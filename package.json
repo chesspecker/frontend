@@ -1,0 +1,33 @@
+{
+	"name": "chesspecker",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"test": "prettier '**/*.{css,html,js,json,jsx,md,sass,scss,ts,tsx,vue,yaml,yml}' --check & xo",
+		"lint": "prettier '**/*.{css,html,js,json,jsx,md,sass,scss,ts,tsx,vue,yaml,yml}' --write & xo --fix"
+	},
+	"prettier": "prettier-config-xo",
+	"xo": {
+		"prettier": true,
+		"extends": "xo-nextjs",
+		"env": "browser",
+		"rules": {
+			"unicorn/filename-case": "off"
+		}
+	},
+	"dependencies": {
+		"next": "11.1.2",
+		"prop-types": "^15.7.2",
+		"react": "17.0.2",
+		"react-dom": "17.0.2"
+	},
+	"devDependencies": {
+		"eslint-config-xo-nextjs": "^4.0.2",
+		"prettier": "^2.4.1",
+		"prettier-config-xo": "^2.0.0",
+		"xo": "^0.45.0"
+	}
+}
