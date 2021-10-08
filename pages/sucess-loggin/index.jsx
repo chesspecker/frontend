@@ -2,8 +2,8 @@ import React from 'react';
 import Head from 'next/head.js';
 import NavBar from '../../components/NavBar.jsx';
 import Container from '../../components/layouts/Container.jsx';
+import useConffeti from '../../components/hooks/useConffeti.jsx';
 import style from './index.module.css';
-import useConffeti from '../../components/hooks/useConffeti';
 
 function Index(props) {
 	return (
