@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head.js';
 import NavBar from '../../components/NavBar.jsx';
-import Container from '../../components/layouts/Container.jsx';
+import Page_header from '../../components/layouts/Page_header.jsx';
 import useConffeti from '../../components/hooks/useConffeti.jsx';
 import style from './index.module.css';
 
@@ -13,9 +13,9 @@ function Index(props) {
 				<meta name='description' content='chesspecker training app' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			{useConffeti()}
-			<Container>
-				<NavBar />
+
+			<Page_header>
+				{useConffeti()}
 				<div className={style.container}>
 					<div>
 						<h1 className={style.title}>
@@ -25,7 +25,7 @@ function Index(props) {
 						</h1>
 					</div>
 				</div>
-			</Container>
+			</Page_header>
 		</>
 	);
 }
