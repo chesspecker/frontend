@@ -5,8 +5,8 @@ class MyDocument extends Document {
 		try {
 			const initialProps = await Document.getInitialProps(ctx);
 			return {...initialProps};
-		} catch (err) {
-			console.log(err);
+		} catch (error) {
+			console.log(error);
 		}
 	}
 
