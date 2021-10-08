@@ -3,6 +3,7 @@ import NavBar from '../../components/NavBar';
 import Head from 'next/head';
 import Container from '../../components/layouts/Container';
 import style from './index.module.css';
+import useConffeti from '../../components/hooks/useConffeti';
 
 function Index(props) {
 	return (
@@ -12,6 +13,7 @@ function Index(props) {
 				<meta name='description' content='chesspecker training app' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
+			{useConffeti()}
 			<Container>
 				<NavBar />
 				<div className={style.container}>
