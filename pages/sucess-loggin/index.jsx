@@ -1,7 +1,7 @@
 import React from 'react';
-import NavBar from '../../components/NavBar';
-import Head from 'next/head';
-import Container from '../../components/layouts/Container';
+import Head from 'next/head.js';
+import NavBar from '../../components/NavBar.jsx';
+import Container from '../../components/layouts/Container.jsx';
 import style from './index.module.css';
 import useConffeti from '../../components/hooks/useConffeti';
 

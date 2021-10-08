@@ -1,7 +1,7 @@
 import React from 'react';
-import style from './NavBar.module.css';
-import Image from 'next/image';
+import Image from 'next/image.js';
 import logo from '../public/images/logo.svg';
+import style from './NavBar.module.css';
 
 function NavBar(props) {
 	return (
