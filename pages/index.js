@@ -1,4 +1,4 @@
-import LogginRegister from './loggin/Index';
+import LogginRegister from './loggin/Index.jsx';
 
 export default function Home() {
 	return (
