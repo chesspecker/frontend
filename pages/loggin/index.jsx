@@ -1,8 +1,8 @@
 import React from 'react';
 import Head from 'next/head.js';
-import Link from 'next/link';
+import Link from 'next/link.js';
+import Container from '../../components/layouts/Container.jsx';
 import style from './index.module.css';
-import Container from '../../components/layouts/Container';
 
 function LogginRegister(props) {
 	return (
@@ -27,7 +27,7 @@ function LogginRegister(props) {
 							<a
 								className={style.btn}
 								href='#'
-								//href='https://api.chesspecker.com/auth/login'
+								// href='https://api.chesspecker.com/auth/login'
 							>
 								SIGN IN WITH LICHESS
 							</a>
