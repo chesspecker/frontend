@@ -1,6 +1,6 @@
 import React from 'react';
-import Container from './Container';
-import NavBar from '../NavBar';
+import NavBar from '../NavBar.jsx';
+import Container from './Container.jsx';
 
 function Page_header({children}) {
 	return (
