@@ -9,7 +9,7 @@ function Index() {
 	return (
 		<>
 			<Head>
-				<title>chesspecker-sucess</title>
+				<title>chesspecker-success</title>
 				<meta name='description' content='chesspecker training app' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>

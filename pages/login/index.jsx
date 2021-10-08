@@ -23,11 +23,10 @@ export default function LoginRegister() {
 						</h1>
 					</div>
 					<div className={style.contentBottom}>
-						<Link href='/sucess-login'>
+						<Link href='https://api.chesspecker.com/auth/login'>
 							<a
 								className={style.btn}
-								href='#'
-								// href='https://api.chesspecker.com/auth/login'
+								href='https://api.chesspecker.com/auth/login'
 							>
 								SIGN IN WITH LICHESS
 							</a>
