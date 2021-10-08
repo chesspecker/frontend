@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head.js';
+import Container from '../../components/layouts/Container.jsx';
 import style from './Index.module.css';
-import Container from '../../components/layouts/Container';
 
 function LogginRegister(props) {
 	return (
