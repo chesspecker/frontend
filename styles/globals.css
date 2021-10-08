@@ -1,5 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+:root {
+	--color-primary: #93d829;
+	--color-secondary: #222831;
+	--grey-primary: #222831;
+	--grey-secondary: rgb(0 0 0 / 5%);
+}
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+	scroll-behavior: smooth;
+}
+
+/* img {
+  width: 100%;
+} */
+
+h1 {
+	font-size: 2.5rem;
+}
+
+h2 {
+	font-size: 2.5rem;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	font-family: 'Poppins', sans-serif;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+* {
+	box-sizing: border-box;
+}
+
 html,
 body {
 	padding: 0;

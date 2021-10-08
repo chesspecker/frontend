@@ -1,0 +1,19 @@
+.container {
+	height: 100vh;
+	margin: 0;
+	color: #222;
+	font-family: sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+}
+.title {
+	font-family: sans-serif;
+	font-size: 26px;
+	margin: 32px auto 24px;
+	line-height: 40px;
+	color: white;
+	text-align: center;
+}
