@@ -1,11 +1,11 @@
 import React from 'react';
 import Head from 'next/head.js';
 import NavBar from '../../components/NavBar.jsx';
-import Page_header from '../../components/layouts/Page_header.jsx';
+import PageHeader from '../../components/layouts/PageHeader.jsx';
 import useConffeti from '../../components/hooks/useConffeti.jsx';
 import style from './index.module.css';
 
-function Index(props) {
+function Index() {
 	return (
 		<>
 			<Head>
@@ -14,7 +14,7 @@ function Index(props) {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<Page_header>
+			<PageHeader>
 				{useConffeti()}
 				<div className={style.container}>
 					<div>
@@ -25,7 +25,7 @@ function Index(props) {
 						</h1>
 					</div>
 				</div>
-			</Page_header>
+			</PageHeader>
 		</>
 	);
 }

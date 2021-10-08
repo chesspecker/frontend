@@ -4,7 +4,7 @@ import Link from 'next/link.js';
 import Container from '../../components/layouts/Container.jsx';
 import style from './index.module.css';
 
-function LogginRegister(props) {
+export default function LoginRegister() {
 	return (
 		<>
 			<Head>
@@ -23,7 +23,7 @@ function LogginRegister(props) {
 						</h1>
 					</div>
 					<div className={style.contentBottom}>
-						<Link href='/sucess-loggin'>
+						<Link href='/sucess-login'>
 							<a
 								className={style.btn}
 								href='#'
@@ -38,5 +38,3 @@ function LogginRegister(props) {
 		</>
 	);
 }
-
-export default LogginRegister;

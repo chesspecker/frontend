@@ -2,7 +2,7 @@ import React from 'react';
 import NavBar from '../NavBar.jsx';
 import Container from './Container.jsx';
 
-function Page_header({children}) {
+function PageHeader({children}) {
 	return (
 		<Container>
 			<NavBar />
@@ -11,4 +11,4 @@ function Page_header({children}) {
 	);
 }
 
-export default Page_header;
+export default PageHeader;
