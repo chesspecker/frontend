@@ -1,6 +1,6 @@
 import React from 'react';
-import useWindowSize from './useWindowSize';
 import Confetti from 'react-confetti';
+import useWindowSize from './useWindowSize.jsx';
 
 export default () => {
 	const {width, height} = useWindowSize();

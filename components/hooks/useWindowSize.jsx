@@ -8,6 +8,7 @@ function App() {
 		</div>
 	);
 }
+
 // Hook
 export default function useWindowSize() {
 	// Initialize state with undefined width/height so server and client renders match
@@ -25,6 +26,7 @@ export default function useWindowSize() {
 				height: window.innerHeight,
 			});
 		}
+
 		// Add event listener
 		window.addEventListener('resize', handleResize);
 		// Call handler right away so state gets updated with initial window size
