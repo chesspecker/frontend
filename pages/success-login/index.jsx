@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import Head from 'next/head.js';
 import Page_header from '../../components/layouts/Page_header.jsx';
 import useConffeti from '../../components/hooks/useConffeti.jsx';
-import style from './index.module.css';
 import http from '../../services/http-service.js';
+import style from './index.module.css';
 
 function Index(props) {
 	const [items, setItems] = useState([]);
