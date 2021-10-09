@@ -10,11 +10,11 @@ function Index() {
 
 	useEffect(() => {
 		const getUser = async () => {
-			const user = await http.get('https://api.chesspecker.com/user', {
+			const {data: user} = await http.get('https://api.chesspecker.com/user', {
 				withCredentials: true,
 			});
 			console.log(user);
-			setUser(user.data);
+			setUser(user.name);
 		};
 		getUser();
 	}, []);
