@@ -16,6 +16,7 @@ function Index() {
 			const data = await response.json();
 			console.log(data);
 		};
+
 		getUserName();
 	}, []);
 	return (
