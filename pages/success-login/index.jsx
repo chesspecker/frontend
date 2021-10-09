@@ -12,8 +12,8 @@ function Index() {
 		const response = await http.get('https://api.chesspecker.com/user', {
 			withCredentials: true,
 		});
-		console.log(response.cookies);
-		setUser(response.name);
+		console.log(response);
+		setUser(response.data.name);
 	}, []);
 	return (
 		<>
