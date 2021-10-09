@@ -9,11 +9,10 @@ function Index() {
 	const [user, setUser] = useState('');
 
 	useEffect(async () => {
-		const {data: response} = await http.get(
-			'https://api.chesspecker.com/user',
-			{withCredentials: true},
-		);
-		console.log(response);
+		const response = await http.get('https://api.chesspecker.com/user', {
+			withCredentials: true,
+		});
+		console.log(response.cookies);
 		setUser(response.name);
 	}, []);
 	return (
