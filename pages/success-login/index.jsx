@@ -3,20 +3,20 @@ import Head from 'next/head.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import useConffeti from '../../components/hooks/useConffeti.jsx';
 import style from './index.module.css';
+import http from '../../services/http-service';
 
 function Index() {
 	const [user, setUser] = useState('');
 
 	useEffect(() => {
-		const getUserName = async () => {
-			const response = await fetch('https://api.chesspecker.com/user', {
-				credentials: 'include',
+		const getUser = async () => {
+			const user = await http.get('https://api.chesspecker.com/user', {
+				withCredentials: true,
 			});
-			const data = await response.json();
-			setUser(data.name);
+			console.log(user);
+			setUser(user.data);
 		};
-
-		getUserName();
+		getUser();
 	}, []);
 
 	return (
