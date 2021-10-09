@@ -2,22 +2,23 @@ import React, {useEffect, useState} from 'react';
 import Head from 'next/head.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import useConffeti from '../../components/hooks/useConffeti.jsx';
-import http from '../../services/http-service.js';
 import style from './index.module.css';
 
 function Index() {
 	const [user, setUser] = useState('');
 
 	useEffect(() => {
-		const getUser = async () => {
-			const user = await http.get('https://api.chesspecker.com/user', {
-				withCredentials: true,
+
+		const getUserName = async () => {
+			const response = await fetch('https://api.chesspecker.com/user', {
+				credentials: 'include',
 			});
-			console.log(user);
-			setUser(user.data);
+			const data = await response.json();
+			setUser(data.name);
 		};
 
-		getUser();
+		getUserName();
+>>>>>>> f885fc5b3dff9e707d9e48db00d1004f68926040
 	}, []);
 
 	return (
@@ -33,9 +34,7 @@ function Index() {
 				<div className={style.container}>
 					<div>
 						<h1 className={style.title}>
-							Hello {user}
-							<br />
-							newcomer 👋 <br /> Welcome to ChessPecker
+							Hello {user}👋 <br /> Welcome to ChessPecker
 						</h1>
 					</div>
 				</div>
