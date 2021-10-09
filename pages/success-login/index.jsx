@@ -1,24 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Head from 'next/head.js';
-import Page_header from '../../components/layouts/Page_header.jsx';
+import PageHeader from '../../components/layouts/PageHeader.jsx';
 import useConffeti from '../../components/hooks/useConffeti.jsx';
-import http from '../../services/http-service.js';
 import style from './index.module.css';
 
-function Index(props) {
-	const [items, setItems] = useState([]);
-
-	useEffect(() => {
-		const logUser = async () => {
-			const {data: response} = await http.get(
-				'https://api.chesspecker.com/auth/login',
-			);
-			setItems(response);
-		};
-
-		logUser();
-	}, []);
-
+function Index() {
 	return (
 		<>
 			<Head>
