@@ -13,7 +13,7 @@ function Index() {
 			'https://api.chesspecker.com/user',
 			{withCredentials: true},
 		);
-		console.log(response.name);
+		console.log(response);
 		setUser(response.name);
 	}, []);
 	return (
