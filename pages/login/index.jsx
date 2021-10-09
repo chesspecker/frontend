@@ -5,6 +5,7 @@ import Container from '../../components/layouts/Container.jsx';
 import style from './index.module.css';
 
 export default function LoginRegister() {
+	console.log(process.env.API_KEY);
 	return (
 		<>
 			<Head>
@@ -23,10 +24,10 @@ export default function LoginRegister() {
 						</h1>
 					</div>
 					<div className={style.contentBottom}>
-						<Link href='https://api.chesspecker.com/auth/login'>
+						<Link href={`http://${process.env.API}/auth/login`}>
 							<a
 								className={style.btn}
-								href='https://api.chesspecker.com/auth/login'
+								href={`http://${process.env.API}/auth/login`}
 							>
 								SIGN IN WITH LICHESS
 							</a>
