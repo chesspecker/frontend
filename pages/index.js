@@ -1,9 +1,9 @@
-import LogginRegister from './loggin/index.jsx';
+import LoginRegister from './login/index.jsx';
 
 export default function Home() {
 	return (
 		<div>
-			<LogginRegister />
+			<LoginRegister />
 		</div>
 	);
 }

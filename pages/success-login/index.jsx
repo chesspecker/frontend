@@ -22,12 +22,12 @@ function Index(props) {
 	return (
 		<>
 			<Head>
-				<title>chesspecker-sucess</title>
+				<title>chesspecker-success</title>
 				<meta name='description' content='chesspecker training app' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<Page_header>
+			<PageHeader>
 				{useConffeti()}
 				<div className={style.container}>
 					<div>
@@ -38,7 +38,7 @@ function Index(props) {
 						</h1>
 					</div>
 				</div>
-			</Page_header>
+			</PageHeader>
 		</>
 	);
 }
