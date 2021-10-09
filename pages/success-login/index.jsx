@@ -3,8 +3,19 @@ import Head from 'next/head.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import useConffeti from '../../components/hooks/useConffeti.jsx';
 import style from './index.module.css';
+import http from '../../services/http-service';
 
 function Index() {
+	const [user, setUser] = useState('');
+
+	useEffect(async () => {
+		const {data: response} = await http.get(
+			'https://api.chesspecker.com/user',
+			{withCredentials: true},
+		);
+		console.log(response.name);
+		setUser(response.name);
+	}, []);
 	return (
 		<>
 			<Head>
@@ -18,7 +29,7 @@ function Index() {
 				<div className={style.container}>
 					<div>
 						<h1 className={style.title}>
-							Hello
+							Hello {user}
 							<br />
 							newcomer 👋 <br /> Welcome to ChessPecker
 						</h1>
