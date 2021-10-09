@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import Head from 'next/head.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import useConffeti from '../../components/hooks/useConffeti.jsx';
+import http from '../../services/http-service.js';
 import style from './index.module.css';
-import http from '../../services/http-service';
 
 function Index() {
 	const [user, setUser] = useState('');
@@ -16,6 +16,7 @@ function Index() {
 			console.log(user);
 			setUser(user.name);
 		};
+
 		getUser();
 	}, []);
 
