@@ -13,7 +13,7 @@ function Index() {
 				credentials: 'include',
 			});
 			const data = await response.json();
-			console.log(data);
+			setUser(data.name);
 		};
 
 		getUserName();
@@ -31,9 +31,7 @@ function Index() {
 				<div className={style.container}>
 					<div>
 						<h1 className={style.title}>
-							Hello {user}
-							<br />
-							newcomer 👋 <br /> Welcome to ChessPecker
+							Hello {user}👋 <br /> Welcome to ChessPecker
 						</h1>
 					</div>
 				</div>
