@@ -8,12 +8,15 @@ import style from './index.module.css';
 function Index() {
 	const [user, setUser] = useState('');
 
-	useEffect(async () => {
-		const response = await http.get('https://api.chesspecker.com/user', {
-			withCredentials: true,
-		});
-		console.log(response);
-		setUser(response.data.name);
+	useEffect(() => {
+		const getUserName = async () => {
+			const response = await fetch('https://api.chesspecker.com/user', {
+				credentials: 'include',
+			});
+			const data = await response.json();
+			console.log(data);
+		};
+		getUserName();
 	}, []);
 	return (
 		<>
