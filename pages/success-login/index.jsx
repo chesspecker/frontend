@@ -8,7 +8,6 @@ function Index() {
 	const [user, setUser] = useState('');
 
 	useEffect(() => {
-
 		const getUserName = async () => {
 			const response = await fetch('https://api.chesspecker.com/user', {
 				credentials: 'include',
@@ -18,7 +17,6 @@ function Index() {
 		};
 
 		getUserName();
->>>>>>> f885fc5b3dff9e707d9e48db00d1004f68926040
 	}, []);
 
 	return (
