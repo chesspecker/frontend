@@ -1,4 +1,3 @@
-import React from 'react';
 import Head from 'next/head.js';
 import Link from 'next/link.js';
 import Container from '../../components/layouts/Container.jsx';

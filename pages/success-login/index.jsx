@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import Head from 'next/head.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import useConffeti from '../../components/hooks/useConffeti.jsx';
@@ -6,7 +6,7 @@ import http from '../../services/http-service.js';
 import style from './index.module.css';
 
 function Index() {
-	const [user, setUser] = useState('');
+	const [username, setUsername] = useState('');
 
 	useEffect(() => {
 		const getUser = async () => {
@@ -14,7 +14,7 @@ function Index() {
 				withCredentials: true,
 			});
 			console.log(user);
-			setUser(user.name);
+			setUsername(user.name);
 		};
 
 		getUser();
@@ -33,7 +33,7 @@ function Index() {
 				<div className={style.container}>
 					<div>
 						<h1 className={style.title}>
-							Hello {user}👋 <br /> Welcome to ChessPecker
+							Hello {username}👋 <br /> Welcome to ChessPecker
 						</h1>
 					</div>
 				</div>

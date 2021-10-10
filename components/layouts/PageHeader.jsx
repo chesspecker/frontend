@@ -1,4 +1,3 @@
-import React from 'react';
 import NavBar from '../NavBar.jsx';
 import Container from './Container.jsx';
 
