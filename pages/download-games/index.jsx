@@ -19,13 +19,11 @@ function SetParameters(props) {
 		if (!toggleTimeGame) {
 			const array = ['bullet', 'blitz', 'rapide', 'classical'];
 			setGameTime(() => {
-				console.log(array);
 				return array;
 			});
 		} else {
 			const array = [];
 			setGameTime(() => {
-				console.log(array);
 				return array;
 			});
 		}
@@ -45,14 +43,11 @@ function SetParameters(props) {
 	};
 
 	const handleAddGameTime = name => {
-		if (name === 'time') console.log('in the time fonction');
-
 		if (gameTime.find(e => e === name)) {
 			setGameTime(() => {
 				const index = gameTime.indexOf(name);
 				const array = [...gameTime];
 				array.splice(index, 1);
-				console.log('game', array);
 
 				return array;
 			});
@@ -60,16 +55,13 @@ function SetParameters(props) {
 			setGameTime(() => {
 				const array = [...gameTime];
 				array.push(name);
-				console.log('game', array);
+
 				return array;
 			});
 		}
 	};
 
 	const handleAddGameType = name => {
-		console.log(name);
-		if (name === 'type') console.log('in the type fonction');
-
 		if (name === rated) {
 			setGameType(() => {
 				return true;
@@ -82,7 +74,6 @@ function SetParameters(props) {
 	};
 
 	const handleNumberChange = e => {
-		console.log(e.target.value);
 		setGameNumber(e.target.value);
 	};
 
@@ -106,7 +97,7 @@ function SetParameters(props) {
 			rated: gameType,
 			perfType: gameTime.join(','),
 		});
-		console.log(linkParameters);
+
 		Router.push(`https://api.chesspecker.com/games/download?${linkParameters}`);
 	};
 
