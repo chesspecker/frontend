@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import Router from 'next/router.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import Btn from '../../components/layouts/Btn.jsx';
 import OptionToggle from '../../components/01-Download-games/OptionsToggle.jsx';
@@ -90,7 +91,7 @@ function SetParameters(props) {
 		const linkParameters = new URLSearchParams({
 			max: gameNumber,
 			rated: gameType,
-			perfType: gameTime.join(),
+			perfType: gameTime.join(','),
 		});
 		console.log(linkParameters);
 		Router.push(`https://api.chesspecker.com/games/download?${linkParameters}`);
