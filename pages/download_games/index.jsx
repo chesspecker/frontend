@@ -33,11 +33,14 @@ function SetParameters(props) {
 					<p htmlFor='number_game' className={style.option_description}>
 						Type de parties ?
 					</p>
-					<ToggleSwitch
-						name='test'
-						checked={toggleTypeGame}
-						onChange={handlChange}
-					/>
+					<div style={{display: 'flex'}}>
+						<p className={style.option_description}>All</p>
+						<ToggleSwitch
+							name='test'
+							checked={toggleTypeGame}
+							onChange={handlChange}
+						/>
+					</div>
 				</div>
 
 				<div
@@ -57,6 +60,15 @@ function SetParameters(props) {
 						Rapide
 					</p>
 					<ToggleSwitch name='rapide' />
+				</div>
+				<div
+					className={`${style.option} ${style.option_secondary}`}
+					style={toggleTypeGame ? {display: 'none'} : {display: 'flex'}}
+				>
+					<p htmlFor='number_game' className={style.option_description}>
+						Longues
+					</p>
+					<ToggleSwitch name='longues' />
 				</div>
 			</div>
 		</PageHeader>
