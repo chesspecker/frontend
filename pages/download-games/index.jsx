@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {array} from 'prop-types';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import Btn from '../../components/layouts/Btn.jsx';
 import OptionToggle from '../../components/01-Download-games/OptionsToggle.jsx';
@@ -38,7 +39,7 @@ function SetParameters(props) {
 
 		if (gameType.find(e => e === name)) {
 			setGameType(() => {
-				const index = gameType.findIndex(e => e === name);
+				const index = gameType.indexOf(name);
 				const array = [...gameType];
 				array.splice(index, 1);
 				console.log('game', array);
