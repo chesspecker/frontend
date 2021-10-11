@@ -1,8 +1,8 @@
 import Head from 'next/head.js';
 import Link from 'next/link.js';
 import Container from '../../components/layouts/Container.jsx';
-import style from './index.module.css';
 import Btn from '../../components/layouts/Btn.jsx';
+import style from './index.module.css';
 
 export default function LoginRegister() {
 	return (
