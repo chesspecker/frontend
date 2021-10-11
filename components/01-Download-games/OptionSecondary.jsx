@@ -2,7 +2,7 @@ import React from 'react';
 import ToggleSwitch from '../layouts/ToggleSwitch.jsx';
 import style from './OptionToggle.module.scss';
 
-function OptionToggle({setName, setToggle, children}) {
+function OptionToggle({setName, setToggle, children, onChange}) {
 	return (
 		<div
 			className={`${style.option} ${style.option_secondary}`}
@@ -11,7 +11,7 @@ function OptionToggle({setName, setToggle, children}) {
 			<p htmlFor='number_game' className={style.option_description}>
 				{children}
 			</p>
-			<ToggleSwitch name={setName} />
+			<ToggleSwitch name={setName} onChange={onChange} />
 		</div>
 	);
 }

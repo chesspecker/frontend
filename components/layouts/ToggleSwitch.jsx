@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './ToggleSwitch.module.scss';
 
-function ToggleSwitch({name, onChange, checked}) {
+function ToggleSwitch({name, checked, onChange}) {
 	return (
 		<div className={style.toggle_switch}>
 			<input
@@ -10,7 +10,7 @@ function ToggleSwitch({name, onChange, checked}) {
 				checked={checked}
 				name={name}
 				id={name}
-				onChange={onChange}
+				onChange={() => onChange(name)}
 			/>
 			<label className={style.toggle_switch_label} htmlFor={name}>
 				<span className={style.toggle_switch_inner} />

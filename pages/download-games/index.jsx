@@ -5,20 +5,43 @@ import Btn from '../../components/layouts/Btn.jsx';
 import OptionToggle from '../../components/01-Download-games/OptionsToggle.jsx';
 import OptionSecondary from '../../components/01-Download-games/OptionSecondary.jsx';
 import style from './index.module.scss';
+import {array} from 'prop-types';
 
 function SetParameters(props) {
 	const [toggleTimeGame, setTogleTimeGame] = useState(false);
 	const [toggleTypeGame, setTogleTypeGame] = useState(false);
 	const [gameType, setGameType] = useState([]);
 
-	const handlTimeChange = () => {
-		console.log('selected');
+	const handlToggleTimeChange = game => {
+		console.log('game =', game);
 		setTogleTimeGame(toggleTymeGame => !toggleTymeGame);
 	};
 
-	const handlTypeChange = () => {
+	const handlToggleTypeChange = () => {
 		console.log('selected');
 		setTogleTypeGame(toggleTypeGame => !toggleTypeGame);
+	};
+
+	const handleAddGame = name => {
+		const actualArray = [...gameType];
+
+		if (gameType.find(e => e === name)) {
+			setGameType(() => {
+				const index = gameType.findIndex(e => e === name);
+				const array = [...gameType];
+				array.splice(index, 1);
+				console.log('game', array);
+
+				return array;
+			});
+		} else {
+			setGameType(() => {
+				const array = [...gameType];
+				array.push(name);
+				console.log('game', array);
+				return array;
+			});
+		}
 	};
 
 	return (
@@ -43,24 +66,36 @@ function SetParameters(props) {
 					setName='time'
 					setDescription='All'
 					setToggle={toggleTimeGame}
-					onChange={handlTimeChange}
+					onChange={handlToggleTimeChange}
 				>
 					Durée des parties ? ⏲
 				</OptionToggle>
-				<OptionSecondary setToggle={toggleTimeGame} setName='Bullet'>
+				<OptionSecondary
+					setToggle={toggleTimeGame}
+					setName='bullet'
+					onChange={handleAddGame}
+				>
 					Bullet
 				</OptionSecondary>
-				<OptionSecondary setToggle={toggleTimeGame} setName='Rapide'>
+				<OptionSecondary
+					setToggle={toggleTimeGame}
+					setName='rapide'
+					onChange={handleAddGame}
+				>
 					Rapide
 				</OptionSecondary>
-				<OptionSecondary setToggle={toggleTimeGame} setName='Longues'>
+				<OptionSecondary
+					setToggle={toggleTimeGame}
+					setName='longues'
+					onChange={handleAddGame}
+				>
 					Longues
 				</OptionSecondary>
 				<OptionToggle
 					setName='type'
 					setDescription='All'
 					setToggle={toggleTypeGame}
-					onChange={handlTypeChange}
+					onChange={handlToggleTypeChange}
 				>
 					Type de partie ?
 				</OptionToggle>
