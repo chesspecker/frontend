@@ -5,18 +5,19 @@ import OptionToggle from '../../components/01-Download-games/OptionsToggle.jsx';
 import OptionSecondary from '../../components/01-Download-games/OptionSecondary.jsx';
 import style from './index.module.scss';
 import OptionNumber from '../../components/01-Download-games/OptionNumber.jsx';
+import Router from 'next/router';
 
 function SetParameters(props) {
 	const [toggleTimeGame, setToggleTimeGame] = useState(false);
 	const [toggleTypeGame, setToggleTypeGame] = useState(false);
 	const [gameTime, setGameTime] = useState([]);
-	const [gameType, setGameType] = useState([]);
+	const [gameType, setGameType] = useState(null);
 	const [gameNumber, setGameNumber] = useState();
 
 	const handlToggleTimeChange = () => {
 		setToggleTimeGame(toggleTymeGame => !toggleTymeGame);
 		if (!toggleTimeGame) {
-			const array = ['bullet', 'rapide', 'longue'];
+			const array = ['bullet', 'blitz', 'rapide', 'classical'];
 			setGameTime(() => {
 				console.log(array);
 				return array;
@@ -33,16 +34,12 @@ function SetParameters(props) {
 	const handlToggleTypeChange = () => {
 		setToggleTypeGame(() => !toggleTypeGame);
 		if (!toggleTypeGame) {
-			const array = ['classées', 'amicale'];
 			setGameType(() => {
-				console.log(array);
-				return array;
+				return null;
 			});
 		} else {
-			const array = [];
 			setGameType(() => {
-				console.log(array);
-				return array;
+				return null;
 			});
 		}
 	};
@@ -73,21 +70,13 @@ function SetParameters(props) {
 		console.log(name);
 		if (name === 'type') console.log('in the type fonction');
 
-		if (gameType.find(e => e === name)) {
+		if (name === rated) {
 			setGameType(() => {
-				const index = gameType.indexOf(name);
-				const array = [...gameType];
-				array.splice(index, 1);
-				console.log('game', array);
-
-				return array;
+				return true;
 			});
 		} else {
 			setGameType(() => {
-				const array = [...gameType];
-				array.push(name);
-				console.log('game', array);
-				return array;
+				return false;
 			});
 		}
 	};
@@ -97,14 +86,14 @@ function SetParameters(props) {
 		setGameNumber(e.target.value);
 	};
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		const linkParameters = new URLSearchParams({
-			max: 150,
-			rated: true,
-			perfType: 'classical',
-			pgnInJson: true,
+			max: gameNumber,
+			rated: gameType,
+			perfType: gameTime.join(),
 		});
 		console.log(linkParameters);
+		Router.push(`https://api.chesspecker.com/games/download?${linkParameters}`);
 	};
 
 	return (
@@ -137,17 +126,24 @@ function SetParameters(props) {
 				</OptionSecondary>
 				<OptionSecondary
 					setToggle={toggleTimeGame}
-					setName='rapide'
+					setName='blitz'
+					onChange={handleAddGameTime}
+				>
+					Blitz
+				</OptionSecondary>
+				<OptionSecondary
+					setToggle={toggleTimeGame}
+					setName='rapid'
 					onChange={handleAddGameTime}
 				>
 					Rapide
 				</OptionSecondary>
 				<OptionSecondary
 					setToggle={toggleTimeGame}
-					setName='longues'
+					setName='classical'
 					onChange={handleAddGameTime}
 				>
-					Longues
+					Classique
 				</OptionSecondary>
 				<OptionToggle
 					setName='type'
@@ -159,7 +155,7 @@ function SetParameters(props) {
 				</OptionToggle>
 				<OptionSecondary
 					setToggle={toggleTypeGame}
-					setName='classées'
+					setName='rated'
 					onChange={handleAddGameType}
 				>
 					Classée
