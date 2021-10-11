@@ -12,7 +12,7 @@ function OptionNumber({onChange, setName, children, value}) {
 				className={style.input_number}
 				type='number'
 				value={value}
-				placeholder='ex:150'
+				placeholder='ex: 150'
 				onChange={onChange}
 			/>
 		</div>

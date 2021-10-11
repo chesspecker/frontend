@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import Router from 'next/router.js';
+import {useState} from 'react';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import Btn from '../../components/layouts/Btn.jsx';
 import OptionToggle from '../../components/01-Download-games/OptionsToggle.jsx';
@@ -8,7 +7,7 @@ import OptionNumber from '../../components/01-Download-games/OptionNumber.jsx';
 import http from '../../services/http-service.js';
 import style from './index.module.scss';
 
-function SetParameters(props) {
+function SetParameters() {
 	const [toggleTimeGame, setToggleTimeGame] = useState(false);
 	const [toggleTypeGame, setToggleTypeGame] = useState(false);
 	const [gameTime, setGameTime] = useState([]);
@@ -22,123 +21,70 @@ function SetParameters(props) {
 	]);
 	const [checkBoxArrayType, setCheckBoxArrayType] = useState([false, false]);
 
-	const handlToggleTimeChange = () => {
-		setToggleTimeGame(toggleTymeGame => !toggleTymeGame);
-		if (!toggleTimeGame) {
-			const array = ['bullet', 'blitz', 'rapide', 'classical'];
-			setGameTime(() => {
-				return array;
-			});
-			setCheckBoxArrayTime(() => [true, true, true, true]);
-		} else {
-			const array = [];
-			setGameTime(() => {
-				return array;
-			});
+	const handleToggleTimeChange = () => {
+		setToggleTimeGame(toggleTimeGame => !toggleTimeGame);
+		if (toggleTimeGame) {
+			setGameTime(() => []);
 			setCheckBoxArrayTime(() => [false, false, false, false]);
+		} else {
+			setGameTime(() => ['bullet', 'blitz', 'rapide', 'classical']);
+			setCheckBoxArrayTime(() => [true, true, true, true]);
 		}
 	};
 
-	const handlToggleTypeChange = () => {
-		setToggleTypeGame(() => !toggleTypeGame);
-		if (!toggleTypeGame) {
-			setGameType(() => {
-				return null;
-			});
-			setCheckBoxArrayType(() => [true, true]);
-		} else {
-			setGameType(() => {
-				return null;
-			});
-			setCheckBoxArrayType(() => [false, false]);
-		}
+	const handleToggleTypeChange = () => {
+		setToggleTypeGame(toggleTypeGame => !toggleTypeGame);
+		setGameType(() => null);
+		toggleTypeGame
+			? setCheckBoxArrayType(() => [false, false])
+			: setCheckBoxArrayType(() => [true, true]);
 	};
 
 	const handleAddGameTime = (name, id) => {
-		if (gameTime.find(e => e === name)) {
-			setGameTime(() => {
-				const index = gameTime.indexOf(name);
-				const array = [...gameTime];
-				array.splice(index, 1);
-
-				return array;
-			});
-			setCheckBoxArrayTime(e => {
-				const array = [...checkBoxArrayTime];
-				if (array.every(e => e === true)) {
-					setToggleTimeGame(() => !toggleTimeGame);
-				}
-
-				array.splice(id, 1, false);
-
+		if (gameTime.includes(name)) {
+			setGameTime(previousArray => {
+				const array = [...previousArray];
+				array.splice(gameTime.indexOf(name), 1);
 				return array;
 			});
 		} else {
-			setGameTime(() => {
-				const array = [...gameTime];
+			setGameTime(previousArray => {
+				const array = [...previousArray];
 				array.push(name);
-
-				return array;
-			});
-			setCheckBoxArrayTime(e => {
-				const array = [...checkBoxArrayTime];
-				array.splice(id, 1, true);
-				if (array.every(e => e === true)) {
-					setToggleTimeGame(() => !toggleTimeGame);
-				}
-
 				return array;
 			});
 		}
+
+		setCheckBoxArrayTime(previousArray => {
+			const array = [...previousArray];
+			array.splice(id, 1, !array[id]);
+			if (array.every(item => item === true)) {
+				setToggleTimeGame(toggleTimeGame => !toggleTimeGame);
+			} else {
+				setToggleTimeGame(() => false);
+			}
+
+			return array;
+		});
 	};
 
 	const handleAddGameType = (name, id) => {
-		if (name === 'rated') {
-			console.log('in the function');
-			setGameType(() => {
-				return true;
-			});
-			setCheckBoxArrayType(e => {
-				const array = [...checkBoxArrayType];
-				if (array.every(e => e === true)) {
-					setToggleTypeGame(() => !toggleTypeGame);
-				}
+		name === 'rated' ? setGameType(() => true) : setGameType(() => false);
+		setCheckBoxArrayType(previousArray => {
+			const array = [...previousArray];
+			array.splice(id, 1, !array[id]);
+			if (array.every(item => item === true)) {
+				setToggleTypeGame(toggleTypeGame => !toggleTypeGame);
+			} else {
+				setToggleTypeGame(() => false);
+			}
 
-				if (array[id]) {
-					array.splice(id, 1, false);
-				} else {
-					array.splice(id, 1, true);
-				}
-
-				console.log(array);
-
-				return array;
-			});
-		} else {
-			setGameType(() => {
-				return false;
-			});
-			setCheckBoxArrayType(e => {
-				const array = [...checkBoxArrayType];
-				if (array.every(e => e === true)) {
-					setToggleTypeGame(() => !toggleTypeGame);
-				}
-
-				if (array[id]) {
-					array.splice(id, 1, false);
-				} else {
-					array.splice(id, 1, true);
-				}
-
-				console.log(array);
-
-				return array;
-			});
-		}
+			return array;
+		});
 	};
 
-	const handleNumberChange = e => {
-		setGameNumber(e.target.value);
+	const handleNumberChange = element => {
+		setGameNumber(element.target.value);
 	};
 
 	const validate = () => {
@@ -162,7 +108,6 @@ function SetParameters(props) {
 			perfType: gameTime.join(','),
 		});
 
-		//	Router.push(`https://api.chesspecker.com/games/download?${linkParameters}`);
 		try {
 			http.get(`https://api.chesspecker.com/games/download?${linkParameters}`, {
 				withCredentials: true,
@@ -176,22 +121,23 @@ function SetParameters(props) {
 		<PageHeader>
 			<div className={style.container}>
 				<h2 className={style.title}>
-					You have no games in the database, download games from litchess
+					You have no game in the database yet! <br />
+					Let&apos;s download some from Lichess 🔥
 				</h2>
 				<OptionNumber
 					name='number_game'
 					value={gameNumber}
 					onChange={handleNumberChange}
 				>
-					Nombre de partie à analyser ?
+					How many games to download:
 				</OptionNumber>
 				<OptionToggle
 					setName='time'
 					setDescription='All'
 					checked={toggleTimeGame}
-					onChange={handlToggleTimeChange}
+					onChange={handleToggleTimeChange}
 				>
-					Type de parties ?
+					Type of game to import:
 				</OptionToggle>
 				<OptionSecondary
 					id={0}
@@ -223,15 +169,15 @@ function SetParameters(props) {
 					setName='classical'
 					onChange={handleAddGameTime}
 				>
-					Classique
+					Classical
 				</OptionSecondary>
 				<OptionToggle
 					setName='type'
 					setDescription='All'
 					checked={toggleTypeGame}
-					onChange={handlToggleTypeChange}
+					onChange={handleToggleTypeChange}
 				>
-					Classée, amicale ?
+					Ranked or casual games ?
 				</OptionToggle>
 				<OptionSecondary
 					id={0}
@@ -239,15 +185,15 @@ function SetParameters(props) {
 					setName='rated'
 					onChange={handleAddGameType}
 				>
-					Classée
+					Ranked
 				</OptionSecondary>
 				<OptionSecondary
 					id={1}
 					setToggle={checkBoxArrayType[1]}
-					setName='amicale'
+					setName='casual'
 					onChange={handleAddGameType}
 				>
-					Amicale
+					Casual
 				</OptionSecondary>
 
 				<Btn onClick={validate}>Download 🔥</Btn>
