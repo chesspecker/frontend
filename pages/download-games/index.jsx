@@ -5,8 +5,8 @@ import Btn from '../../components/layouts/Btn.jsx';
 import OptionToggle from '../../components/01-Download-games/OptionsToggle.jsx';
 import OptionSecondary from '../../components/01-Download-games/OptionSecondary.jsx';
 import OptionNumber from '../../components/01-Download-games/OptionNumber.jsx';
+import http from '../../services/http-service.js';
 import style from './index.module.scss';
-import http from '../../services/http-service';
 
 function SetParameters(props) {
 	const [toggleTimeGame, setToggleTimeGame] = useState(false);
@@ -65,6 +65,7 @@ function SetParameters(props) {
 				if (array.every(e => e === true)) {
 					setToggleTimeGame(() => !toggleTimeGame);
 				}
+
 				array.splice(id, 1, false);
 
 				return array;
@@ -130,9 +131,8 @@ function SetParameters(props) {
 			http.get(`https://api.chesspecker.com/games/download?${linkParameters}`, {
 				withCredentials: true,
 			});
-		} catch (er) {
-			console.log(er);
-			return;
+		} catch (error) {
+			console.log(error);
 		}
 	};
 
