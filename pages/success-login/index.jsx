@@ -38,7 +38,7 @@ function Index() {
 						<h1 className={style.title}>
 							Hello {username}👋 <br /> Welcome to ChessPecker
 						</h1>
-						<Btn link='/download_games'>LETS GO !!</Btn>
+						<Btn link='/download-games'>LETS GO !!</Btn>
 					</div>
 				</div>
 			</PageHeader>
