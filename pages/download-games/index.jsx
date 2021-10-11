@@ -50,7 +50,7 @@ function SetParameters(props) {
 
 		if (gameTime.find(e => e === name)) {
 			setGameTime(() => {
-				const index = gameTime.findIndex(e => e === name);
+				const index = gameTime.indexOf(name);
 				const array = [...gameTime];
 				array.splice(index, 1);
 				console.log('game', array);
@@ -66,13 +66,14 @@ function SetParameters(props) {
 			});
 		}
 	};
+
 	const handleAddGameType = name => {
 		console.log(name);
 		if (name === 'type') console.log('in the type fonction');
 
 		if (gameType.find(e => e === name)) {
 			setGameType(() => {
-				const index = gameType.findIndex(e => e === name);
+				const index = gameType.indexOf(name);
 				const array = [...gameType];
 				array.splice(index, 1);
 				console.log('game', array);
