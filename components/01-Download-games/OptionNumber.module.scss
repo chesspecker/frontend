@@ -1,0 +1,39 @@
+.option {
+	text-align: left;
+
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	padding-bottom: 1rem;
+	margin-top: 2rem;
+
+	border-bottom: solid 1px white;
+
+	&_description {
+		font-size: 2rem;
+		margin: 0;
+		color: white;
+		align-self: center;
+		margin-right: 1rem;
+	}
+
+	&_secondary {
+		width: 60%;
+		align-self: flex-end;
+	}
+}
+
+.input_number {
+	background-color: white;
+	color: var(--color-primary);
+	font-size: 2rem;
+	border: none;
+	border-radius: 5px;
+	height: 4rem;
+	width: 10rem;
+	justify-self: center;
+	align-self: center;
+	margin-left: 2rem;
+	text-align: center;
+}

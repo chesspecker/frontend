@@ -4,12 +4,14 @@ import Btn from '../../components/layouts/Btn.jsx';
 import OptionToggle from '../../components/01-Download-games/OptionsToggle.jsx';
 import OptionSecondary from '../../components/01-Download-games/OptionSecondary.jsx';
 import style from './index.module.scss';
+import OptionNumber from '../../components/01-Download-games/OptionNumber.jsx';
 
 function SetParameters(props) {
 	const [toggleTimeGame, setToggleTimeGame] = useState(false);
 	const [toggleTypeGame, setToggleTypeGame] = useState(false);
 	const [gameTime, setGameTime] = useState([]);
 	const [gameType, setGameType] = useState([]);
+	const [gameNumber, setGameNumber] = useState();
 
 	const handlToggleTimeChange = () => {
 		setToggleTimeGame(toggleTymeGame => !toggleTymeGame);
@@ -90,24 +92,34 @@ function SetParameters(props) {
 		}
 	};
 
+	const handleNumberChange = e => {
+		console.log(e.target.value);
+		setGameNumber(e.target.value);
+	};
+
+	const handleSubmit = () => {
+		const linkParameters = new URLSearchParams({
+			max: 150,
+			rated: true,
+			perfType: 'classical',
+			pgnInJson: true,
+		});
+		console.log(linkParameters);
+	};
+
 	return (
 		<PageHeader>
 			<div className={style.container}>
 				<h2 className={style.title}>
 					You have no games in the database, download games from litchess
 				</h2>
-
-				<div className={style.option}>
-					<label htmlFor='number_game' className={style.option_description}>
-						Nombre de partie à analyser ?{' '}
-					</label>
-					<input
-						id='number_game'
-						className={style.input_number}
-						type='number'
-						placeholder='ex:150'
-					/>
-				</div>
+				<OptionNumber
+					name='number_game'
+					value={gameNumber}
+					onChange={handleNumberChange}
+				>
+					Nombre de partie à analyser ?
+				</OptionNumber>
 				<OptionToggle
 					setName='time'
 					setDescription='All'
@@ -160,7 +172,7 @@ function SetParameters(props) {
 					Amicale
 				</OptionSecondary>
 
-				<Btn>Download 🔥</Btn>
+				<Btn onClick={handleSubmit}>Download 🔥</Btn>
 			</div>
 		</PageHeader>
 	);
