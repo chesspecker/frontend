@@ -7,10 +7,12 @@ import style from './index.module.css';
 
 function Index() {
 	const [user, setUser] = useState('');
+	console.log(process.env.API);
+	const api = process.env.API;
 
 	useEffect(() => {
 		const getUser = async () => {
-			const {data: user} = await http.get('https://api.chesspecker.com/user', {
+			const {data: user} = await http.get(`${api}/user`, {
 				withCredentials: true,
 			});
 			console.log(user);
@@ -35,6 +37,7 @@ function Index() {
 						<h1 className={style.title}>
 							Hello {user}👋 <br /> Welcome to ChessPecker
 						</h1>
+						<a href='#'>Lets's Go !!</a>
 					</div>
 				</div>
 			</PageHeader>

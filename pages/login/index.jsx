@@ -3,9 +3,9 @@ import Head from 'next/head.js';
 import Link from 'next/link.js';
 import Container from '../../components/layouts/Container.jsx';
 import style from './index.module.css';
+import Btn from '../../components/layouts/Btn.jsx';
 
 export default function LoginRegister() {
-	console.log(process.env.API_KEY);
 	return (
 		<>
 			<Head>
@@ -24,13 +24,10 @@ export default function LoginRegister() {
 						</h1>
 					</div>
 					<div className={style.contentBottom}>
-						<Link href={`http://${process.env.API}/auth/login`}>
-							<a
-								className={style.btn}
-								href={`http://${process.env.API}/auth/login`}
-							>
+						<Link href={`${process.env.API}/auth/login`}>
+							<Btn link={`${process.env.API}/auth/login`}>
 								SIGN IN WITH LICHESS
-							</a>
+							</Btn>
 						</Link>
 					</div>
 				</div>
