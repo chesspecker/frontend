@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
+import Router from 'next/router.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import Btn from '../../components/layouts/Btn.jsx';
 import OptionToggle from '../../components/01-Download-games/OptionsToggle.jsx';
 import OptionSecondary from '../../components/01-Download-games/OptionSecondary.jsx';
 import OptionNumber from '../../components/01-Download-games/OptionNumber.jsx';
-import Router from 'next/router';
 
 function SetParameters(props) {
 	const [toggleTimeGame, setToggleTimeGame] = useState(false);
@@ -89,7 +89,7 @@ function SetParameters(props) {
 		const linkParameters = new URLSearchParams({
 			max: gameNumber,
 			rated: gameType,
-			perfType: gameTime.join(),
+			perfType: gameTime.join(','),
 		});
 		console.log(linkParameters);
 		Router.push(`https://api.chesspecker.com/games/download?${linkParameters}`);
