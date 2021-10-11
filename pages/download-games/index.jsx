@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import ToggleSwitch from '../../components/layouts/ToggleSwitch.jsx';
-import Btn from '../../components/layouts/Btn';
-import style from './index.module.scss';
+import Btn from '../../components/layouts/Btn.jsx';
 import OptionToggle from '../../components/01-Download-games/OptionsToggle.jsx';
-import OptionSecondary from '../../components/01-Download-games/OptionSecondary';
+import OptionSecondary from '../../components/01-Download-games/OptionSecondary.jsx';
+import style from './index.module.scss';
 
 function SetParameters(props) {
 	const [toggleTimeGame, setTogleTimeGame] = useState(false);
@@ -41,9 +41,9 @@ function SetParameters(props) {
 				</div>
 				<OptionToggle
 					setName='time'
-					onChange={handlTimeChange}
 					setDescription='All'
 					setToggle={toggleTimeGame}
+					onChange={handlTimeChange}
 				>
 					Durée des parties ? ⏲
 				</OptionToggle>
@@ -58,9 +58,9 @@ function SetParameters(props) {
 				</OptionSecondary>
 				<OptionToggle
 					setName='type'
-					onChange={handlTypeChange}
 					setDescription='All'
 					setToggle={toggleTypeGame}
+					onChange={handlTypeChange}
 				>
 					Type de partie ?
 				</OptionToggle>

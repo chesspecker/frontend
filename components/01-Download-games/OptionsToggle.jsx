@@ -1,6 +1,6 @@
 import React from 'react';
+import ToggleSwitch from '../layouts/ToggleSwitch.jsx';
 import style from './OptionToggle.module.scss';
-import ToggleSwitch from '../layouts/ToggleSwitch';
 
 function OptionToggle({
 	onChange,
