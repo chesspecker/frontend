@@ -129,6 +129,7 @@ function SetParameters(props) {
 				} else {
 					array.splice(id, 1, true);
 				}
+
 				console.log(array);
 
 				return array;
