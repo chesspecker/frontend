@@ -4,6 +4,7 @@ import Btn from '../../components/layouts/Btn.jsx';
 import OptionToggle from '../../components/01-Download-games/OptionsToggle.jsx';
 import OptionSecondary from '../../components/01-Download-games/OptionSecondary.jsx';
 import OptionNumber from '../../components/01-Download-games/OptionNumber.jsx';
+import style from './index.module.scss';
 import Router from 'next/router';
 
 function SetParameters(props) {
@@ -85,7 +86,7 @@ function SetParameters(props) {
 		setGameNumber(e.target.value);
 	};
 
-	const handleSubmit = async () => {
+	const handleSubmit = () => {
 		const linkParameters = new URLSearchParams({
 			max: gameNumber,
 			rated: gameType,
@@ -114,7 +115,7 @@ function SetParameters(props) {
 					checked={toggleTimeGame}
 					onChange={handlToggleTimeChange}
 				>
-					Durée des parties ? ⏲
+					Type de parties ?
 				</OptionToggle>
 				<OptionSecondary
 					setToggle={toggleTimeGame}
@@ -150,7 +151,7 @@ function SetParameters(props) {
 					checked={toggleTypeGame}
 					onChange={handlToggleTypeChange}
 				>
-					Type de partie ?
+					Classée, amicale ?
 				</OptionToggle>
 				<OptionSecondary
 					setToggle={toggleTypeGame}
