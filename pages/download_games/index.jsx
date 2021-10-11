@@ -1,6 +1,6 @@
 import React from 'react';
-import PageHeader from '../../components/layouts/PageHeader';
-import ToggleSwitch from '../../components/layouts/ToggleSwitch';
+import PageHeader from '../../components/layouts/PageHeader.jsx';
+import ToggleSwitch from '../../components/layouts/ToggleSwitch.jsx';
 import style from './index.module.css';
 
 function SetParameters(props) {
@@ -12,7 +12,7 @@ function SetParameters(props) {
 				</h2>
 
 				<div className={style.option}>
-					<label for='number_game' className={style.description}>
+					<label htmlFor='number_game' className={style.description}>
 						Nombre de partie à analyser ?{' '}
 					</label>
 					<input
@@ -23,7 +23,7 @@ function SetParameters(props) {
 					/>
 				</div>
 				<div className={style.option}>
-					<p for='number_game' className={style.description}>
+					<p htmlFor='number_game' className={style.description}>
 						Type de parties ?
 					</p>
 					<ToggleSwitch name='test' />
