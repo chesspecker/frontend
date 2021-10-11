@@ -11,6 +11,7 @@
 </div>
 
 TODO:
+
 #### 1. Connect to app via lichess
 
 ✅ user logs in using oauth lichess
