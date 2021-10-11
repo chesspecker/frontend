@@ -6,13 +6,13 @@ import OptionSecondary from '../../components/01-Download-games/OptionSecondary.
 import style from './index.module.scss';
 
 function SetParameters(props) {
-	const [toggleTimeGame, setTogleTimeGame] = useState(false);
-	const [toggleTypeGame, setTogleTypeGame] = useState(false);
+	const [toggleTimeGame, setToggleTimeGame] = useState(false);
+	const [toggleTypeGame, setToggleTypeGame] = useState(false);
 	const [gameTime, setGameTime] = useState([]);
 	const [gameType, setGameType] = useState([]);
 
 	const handlToggleTimeChange = () => {
-		setTogleTimeGame(toggleTymeGame => !toggleTymeGame);
+		setToggleTimeGame(toggleTymeGame => !toggleTymeGame);
 		if (!toggleTimeGame) {
 			const array = ['bullet', 'rapide', 'longue'];
 			setGameTime(() => {
@@ -29,7 +29,7 @@ function SetParameters(props) {
 	};
 
 	const handlToggleTypeChange = () => {
-		setTogleTypeGame(() => !toggleTypeGame);
+		setToggleTypeGame(() => !toggleTypeGame);
 		if (!toggleTypeGame) {
 			const array = ['classées', 'amicale'];
 			setGameType(() => {
