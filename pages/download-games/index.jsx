@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
+import {array} from 'prop-types';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import ToggleSwitch from '../../components/layouts/ToggleSwitch.jsx';
 import Btn from '../../components/layouts/Btn.jsx';
 import OptionToggle from '../../components/01-Download-games/OptionsToggle.jsx';
 import OptionSecondary from '../../components/01-Download-games/OptionSecondary.jsx';
 import style from './index.module.scss';
-import {array} from 'prop-types';
 
 function SetParameters(props) {
 	const [toggleTimeGame, setTogleTimeGame] = useState(false);
@@ -27,7 +27,7 @@ function SetParameters(props) {
 
 		if (gameType.find(e => e === name)) {
 			setGameType(() => {
-				const index = gameType.findIndex(e => e === name);
+				const index = gameType.indexOf(name);
 				const array = [...gameType];
 				array.splice(index, 1);
 				console.log('game', array);
