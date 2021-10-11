@@ -3,8 +3,8 @@ import PageHeader from '../../components/layouts/PageHeader.jsx';
 import Btn from '../../components/layouts/Btn.jsx';
 import OptionToggle from '../../components/01-Download-games/OptionsToggle.jsx';
 import OptionSecondary from '../../components/01-Download-games/OptionSecondary.jsx';
-import style from './index.module.scss';
 import OptionNumber from '../../components/01-Download-games/OptionNumber.jsx';
+import style from './index.module.scss';
 
 function SetParameters(props) {
 	const [toggleTimeGame, setToggleTimeGame] = useState(false);
