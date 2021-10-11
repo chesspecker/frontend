@@ -6,7 +6,6 @@ import OptionToggle from '../../components/01-Download-games/OptionsToggle.jsx';
 import OptionSecondary from '../../components/01-Download-games/OptionSecondary.jsx';
 import OptionNumber from '../../components/01-Download-games/OptionNumber.jsx';
 import style from './index.module.scss';
-import Router from 'next/router';
 
 function SetParameters(props) {
 	const [toggleTimeGame, setToggleTimeGame] = useState(false);
