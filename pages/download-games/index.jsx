@@ -1,20 +1,30 @@
 import React, {useState} from 'react';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
-import ToggleSwitch from '../../components/layouts/ToggleSwitch.jsx';
 import Btn from '../../components/layouts/Btn.jsx';
 import OptionToggle from '../../components/01-Download-games/OptionsToggle.jsx';
 import OptionSecondary from '../../components/01-Download-games/OptionSecondary.jsx';
 import style from './index.module.scss';
-import {array} from 'prop-types';
 
 function SetParameters(props) {
 	const [toggleTimeGame, setTogleTimeGame] = useState(false);
 	const [toggleTypeGame, setTogleTypeGame] = useState(false);
 	const [gameType, setGameType] = useState([]);
 
-	const handlToggleTimeChange = game => {
-		console.log('game =', game);
+	const handlToggleTimeChange = () => {
 		setTogleTimeGame(toggleTymeGame => !toggleTymeGame);
+		if (!toggleTimeGame) {
+			const array = ['bullet', 'rapide', 'longue'];
+			setGameType(() => {
+				console.log(array);
+				return array;
+			});
+		} else {
+			const array = [];
+			setGameType(() => {
+				console.log(array);
+				return array;
+			});
+		}
 	};
 
 	const handlToggleTypeChange = () => {
@@ -23,7 +33,8 @@ function SetParameters(props) {
 	};
 
 	const handleAddGame = name => {
-		const actualArray = [...gameType];
+		console.log(name);
+		if (name === 'time') console.log('in the time fonction');
 
 		if (gameType.find(e => e === name)) {
 			setGameType(() => {
@@ -65,7 +76,7 @@ function SetParameters(props) {
 				<OptionToggle
 					setName='time'
 					setDescription='All'
-					setToggle={toggleTimeGame}
+					checked={toggleTimeGame}
 					onChange={handlToggleTimeChange}
 				>
 					Durée des parties ? ⏲
@@ -94,7 +105,7 @@ function SetParameters(props) {
 				<OptionToggle
 					setName='type'
 					setDescription='All'
-					setToggle={toggleTypeGame}
+					checked={toggleTypeGame}
 					onChange={handlToggleTypeChange}
 				>
 					Type de partie ?
