@@ -4,6 +4,7 @@ import PageHeader from '../../components/layouts/PageHeader.jsx';
 import useConffeti from '../../components/hooks/useConffeti.jsx';
 import http from '../../services/http-service.js';
 import style from './index.module.css';
+import Btn from '../../components/layouts/Btn.jsx';
 
 function Index() {
 	const [username, setUsername] = useState('');
@@ -37,7 +38,7 @@ function Index() {
 						<h1 className={style.title}>
 							Hello {username}👋 <br /> Welcome to ChessPecker
 						</h1>
-						<a href='#'>Lets's Go !!</a>
+						<Btn link='/download_games'>LETS GO !!</Btn>
 					</div>
 				</div>
 			</PageHeader>
