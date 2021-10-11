@@ -6,7 +6,7 @@ import http from '../../services/http-service.js';
 import style from './index.module.css';
 
 function Index() {
-	const [user, setUser] = useState('');
+	const [username, setUsername] = useState('');
 	console.log(process.env.API);
 	const api = process.env.API;
 
