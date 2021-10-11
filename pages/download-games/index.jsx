@@ -14,6 +14,12 @@ function SetParameters(props) {
 	const [gameTime, setGameTime] = useState([]);
 	const [gameType, setGameType] = useState(null);
 	const [gameNumber, setGameNumber] = useState();
+	const [checkBoxArray, setCheckBoxArray] = useState([
+		false,
+		false,
+		false,
+		false,
+	]);
 
 	const handlToggleTimeChange = () => {
 		setToggleTimeGame(toggleTymeGame => !toggleTymeGame);
@@ -22,11 +28,13 @@ function SetParameters(props) {
 			setGameTime(() => {
 				return array;
 			});
+			setCheckBoxArray(() => [true, true, true, true]);
 		} else {
 			const array = [];
 			setGameTime(() => {
 				return array;
 			});
+			setCheckBoxArray(() => [false, false, false, false]);
 		}
 	};
 
@@ -43,7 +51,7 @@ function SetParameters(props) {
 		}
 	};
 
-	const handleAddGameTime = name => {
+	const handleAddGameTime = (name, id) => {
 		if (gameTime.find(e => e === name)) {
 			setGameTime(() => {
 				const index = gameTime.indexOf(name);
@@ -52,10 +60,28 @@ function SetParameters(props) {
 
 				return array;
 			});
+			setCheckBoxArray(e => {
+				const array = [...checkBoxArray];
+				if (array.every(e => e === true)) {
+					setToggleTimeGame(() => !toggleTimeGame);
+				}
+				array.splice(id, 1, false);
+
+				return array;
+			});
 		} else {
 			setGameTime(() => {
 				const array = [...gameTime];
 				array.push(name);
+
+				return array;
+			});
+			setCheckBoxArray(e => {
+				const array = [...checkBoxArray];
+				array.splice(id, 1, true);
+				if (array.every(e => e === true)) {
+					setToggleTimeGame(() => !toggleTimeGame);
+				}
 
 				return array;
 			});
@@ -110,8 +136,6 @@ function SetParameters(props) {
 		}
 	};
 
-	console.log('rerender');
-
 	return (
 		<PageHeader>
 			<div className={style.container}>
@@ -134,28 +158,32 @@ function SetParameters(props) {
 					Type de parties ?
 				</OptionToggle>
 				<OptionSecondary
-					setToggle={toggleTimeGame}
+					id={0}
+					setToggle={checkBoxArray[0]}
 					setName='bullet'
 					onChange={handleAddGameTime}
 				>
 					Bullet
 				</OptionSecondary>
 				<OptionSecondary
-					setToggle={toggleTimeGame}
+					id={1}
+					setToggle={checkBoxArray[1]}
 					setName='blitz'
 					onChange={handleAddGameTime}
 				>
 					Blitz
 				</OptionSecondary>
 				<OptionSecondary
-					setToggle={toggleTimeGame}
+					id={2}
+					setToggle={checkBoxArray[2]}
 					setName='rapid'
 					onChange={handleAddGameTime}
 				>
 					Rapide
 				</OptionSecondary>
 				<OptionSecondary
-					setToggle={toggleTimeGame}
+					id={3}
+					setToggle={checkBoxArray[3]}
 					setName='classical'
 					onChange={handleAddGameTime}
 				>
