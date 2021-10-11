@@ -4,6 +4,8 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	width: 80%;
+	margin: auto auto;
 }
 
 .title {
@@ -13,20 +15,26 @@
 
 .option {
 	text-align: left;
-	color: white;
+
 	display: flex;
-	width: 80%;
+	width: 100%;
 	justify-content: space-between;
 	align-items: center;
 	padding-bottom: 1rem;
 	margin-top: 2rem;
 
-	border-bottom: solid 1px;
-}
+	border-bottom: solid 1px white;
 
-.description {
-	font-size: 2rem;
-	margin: 0;
+	&_description {
+		font-size: 2rem;
+		margin: 0;
+		color: white;
+	}
+
+	&_secondary {
+		width: 60%;
+		align-self: flex-end;
+	}
 }
 
 .input_number {
@@ -41,4 +49,11 @@
 	align-self: center;
 	margin-left: 2rem;
 	text-align: center;
+}
+
+.number_game {
+	&_notAll {
+		background-color: aqua;
+		width: 50rem;
+	}
 }

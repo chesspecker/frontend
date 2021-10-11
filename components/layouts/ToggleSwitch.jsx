@@ -1,14 +1,16 @@
 import React from 'react';
 import style from './ToggleSwitch.module.scss';
 
-function ToggleSwitch({name}) {
+function ToggleSwitch({name, onChange, checked}) {
 	return (
 		<div className={style.toggle_switch}>
 			<input
 				type='checkbox'
 				className={style.toggle_switch_checkbox}
+				checked={checked}
 				name={name}
 				id={name}
+				onChange={onChange}
 			/>
 			<label className={style.toggle_switch_label} htmlFor={name}>
 				<span className={style.toggle_switch_inner} />
