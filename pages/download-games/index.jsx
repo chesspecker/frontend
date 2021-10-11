@@ -5,8 +5,8 @@ import Btn from '../../components/layouts/Btn.jsx';
 import OptionToggle from '../../components/01-Download-games/OptionsToggle.jsx';
 import OptionSecondary from '../../components/01-Download-games/OptionSecondary.jsx';
 import OptionNumber from '../../components/01-Download-games/OptionNumber.jsx';
+import http from '../../services/http-service.js';
 import style from './index.module.scss';
-import http from '../../services/http-service';
 
 function SetParameters(props) {
 	const [toggleTimeGame, setToggleTimeGame] = useState(false);
@@ -14,12 +14,13 @@ function SetParameters(props) {
 	const [gameTime, setGameTime] = useState([]);
 	const [gameType, setGameType] = useState(null);
 	const [gameNumber, setGameNumber] = useState();
-	const [checkBoxArray, setCheckBoxArray] = useState([
+	const [checkBoxArrayTime, setCheckBoxArrayTime] = useState([
 		false,
 		false,
 		false,
 		false,
 	]);
+	const [checkBoxArrayType, setCheckBoxArrayType] = useState([false, false]);
 
 	const handlToggleTimeChange = () => {
 		setToggleTimeGame(toggleTymeGame => !toggleTymeGame);
@@ -28,13 +29,13 @@ function SetParameters(props) {
 			setGameTime(() => {
 				return array;
 			});
-			setCheckBoxArray(() => [true, true, true, true]);
+			setCheckBoxArrayTime(() => [true, true, true, true]);
 		} else {
 			const array = [];
 			setGameTime(() => {
 				return array;
 			});
-			setCheckBoxArray(() => [false, false, false, false]);
+			setCheckBoxArrayTime(() => [false, false, false, false]);
 		}
 	};
 
@@ -44,10 +45,12 @@ function SetParameters(props) {
 			setGameType(() => {
 				return null;
 			});
+			setCheckBoxArrayType(() => [true, true]);
 		} else {
 			setGameType(() => {
 				return null;
 			});
+			setCheckBoxArrayType(() => [false, false]);
 		}
 	};
 
@@ -60,11 +63,12 @@ function SetParameters(props) {
 
 				return array;
 			});
-			setCheckBoxArray(e => {
-				const array = [...checkBoxArray];
+			setCheckBoxArrayTime(e => {
+				const array = [...checkBoxArrayTime];
 				if (array.every(e => e === true)) {
 					setToggleTimeGame(() => !toggleTimeGame);
 				}
+
 				array.splice(id, 1, false);
 
 				return array;
@@ -76,8 +80,8 @@ function SetParameters(props) {
 
 				return array;
 			});
-			setCheckBoxArray(e => {
-				const array = [...checkBoxArray];
+			setCheckBoxArrayTime(e => {
+				const array = [...checkBoxArrayTime];
 				array.splice(id, 1, true);
 				if (array.every(e => e === true)) {
 					setToggleTimeGame(() => !toggleTimeGame);
@@ -88,14 +92,46 @@ function SetParameters(props) {
 		}
 	};
 
-	const handleAddGameType = name => {
-		if (name === rated) {
+	const handleAddGameType = (name, id) => {
+		if (name === 'rated') {
+			console.log('in the function');
 			setGameType(() => {
 				return true;
+			});
+			setCheckBoxArrayType(e => {
+				const array = [...checkBoxArrayType];
+				if (array.every(e => e === true)) {
+					setToggleTypeGame(() => !toggleTypeGame);
+				}
+
+				if (array[id]) {
+					array.splice(id, 1, false);
+				} else {
+					array.splice(id, 1, true);
+				}
+
+				console.log(array);
+
+				return array;
 			});
 		} else {
 			setGameType(() => {
 				return false;
+			});
+			setCheckBoxArrayType(e => {
+				const array = [...checkBoxArrayType];
+				if (array.every(e => e === true)) {
+					setToggleTypeGame(() => !toggleTypeGame);
+				}
+
+				if (array[id]) {
+					array.splice(id, 1, false);
+				} else {
+					array.splice(id, 1, true);
+				}
+				console.log(array);
+
+				return array;
 			});
 		}
 	};
@@ -130,9 +166,8 @@ function SetParameters(props) {
 			http.get(`https://api.chesspecker.com/games/download?${linkParameters}`, {
 				withCredentials: true,
 			});
-		} catch (er) {
-			console.log(er);
-			return;
+		} catch (error) {
+			console.log(error);
 		}
 	};
 
@@ -159,7 +194,7 @@ function SetParameters(props) {
 				</OptionToggle>
 				<OptionSecondary
 					id={0}
-					setToggle={checkBoxArray[0]}
+					setToggle={checkBoxArrayTime[0]}
 					setName='bullet'
 					onChange={handleAddGameTime}
 				>
@@ -167,7 +202,7 @@ function SetParameters(props) {
 				</OptionSecondary>
 				<OptionSecondary
 					id={1}
-					setToggle={checkBoxArray[1]}
+					setToggle={checkBoxArrayTime[1]}
 					setName='blitz'
 					onChange={handleAddGameTime}
 				>
@@ -175,7 +210,7 @@ function SetParameters(props) {
 				</OptionSecondary>
 				<OptionSecondary
 					id={2}
-					setToggle={checkBoxArray[2]}
+					setToggle={checkBoxArrayTime[2]}
 					setName='rapid'
 					onChange={handleAddGameTime}
 				>
@@ -183,7 +218,7 @@ function SetParameters(props) {
 				</OptionSecondary>
 				<OptionSecondary
 					id={3}
-					setToggle={checkBoxArray[3]}
+					setToggle={checkBoxArrayTime[3]}
 					setName='classical'
 					onChange={handleAddGameTime}
 				>
@@ -198,14 +233,16 @@ function SetParameters(props) {
 					Classée, amicale ?
 				</OptionToggle>
 				<OptionSecondary
-					setToggle={toggleTypeGame}
+					id={0}
+					setToggle={checkBoxArrayType[0]}
 					setName='rated'
 					onChange={handleAddGameType}
 				>
 					Classée
 				</OptionSecondary>
 				<OptionSecondary
-					setToggle={toggleTypeGame}
+					id={1}
+					setToggle={checkBoxArrayType[1]}
 					setName='amicale'
 					onChange={handleAddGameType}
 				>
