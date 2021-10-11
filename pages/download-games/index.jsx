@@ -65,6 +65,7 @@ function SetParameters(props) {
 				if (array.every(e => e === true)) {
 					setToggleTimeGame(() => !toggleTimeGame);
 				}
+
 				array.splice(id, 1, false);
 
 				return array;

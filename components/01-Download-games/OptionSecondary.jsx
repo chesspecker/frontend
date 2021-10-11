@@ -6,16 +6,16 @@ function OptionToggle({setName, setToggle, children, onChange, id}) {
 	return (
 		<div
 			className={`${style.option} ${style.option_secondary}`}
-			//style={setToggle ? {display: 'none'} : {display: 'flex'}}
+			// Style={setToggle ? {display: 'none'} : {display: 'flex'}}
 		>
 			<p htmlFor='number_game' className={style.option_description}>
 				{children}
 			</p>
 			<ToggleSwitch
 				name={setName}
-				onChange={onChange}
 				setToggle={setToggle}
 				id={id}
+				onChange={onChange}
 			/>
 		</div>
 	);
