@@ -86,6 +86,20 @@ function SetParameters(props) {
 		setGameNumber(e.target.value);
 	};
 
+	const validate = () => {
+		if (gameNumber < 1) {
+			alert('you must anayse at least one game ! ');
+			return;
+		}
+
+		if (gameTime.length === 0) {
+			alert('you must select at least one type of game !! ');
+			return;
+		}
+
+		handleSubmit();
+	};
+
 	const handleSubmit = () => {
 		const linkParameters = new URLSearchParams({
 			max: gameNumber,
@@ -168,7 +182,7 @@ function SetParameters(props) {
 					Amicale
 				</OptionSecondary>
 
-				<Btn onClick={handleSubmit}>Download 🔥</Btn>
+				<Btn onClick={validate}>Download 🔥</Btn>
 			</div>
 		</PageHeader>
 	);
