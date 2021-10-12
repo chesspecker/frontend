@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import router from 'next/router.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import Btn from '../../components/layouts/Btn.jsx';
 import OptionToggle from '../../components/01-Download-games/OptionsToggle.jsx';
@@ -112,8 +113,10 @@ function SetParameters() {
 			http.get(`https://api.chesspecker.com/games/download?${linkParameters}`, {
 				withCredentials: true,
 			});
+			router.push('/download-progress');
 		} catch (error) {
 			console.log(error);
+			alert(error);
 		}
 	};
 
@@ -139,6 +142,7 @@ function SetParameters() {
 				>
 					Type of game to import:
 				</OptionToggle>
+
 				<OptionSecondary
 					id={0}
 					setToggle={checkBoxArrayTime[0]}
@@ -195,7 +199,6 @@ function SetParameters() {
 				>
 					Casual
 				</OptionSecondary>
-
 				<Btn onClick={validate}>Download 🔥</Btn>
 			</div>
 		</PageHeader>
