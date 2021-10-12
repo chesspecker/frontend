@@ -13,13 +13,11 @@ function DownloadProgress(props) {
 
 	useEffect(() => {
 		const socket = socketIOClient(ENDPOINT);
-		socket.on('connect', () => {
-			console.log(socket.id);
-		});
-		socket.on('data', data => {
-			console.log(data);
-			setPercentage(data);
-		});
+		const listener = (eventName, ...args) => {
+			console.log(eventName, args);
+		};
+
+		socket.onAny(listener);
 	}, []);
 	return (
 		<PageHeader>
