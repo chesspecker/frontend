@@ -5,7 +5,7 @@ import PageHeader from '../../components/layouts/PageHeader.jsx';
 import ProgressBar from '../../components/02-Download-progress/ProgressBar.jsx';
 import style from './index.module.scss';
 
-const ENDPOINT = 'http://api.chesspecker.com';
+const ENDPOINT = 'https://api.chesspecker.com';
 
 function DownloadProgress(props) {
 	const api = process.env.API;
