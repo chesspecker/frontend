@@ -1,0 +1,29 @@
+.progress_bar_container {
+	width: 80%;
+}
+
+.progress_bar {
+	background-color: yellow;
+	height: 5px;
+	overflow: hidden;
+	position: relative;
+
+	&_moving {
+		background-color: white;
+		height: 100%;
+		width: 100%;
+	}
+	&_dot_container {
+		width: 100%;
+		background-color: aqua;
+		transform: translateX(50%);
+	}
+	&_dot {
+		background-color: yellow;
+		height: 2rem;
+		width: 2rem;
+		border-radius: 50%;
+		position: fixed;
+		transform: translateY(-1.18rem);
+	}
+}

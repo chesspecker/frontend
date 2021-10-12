@@ -110,7 +110,7 @@ function SetParameters() {
 		});
 
 		try {
-			http.get(`https://api.chesspecker.com/games/download?${linkParameters}`, {
+			http.get(`${process.env.API}/games/download?${linkParameters}`, {
 				withCredentials: true,
 			});
 			router.push('/download-progress');
