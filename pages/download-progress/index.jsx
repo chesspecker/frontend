@@ -6,7 +6,7 @@ import style from './index.module.scss';
 
 function DownloadProgress(props) {
 	const api = process.env.API;
-	const [percentage, setPercentage] = useState(0);
+	const [percentage, setPercentage] = useState();
 
 	useEffect(() => {
 		const getPercentage = async () => {
@@ -14,6 +14,11 @@ function DownloadProgress(props) {
 				withCredentials: true,
 			});
 			console.log(percent);
+			if (isNaN(percent)) {
+				console.log(percent);
+				return;
+			}
+
 			setPercentage(() => percent);
 		};
 
@@ -27,6 +32,7 @@ function DownloadProgress(props) {
 			<div className={style.container}>
 				<h2 className={style.title}>We are downloading your game 😀</h2>
 				<p className={style.description}>Status : 240/500 games </p>
+				<p className={style.percentage}>{percentage} %</p>
 				<ProgressBar percentage={percentage} />
 			</div>
 		</PageHeader>
