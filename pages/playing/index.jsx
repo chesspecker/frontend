@@ -1,18 +1,23 @@
 import React from 'react';
-import dynamic from 'next/dynamic.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
+import Btn from '../../components/layouts/Btn.jsx';
+import ChessGround from '../../components/layouts/ChessGround.jsx';
 import style from './index.module.scss';
 
-const Chessground = dynamic(
-	() => import('../../components/layouts/ChessGround.jsx'),
-	{ssr: false},
-);
-
 function index(props) {
+	const handleClick = () => {
+		console.log('clicked');
+	};
+
 	return (
 		<PageHeader>
 			<div className={style.container}>
-				<Chessground />
+				<div>
+					<ChessGround />
+				</div>
+				<button className={style.btn} onClick={handleClick}>
+					Test
+				</button>
 			</div>
 		</PageHeader>
 	);

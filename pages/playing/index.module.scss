@@ -1,6 +1,11 @@
 .container {
 	height: 100vh;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+
+.btn {
+	z-index: 99999;
 }
