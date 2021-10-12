@@ -1,31 +1,22 @@
 import React, {useEffect, useState} from 'react';
+import socketIOClient from 'socket.io-client';
 import http from '../../services/http-service.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import ProgressBar from '../../components/02-Download-progress/ProgressBar.jsx';
 import style from './index.module.scss';
+
+const ENDPOINT = 'http://api.chesspecker.com';
 
 function DownloadProgress(props) {
 	const api = process.env.API;
 	const [percentage, setPercentage] = useState(0);
 
 	useEffect(() => {
-		const getPercentage = async () => {
-			const {data: percent} = await http.get(`${api}/worker`, {
-				withCredentials: true,
-			});
-			console.log(percent);
-			if (isNaN(percent)) {
-				console.log(percent);
-				return;
-			}
-
-			setPercentage(() => percent);
-		};
-
-		setInterval(() => {
-			getPercentage();
-			console.log('getPercent');
-		}, 5000);
+		const socket = socketIOClient(ENDPOINT);
+		socket.on('FromAPI', data => {
+			console.log(data);
+			setPercentage(data);
+		});
 	}, []);
 	return (
 		<PageHeader>
