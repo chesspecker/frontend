@@ -12,7 +12,7 @@ function DownloadProgress(props) {
 	const [percentage, setPercentage] = useState(0);
 
 	useEffect(() => {
-		const socket = socketIOClient(ENDPOINT);
+		const socket = socketIOClient(ENDPOINT, {transports: ['websocket']});
 		socket.on('connect', () => {
 			console.log(socket.id);
 		});
