@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import socketIOClient from 'socket.io-client';
+import {io} from 'socket.io-client';
 import http from '../../services/http-service.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import ProgressBar from '../../components/02-Download-progress/ProgressBar.jsx';
@@ -12,12 +12,15 @@ function DownloadProgress(props) {
 	const [percentage, setPercentage] = useState(0);
 
 	useEffect(() => {
-		const socket = socketIOClient(ENDPOINT, {
+		const socket = io(ENDPOINT, {
 			transports: ['websocket', 'polling'],
 			credentials: true,
 		});
 		socket.on('connect', () => {
 			console.log(socket.id);
+		});
+		socket.io.on('error', error => {
+			console.log(error);
 		});
 		socket.on('FromAPI', data => {
 			console.log(data);
