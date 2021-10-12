@@ -7,7 +7,7 @@ import style from './index.module.scss';
 
 const ENDPOINT = 'https://api.chesspecker.com';
 
-function DownloadProgress(props) {
+function DownloadProgress() {
 	const api = process.env.API;
 	const [percentage, setPercentage] = useState(0);
 
@@ -17,13 +17,9 @@ function DownloadProgress(props) {
 			credentials: true,
 		});
 		socket.on('connect', () => {
-			console.log(socket.id);
-		});
-		socket.io.on('error', error => {
-			console.log(error);
+			console.log(`connected with id: ${socket.id}`);
 		});
 		socket.on('FromAPI', data => {
-			console.log(data);
 			setPercentage(data * 100);
 		});
 	}, []);
