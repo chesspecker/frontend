@@ -16,11 +16,17 @@
 		color: white;
 		align-self: center;
 		margin-right: 1rem;
+		@media screen and (max-width: 450px) {
+			font-size: 1.5rem;
+		}
 	}
 
 	&_secondary {
 		width: 60%;
 		align-self: flex-end;
+		@media screen and (max-width: 450px) {
+			font-size: 1.5rem;
+		}
 	}
 }
 
@@ -36,4 +42,7 @@
 	align-self: center;
 	margin-left: 2rem;
 	text-align: center;
+	@media screen and (max-width: 450px) {
+		transform: scale(0.8);
+	}
 }

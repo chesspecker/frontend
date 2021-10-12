@@ -79,3 +79,9 @@
 		}
 	}
 }
+
+@media screen and (max-width: 450px) {
+	.toggle_switch {
+		transform: scale(0.7);
+	}
+}

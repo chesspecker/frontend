@@ -1,10 +1,10 @@
 .container {
-	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	width: 80%;
+	min-height: 100vh;
 	margin: auto auto;
 }
 
@@ -25,4 +25,13 @@
 	align-self: center;
 	margin-left: 2rem;
 	text-align: center;
+}
+
+@media screen and (max-width: 450px) {
+	.title {
+		font-size: 2rem;
+	}
+	.container {
+		margin-top: 5rem;
+	}
 }

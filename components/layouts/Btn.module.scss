@@ -14,4 +14,7 @@
 	font-family: sans-serif;
 	font-weight: bold;
 	cursor: pointer;
+	@media screen and (max-width: 450px) {
+		transform: scale(0.9);
+	}
 }

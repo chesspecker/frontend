@@ -9,6 +9,10 @@
 	margin-top: 2rem;
 
 	border-bottom: solid 1px white;
+	@media screen and (max-width: 450px) {
+		padding-bottom: 0.6rem;
+		margin-top: 0.5rem;
+	}
 
 	&_description {
 		font-size: 2rem;
@@ -16,6 +20,9 @@
 		color: white;
 		align-self: center;
 		margin-right: 1rem;
+		@media screen and (max-width: 450px) {
+			font-size: 1.5rem;
+		}
 	}
 
 	&_secondary {

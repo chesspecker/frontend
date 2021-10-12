@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './Btn.module.css';
+import style from './Btn.module.scss';
 
 function Btn({link, onClick, children}) {
 	return (

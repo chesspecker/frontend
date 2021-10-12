@@ -1,8 +1,8 @@
 import React from 'react';
 import ToggleSwitch from '../layouts/ToggleSwitch.jsx';
-import style from './OptionToggle.module.scss';
+import style from './OptionSecondary.module.scss';
 
-function OptionToggle({setName, setToggle, children, onChange, id}) {
+function OptionSecondary({setName, setToggle, children, onChange, id}) {
 	return (
 		<div
 			className={`${style.option} ${style.option_secondary}`}
@@ -21,4 +21,4 @@ function OptionToggle({setName, setToggle, children, onChange, id}) {
 	);
 }
 
-export default OptionToggle;
+export default OptionSecondary;
