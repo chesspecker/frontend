@@ -6,7 +6,7 @@ import style from './index.module.scss';
 
 function DownloadProgress(props) {
 	const api = process.env.API;
-	const [percentage, setPercentage] = useState();
+	const [percentage, setPercentage] = useState(0);
 
 	useEffect(() => {
 		const getPercentage = async () => {
