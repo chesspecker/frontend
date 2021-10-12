@@ -15,7 +15,7 @@ function DownloadProgress(props) {
 		const socket = socketIOClient(ENDPOINT);
 		socket.on('FromAPI', data => {
 			console.log(data);
-			setPercentage(data*100);
+			setPercentage(data * 100);
 		});
 	}, []);
 	return (
