@@ -13,6 +13,9 @@ function DownloadProgress(props) {
 
 	useEffect(() => {
 		const socket = socketIOClient(ENDPOINT);
+		socket.on('connect', () => {
+			console.log(socket.id);
+		});
 		socket.on('FromAPI', data => {
 			console.log(data);
 			setPercentage(data*100);
