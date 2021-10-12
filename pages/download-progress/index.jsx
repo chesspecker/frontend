@@ -34,6 +34,9 @@ function DownloadProgress(props) {
 				<p className={style.description}>Status : 240/500 games </p>
 				<p className={style.percentage}>{percentage} %</p>
 				<ProgressBar percentage={percentage} />
+				<p className={style.noWorries}>
+					No worries, you can close this page and come back later
+				</p>
 			</div>
 		</PageHeader>
 	);
