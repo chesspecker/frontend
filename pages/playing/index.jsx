@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
+import Image from 'next/image.js';
 import Chess from '../../components/utils/chess.js';
-
+import rotate from '../../public/images/rotate.svg';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import Btn from '../../components/layouts/Btn.jsx';
 import ChessGround from '../../components/layouts/ChessGround.jsx';
@@ -10,6 +11,7 @@ function index(props) {
 	const [chess, setChess] = useState(new Chess());
 	const [fen, setFen] = useState('');
 	const [lastMove, setLastMove] = useState();
+	const [orientation, setOrientation] = useState('white');
 
 	const onMove = (from, to) => {
 		const moves = chess.moves({verbose: true});
@@ -62,6 +64,10 @@ function index(props) {
 		};
 	};
 
+	const switchOrientation = () => {
+		setOrientation(() => (orientation === 'white' ? 'black' : 'white'));
+	};
+
 	return (
 		<PageHeader>
 			<div className={style.container}>
@@ -70,11 +76,14 @@ function index(props) {
 						fen={fen}
 						turnColor={turnColor()}
 						movable={calcMovable()}
+						orientation={orientation}
 						onMove={onMove}
 					/>
 				</div>
 				<div className={style.content}>
-					<Btn onClick={turnColor}>Test</Btn>
+					<button className={style.btn} onClick={switchOrientation}>
+						<Image src={rotate} />
+					</button>
 				</div>
 			</div>
 		</PageHeader>
