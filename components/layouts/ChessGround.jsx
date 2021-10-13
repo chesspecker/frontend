@@ -4,8 +4,15 @@ import 'react-chessground/dist/styles/chessground.css';
 
 const Chessground = dynamic(() => import('react-chessground'), {ssr: false});
 
-function ChessGround({onMove, fen, turnColor}) {
-	return <Chessground fen={fen} turnColor={turnColor} onMove={onMove} />;
+function ChessGround({onMove, fen, turnColor, movable}) {
+	return (
+		<Chessground
+			fen={fen}
+			turnColor={turnColor}
+			movable={movable}
+			onMove={onMove}
+		/>
+	);
 }
 
 export default ChessGround;

@@ -43,11 +43,35 @@ function index(props) {
 		return chess.turn() === 'w' ? 'white' : 'black';
 	};
 
+	const calcMovable = () => {
+		const dests = new Map();
+		console.log(dests);
+		for (const s of chess.SQUARES) {
+			const ms = chess.moves({square: s, verbose: true});
+			if (ms.length > 0)
+				dests.set(
+					s,
+					ms.map(m => m.to),
+				);
+		}
+
+		return {
+			free: false,
+			dests,
+			color: 'white',
+		};
+	};
+
 	return (
 		<PageHeader>
 			<div className={style.container}>
 				<div>
-					<ChessGround fen={fen} turnColor={turnColor()} onMove={onMove} />
+					<ChessGround
+						fen={fen}
+						turnColor={turnColor()}
+						movable={calcMovable()}
+						onMove={onMove}
+					/>
 				</div>
 				<div className={style.content}>
 					<Btn onClick={turnColor}>Test</Btn>
