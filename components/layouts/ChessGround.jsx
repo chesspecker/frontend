@@ -5,7 +5,6 @@ import 'react-chessground/dist/styles/chessground.css';
 const Chessground = dynamic(() => import('react-chessground'), {ssr: false});
 
 function ChessGround({onMove, fen, turnColor}) {
-	console.log(turnColor);
 	return <Chessground fen={fen} turnColor={turnColor} onMove={onMove} />;
 }
 

@@ -13,20 +13,22 @@ function index(props) {
 
 	const onMove = (from, to) => {
 		const moves = chess.moves({verbose: true});
-		for (let i = 0, len = moves.length; i < len; i++) {
+		for (let i = 0, length_ = moves.length; i < length_; i++) {
 			/* eslint-disable-line */
-			if (moves[i].flags.indexOf('p') !== -1 && moves[i].from === from) {
+			if (moves[i].flags.includes('p') && moves[i].from === from) {
 				setPendingMove([from, to]);
 				setSelectVisible(true);
 				return;
 			}
 		}
+
 		if (chess.move({from, to, promotion: 'x'})) {
 			setFen(chess.fen());
 			setLastMove([from, to]);
 			setTimeout(randomMove, 500);
 		}
 	};
+
 	const randomMove = () => {
 		const moves = chess.moves({verbose: true});
 		const move = moves[Math.floor(Math.random() * moves.length)];
@@ -34,9 +36,9 @@ function index(props) {
 			chess.move(move.san);
 			setFen(chess.fen());
 			setLastMove([move.from, move.to]);
-			turnColor();
 		}
 	};
+
 	const turnColor = () => {
 		return chess.turn() === 'w' ? 'white' : 'black';
 	};
@@ -45,7 +47,7 @@ function index(props) {
 		<PageHeader>
 			<div className={style.container}>
 				<div>
-					<ChessGround onMove={onMove} fen={fen} turnColor={turnColor()} />
+					<ChessGround fen={fen} turnColor={turnColor()} onMove={onMove} />
 				</div>
 				<div className={style.content}>
 					<Btn onClick={turnColor}>Test</Btn>
