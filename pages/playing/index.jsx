@@ -5,19 +5,12 @@ import ChessGround from '../../components/layouts/ChessGround.jsx';
 import style from './index.module.scss';
 
 function index(props) {
-	const handleClick = () => {
-		console.log('clicked');
-	};
-
 	return (
 		<PageHeader>
 			<div className={style.container}>
 				<div>
 					<ChessGround />
 				</div>
-				<button className={style.btn} onClick={handleClick}>
-					Test
-				</button>
 			</div>
 		</PageHeader>
 	);
