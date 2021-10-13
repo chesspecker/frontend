@@ -23,7 +23,7 @@ function DownloadProgress() {
 			console.log(`connected with id: ${socket.id}`);
 		});
 		socket.on('FromAPI', data => {
-			setPercentage(100 * data.progress.toFixed(2));
+			setPercentage(100 * data.progress);
 			setCount(data.count);
 			setMax(data.max);
 		});

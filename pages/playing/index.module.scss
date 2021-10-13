@@ -13,7 +13,7 @@
 .control_bar {
 	z-index: 99999;
 	display: flex;
-	width: 100%;
+	width: 80%;
 }
 
 .btn {
@@ -24,7 +24,7 @@
 	border-radius: 50%;
 	cursor: pointer;
 }
-.game_history {
+.dashboard {
 	background-color: white;
 	flex-direction: column;
 	height: 20rem;

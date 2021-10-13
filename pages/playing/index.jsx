@@ -92,7 +92,7 @@ function index(props) {
 						<Image src={rotate} />
 					</button>
 				</div>
-				<div className={style.game_history}>
+				<div className={style.dashboard}>
 					{moveHistory.map(s => {
 						return <div>{s.to}</div>;
 					})}
