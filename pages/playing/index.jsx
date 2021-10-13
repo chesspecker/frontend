@@ -12,6 +12,7 @@ function index(props) {
 	const [fen, setFen] = useState('');
 	const [lastMove, setLastMove] = useState();
 	const [orientation, setOrientation] = useState('white');
+	const [moveHistory, setMoveHistory] = useState([]);
 
 	const onMove = (from, to) => {
 		const moves = chess.moves({verbose: true});
@@ -27,6 +28,12 @@ function index(props) {
 		if (chess.move({from, to, promotion: 'x'})) {
 			setFen(chess.fen());
 			setLastMove([from, to]);
+			setMoveHistory(() => {
+				const lastMovs = [...moveHistory];
+				lastMovs.push({from, to});
+				console.log(lastMovs);
+				return lastMovs;
+			});
 			setTimeout(randomMove, 500);
 		}
 	};
@@ -80,10 +87,20 @@ function index(props) {
 						onMove={onMove}
 					/>
 				</div>
-				<div className={style.content}>
+				<div className={style.control_bar}>
 					<button className={style.btn} onClick={switchOrientation}>
 						<Image src={rotate} />
 					</button>
+				</div>
+				<div className={style.game_history}>
+					{moveHistory.map(s => {
+						return (
+							<div>
+								{s.from}
+								{s.to}
+							</div>
+						);
+					})}
 				</div>
 			</div>
 		</PageHeader>

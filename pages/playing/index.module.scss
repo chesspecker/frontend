@@ -1,5 +1,5 @@
 .container {
-	height: 100vh;
+	height: 120vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -10,7 +10,7 @@
 	z-index: 99999;
 }
 
-.content {
+.control_bar {
 	z-index: 99999;
 	display: flex;
 	width: 100%;
@@ -23,4 +23,15 @@
 	border: none;
 	border-radius: 50%;
 	cursor: pointer;
+}
+.game_history {
+	background-color: white;
+	flex-direction: column;
+	height: 20rem;
+	width: 40%;
+	border-radius: 30px;
+	padding: 2rem;
+	display: flex;
+	font-size: 1.5rem;
+	z-index: 99999;
 }
