@@ -94,12 +94,7 @@ function index(props) {
 				</div>
 				<div className={style.game_history}>
 					{moveHistory.map(s => {
-						return (
-							<div>
-								{s.from}
-								{s.to}
-							</div>
-						);
+						return <div>{s.to}</div>;
 					})}
 				</div>
 			</div>

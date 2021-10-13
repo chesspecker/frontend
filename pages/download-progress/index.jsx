@@ -11,6 +11,8 @@ function DownloadProgress() {
 	const api = process.env.API;
 	const [percentage, setPercentage] = useState(0);
 	const [progress, setProgress] = useState(0);
+	const [count, setCount] = useState(0);
+	const [max, setMax] = useState(0);
 
 	useEffect(() => {
 		const socket = io(ENDPOINT, {
@@ -21,7 +23,9 @@ function DownloadProgress() {
 			console.log(`connected with id: ${socket.id}`);
 		});
 		socket.on('FromAPI', data => {
-			setPercentage(data * 100);
+			setPercentage(100 * data.progress.toFixed(2));
+			setCount(data.count);
+			setMax(data.max);
 		});
 	}, []);
 
@@ -43,7 +47,9 @@ function DownloadProgress() {
 		<PageHeader>
 			<div className={style.container}>
 				<h2 className={style.title}>We are downloading your game 😀</h2>
-				<p className={style.description}>Status : 240/500 games </p>
+				<p className={style.description}>
+					Status : {count}/{max} games{' '}
+				</p>
 				<p className={style.percentage}>{percentage} %</p>
 				<ProgressBar percentage={percentage} />
 				<p className={style.noWorries}>
