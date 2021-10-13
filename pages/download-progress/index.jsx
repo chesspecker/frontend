@@ -27,11 +27,11 @@ function DownloadProgress() {
 
 	useEffect(() => {
 		const getProgress = async () => {
-			const {data: jobProgress} = await http.get(`${api}/worker`, {
+			const {data} = await http.get(`${api}/worker`, {
 				withCredentials: true,
 			});
-			console.log(jobProgress);
-			setProgress(() => jobProgress);
+			console.log(data);
+			setProgress(() => data.jobProgress);
 		};
 
 		setInterval(() => {
