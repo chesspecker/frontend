@@ -10,6 +10,7 @@ const ENDPOINT = 'https://api.chesspecker.com';
 function DownloadProgress() {
 	const api = process.env.API;
 	const [percentage, setPercentage] = useState(0);
+	const [progress, setProgress] = useState(0);
 
 	useEffect(() => {
 		const socket = io(ENDPOINT, {
@@ -23,6 +24,21 @@ function DownloadProgress() {
 			setPercentage(data * 100);
 		});
 	}, []);
+
+	useEffect(() => {
+		const getProgress = async () => {
+			const {data: jobProgress} = await http.get(`${api}/worker`, {
+				withCredentials: true,
+			});
+			console.log(jobProgress);
+			setProgress(() => jobProgress);
+		};
+
+		setInterval(() => {
+			getProgress();
+		}, 500);
+	}, []);
+
 	return (
 		<PageHeader>
 			<div className={style.container}>
