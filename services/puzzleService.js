@@ -30,7 +30,8 @@ const puzzles = [
 
 export const getPuzzle = id => {
 	const puzzle = puzzles.find(e => e._id === id);
-	return puzzle ? puzzle : error("Ce problème n'est pas dans la db");
+
+	return puzzle ? puzzle : alert("Ce problème n'est pas dans la db");
 };
 
 export const getPuzzleList = () => puzzlesId;

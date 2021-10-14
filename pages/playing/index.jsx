@@ -20,6 +20,7 @@ function index() {
 	const [history, setHistory] = useState([]);
 	const [moveNumber, setMoveNumber] = useState(0);
 	const [actualPuzzle, setActualPuzzle] = useState(0);
+	const [puzzleSize, setPuzzleSize] = useState(0);
 
 	// TODO: à décommenter quand la backend sera fonctionnel :)
 	/* 	useEffect(() => {
@@ -37,6 +38,20 @@ function index() {
 	}, []); */
 
 	useEffect(() => {
+		const getSet = async () => {
+			const {data: set} = await http.get(
+				`https://api.chesspecker.com/puzzles/sets`,
+				{
+					withCredentials: true,
+				},
+			);
+			console.log(set);
+		};
+
+		getSet();
+	}, []);
+
+	useEffect(() => {
 		const puzzlList = getPuzzleList();
 		const puzzle = getPuzzle(puzzlList[actualPuzzle]);
 		const regex = /FEN "(.*?)"/g;
@@ -48,6 +63,7 @@ function index() {
 		const newChess = new Chess(puzzleFen);
 
 		setMoveHistory(() => []);
+		setPuzzleSize(() => puzzlList.length);
 		setMoveNumber(() => 0);
 		setHistory(() => history);
 		setPgn(() => puzzle.pgn);
@@ -122,16 +138,29 @@ function index() {
 		}
 	};
 
+	const changePage = () => {
+		setActualPuzzle(previousPuzzle => {
+			const nowPuzzle = previousPuzzle + 1;
+			return nowPuzzle;
+		});
+	};
+
 	const checkPuzzleComplete = newMove => {
-		if (history.length === newMove + 1) {
-			setTimeout(
-				setActualPuzzle(previousPuzzle => {
-					const actualPuzzle = previousPuzzle + 1;
-					return actualPuzzle;
-				}),
-				800,
-			);
-		}
+		setTimeout(
+			() => {
+				if (history.length === newMove + 1) {
+					console.log('change page');
+					if (puzzleSize === actualPuzzle + 1) {
+						alert('fin du game bb 😀');
+						return;
+					}
+
+					changePage();
+				}
+			},
+			800,
+			[],
+		);
 	};
 
 	const turnColor = string => {
@@ -178,11 +207,7 @@ function index() {
 						<Image src={rotate} />
 					</button>
 				</div>
-				<div className={style.dashboard}>
-					{moveHistory.map(s => {
-						return <div key={s.to}>{s.to}</div>;
-					})}
-				</div>
+				<div className={style.dashboard} />
 			</div>
 		</PageHeader>
 	);
