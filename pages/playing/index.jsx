@@ -6,7 +6,7 @@ import PageHeader from '../../components/layouts/PageHeader.jsx';
 import Btn from '../../components/layouts/Btn.jsx';
 import ChessGround from '../../components/layouts/ChessGround.jsx';
 import http from '../../services/http-service.js';
-import {getPuzzle} from '../../services/puzzleService.js';
+import {getPuzzle, getPuzzleList} from '../../services/puzzleService.js';
 import style from './index.module.scss';
 
 function index() {
@@ -14,11 +14,12 @@ function index() {
 	const [fen, setFen] = useState('');
 	const [lastMove, setLastMove] = useState();
 	const [orientation, setOrientation] = useState('white');
-	const [moveHistory, setMoveHistory] = useState([]);
+	const [moveHistory, setMoveHistory] = useState([]); // A reset
 	const [turn, setTurn] = useState('w');
 	const [pgn, setPgn] = useState([]);
 	const [history, setHistory] = useState([]);
 	const [moveNumber, setMoveNumber] = useState(0);
+	const [actualPuzzle, setActualPuzzle] = useState(0);
 
 	// TODO: à décommenter quand la backend sera fonctionnel :)
 	/* 	useEffect(() => {
@@ -36,22 +37,24 @@ function index() {
 	}, []); */
 
 	useEffect(() => {
-		const puzzle = getPuzzle('61641996580b920793bacab6');
+		const puzzlList = getPuzzleList();
+		const puzzle = getPuzzle(puzzlList[actualPuzzle]);
 		const regex = /FEN "(.*?)"/g;
 		const puzzleFen = regex.exec(puzzle.pgn)[1];
-
 		const pgnChess = new Chess();
 		pgnChess.load_pgn(puzzle.pgn);
 		const history = pgnChess.history();
-		setHistory(() => history);
-
+		const sucess = pgnChess.load_pgn(puzzle.pgn);
 		const newChess = new Chess(puzzleFen);
 
+		setMoveHistory(() => []);
+		setMoveNumber(() => 0);
+		setHistory(() => history);
 		setPgn(() => puzzle.pgn);
 		setChess(() => newChess);
 		setFen(() => newChess.fen());
 		setTurn(() => newChess.turn());
-	}, []);
+	}, [actualPuzzle]);
 
 	const onMove = (from, to) => {
 		const move = chess.move({from, to, promotion: 'x'});
@@ -66,9 +69,6 @@ function index() {
 		}
 
 		if (move && move.san === history[moveNumber]) {
-			console.log('in the function nextMove');
-			console.log(history.length);
-
 			setFen(() => chess.fen());
 			setLastMove(move.san); // Move.san
 			setMoveHistory(moveHistory => {
@@ -81,11 +81,9 @@ function index() {
 				const newMove = move + 1;
 				checkPuzzleComplete(newMove);
 				rightMove(newMove);
-				console.log(newMove);
 				return newMove;
 			});
 		} else if (move) {
-			console.log('in the function undo');
 			goToPrevious();
 		}
 	};
@@ -102,7 +100,7 @@ function index() {
 		setFen(chess.fen());
 		setMoveNumber(move => {
 			const newMove = move + 1;
-			console.log(newMove);
+
 			checkPuzzleComplete(newMove);
 			return newMove;
 		});
@@ -120,7 +118,13 @@ function index() {
 
 	const checkPuzzleComplete = newMove => {
 		if (history.length === newMove + 1) {
-			setTimeout(() => alert('fin du puzzle !! Good Gameeee'), 800);
+			setTimeout(
+				setActualPuzzle(previousPuzzle => {
+					const actualPuzzle = previousPuzzle + 1;
+					return actualPuzzle;
+				}),
+				800,
+			);
 		}
 	};
 

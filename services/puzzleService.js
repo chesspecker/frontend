@@ -19,7 +19,7 @@ const puzzles = [
 		game_id: 'vrjou0lh',
 		user: 'detnop',
 		category: 'Material',
-		pgn: `[Event "Rated Blitz game"] [Site "https://lichess.org/vRJOu0lH"] [Date "2021.06.06"] [Round "?"] [White "detnop"] [Black "GeorgeBest01"] [Result "1-0"] [BlackElo "1747"] [BlackRatingDiff "-6"] [ECO "A41"] [FEN "3rr1k1/2p1qpb1/p1n2n1p/1p3bp1/8/PNP1PR1P/1PB1Q1PB/3RN1K1 b - - 0 19"] [SetUp "1"] [Termination "Normal"] [TimeControl "180+0"] [UTCDate "2021.06.06"] [UTCTime "18:35:37"] [Variant "Standard"] [WhiteElo "1756"] [WhiteRatingDiff "+6"] 19... g4 20. Rxf5 Rxd1 21. Bxd1 Qe6 1-0`,
+		pgn: `[Event \"Rated Blitz game\"]\n[Site \"https://lichess.org/vRJOu0lH\"]\n[Date \"2021.06.06\"]\n[Round \"?\"]\n[White \"detnop\"]\n[Black \"GeorgeBest01\"]\n[Result \"1-0\"]\n[BlackElo \"1747\"]\n[BlackRatingDiff \"-6\"]\n[ECO \"A41\"]\n[FEN \"3rr1k1/2p1qpb1/p1n2n1p/1p3bp1/8/PNP1PR1P/1PB1Q1PB/3RN1K1 b - - 0 19\"]\n[SetUp \"1\"]\n[Termination \"Normal\"]\n[TimeControl \"180+0\"]\n[UTCDate \"2021.06.06\"]\n[UTCTime \"18:35:37\"]\n[Variant \"Standard\"]\n[WhiteElo \"1756\"]\n[WhiteRatingDiff \"+6\"]\n\n19... g4 20. Rxf5 Rxd1 21. Bxd1 Qe6 1-0`,
 	},
 	{
 		_id: '616419ad580b920793bacab7',
@@ -48,3 +48,5 @@ export const getPuzzle = id => {
 	const puzzle = puzzles.find(e => e._id === id);
 	return puzzle ? puzzle : error("Ce problème n'est pas dans la db");
 };
+
+export const getPuzzleList = () => puzzlesId;
