@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Image from 'next/image.js';
 import Chess from '../../components/utils/chess.js';
 import rotate from '../../public/images/rotate.svg';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import Btn from '../../components/layouts/Btn.jsx';
 import ChessGround from '../../components/layouts/ChessGround.jsx';
+import http from '../../services/http-service.js';
 import style from './index.module.scss';
 
 function index(props) {
@@ -13,6 +14,20 @@ function index(props) {
 	const [lastMove, setLastMove] = useState();
 	const [orientation, setOrientation] = useState('white');
 	const [moveHistory, setMoveHistory] = useState([]);
+
+	useEffect(() => {
+		const getPuzzle = async () => {
+			const {data: puzzle} = await http.get(
+				`https://api.chesspecker.com/puzzles/id/61641984580b920793bacab4`,
+				{
+					withCredentials: true,
+				},
+			);
+			console.log(puzzle);
+		};
+
+		getPuzzle();
+	}, []);
 
 	const onMove = (from, to) => {
 		const moves = chess.moves({verbose: true});

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {io} from 'socket.io-client';
+import Link from 'next/link.js';
 import http from '../../services/http-service.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import ProgressBar from '../../components/02-Download-progress/ProgressBar.jsx';
@@ -55,6 +56,9 @@ function DownloadProgress() {
 				<p className={style.noWorries}>
 					No worries, you can close this page and come back later
 				</p>
+				<Link href='/playing'>
+					<button>Next page</button>
+				</Link>
 			</div>
 		</PageHeader>
 	);
