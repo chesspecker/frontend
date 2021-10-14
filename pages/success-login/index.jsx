@@ -8,7 +8,6 @@ import style from './index.module.css';
 
 function Index() {
 	const [username, setUsername] = useState('');
-	console.log(process.env.API);
 	const api = process.env.API;
 
 	useEffect(() => {
@@ -16,7 +15,6 @@ function Index() {
 			const {data: user} = await http.get(`${api}/user`, {
 				withCredentials: true,
 			});
-			console.log(user);
 			setUsername(user.name);
 		};
 
@@ -38,7 +36,7 @@ function Index() {
 						<h1 className={style.title}>
 							Hello {username}👋 <br /> Welcome to ChessPecker
 						</h1>
-						<Btn link='/download-games'>LETS GO !!</Btn>
+						<Btn link='/download-games'>LET&apos;S GO !</Btn>
 					</div>
 				</div>
 			</PageHeader>
