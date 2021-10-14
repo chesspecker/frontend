@@ -7,14 +7,16 @@ const Chessground = dynamic(() => import('react-chessground'), {ssr: false});
 
 function ChessGround({onMove, fen, turnColor, movable, orientation}) {
 	return (
-		<Chessground
-			className={style.chessGround}
-			fen={fen}
-			turnColor={turnColor}
-			movable={movable}
-			orientation={orientation}
-			onMove={onMove}
-		/>
+		<div className={style.chessGround}>
+			<Chessground
+				fen={fen}
+				turnColor={turnColor}
+				movable={movable}
+				orientation={orientation}
+				style={{margin: '30px', backgroundColor: 'white'}}
+				onMove={onMove}
+			/>
+		</div>
 	);
 }
 
