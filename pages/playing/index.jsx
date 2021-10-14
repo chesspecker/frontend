@@ -13,7 +13,7 @@ function index() {
 	const [chess, setChess] = useState(new Chess());
 	const [fen, setFen] = useState('');
 	const [lastMove, setLastMove] = useState();
-	const [orientation, setOrientation] = useState('white');
+	const [orientation, setOrientation] = useState('');
 	const [moveHistory, setMoveHistory] = useState([]); // A reset
 	const [turn, setTurn] = useState('w');
 	const [pgn, setPgn] = useState([]);
@@ -53,7 +53,13 @@ function index() {
 		setPgn(() => puzzle.pgn);
 		setChess(() => newChess);
 		setFen(() => newChess.fen());
-		setTurn(() => newChess.turn());
+		setTurn(() => {
+			const turn = newChess.turn();
+			setOrientation(() => {
+				return turn === 'w' ? 'white' : 'black';
+			});
+			return turn;
+		});
 	}, [actualPuzzle]);
 
 	const onMove = (from, to) => {
