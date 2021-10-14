@@ -54,7 +54,6 @@ function index() {
 	}, []);
 
 	const onMove = (from, to) => {
-		console.log(from, to);
 		const move = chess.move({from, to, promotion: 'x'});
 		const moves = chess.moves({verbose: true});
 		for (let i = 0, length_ = moves.length; i < length_; i++) {
@@ -67,6 +66,9 @@ function index() {
 		}
 
 		if (move && move.san === history[moveNumber]) {
+			console.log('in the function nextMove');
+			console.log(history.length);
+
 			setFen(() => chess.fen());
 			setLastMove(move.san); // Move.san
 			setMoveHistory(moveHistory => {
@@ -74,23 +76,24 @@ function index() {
 				lastMovs.push(move.san);
 				return lastMovs;
 			});
+
 			setMoveNumber(move => {
 				const newMove = move + 1;
+				checkPuzzleComplete(newMove);
 				rightMove(newMove);
+				console.log(newMove);
 				return newMove;
 			});
 		} else if (move) {
-			setFen(() => chess.fen());
-			chess.undo();
-			setFen(() => chess.fen());
-			console.log('in the 1 function');
+			console.log('in the function undo');
+			goToPrevious();
 		}
 	};
 
 	const goToPrevious = () => {
-		console.log('in the function');
 		setFen(() => chess.fen());
-		return chess.undo();
+		chess.undo();
+		setFen(() => chess.fen());
 	};
 
 	const rightMove = index => {
@@ -99,6 +102,8 @@ function index() {
 		setFen(chess.fen());
 		setMoveNumber(move => {
 			const newMove = move + 1;
+			console.log(newMove);
+			checkPuzzleComplete(newMove);
 			return newMove;
 		});
 	};
@@ -110,6 +115,12 @@ function index() {
 			chess.move(move.san);
 			setFen(chess.fen());
 			setLastMove([move.from, move.to]);
+		}
+	};
+
+	const checkPuzzleComplete = newMove => {
+		if (history.length === newMove + 1) {
+			setTimeout(() => alert('fin du puzzle !! Good Gameeee'), 800);
 		}
 	};
 
