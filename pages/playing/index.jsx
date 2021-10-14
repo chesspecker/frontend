@@ -6,6 +6,7 @@ import PageHeader from '../../components/layouts/PageHeader.jsx';
 import Btn from '../../components/layouts/Btn.jsx';
 import ChessGround from '../../components/layouts/ChessGround.jsx';
 import http from '../../services/http-service.js';
+import {getPuzzle} from '../../services/puzzleService.js';
 import style from './index.module.scss';
 
 function index(props) {
@@ -15,7 +16,8 @@ function index(props) {
 	const [orientation, setOrientation] = useState('white');
 	const [moveHistory, setMoveHistory] = useState([]);
 
-	useEffect(() => {
+	// TODO: à décommenter quand la backend sera fonctionnel :)
+	/* 	useEffect(() => {
 		const getPuzzle = async () => {
 			const {data: puzzle} = await http.get(
 				`https://api.chesspecker.com/puzzles/id/61641984580b920793bacab4`,
@@ -27,7 +29,9 @@ function index(props) {
 		};
 
 		getPuzzle();
-	}, []);
+	}, []); */
+
+	console.log(getPuzzle('616419ad580b920793bacab7'));
 
 	const onMove = (from, to) => {
 		const moves = chess.moves({verbose: true});
