@@ -2,8 +2,6 @@ const puzzlesId = [
 	'61641996580b920793bacab6',
 	'6164198e580b920793bacab5',
 	'616419ad580b920793bacab7',
-	'616419b1580b920793bacab8',
-	'616419d6580b920793bacab9',
 ];
 
 const puzzles = [
@@ -26,21 +24,7 @@ const puzzles = [
 		game_id: 'emec5kmv',
 		user: 'detnop',
 		category: 'Material',
-		pgn: `[Event "Rated Blitz game"] [Site "https://lichess.org/EmeC5KmV"] [Date "2021.06.02"] [Round "?"] [White "maxnosleeves"] [Black "detnop"] [Result "1-0"] [BlackElo "1715"] [BlackRatingDiff "-6"] [ECO "B40"] [FEN "4r1k1/5ppp/8/2b5/P3N1n1/7P/1PP2P2/4R1K1 b - - 0 27"] [SetUp "1"] [Termination "Normal"] [TimeControl "180+0"] [UTCDate "2021.06.02"] [UTCTime "20:15:09"] [Variant "Standard"] [WhiteElo "1715"] [WhiteRatingDiff "+6"] 27... Nf6 28. Nxf6+ gxf6 29. Rxe8+ Kg7 1-0`,
-	},
-	{
-		_id: '616419b1580b920793bacab8',
-		game_id: 'tfry7c5n',
-		user: 'detnop',
-		category: 'Material',
-		pgn: `[Event "Rated Blitz game"] [Site "https://lichess.org/tFRY7c5n"] [Date "2021.05.31"] [Round "?"] [White "sunkyyaki"] [Black "detnop"] [Result "0-1"] [BlackElo "1682"] [BlackRatingDiff "+5"] [ECO "B40"] [FEN "r2r2k1/bb3ppp/p1p1pn2/3pq1B1/1P2P3/2N2P2/P1P1B1PP/1R1Q1R1K w - - 4 16"] [SetUp "1"] [Termination "Normal"] [TimeControl "300+3"] [UTCDate "2021.05.31"] [UTCTime "19:20:48"] [Variant "Standard"] [WhiteElo "1641"] [WhiteRatingDiff "-5"] 16. f4 Qxc3 17. Rb3 Qd4 18. Qxd4 Bxd4 19. exd5 0-1`,
-	},
-	{
-		_id: '616419d6580b920793bacab9',
-		game_id: 'w3cl1m6a',
-		user: 'detnop',
-		category: 'Material',
-		pgn: `[Event "Rated Blitz game"] [Site "https://lichess.org/w3Cl1M6A"] [Date "2021.05.12"] [Round "?"] [White "detnop"] [Black "OfficialSting"] [Result "0-1"] [BlackElo "1679"] [BlackRatingDiff "-5"] [ECO "D00"] [FEN "r3kbnr/pppqp2p/5p2/3p1bp1/1n1P1B2/3BP2P/PPPNQPP1/R3K1NR w KQkq - 0 8"] [SetUp "1"] [Termination "Normal"] [TimeControl "300+0"] [UTCDate "2021.05.12"] [UTCTime "17:57:51"] [Variant "Standard"] [WhiteElo "1688"] [WhiteRatingDiff "+7"] 8. Bh2 Bxd3 9. cxd3 Nc2+ 10. Kf1 Nxa1 11. Qh5+ Kd8 12. Qd1 0-1`,
+		pgn: `[Event \"Rated Blitz game\"]\n[Site \"https://lichess.org/EmeC5KmV\"]\n[Date \"2021.06.02\"]\n[Round \"?\"]\n[White \"maxnosleeves\"]\n[Black \"detnop\"]\n[Result \"1-0\"]\n[BlackElo \"1715\"]\n[BlackRatingDiff \"-6\"]\n[ECO \"B40\"]\n[FEN \"4r1k1/5ppp/8/2b5/P3N1n1/7P/1PP2P2/4R1K1 b - - 0 27\"]\n[SetUp \"1\"]\n[Termination \"Normal\"]\n[TimeControl \"180+0\"]\n[UTCDate \"2021.06.02\"]\n[UTCTime \"20:15:09\"]\n[Variant \"Standard\"]\n[WhiteElo \"1715\"]\n[WhiteRatingDiff \"+6\"]\n\n27... Nf6 28. Nxf6+ gxf6 29. Rxe8+ Kg7 1-0`,
 	},
 ];
 
