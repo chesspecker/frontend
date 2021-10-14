@@ -54,6 +54,7 @@ function index() {
 	}, []);
 
 	const onMove = (from, to) => {
+		console.log(from, to);
 		const move = chess.move({from, to, promotion: 'x'});
 		const moves = chess.moves({verbose: true});
 		for (let i = 0, length_ = moves.length; i < length_; i++) {
@@ -70,7 +71,7 @@ function index() {
 			setLastMove(move.san); // Move.san
 			setMoveHistory(moveHistory => {
 				const lastMovs = [...moveHistory];
-				lastMovs.push({from, to});
+				lastMovs.push(move.san);
 				return lastMovs;
 			});
 			setMoveNumber(move => {
@@ -78,7 +79,18 @@ function index() {
 				rightMove(newMove);
 				return newMove;
 			});
+		} else if (move) {
+			setFen(() => chess.fen());
+			chess.undo();
+			setFen(() => chess.fen());
+			console.log('in the 1 function');
 		}
+	};
+
+	const goToPrevious = () => {
+		console.log('in the function');
+		setFen(() => chess.fen());
+		return chess.undo();
 	};
 
 	const rightMove = index => {
@@ -147,7 +159,7 @@ function index() {
 				</div>
 				<div className={style.dashboard}>
 					{moveHistory.map(s => {
-						return <div>{s.to}</div>;
+						return <div key={s.to}>{s.to}</div>;
 					})}
 				</div>
 			</div>
