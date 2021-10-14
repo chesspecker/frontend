@@ -9,7 +9,7 @@ import http from '../../services/http-service.js';
 import {getPuzzle} from '../../services/puzzleService.js';
 import style from './index.module.scss';
 
-function index(props) {
+function index() {
 	const [chess, setChess] = useState(new Chess());
 	const [fen, setFen] = useState('');
 	const [lastMove, setLastMove] = useState();
@@ -17,6 +17,8 @@ function index(props) {
 	const [moveHistory, setMoveHistory] = useState([]);
 	const [turn, setTurn] = useState('w');
 	const [pgn, setPgn] = useState([]);
+	const [history, setHistory] = useState([]);
+	const [moveNumber, setMoveNumber] = useState(0);
 
 	// TODO: à décommenter quand la backend sera fonctionnel :)
 	/* 	useEffect(() => {
@@ -37,32 +39,22 @@ function index(props) {
 		const puzzle = getPuzzle('61641996580b920793bacab6');
 		const regex = /FEN "(.*?)"/g;
 		const puzzleFen = regex.exec(puzzle.pgn)[1];
-		const puzzlePgn = puzzle.pgn.split('\n');
-		const puzzleMoves = puzzlePgn[puzzlePgn.length - 1];
+
+		const pgnChess = new Chess();
+		pgnChess.load_pgn(puzzle.pgn);
+		const history = pgnChess.history();
+		setHistory(() => history);
 
 		const newChess = new Chess(puzzleFen);
 
 		setPgn(() => puzzle.pgn);
-
-		setChess(() => {
-			return newChess;
-		});
-		setFen(() => {
-			return newChess.fen();
-		});
-		setTurn(() => {
-			const turn = newChess.turn();
-
-			return turn;
-		});
+		setChess(() => newChess);
+		setFen(() => newChess.fen());
+		setTurn(() => newChess.turn());
 	}, []);
 
 	const onMove = (from, to) => {
 		const move = chess.move({from, to, promotion: 'x'});
-		const history = chess.history();
-		console.log('history =', history);
-		console.log('pgn =', pgn);
-		console.log('chess move', move);
 		const moves = chess.moves({verbose: true});
 		for (let i = 0, length_ = moves.length; i < length_; i++) {
 			/* eslint-disable-line */
@@ -73,26 +65,30 @@ function index(props) {
 			}
 		}
 
-		if (move) {
-			setFen(() => {
-				console.log(chess.fen());
-				return chess.fen();
-			});
-
-			setLastMove([from, to]);
-			setMoveHistory(() => {
+		if (move && move.san === history[moveNumber]) {
+			setFen(() => chess.fen());
+			setLastMove(move.san); // Move.san
+			setMoveHistory(moveHistory => {
 				const lastMovs = [...moveHistory];
 				lastMovs.push({from, to});
-
 				return lastMovs;
 			});
-			setTimeout(rightMove, 500);
+			setMoveNumber(move => {
+				const newMove = move + 1;
+				rightMove(newMove);
+				return newMove;
+			});
 		}
 	};
 
-	const rightMove = () => {
-		chess.move('Nxe5');
+	const rightMove = index => {
+		const currentMove = history[index];
+		chess.move(currentMove);
 		setFen(chess.fen());
+		setMoveNumber(move => {
+			const newMove = move + 1;
+			return newMove;
+		});
 	};
 
 	const randomMove = () => {
@@ -106,7 +102,6 @@ function index(props) {
 	};
 
 	const turnColor = string => {
-		console.log(string);
 		return string === 'w' ? 'white' : 'black';
 	};
 
