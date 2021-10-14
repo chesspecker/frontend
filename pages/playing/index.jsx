@@ -15,6 +15,8 @@ function index(props) {
 	const [lastMove, setLastMove] = useState();
 	const [orientation, setOrientation] = useState('white');
 	const [moveHistory, setMoveHistory] = useState([]);
+	const [turn, setTurn] = useState('w');
+	const [pgn, setPgn] = useState([]);
 
 	// TODO: à décommenter quand la backend sera fonctionnel :)
 	/* 	useEffect(() => {
@@ -31,9 +33,36 @@ function index(props) {
 		getPuzzle();
 	}, []); */
 
-	console.log(getPuzzle('616419ad580b920793bacab7'));
+	useEffect(() => {
+		const puzzle = getPuzzle('61641996580b920793bacab6');
+		const regex = /FEN "(.*?)"/g;
+		const puzzleFen = regex.exec(puzzle.pgn)[1];
+		const puzzlePgn = puzzle.pgn.split('\n');
+		const puzzleMoves = puzzlePgn[puzzlePgn.length - 1];
+
+		const newChess = new Chess(puzzleFen);
+
+		setPgn(() => puzzle.pgn);
+
+		setChess(() => {
+			return newChess;
+		});
+		setFen(() => {
+			return newChess.fen();
+		});
+		setTurn(() => {
+			const turn = newChess.turn();
+
+			return turn;
+		});
+	}, []);
 
 	const onMove = (from, to) => {
+		const move = chess.move({from, to, promotion: 'x'});
+		const history = chess.history();
+		console.log('history =', history);
+		console.log('pgn =', pgn);
+		console.log('chess move', move);
 		const moves = chess.moves({verbose: true});
 		for (let i = 0, length_ = moves.length; i < length_; i++) {
 			/* eslint-disable-line */
@@ -44,17 +73,26 @@ function index(props) {
 			}
 		}
 
-		if (chess.move({from, to, promotion: 'x'})) {
-			setFen(chess.fen());
+		if (move) {
+			setFen(() => {
+				console.log(chess.fen());
+				return chess.fen();
+			});
+
 			setLastMove([from, to]);
 			setMoveHistory(() => {
 				const lastMovs = [...moveHistory];
 				lastMovs.push({from, to});
-				console.log(lastMovs);
+
 				return lastMovs;
 			});
-			setTimeout(randomMove, 500);
+			setTimeout(rightMove, 500);
 		}
+	};
+
+	const rightMove = () => {
+		chess.move('Nxe5');
+		setFen(chess.fen());
 	};
 
 	const randomMove = () => {
@@ -67,13 +105,14 @@ function index(props) {
 		}
 	};
 
-	const turnColor = () => {
-		return chess.turn() === 'w' ? 'white' : 'black';
+	const turnColor = string => {
+		console.log(string);
+		return string === 'w' ? 'white' : 'black';
 	};
 
 	const calcMovable = () => {
 		const dests = new Map();
-		console.log(dests);
+
 		for (const s of chess.SQUARES) {
 			const ms = chess.moves({square: s, verbose: true});
 			if (ms.length > 0)
@@ -86,7 +125,7 @@ function index(props) {
 		return {
 			free: false,
 			dests,
-			color: 'white',
+			color: turnColor(turn),
 		};
 	};
 
@@ -100,7 +139,7 @@ function index(props) {
 				<div>
 					<ChessGround
 						fen={fen}
-						turnColor={turnColor()}
+						turnColor={turnColor(chess.turn())}
 						movable={calcMovable()}
 						orientation={orientation}
 						onMove={onMove}

@@ -12,7 +12,7 @@ const puzzles = [
 		game_id: '4lq0mjak',
 		user: 'detnop',
 		category: 'Material',
-		pgn: `[Event "Rated Blitz game"] [Site "https://lichess.org/4lq0MjAK"] [Date "2021.06.04"] [Round "?"] [White "Zishan4pride"] [Black "detnop"] [Result "0-1"] [BlackElo "1721"] [BlackRatingDiff "+6"] [ECO "B44"] [FEN "r4rk1/1b1p1ppp/p1n1p3/3qP3/QP3P2/3B4/2PB2PP/RR5K w - - 1 22"] [SetUp "1"] [Termination "Time forfeit"] [TimeControl "180+0"] [UTCDate "2021.06.04"] [UTCTime "20:43:28"] [Variant "Standard"] [WhiteElo "1694"] [WhiteRatingDiff "-5"] 22. Qa3 Nxe5 23. Bxh7+ Kxh7 24. Qh3+ Kg8 25. Rd1 0-1`,
+		pgn: `[Event \"Rated Blitz game\"]\n[Site \"https://lichess.org/4lq0MjAK\"]\n[Date \"2021.06.04\"]\n[Round \"?\"]\n[White \"Zishan4pride\"]\n[Black \"detnop\"]\n[Result \"0-1\"]\n[BlackElo \"1721\"]\n[BlackRatingDiff \"+6\"]\n[ECO \"B44\"]\n[FEN \"r4rk1/1b1p1ppp/p1n1p3/3qP3/QP3P2/3B4/2PB2PP/RR5K w - - 1 22\"]\n[SetUp \"1\"]\n[Termination \"Time forfeit\"]\n[TimeControl \"180+0\"]\n[UTCDate \"2021.06.04\"]\n[UTCTime \"20:43:28\"]\n[Variant \"Standard\"]\n[WhiteElo \"1694\"]\n[WhiteRatingDiff \"-5\"]\n\n22. Qa3 Nxe5 23. Bxh7+ Kxh7 24. Qh3+ Kg8 25. Rd1 0-1`,
 	},
 	{
 		_id: '6164198e580b920793bacab5',
