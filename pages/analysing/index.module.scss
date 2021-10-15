@@ -1,0 +1,28 @@
+.container {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.title {
+	color: white;
+}
+.description {
+	font-size: 2rem;
+}
+
+.percentage {
+	color: white;
+	font-size: 3rem;
+}
+
+.noWorries {
+	margin-top: 10rem;
+	position: relative;
+	color: white;
+	font-size: 1.5rem;
+}
