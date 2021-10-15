@@ -28,6 +28,7 @@ function index() {
 	const [counter, setCounter] = useState(0);
 	const [sucessVisible, setSucessVisible] = useState(false);
 	const [startPopupVisible, setStartPopupVisible] = useState(true);
+	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
 
 	// TODO: à décommenter quand la backend sera fonctionnel :)
 	/* 	useEffect(() => {
@@ -148,6 +149,8 @@ function index() {
 		setFen(() => chess.fen());
 		chess.undo();
 		setFen(() => chess.fen());
+		setWrongMoveVisible(() => true);
+		setTimeout(() => setWrongMoveVisible(() => false), 300);
 	};
 
 	const rightMove = index => {
@@ -239,15 +242,14 @@ function index() {
 
 			<div className={style.container}>
 				<div className={style.chessGroundContainer}>
-					<div>
-						<ChessGround
-							fen={fen}
-							turnColor={turnColor(chess.turn())}
-							movable={calcMovable()}
-							orientation={orientation}
-							onMove={onMove}
-						/>
-					</div>
+					{wrongMoveVisible && <div className={style.wrong_move} />}
+					<ChessGround
+						fen={fen}
+						turnColor={turnColor(chess.turn())}
+						movable={calcMovable()}
+						orientation={orientation}
+						onMove={onMove}
+					/>
 					<div className={style.control_bar}>
 						<button className={style.btn} onClick={switchOrientation}>
 							<Image src={rotate} />
