@@ -1,0 +1,10 @@
+.popup {
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgb(0, 0, 0, 0.5);
+	z-index: 3;
+}

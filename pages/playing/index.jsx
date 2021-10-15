@@ -4,7 +4,10 @@ import {number} from 'prop-types';
 import Chess from '../../components/utils/chess.js';
 import rotate from '../../public/images/rotate.svg';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
-import Btn from '../../components/layouts/Btn.jsx';
+import Btn from '../../components/layouts/btn/Btn.jsx';
+import SucessPopup from '../../components/layouts/popup/SucessPopup.jsx';
+import BtnSecondary from '../../components/layouts/btn/BtnSecondary.jsx';
+import BackgroundPopup from '../../components/layouts/popup/BackgroundPopup.jsx';
 import ChessGround from '../../components/layouts/ChessGround.jsx';
 import http from '../../services/http-service.js';
 import {getPuzzle, getPuzzleList} from '../../services/puzzleService.js';
@@ -24,7 +27,8 @@ function index() {
 	const [actualPuzzle, setActualPuzzle] = useState(0);
 	const [puzzleSize, setPuzzleSize] = useState(0);
 	const [timerRunning, setTimerRunning] = useState(false);
-	const [counter, setCounter] = useState(65);
+	const [counter, setCounter] = useState(0);
+	const [sucessVisible, setSucessVisible] = useState(false);
 
 	// TODO: à décommenter quand la backend sera fonctionnel :)
 	/* 	useEffect(() => {
@@ -41,7 +45,7 @@ function index() {
 		getPuzzle();
 	}, []); */
 
-	useEffect(() => {
+	/* useEffect(() => {
 		const getSet = async () => {
 			const {data: set} = await http.get(
 				`https://api.chesspecker.com/puzzles/sets`,
@@ -53,7 +57,36 @@ function index() {
 		};
 
 		getSet();
-	}, []);
+	}, []); */
+
+	useEffect(() => {
+		const timer = () => {
+			setTimeout(
+				() =>
+					setCounter(lastCount => {
+						const newCount = lastCount + 1;
+						console.log(newCount);
+						return newCount;
+					}),
+				1000,
+			);
+		};
+
+		if (timerRunning) {
+			timer();
+		}
+
+		if (!timerRunning) {
+			clearTimeout(timer);
+		}
+	}, [timerRunning, counter]);
+
+	const startTimer = () => {
+		setTimerRunning(lastValue => {
+			const newValue = !lastValue;
+			return newValue;
+		});
+	};
 
 	useEffect(() => {
 		const puzzlList = getPuzzleList();
@@ -104,7 +137,7 @@ function index() {
 
 			setMoveNumber(move => {
 				const newMove = move + 1;
-				checkPuzzleComplete(newMove);
+				setTimeout(() => checkPuzzleComplete(newMove), 800);
 				rightMove(newMove);
 				return newMove;
 			});
@@ -126,7 +159,7 @@ function index() {
 		setMoveNumber(move => {
 			const newMove = move + 1;
 
-			checkPuzzleComplete(newMove);
+			setTimeout(() => checkPuzzleComplete(newMove), 800);
 			return newMove;
 		});
 	};
@@ -149,20 +182,15 @@ function index() {
 	};
 
 	const checkPuzzleComplete = newMove => {
-		setTimeout(
-			() => {
-				if (history.length === newMove + 1) {
-					if (puzzleSize === actualPuzzle + 1) {
-						alert('fin du game bb 😀');
-						return;
-					}
+		if (history.length === newMove + 1) {
+			if (puzzleSize === actualPuzzle + 1) {
+				setTimerRunning(() => false);
+				setSucessVisible(() => true);
+				return;
+			}
 
-					changePage();
-				}
-			},
-			800,
-			[],
-		);
+			changePage();
+		}
 	};
 
 	const turnColor = string => {
@@ -192,37 +220,10 @@ function index() {
 		setOrientation(() => (orientation === 'white' ? 'black' : 'white'));
 	};
 
-	useEffect(() => {
-		const timer = () => {
-			setTimeout(
-				() =>
-					setCounter(lastCount => {
-						const newCount = lastCount + 1;
-						console.log(newCount);
-						return newCount;
-					}),
-				1000,
-			);
-		};
-
-		if (timerRunning) {
-			timer();
-		}
-
-		if (!timerRunning) {
-			clearTimeout(timer);
-		}
-	}, [timerRunning, counter]);
-
-	const startTimer = () => {
-		setTimerRunning(lastValue => {
-			const newValue = !lastValue;
-			return newValue;
-		});
-	};
-
 	return (
 		<PageHeader>
+			{sucessVisible && <SucessPopup counter={counter} />}
+
 			<div className={style.container}>
 				<div className={style.chessGroundContainer}>
 					<div>
@@ -240,7 +241,9 @@ function index() {
 						</button>
 					</div>
 					<div className={style.btn_container}>
-						<Btn onClick={startTimer}>Start !!🔥</Btn>
+						<Btn onClick={startTimer}>
+							{timerRunning ? 'Stop' : 'Start'} !!🔥
+						</Btn>
 					</div>
 				</div>
 				<div className={style.information_container}>
