@@ -5,6 +5,7 @@ import rotate from '../../public/images/rotate.svg';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import Btn from '../../components/layouts/btn/Btn.jsx';
 import SucessPopup from '../../components/layouts/popup/SucessPopup.jsx';
+import StartingPopup from '../../components/layouts/popup/StartingPopup.jsx';
 import ChessGround from '../../components/layouts/ChessGround.jsx';
 import http from '../../services/http-service.js';
 import {getPuzzle, getPuzzleList} from '../../services/puzzleService.js';
@@ -26,6 +27,7 @@ function index() {
 	const [timerRunning, setTimerRunning] = useState(false);
 	const [counter, setCounter] = useState(0);
 	const [sucessVisible, setSucessVisible] = useState(false);
+	const [startPopupVisible, setStartPopupVisible] = useState(true);
 
 	// TODO: à décommenter quand la backend sera fonctionnel :)
 	/* 	useEffect(() => {
@@ -62,7 +64,6 @@ function index() {
 				() =>
 					setCounter(lastCount => {
 						const newCount = lastCount + 1;
-						console.log(newCount);
 						return newCount;
 					}),
 				1000,
@@ -218,11 +219,15 @@ function index() {
 	};
 
 	const handleRestart = () => {
-		console.log('dans la fonction restart');
 		setActualPuzzle(() => 0);
 		setCounter(() => 0);
-		setTimerRunning(() => false);
+		setTimerRunning(() => true);
 		setSucessVisible(() => false);
+	};
+
+	const handleStart = () => {
+		setStartPopupVisible(() => false);
+		setTimerRunning(true);
 	};
 
 	return (
@@ -230,6 +235,7 @@ function index() {
 			{sucessVisible && (
 				<SucessPopup counter={counter} restart={handleRestart} />
 			)}
+			{startPopupVisible && <StartingPopup onStart={handleStart} />}
 
 			<div className={style.container}>
 				<div className={style.chessGroundContainer}>
@@ -246,11 +252,6 @@ function index() {
 						<button className={style.btn} onClick={switchOrientation}>
 							<Image src={rotate} />
 						</button>
-					</div>
-					<div className={style.btn_container}>
-						<Btn onClick={startTimer}>
-							{timerRunning ? 'Stop' : 'Start'} !!🔥
-						</Btn>
 					</div>
 				</div>
 				<div className={style.information_container}>
