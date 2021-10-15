@@ -4,14 +4,14 @@ import useClock from '../../hooks/useClock.jsx';
 import BackgroundPopup from './BackgroundPopup.jsx';
 import style from './SucessPopup.module.scss';
 
-function SucessPopup({counter}) {
+function SucessPopup({restart, counter}) {
 	return (
 		<BackgroundPopup>
 			<div className={style.sucess}>
 				<p>🎉🎉 Good game 🎉🎉 !</p>
 				<p>Time to solve this set : {useClock(counter)}</p>
 				<div className={style.options}>
-					<BtnSecondary> Restart</BtnSecondary>
+					<BtnSecondary onClick={restart}> Restart</BtnSecondary>
 					<BtnSecondary> Next Set</BtnSecondary>
 				</div>
 			</div>

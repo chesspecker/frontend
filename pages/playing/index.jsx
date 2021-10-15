@@ -3,7 +3,7 @@ import Image from 'next/image.js';
 import Chess from '../../components/utils/chess.js';
 import rotate from '../../public/images/rotate.svg';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
-import Btn from '../../components/layouts/btn/Btn';
+import Btn from '../../components/layouts/btn/Btn.jsx';
 import SucessPopup from '../../components/layouts/popup/SucessPopup.jsx';
 import ChessGround from '../../components/layouts/ChessGround.jsx';
 import http from '../../services/http-service.js';
@@ -171,7 +171,7 @@ function index() {
 		}
 	};
 
-	const changePage = () => {
+	const changePuzzle = () => {
 		setActualPuzzle(previousPuzzle => {
 			const nowPuzzle = previousPuzzle + 1;
 			return nowPuzzle;
@@ -186,7 +186,7 @@ function index() {
 				return;
 			}
 
-			changePage();
+			changePuzzle();
 		}
 	};
 
@@ -217,9 +217,19 @@ function index() {
 		setOrientation(() => (orientation === 'white' ? 'black' : 'white'));
 	};
 
+	const handleRestart = () => {
+		console.log('dans la fonction restart');
+		setActualPuzzle(() => 0);
+		setCounter(() => 0);
+		setTimerRunning(() => false);
+		setSucessVisible(() => false);
+	};
+
 	return (
 		<PageHeader>
-			{sucessVisible && <SucessPopup counter={counter} />}
+			{sucessVisible && (
+				<SucessPopup counter={counter} restart={handleRestart} />
+			)}
 
 			<div className={style.container}>
 				<div className={style.chessGroundContainer}>
