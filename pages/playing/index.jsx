@@ -3,7 +3,7 @@ import Image from 'next/image.js';
 import Chess from '../../components/utils/chess.js';
 import rotate from '../../public/images/rotate.svg';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
-import Btn from '../../components/layouts/btn/Btn';
+import Btn from '../../components/layouts/btn/Btn.jsx';
 import SucessPopup from '../../components/layouts/popup/SucessPopup.jsx';
 import ChessGround from '../../components/layouts/ChessGround.jsx';
 import http from '../../services/http-service.js';
