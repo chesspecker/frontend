@@ -59,7 +59,6 @@ function index() {
 		const pgnChess = new Chess();
 		pgnChess.load_pgn(puzzle.pgn);
 		const history = pgnChess.history();
-		const sucess = pgnChess.load_pgn(puzzle.pgn);
 		const newChess = new Chess(puzzleFen);
 
 		setMoveHistory(() => []);
@@ -149,7 +148,6 @@ function index() {
 		setTimeout(
 			() => {
 				if (history.length === newMove + 1) {
-					console.log('change page');
 					if (puzzleSize === actualPuzzle + 1) {
 						alert('fin du game bb 😀');
 						return;
@@ -193,21 +191,31 @@ function index() {
 	return (
 		<PageHeader>
 			<div className={style.container}>
-				<div>
-					<ChessGround
-						fen={fen}
-						turnColor={turnColor(chess.turn())}
-						movable={calcMovable()}
-						orientation={orientation}
-						onMove={onMove}
-					/>
+				<div className={style.chessGroundContainer}>
+					<div>
+						<ChessGround
+							fen={fen}
+							turnColor={turnColor(chess.turn())}
+							movable={calcMovable()}
+							orientation={orientation}
+							onMove={onMove}
+						/>
+					</div>
+					<div className={style.control_bar}>
+						<button className={style.btn} onClick={switchOrientation}>
+							<Image src={rotate} />
+						</button>
+					</div>
+					<div className={style.btn_container}>
+						<Btn>Start !!🔥</Btn>
+					</div>
 				</div>
-				<div className={style.control_bar}>
-					<button className={style.btn} onClick={switchOrientation}>
-						<Image src={rotate} />
-					</button>
+				<div className={style.information_container}>
+					<div className={style.timer}>
+						<p>⏲ 00 : 01</p>
+					</div>
+					<div className={style.dashboard} />
 				</div>
-				<div className={style.dashboard} />
 			</div>
 		</PageHeader>
 	);
