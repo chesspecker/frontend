@@ -241,26 +241,27 @@ function index() {
 			{startPopupVisible && <StartingPopup onStart={handleStart} />}
 
 			<div className={style.container}>
-				<div className={style.chessGroundContainer}>
-					{wrongMoveVisible && <div className={style.wrong_move} />}
-					<ChessGround
-						fen={fen}
-						turnColor={turnColor(chess.turn())}
-						movable={calcMovable()}
-						orientation={orientation}
-						onMove={onMove}
-					/>
-					<div className={style.control_bar}>
-						<button className={style.btn} onClick={switchOrientation}>
-							<Image src={rotate} />
-						</button>
+				<div>
+					<div className={style.information_container}>
+						<div className={style.timer}>
+							<p>⏲ {useClock(counter)}</p>
+						</div>
 					</div>
-				</div>
-				<div className={style.information_container}>
-					<div className={style.timer}>
-						<p>⏲ {useClock(counter)}</p>
+					<div className={style.chessGroundContainer}>
+						{wrongMoveVisible && <div className={style.wrong_move} />}
+						<ChessGround
+							fen={fen}
+							turnColor={turnColor(chess.turn())}
+							movable={calcMovable()}
+							orientation={orientation}
+							onMove={onMove}
+						/>
+						<div className={style.control_bar}>
+							<button className={style.btn} onClick={switchOrientation}>
+								<Image src={rotate} />
+							</button>
+						</div>
 					</div>
-					<div className={style.dashboard} />
 				</div>
 			</div>
 		</PageHeader>
