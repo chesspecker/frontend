@@ -1,13 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import Image from 'next/image.js';
-import {number} from 'prop-types';
 import Chess from '../../components/utils/chess.js';
 import rotate from '../../public/images/rotate.svg';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
-import Btn from '../../components/layouts/btn/Btn.jsx';
+import Btn from '../../components/layouts/btn/Btn';
 import SucessPopup from '../../components/layouts/popup/SucessPopup.jsx';
-import BtnSecondary from '../../components/layouts/btn/BtnSecondary.jsx';
-import BackgroundPopup from '../../components/layouts/popup/BackgroundPopup.jsx';
 import ChessGround from '../../components/layouts/ChessGround.jsx';
 import http from '../../services/http-service.js';
 import {getPuzzle, getPuzzleList} from '../../services/puzzleService.js';
