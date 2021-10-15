@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Image from 'next/image.js';
+import {number} from 'prop-types';
 import Chess from '../../components/utils/chess.js';
 import rotate from '../../public/images/rotate.svg';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
@@ -7,6 +8,7 @@ import Btn from '../../components/layouts/Btn.jsx';
 import ChessGround from '../../components/layouts/ChessGround.jsx';
 import http from '../../services/http-service.js';
 import {getPuzzle, getPuzzleList} from '../../services/puzzleService.js';
+import useClock from '../../components/hooks/useClock.jsx';
 import style from './index.module.scss';
 
 function index() {
@@ -21,6 +23,8 @@ function index() {
 	const [moveNumber, setMoveNumber] = useState(0);
 	const [actualPuzzle, setActualPuzzle] = useState(0);
 	const [puzzleSize, setPuzzleSize] = useState(0);
+	const [timerRunning, setTimerRunning] = useState(false);
+	const [counter, setCounter] = useState(65);
 
 	// TODO: à décommenter quand la backend sera fonctionnel :)
 	/* 	useEffect(() => {
@@ -188,6 +192,35 @@ function index() {
 		setOrientation(() => (orientation === 'white' ? 'black' : 'white'));
 	};
 
+	useEffect(() => {
+		const timer = () => {
+			setTimeout(
+				() =>
+					setCounter(lastCount => {
+						const newCount = lastCount + 1;
+						console.log(newCount);
+						return newCount;
+					}),
+				1000,
+			);
+		};
+
+		if (timerRunning) {
+			timer();
+		}
+
+		if (!timerRunning) {
+			clearTimeout(timer);
+		}
+	}, [timerRunning, counter]);
+
+	const startTimer = () => {
+		setTimerRunning(lastValue => {
+			const newValue = !lastValue;
+			return newValue;
+		});
+	};
+
 	return (
 		<PageHeader>
 			<div className={style.container}>
@@ -207,12 +240,12 @@ function index() {
 						</button>
 					</div>
 					<div className={style.btn_container}>
-						<Btn>Start !!🔥</Btn>
+						<Btn onClick={startTimer}>Start !!🔥</Btn>
 					</div>
 				</div>
 				<div className={style.information_container}>
 					<div className={style.timer}>
-						<p>⏲ 00 : 01</p>
+						<p>⏲ {useClock(counter)}</p>
 					</div>
 					<div className={style.dashboard} />
 				</div>
