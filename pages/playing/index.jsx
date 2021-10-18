@@ -14,6 +14,7 @@ import {useUserContext} from '../../components/context/UserContext.jsx';
 import style from './index.module.scss';
 
 function index() {
+	const [puzzlesList, setPuzzlesList] = useState([]);
 	const [chess, setChess] = useState(new Chess());
 	const [fen, setFen] = useState('');
 	const [lastMove, setLastMove] = useState();
@@ -32,6 +33,7 @@ function index() {
 	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
 	const {currentUser, updateCurrentUserName, updateCurrentSet} =
 		useUserContext();
+	const api = process.env.API;
 	console.log('ceci est le usercontext dans playing', useUserContext());
 
 	// TODO: à décommenter quand la backend sera fonctionnel :)
@@ -48,16 +50,35 @@ function index() {
 
 		getPuzzle();
 	}, []); */
+	const getPuzzle = async id => {
+		const {data: puzzle} = await http.get(`${api}/puzzles/id/${id}`, {
+			withCredentials: true,
+		});
+		console.log(puzzle);
+		return puzzle;
+	};
+	const getSet = async () => {
+		const {data: set} = await http.get(
+			`${api}/puzzles/sets/${currentUser.id}`,
+			{
+				withCredentials: true,
+			},
+		);
+		setPuzzlesList(() => set[0].puzzles);
+		console.log('this is the set', set[0].puzzles);
+		return set[0].puzzles;
+	};
 
 	/* useEffect(() => {
 		const getSet = async () => {
 			const {data: set} = await http.get(
-				`https://api.chesspecker.com/puzzles/sets`,
+				`${api}/puzzles/sets/${currentUser.id}`,
 				{
 					withCredentials: true,
 				},
 			);
-			console.log(set);
+			setPuzzlesList(() => set[0].puzzles);
+			console.log('this is the set', set[0].puzzles);
 		};
 
 		getSet();
@@ -85,8 +106,8 @@ function index() {
 	}, [timerRunning, counter]);
 
 	useEffect(() => {
-		const puzzlList = getPuzzleList();
-		const puzzle = getPuzzle(puzzlList[actualPuzzle]);
+		const puzzlList = getSet();
+		const puzzle = getPuzzle(puzzlesList[actualPuzzle]);
 		const regex = /FEN "(.*?)"/g;
 		const puzzleFen = regex.exec(puzzle.pgn)[1];
 		const pgnChess = new Chess();
