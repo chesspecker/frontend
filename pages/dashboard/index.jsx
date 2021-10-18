@@ -11,7 +11,10 @@ function Dashboard(props) {
 		<PageHeader>
 			<div className={style.container}>
 				<div className={style.gameSet}>
-					{gameSets && gameSets.map(s => <GameSet />)}
+					{gameSets &&
+						gameSets.map(s => (
+							<GameSet sets={s} number={gameSets.indexOf(s)} />
+						))}
 				</div>
 			</div>
 		</PageHeader>
