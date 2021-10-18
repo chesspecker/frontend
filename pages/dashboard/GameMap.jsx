@@ -1,22 +1,29 @@
 import React, {useState, useEffect, useContext} from 'react';
 import useSets from '../../components/hooks/useSets.jsx';
 import GameSet from '../../components/layouts/sets/GameSet.jsx';
-import LanguageContext from '../../components/layouts/LanguageContext.jsx';
 import style from './index.module.scss';
+import {useUserContext} from '../../components/context/UserContext.jsx';
 
 function GameMap() {
 	const getSets = useSets();
 	const [gameSets, setGameSets] = useState([]);
+	const {currentUser, updateCurrentSet} = useUserContext();
 
-	const {language} = useContext(LanguageContext);
+	console.log(currentUser);
 
 	useEffect(() => {
 		setGameSets(() => getSets);
-	});
+
+		console.log(currentUser);
+	}, []);
+
+	const handleCurrentSet = set => {
+		updateCurrentSet(set);
+	};
 
 	return (
 		<div className={style.container}>
-			<h1>{language}</h1>
+			<h1>Bonsoir</h1>
 			<div className={style.gameSet}>
 				{gameSets &&
 					gameSets.map(s => (
@@ -25,6 +32,7 @@ function GameMap() {
 							number={gameSets.indexOf(s)}
 							id={s._id}
 							setId={s._id}
+							setCurrentSet={handleCurrentSet}
 						/>
 					))}
 			</div>

@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
-import LanguageContext from '../../components/layouts/LanguageContext.jsx';
 import GameMap from './GameMap.jsx';
 
 function Dashboard(props) {
@@ -8,9 +7,7 @@ function Dashboard(props) {
 
 	return (
 		<PageHeader>
-			<LanguageContext.Provider value={{language, setLanguage}}>
-				<GameMap />
-			</LanguageContext.Provider>
+			<GameMap />
 		</PageHeader>
 	);
 }
