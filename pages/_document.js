@@ -1,6 +1,15 @@
 import Document, {Html, Head, Main, NextScript} from 'next/document.js';
 
 class MyDocument extends Document {
+	static async getInitialProps(ctx) {
+		try {
+			const initialProps = await Document.getInitialProps(ctx);
+			return {...initialProps};
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
 	render() {
 		return (
 			<Html>

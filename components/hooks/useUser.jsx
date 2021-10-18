@@ -3,7 +3,7 @@ import http from '../../services/http-service.js';
 
 export default function useUser() {
 	const api = process.env.API;
-	const [user, setUser] = useState('');
+	const [user, setUser] = useState({});
 
 	useEffect(() => {
 		const getUser = async () => {
