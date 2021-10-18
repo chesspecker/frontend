@@ -21,7 +21,6 @@ function PageHeader({children}) {
 			return {...rest, currentSet: data};
 		});
 	};
-
 	return (
 		<UserContext.Provider
 			value={{currentUser, updateCurrentUserName, updateCurrentSet}}
