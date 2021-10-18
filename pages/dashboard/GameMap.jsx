@@ -9,8 +9,6 @@ function GameMap() {
 	const [gameSets, setGameSets] = useState([]);
 	const {currentUser, updateCurrentSet} = useUserContext();
 
-	console.log(currentUser);
-
 	useEffect(() => {
 		setGameSets(() => getSets);
 	}, []);
@@ -24,7 +22,7 @@ function GameMap() {
 		<div className={style.container}>
 			<h1>Bonsoir</h1>
 			<div className={style.gameSet}>
-				{gameSets &&
+				{getSets &&
 					gameSets.map(s => (
 						<GameSet
 							sets={s}
