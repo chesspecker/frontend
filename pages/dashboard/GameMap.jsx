@@ -22,7 +22,7 @@ function GameMap() {
 		<div className={style.container}>
 			<h1>Bonsoir</h1>
 			<div className={style.gameSet}>
-				{getSets &&
+				{gameSets &&
 					gameSets.map(s => (
 						<GameSet
 							sets={s}
