@@ -1,9 +1,11 @@
 import React, {useState, useEffect, useContext} from 'react';
 import useSets from '../../components/hooks/useSets.jsx';
 import GameSet from '../../components/layouts/sets/GameSet.jsx';
-import {useUserContext} from '../../components/context/UserContext.jsx';
+import {
+	useUserContext,
+	UserContext,
+} from '../../components/context/UserContext.jsx';
 import style from './index.module.scss';
-import {UserContext} from '../../components/context/UserContext.jsx';
 
 function GameMap() {
 	const sets = useSets();
