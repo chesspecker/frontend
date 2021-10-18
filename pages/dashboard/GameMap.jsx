@@ -11,6 +11,7 @@ function GameMap() {
 
 	useEffect(() => {
 		setGameSets(() => getSets);
+		console.log(getSets);
 	});
 
 	const handleCurrentSet = set => {
@@ -22,7 +23,7 @@ function GameMap() {
 		<div className={style.container}>
 			<h1>Bonsoir</h1>
 			<div className={style.gameSet}>
-				{gameSets &&
+				{gameSets.length > 0 &&
 					gameSets.map(s => (
 						<GameSet
 							sets={s}
