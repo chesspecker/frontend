@@ -6,7 +6,6 @@ import GameMap from './gameMap.jsx';
 function Dashboard(props) {
 	const [language, setLanguage] = useState('en');
 
-
 	return (
 		<PageHeader>
 			<LanguageContext.Provider value={{language, setLanguage}}>
