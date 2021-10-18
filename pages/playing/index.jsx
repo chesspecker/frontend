@@ -57,6 +57,7 @@ function index() {
 		console.log(puzzle);
 		return puzzle;
 	};
+
 	const getSet = async () => {
 		const {data: set} = await http.get(
 			`${api}/puzzles/sets/${currentUser.id}`,
@@ -69,7 +70,7 @@ function index() {
 		return set[0].puzzles;
 	};
 
-	/* useEffect(() => {
+	/* UseEffect(() => {
 		const getSet = async () => {
 			const {data: set} = await http.get(
 				`${api}/puzzles/sets/${currentUser.id}`,
