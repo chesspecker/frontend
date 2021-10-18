@@ -1,0 +1,25 @@
+.set {
+	border: 1px solid white;
+	border-radius: 10px;
+	height: 70%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	color: white;
+}
+.title {
+	margin-top: 1rem;
+	margin-left: 1rem;
+	font-size: 2rem;
+	font-weight: 500;
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	list-style: none;
+	&_element {
+		font-size: 1.5rem;
+	}
+}
