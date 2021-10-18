@@ -1,7 +1,8 @@
 import React from 'react';
-import PageHeader from '../../components/layouts/PageHeader';
+import PageHeader from '../../components/layouts/PageHeader.jsx';
+import GameSet from '../../components/layouts/sets/GameSet.jsx';
 import style from './index.module.scss';
-import GameSet from '../../components/layouts/sets/GameSet';
+
 function Dashboard(props) {
 	return (
 		<PageHeader>

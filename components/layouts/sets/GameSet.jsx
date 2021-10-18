@@ -1,6 +1,6 @@
 import React from 'react';
+import Btn from '../btn/Btn.jsx';
 import style from './GameSet.module.scss';
-import Btn from '../btn/Btn';
 
 function GameSet(props) {
 	return (
