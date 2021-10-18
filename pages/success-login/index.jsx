@@ -4,22 +4,18 @@ import PageHeader from '../../components/layouts/PageHeader.jsx';
 import useConffeti from '../../components/hooks/useConffeti.jsx';
 import http from '../../services/http-service.js';
 import Btn from '../../components/layouts/btn/Btn.jsx';
+import useUser from '../../components/hooks/useUser.jsx';
 import style from './index.module.css';
 
 function Index() {
+	const user = useUser();
 	const [username, setUsername] = useState('');
-	const api = process.env.API;
 
-	useEffect(() => {
-		const getUser = async () => {
-			const {data: user} = await http.get(`${api}/user`, {
-				withCredentials: true,
-			});
-			setUsername(user.name);
-		};
-
-		getUser();
-	}, []);
+	useEffect(() =>
+		setUsername(() => {
+			return user.name;
+		}),
+	);
 
 	return (
 		<>
