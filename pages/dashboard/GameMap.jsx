@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useContext} from 'react';
 import useSets from '../../components/hooks/useSets.jsx';
 import GameSet from '../../components/layouts/sets/GameSet.jsx';
-import style from './index.module.scss';
 import {useUserContext} from '../../components/context/UserContext.jsx';
+import style from './index.module.scss';
 
 function GameMap() {
 	const getSets = useSets();

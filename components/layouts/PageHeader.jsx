@@ -1,7 +1,7 @@
-import NavBar from '../NavBar.jsx';
-import Container from './Container.jsx';
-import {UserProvider} from '../context/UserContext.jsx';
 import {useState} from 'react';
+import NavBar from '../NavBar.jsx';
+import {UserProvider} from '../context/UserContext.jsx';
+import Container from './Container.jsx';
 
 function PageHeader({children}) {
 	const [currentUser, setCurrentUser] = useState({
@@ -15,11 +15,13 @@ function PageHeader({children}) {
 			return {...rest, name: data};
 		});
 	};
+
 	const updateCurrentSet = data => {
 		setCurrentUser(rest => {
 			return {...rest, currentSet: data};
 		});
 	};
+
 	return (
 		<UserProvider
 			value={{currentUser, updateCurrentUserName, updateCurrentSet}}

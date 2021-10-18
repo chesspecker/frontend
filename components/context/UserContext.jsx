@@ -1,4 +1,4 @@
-// components/common/MenuProvider.js
+// Components/common/MenuProvider.js
 import {createContext, useContext} from 'react';
 
 // Create Context object.
