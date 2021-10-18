@@ -1,12 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import useSets from '../../components/hooks/useSets.jsx';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import GameSet from '../../components/layouts/sets/GameSet.jsx';
 import style from './index.module.scss';
+//import UserContext from '../../components/contexts/user-context.js';
 
 function Dashboard(props) {
 	const getSets = useSets();
 	const [gameSets, setGameSets] = useState([]);
+	//const {language, setLanguage} = useContext(UserContext);
+
+	('bark');
 
 	useEffect(() => {
 		setGameSets(() => getSets);
@@ -18,7 +22,12 @@ function Dashboard(props) {
 				<div className={style.gameSet}>
 					{gameSets &&
 						gameSets.map(s => (
-							<GameSet sets={s} number={gameSets.indexOf(s)} />
+							<GameSet
+								sets={s}
+								number={gameSets.indexOf(s)}
+								id={s._id}
+								setId={s._id}
+							/>
 						))}
 				</div>
 			</div>
