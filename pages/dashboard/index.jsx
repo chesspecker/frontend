@@ -1,9 +1,16 @@
 import React, {useState, useEffect, useContext} from 'react';
+import useSets from '../../components/hooks/useSets.jsx';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import GameMap from './GameMap.jsx';
 
 function Dashboard(props) {
-	const [language, setLanguage] = useState('en');
+	const getSets = useSets();
+	const [gameSets, setGameSets] = useState([]);
+	const {language, setLanguage} = useContext(LanguageContext);
+
+	useEffect(() => {
+		setGameSets(() => getSets);
+	});
 
 	return (
 		<PageHeader>
