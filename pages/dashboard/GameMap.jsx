@@ -12,7 +12,7 @@ function GameMap() {
 	useEffect(() => {
 		setGameSets(() => getSets);
 		console.log(getSets);
-	});
+	}, [gameSets]);
 
 	const handleCurrentSet = set => {
 		updateCurrentSet(set);
