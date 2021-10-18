@@ -28,7 +28,6 @@ function GameMap() {
 							sets={s}
 							number={gameSets.indexOf(s)}
 							id={s._id}
-							setId={s._id}
 							setCurrentSet={handleCurrentSet}
 						/>
 					))}

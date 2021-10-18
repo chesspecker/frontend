@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import Btn from '../btn/Btn.jsx';
 import style from './GameSet.module.scss';
 
-function GameSet({set, number, setCurrentSet}) {
+function GameSet({sets, number, setCurrentSet}) {
 	return (
 		<>
 			<div className={style.set}>
@@ -13,7 +13,7 @@ function GameSet({set, number, setCurrentSet}) {
 					<li className={style.list_element}>Level :</li>
 				</ul>
 			</div>
-			<Btn link={set._id} data={s._id} onClick={setCurrentSet}>
+			<Btn link={sets._id} data={sets._id} onClick={setCurrentSet}>
 				Start
 			</Btn>
 		</>
