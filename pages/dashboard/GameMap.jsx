@@ -7,11 +7,12 @@ import style from './index.module.scss';
 function GameMap() {
 	const getSets = useSets();
 	const [gameSets, setGameSets] = useState([]);
-	const {currentUser, updateCurrentSet} = useUserContext();
+	const data = useUserContext();
 
 	useEffect(() => {
 		setGameSets(() => getSets);
 		console.log(getSets);
+		console.log(data.currentUser);
 	}, [gameSets]);
 
 	const handleCurrentSet = set => {
