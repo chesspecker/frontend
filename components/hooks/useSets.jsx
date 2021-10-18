@@ -3,7 +3,7 @@ import http from '../../services/http-service.js';
 
 export default function useSets() {
 	const api = process.env.API;
-	const [gameSet, setGameSet] = useState('');
+	const [gameSet, setGameSet] = useState([]);
 
 	useEffect(() => {
 		const getSets = async () => {

@@ -5,15 +5,12 @@ import {useUserContext} from '../../components/context/UserContext.jsx';
 import style from './index.module.scss';
 
 function GameMap() {
-	const getSets = useSets();
-	const [gameSets, setGameSets] = useState([]);
+	const Sets = useSets();
 	const data = useUserContext();
 
 	useEffect(() => {
-		setGameSets(() => getSets);
-		console.log(getSets);
 		console.log(data.currentUser);
-	}, [gameSets]);
+	});
 
 	const handleCurrentSet = set => {
 		updateCurrentSet(set);
@@ -24,11 +21,11 @@ function GameMap() {
 		<div className={style.container}>
 			<h1>Bonsoir</h1>
 			<div className={style.gameSet}>
-				{gameSets.length > 0 &&
-					gameSets.map(s => (
+				{Sets &&
+					Sets.map(s => (
 						<GameSet
 							sets={s}
-							number={gameSets.indexOf(s)}
+							number={Sets.indexOf(s)}
 							id={s._id}
 							setCurrentSet={handleCurrentSet}
 						/>
