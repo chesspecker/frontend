@@ -2,8 +2,8 @@ import React, {useState, useEffect, useContext} from 'react';
 import useSets from '../../components/hooks/useSets.jsx';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import GameSet from '../../components/layouts/sets/GameSet.jsx';
-import style from './index.module.scss';
 import LanguageContext from '../../components/layouts/LanguageContext.jsx';
+import style from './index.module.scss';
 
 function Dashboard(props) {
 	const getSets = useSets();

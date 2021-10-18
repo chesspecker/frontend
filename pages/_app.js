@@ -1,6 +1,6 @@
 import '../styles/globals.css';
-import LanguageContext from '../components/layouts/LanguageContext';
 import {useState} from 'react';
+import LanguageContext from '../components/layouts/LanguageContext.jsx';
 
 function MyApp({Component, pageProps}) {
 	const [language, setLanguage] = useState('en');
