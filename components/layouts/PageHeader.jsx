@@ -2,6 +2,7 @@ import {useState} from 'react';
 import NavBar from '../NavBar.jsx';
 import {UserProvider} from '../context/UserContext.jsx';
 import Container from './Container.jsx';
+import {UserContext} from '../context/UserContext.jsx';
 
 function PageHeader({children}) {
 	const [currentUser, setCurrentUser] = useState({
@@ -23,14 +24,14 @@ function PageHeader({children}) {
 	};
 
 	return (
-		<UserProvider
+		<UserContext.Provider
 			value={{currentUser, updateCurrentUserName, updateCurrentSet}}
 		>
 			<Container>
 				<NavBar />
 				{children}
 			</Container>
-		</UserProvider>
+		</UserContext.Provider>
 	);
 }
 

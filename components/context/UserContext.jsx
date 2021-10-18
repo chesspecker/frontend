@@ -2,7 +2,7 @@
 import {createContext, useContext} from 'react';
 
 // Create Context object.
-const UserContext = createContext();
+export const UserContext = createContext();
 
 // Export Provider.
 export function UserProvider(props) {
