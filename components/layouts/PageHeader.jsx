@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import NavBar from '../NavBar.jsx';
-import {UserProvider, UserContext} from '../context/UserContext.jsx';
+import {UserContext} from '../context/UserContext.jsx';
 import Container from './Container.jsx';
 
 function PageHeader({children}) {
