@@ -3,14 +3,12 @@ import useSets from '../../components/hooks/useSets.jsx';
 import GameSet from '../../components/layouts/sets/GameSet.jsx';
 import {useUserContext} from '../../components/context/UserContext.jsx';
 import style from './index.module.scss';
+import {UserContext} from '../../components/context/UserContext.jsx';
 
 function GameMap() {
-	const Sets = useSets();
-	const data = useUserContext();
-
-	useEffect(() => {
-		console.log(data.currentUser);
-	});
+	const sets = useSets();
+	const {currentUser, updateCurrentUserName, updateCurrentSet} =
+		useUserContext();
 
 	const handleCurrentSet = set => {
 		updateCurrentSet(set);
@@ -21,11 +19,12 @@ function GameMap() {
 		<div className={style.container}>
 			<h1>Bonsoir</h1>
 			<div className={style.gameSet}>
-				{Sets &&
-					Sets.map(s => (
+				{sets &&
+					sets.map(s => (
 						<GameSet
+							key={s._id}
 							sets={s}
-							number={Sets.indexOf(s)}
+							number={sets.indexOf(s)}
 							id={s._id}
 							setCurrentSet={handleCurrentSet}
 						/>
