@@ -6,7 +6,6 @@ import GameMap from './GameMap.jsx';
 function Dashboard(props) {
 	const getSets = useSets();
 	const [gameSets, setGameSets] = useState([]);
-	const {language, setLanguage} = useContext(LanguageContext);
 
 	useEffect(() => {
 		setGameSets(() => getSets);
