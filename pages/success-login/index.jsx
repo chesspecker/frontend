@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react';
 import Head from 'next/head.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import useConffeti from '../../components/hooks/useConffeti.jsx';
-import http from '../../services/http-service.js';
 import Btn from '../../components/layouts/btn/Btn.jsx';
 import useUser from '../../components/hooks/useUser.jsx';
 import style from './index.module.css';

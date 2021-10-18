@@ -48,3 +48,9 @@
 		max-width: 7rem;
 	}
 }
+
+.user {
+	color: white;
+	font-size: 2rem;
+	margin-right: 2rem;
+}

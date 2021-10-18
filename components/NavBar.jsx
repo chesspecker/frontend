@@ -1,8 +1,11 @@
 import Image from 'next/image.js';
 import logo from '../public/images/logo.svg';
 import style from './NavBar.module.css';
+import useUser from './hooks/useUser.jsx';
 
 function NavBar() {
+	const api = process.env.API;
+
 	return (
 		<div className={style.navBar}>
 			<div className={style.navBar_logo}>
@@ -10,6 +13,9 @@ function NavBar() {
 					<Image src={logo} />
 				</div>
 				<p className={style.navBar_title}> - ChessPecker</p>
+			</div>
+			<div className={style.user}>
+				{useUser() && <a href={`${api}/auth/logout`}>Logout</a>}
 			</div>
 		</div>
 	);
