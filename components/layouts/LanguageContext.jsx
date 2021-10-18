@@ -1,5 +1,8 @@
 import {createContext} from 'react';
 
-const LanguageContext = createContext({lang: 'fr', setObject: () => {}});
+const LanguageContext = createContext({
+	language: 'fr',
+	setLanguage: () => {},
+});
 
 export default LanguageContext;
