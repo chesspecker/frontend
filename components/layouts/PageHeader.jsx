@@ -1,8 +1,7 @@
 import {useState} from 'react';
 import NavBar from '../NavBar.jsx';
-import {UserProvider} from '../context/UserContext.jsx';
+import {UserProvider, UserContext} from '../context/UserContext.jsx';
 import Container from './Container.jsx';
-import {UserContext} from '../context/UserContext.jsx';
 
 function PageHeader({children}) {
 	const [currentUser, setCurrentUser] = useState({
