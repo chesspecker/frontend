@@ -3,10 +3,10 @@ import Container from './Container.jsx';
 
 function PageHeader({children}) {
 	return (
-			<Container>
-				<NavBar />
-				{children}
-			</Container>
+		<Container>
+			<NavBar />
+			{children}
+		</Container>
 	);
 }
 
