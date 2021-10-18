@@ -5,11 +5,11 @@ import GameSet from '../../components/layouts/sets/GameSet.jsx';
 import style from './index.module.scss';
 
 function Dashboard(props) {
+	const getSets = useSets();
 	const [gameSets, setGameSets] = useState([]);
 
 	useEffect(() => {
-		sets = useSets();
-		setGameSets(() => sets);
+		setGameSets(() => getSets);
 	});
 
 	return (
