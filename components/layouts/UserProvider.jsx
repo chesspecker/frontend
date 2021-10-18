@@ -1,6 +1,6 @@
 import React, {createContext, useState, useReducer} from 'react';
 
-import {UserContext} from '../contexts/user-context';
+import {UserContext} from '../contexts/user-context.js';
 
 export function UserProvider({children}) {
 	const [language, setLanguage] = useState('en');

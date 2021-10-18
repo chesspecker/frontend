@@ -3,12 +3,12 @@ import useSets from '../../components/hooks/useSets.jsx';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import GameSet from '../../components/layouts/sets/GameSet.jsx';
 import style from './index.module.scss';
-//import UserContext from '../../components/contexts/user-context.js';
+// Import UserContext from '../../components/contexts/user-context.js';
 
 function Dashboard(props) {
 	const getSets = useSets();
 	const [gameSets, setGameSets] = useState([]);
-	//const {language, setLanguage} = useContext(UserContext);
+	// Const {language, setLanguage} = useContext(UserContext);
 
 	('bark');
 

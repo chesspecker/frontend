@@ -13,7 +13,7 @@ function GameSet({set, number, onClick}) {
 					<li className={style.list_element}>Level :</li>
 				</ul>
 			</div>
-			<Btn link={set._id} onClick={onClick} data={s._id}>
+			<Btn link={set._id} data={s._id} onClick={onClick}>
 				Start
 			</Btn>
 		</>
