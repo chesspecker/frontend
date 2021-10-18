@@ -18,6 +18,7 @@ function Dashboard(props) {
 		<PageHeader>
 			<div className={style.container}>
 				<div className={style.gameSet}>
+					<h1>{language}</h1>
 					{gameSets &&
 						gameSets.map(s => (
 							<GameSet
