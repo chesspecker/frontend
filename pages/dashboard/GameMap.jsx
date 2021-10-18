@@ -1,20 +1,20 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React from 'react';
+import Router from 'next/router.js';
 import useSets from '../../components/hooks/useSets.jsx';
 import GameSet from '../../components/layouts/sets/GameSet.jsx';
-import {
-	useUserContext,
-	UserContext,
-} from '../../components/context/UserContext.jsx';
+import {useUserContext} from '../../components/context/UserContext.jsx';
 import style from './index.module.scss';
 
 function GameMap() {
 	const sets = useSets();
 	const {currentUser, updateCurrentUserName, updateCurrentSet} =
 		useUserContext();
+	console.log('userContext in gamemap', useUserContext());
 
 	const handleCurrentSet = set => {
+		console.log(set);
 		updateCurrentSet(set);
-		console.log(currentUser);
+		Router.push('/playing');
 	};
 
 	return (
@@ -28,7 +28,7 @@ function GameMap() {
 							sets={s}
 							number={sets.indexOf(s)}
 							id={s._id}
-							setCurrentSet={handleCurrentSet}
+							setCurrentSet={() => handleCurrentSet(s._id)}
 						/>
 					))}
 			</div>

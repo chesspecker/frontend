@@ -10,6 +10,7 @@ import ChessGround from '../../components/layouts/ChessGround.jsx';
 import http from '../../services/http-service.js';
 import {getPuzzle, getPuzzleList} from '../../services/puzzleService.js';
 import useClock from '../../components/hooks/useClock.jsx';
+import {useUserContext} from '../../components/context/UserContext.jsx';
 import style from './index.module.scss';
 
 function index() {
@@ -29,6 +30,9 @@ function index() {
 	const [sucessVisible, setSucessVisible] = useState(false);
 	const [startPopupVisible, setStartPopupVisible] = useState(true);
 	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
+	const {currentUser, updateCurrentUserName, updateCurrentSet} =
+		useUserContext();
+	console.log('ceci est le usercontext dans playing', useUserContext());
 
 	// TODO: à décommenter quand la backend sera fonctionnel :)
 	/* 	useEffect(() => {
@@ -80,13 +84,6 @@ function index() {
 		}
 	}, [timerRunning, counter]);
 
-	const startTimer = () => {
-		setTimerRunning(lastValue => {
-			const newValue = !lastValue;
-			return newValue;
-		});
-	};
-
 	useEffect(() => {
 		const puzzlList = getPuzzleList();
 		const puzzle = getPuzzle(puzzlList[actualPuzzle]);
@@ -112,6 +109,13 @@ function index() {
 			return turn;
 		});
 	}, [actualPuzzle]);
+
+	const startTimer = () => {
+		setTimerRunning(lastValue => {
+			const newValue = !lastValue;
+			return newValue;
+		});
+	};
 
 	const onMove = (from, to) => {
 		const move = chess.move({from, to, promotion: 'x'});
