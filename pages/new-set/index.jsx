@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
-import style from './index.module.scss';
-import Choice from '../../components/03-Create-set/Choice';
+import Choice from '../../components/03-Create-set/Choice.jsx';
 import {
 	puzzleThemes,
 	themesCategory,
 } from '../../services/gameCategorieService.js';
+import style from './index.module.scss';
 
 function NewSet(props) {
 	const [choicesSelected, setChoicesSelected] = useState([]);
@@ -20,12 +20,14 @@ function NewSet(props) {
 			});
 			return;
 		}
+
 		setChoicesSelected(oldArray => {
 			const newArray = [...oldArray];
 			newArray.push(id);
 			return newArray;
 		});
 	};
+
 	return (
 		<PageHeader>
 			<div className={style.container}>
@@ -42,11 +44,11 @@ function NewSet(props) {
 									.filter(p => p.category.nom === c.nom)
 									.map(p => (
 										<Choice
-											onClick={handleClick}
 											selected={choicesSelected}
 											id={p.title}
 											title={p.title}
 											description='bonsoir paris'
+											onClick={handleClick}
 										/>
 									))}
 							</div>
