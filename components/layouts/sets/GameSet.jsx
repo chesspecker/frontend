@@ -3,7 +3,6 @@ import Btn from '../btn/Btn.jsx';
 import style from './GameSet.module.scss';
 
 function GameSet({sets, number, setCurrentSet}) {
-	const api = process.env.API;
 	return (
 		<>
 			<div className={style.set}>

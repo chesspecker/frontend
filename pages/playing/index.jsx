@@ -3,18 +3,17 @@ import Image from 'next/image.js';
 import Chess from '../../components/utils/chess.js';
 import rotate from '../../public/images/rotate.svg';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
-import Btn from '../../components/layouts/btn/Btn.jsx';
 import SucessPopup from '../../components/layouts/popup/SucessPopup.jsx';
 import StartingPopup from '../../components/layouts/popup/StartingPopup.jsx';
 import ChessGround from '../../components/layouts/ChessGround.jsx';
 import http from '../../services/http-service.js';
-import {getPuzzle, getPuzzleList} from '../../services/puzzleService.js';
 import useClock from '../../components/hooks/useClock.jsx';
 import {useUserContext} from '../../components/context/UserContext.jsx';
 import style from './index.module.scss';
 
 function index() {
 	const [puzzlesList, setPuzzlesList] = useState([]);
+	const [puzzle, setPuzzle] = useState({});
 	const [chess, setChess] = useState(new Chess());
 	const [fen, setFen] = useState('');
 	const [lastMove, setLastMove] = useState();
@@ -34,56 +33,58 @@ function index() {
 	const {currentUser, updateCurrentUserName, updateCurrentSet} =
 		useUserContext();
 	const api = process.env.API;
-	console.log('ceci est le usercontext dans playing', useUserContext());
 
 	// TODO: à décommenter quand la backend sera fonctionnel :)
-	/* 	useEffect(() => {
+	useEffect(() => {
+		if (puzzlesList.length === 0) return;
+
 		const getPuzzle = async () => {
-			const {data: puzzle} = await http.get(
-				`https://api.chesspecker.com/puzzles/id/61641984580b920793bacab4`,
+			const {data: puzlle} = await http.get(
+				`${api}/puzzles/id/${puzzlesList[actualPuzzle]}`,
 				{
 					withCredentials: true,
 				},
 			);
-			console.log(puzzle);
+			setPuzzle(() => puzlle);
+			console.log('this is the puzzle', puzlle);
 		};
 
 		getPuzzle();
-	}, []); */
-	const getPuzzle = async id => {
+	}, [puzzlesList, actualPuzzle]);
+	/* const getPuzzle = async id => {
 		const {data: puzzle} = await http.get(`${api}/puzzles/id/${id}`, {
 			withCredentials: true,
 		});
-		console.log(puzzle);
+		console.log('ceci est le puzzle', puzzle);
 		return puzzle;
-	};
-
+	}; */
+	/* 
 	const getSet = async () => {
 		const {data: set} = await http.get(
-			`${api}/puzzles/sets/${currentUser.id}`,
+			`${api}/puzzles/set/id/${currentUser.currentSet}`,
 			{
 				withCredentials: true,
 			},
 		);
-		setPuzzlesList(() => set[0].puzzles);
-		console.log('this is the set', set[0].puzzles);
-		return set[0].puzzles;
-	};
+		setPuzzlesList(() => set.puzzles);
+		console.log('this is the set', set.puzzles);
+		return set.puzzles;
+	}; */
 
-	/* UseEffect(() => {
+	useEffect(() => {
 		const getSet = async () => {
 			const {data: set} = await http.get(
-				`${api}/puzzles/sets/${currentUser.id}`,
+				`${api}/puzzles/set/id/${currentUser.currentSet}`,
 				{
 					withCredentials: true,
 				},
 			);
-			setPuzzlesList(() => set[0].puzzles);
-			console.log('this is the set', set[0].puzzles);
+			setPuzzlesList(() => set.puzzles);
+			console.log('this is the set', set.puzzles);
 		};
 
 		getSet();
-	}, []); */
+	}, []);
 
 	useEffect(() => {
 		const timer = () => {
@@ -107,9 +108,11 @@ function index() {
 	}, [timerRunning, counter]);
 
 	useEffect(() => {
-		const puzzlList = getSet();
-		const puzzle = getPuzzle(puzzlesList[actualPuzzle]);
+		if (puzzlesList.length === 0) return;
 		const regex = /FEN "(.*?)"/g;
+		console.log('puzzle dans dernier useEffect', puzzle);
+		if (!puzzle.pgn) return;
+		console.log('PGN =', puzzle.pgn);
 		const puzzleFen = regex.exec(puzzle.pgn)[1];
 		const pgnChess = new Chess();
 		pgnChess.load_pgn(puzzle.pgn);
@@ -117,7 +120,7 @@ function index() {
 		const newChess = new Chess(puzzleFen);
 
 		setMoveHistory(() => []);
-		setPuzzleSize(() => puzzlList.length);
+		setPuzzleSize(() => puzzlesList.length);
 		setMoveNumber(() => 0);
 		setHistory(() => history);
 		setPgn(() => puzzle.pgn);
@@ -130,7 +133,7 @@ function index() {
 			});
 			return turn;
 		});
-	}, [actualPuzzle]);
+	}, [actualPuzzle, puzzlesList, puzzle]);
 
 	const startTimer = () => {
 		setTimerRunning(lastValue => {
