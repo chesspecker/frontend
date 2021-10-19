@@ -44,7 +44,7 @@ function DownloadProgress() {
 
 	useEffect(() => {
 		console.log('percentage', percentage);
-		if (percentage === 1) {
+		if (percentage === 100) {
 			Router.push('/analysing');
 		}
 	}, [percentage]);
