@@ -1,16 +1,18 @@
 import React, {useState} from 'react';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
-import style from './index.module.scss';
-import Choice from '../../components/03-Create-set/Choice';
+import Choice from '../../components/03-Create-set/Choice.jsx';
 import {
 	puzzleThemes,
 	themesCategory,
 } from '../../services/gameCategorieService.js';
+import Btn from '../../components/layouts/btn/Btn.jsx';
+import style from './index.module.scss';
 
 function NewSet(props) {
 	const [choicesSelected, setChoicesSelected] = useState([]);
 
 	const handleClick = id => {
+		console.log(choicesSelected);
 		if (choicesSelected.includes(id)) {
 			setChoicesSelected(oldArray => {
 				const index = oldArray.indexOf(id);
@@ -20,12 +22,14 @@ function NewSet(props) {
 			});
 			return;
 		}
+
 		setChoicesSelected(oldArray => {
 			const newArray = [...oldArray];
 			newArray.push(id);
 			return newArray;
 		});
 	};
+
 	return (
 		<PageHeader>
 			<div className={style.container}>
@@ -42,16 +46,19 @@ function NewSet(props) {
 									.filter(p => p.category.nom === c.nom)
 									.map(p => (
 										<Choice
-											onClick={handleClick}
 											selected={choicesSelected}
-											id={p.title}
+											id={p.id}
 											title={p.title}
-											description='bonsoir paris'
+											description={p.description}
+											onClick={handleClick}
 										/>
 									))}
 							</div>
 						</div>
 					))}
+				</div>
+				<div className={style.btn_container}>
+					<Btn>Bonsoir</Btn>
 				</div>
 			</div>
 		</PageHeader>

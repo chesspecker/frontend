@@ -7,11 +7,11 @@ function SetCategory(props) {
 			<h3 className={style.set_category_title}>Opening</h3>
 			<div className={style.set_category_choices}>
 				<Choice
-					onClick={handleClick}
 					selected={choicesSelected}
-					id={'234'}
+					id='234'
 					title='Title du turf'
 					description='bonsoir paris'
+					onClick={handleClick}
 				/>
 			</div>
 		</div>
