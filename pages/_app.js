@@ -1,5 +1,6 @@
 import {UserContext} from '../components/context/UserContext.jsx';
 import '../styles/globals.css';
+import '../styles/chessground.css';
 import {useState} from 'react';
 
 function MyApp({Component, pageProps}) {
