@@ -14,7 +14,6 @@ function ChessGround({onMove, fen, turnColor, movable, orientation, undo}) {
 				orientation={orientation}
 				style={{margin: '30px', backgroundColor: 'white'}}
 				onMove={onMove}
-				addDimensionsCssVars={true}
 			/>
 		</div>
 	);
