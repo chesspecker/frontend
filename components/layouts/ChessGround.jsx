@@ -8,6 +8,7 @@ function ChessGround({onMove, fen, turnColor, movable, orientation, undo}) {
 	return (
 		<div className={style.chessGround}>
 			<Chessground
+				addDimensionsCssVars
 				fen={fen}
 				turnColor={turnColor}
 				movable={movable}
