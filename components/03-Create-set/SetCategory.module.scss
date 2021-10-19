@@ -1,0 +1,12 @@
+.set {
+	&_category {
+		&_choices {
+			display: flex;
+			flex-wrap: wrap;
+		}
+		&_title {
+			color: white;
+			font-size: 2.3rem;
+		}
+	}
+}

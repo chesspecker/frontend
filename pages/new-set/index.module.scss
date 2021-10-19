@@ -2,10 +2,24 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
+
 	width: 100vw;
+	flex-direction: column;
 }
 
 .title {
 	color: white;
+}
+
+.set {
+	&_category {
+		&_choices {
+			display: flex;
+			flex-wrap: wrap;
+		}
+		&_title {
+			color: white;
+			font-size: 2.3rem;
+		}
+	}
 }
