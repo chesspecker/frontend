@@ -6,20 +6,23 @@
 	display: flex;
 	flex-direction: column;
 	color: white;
+	margin: 1rem;
+	padding: 1rem;
 }
+
 .title {
-	margin-top: 1rem;
-	margin-left: 1rem;
+	margin: 1rem;
 	font-size: 2rem;
 	font-weight: 500;
 }
 
 .list {
+	height: 100%;
 	display: flex;
-	flex-direction: column;
 	justify-content: space-around;
 	list-style: none;
 	&_element {
 		font-size: 1.5rem;
+		margin-top: 1rem;
 	}
 }
