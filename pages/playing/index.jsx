@@ -51,7 +51,7 @@ function index() {
 
 		getPuzzle();
 	}, [puzzlesList, actualPuzzle]);
-	/* const getPuzzle = async id => {
+	/* Const getPuzzle = async id => {
 		const {data: puzzle} = await http.get(`${api}/puzzles/id/${id}`, {
 			withCredentials: true,
 		});
