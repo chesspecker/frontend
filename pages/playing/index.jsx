@@ -30,11 +30,9 @@ function index() {
 	const [sucessVisible, setSucessVisible] = useState(false);
 	const [startPopupVisible, setStartPopupVisible] = useState(true);
 	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
-	const {currentUser, updateCurrentUserName, updateCurrentSet} =
-		useUserContext();
+	const {currentUser} = useUserContext();
 	const api = process.env.API;
 
-	// TODO: à décommenter quand la backend sera fonctionnel :)
 	useEffect(() => {
 		if (puzzlesList.length === 0) return;
 
@@ -46,30 +44,10 @@ function index() {
 				},
 			);
 			setPuzzle(() => puzlle);
-			console.log('this is the puzzle', puzlle);
 		};
 
 		getPuzzle();
 	}, [puzzlesList, actualPuzzle]);
-	/* Const getPuzzle = async id => {
-		const {data: puzzle} = await http.get(`${api}/puzzles/id/${id}`, {
-			withCredentials: true,
-		});
-		console.log('ceci est le puzzle', puzzle);
-		return puzzle;
-	}; */
-	/* 
-	const getSet = async () => {
-		const {data: set} = await http.get(
-			`${api}/puzzles/set/id/${currentUser.currentSet}`,
-			{
-				withCredentials: true,
-			},
-		);
-		setPuzzlesList(() => set.puzzles);
-		console.log('this is the set', set.puzzles);
-		return set.puzzles;
-	}; */
 
 	useEffect(() => {
 		const getSet = async () => {
@@ -80,7 +58,6 @@ function index() {
 				},
 			);
 			setPuzzlesList(() => set.puzzles);
-			console.log('this is the set', set.puzzles);
 		};
 
 		getSet();
@@ -110,9 +87,7 @@ function index() {
 	useEffect(() => {
 		if (puzzlesList.length === 0) return;
 		const regex = /FEN "(.*?)"/g;
-		console.log('puzzle dans dernier useEffect', puzzle);
 		if (!puzzle.pgn) return;
-		console.log('PGN =', puzzle.pgn);
 		const puzzleFen = regex.exec(puzzle.pgn)[1];
 		const pgnChess = new Chess();
 		pgnChess.load_pgn(puzzle.pgn);
@@ -143,7 +118,6 @@ function index() {
 	};
 
 	const onMove = (from, to) => {
-		console.log('actual puzzl dans le onmove', actualPuzzle);
 		const move = chess.move({from, to, promotion: 'x'});
 		const moves = chess.moves({verbose: true});
 		for (let i = 0, length_ = moves.length; i < length_; i++) {
