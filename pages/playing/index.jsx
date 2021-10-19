@@ -143,6 +143,7 @@ function index() {
 	};
 
 	const onMove = (from, to) => {
+		console.log('actual puzzl dans le onmove', actualPuzzle);
 		const move = chess.move({from, to, promotion: 'x'});
 		const moves = chess.moves({verbose: true});
 		for (let i = 0, length_ = moves.length; i < length_; i++) {
