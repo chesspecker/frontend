@@ -1,7 +1,7 @@
 import React from 'react';
-import style from './Stars.module.scss';
-import star from '../../../public/images/star.svg';
 import Image from 'next/image.js';
+import star from '../../../public/images/star.svg';
+import style from './Stars.module.scss';
 
 function Stars(props) {
 	return (
@@ -9,15 +9,15 @@ function Stars(props) {
 			<div
 				className={`${style.star} ${style.star_primary} ${style.star_normal}`}
 			>
-				<Image src={star}></Image>
+				<Image src={star} />
 			</div>
 			<div className={`${style.star} ${style.star_primary} ${style.star_big}`}>
-				<Image src={star}></Image>
+				<Image src={star} />
 			</div>
 			<div
 				className={`${style.star} ${style.star_primary} ${style.star_normal}`}
 			>
-				<Image src={star}></Image>
+				<Image src={star} />
 			</div>
 		</div>
 	);
