@@ -1,0 +1,12 @@
+.stars_container {
+	display: flex;
+	justify-content: space-around;
+	margin: 1rem;
+}
+
+.star {
+	margin: 0.5rem;
+	&_normal {
+		transform: scale(0.8);
+	}
+}
