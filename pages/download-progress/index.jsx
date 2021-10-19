@@ -20,9 +20,7 @@ function DownloadProgress() {
 			transports: ['websocket', 'polling'],
 			credentials: true,
 		});
-		socket.on('connect', () => {
-			console.log(`connected with id: ${socket.id}`);
-		});
+		socket.on('connect', () => {});
 		socket.on('FromAPI', data => {
 			setPercentage(100 * data.progress);
 			setCount(data.count);
@@ -35,7 +33,7 @@ function DownloadProgress() {
 			const {data} = await http.get(`${api}/worker`, {
 				withCredentials: true,
 			});
-			console.log(data);
+
 			setProgress(() => data.jobProgress);
 		};
 
@@ -45,6 +43,7 @@ function DownloadProgress() {
 	}, []);
 
 	useEffect(() => {
+		console.log('percentage', percentage);
 		if (percentage === 1) {
 			Router.push('/analysing');
 		}
