@@ -90,7 +90,7 @@ function index() {
 		// Const regex = /FEN "(.*?)"/g;
 		if (!puzzle.Moves) return;
 		console.log('in the useEffect');
-		const puzzleFen = puzzle.Fen;
+		const puzzleFen = puzzle.FEN;
 		console.log('puzzleFen', puzzleFen);
 		//const pgnChess = new Chess();
 		const history = puzzle.Moves.split(' ');
