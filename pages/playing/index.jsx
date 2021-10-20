@@ -151,7 +151,7 @@ function Index() {
 	};
 
 	const checkPuzzleComplete = moveNumber => {
-		console.log('moveNumber', moveNumber)
+		console.log('moveNumber', moveNumber);
 		console.log('history.length', history.length);
 		if (moveNumber === history.length) {
 			if (checkSetComplete()) return;
