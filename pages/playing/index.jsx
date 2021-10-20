@@ -58,7 +58,6 @@ function index() {
 					withCredentials: true,
 				},
 			);
-			console.log('le set', set);
 			setPuzzlesList(() => set.puzzles);
 		};
 
@@ -88,11 +87,12 @@ function index() {
 
 	useEffect(() => {
 		if (puzzlesList.length === 0) return;
-		const regex = /FEN "(.*?)"/g;
-		if (!puzzle.pgn) return;
-		const puzzleFen = regex.exec(puzzle.pgn)[1];
+		//const regex = /FEN "(.*?)"/g;
+		if (!puzzle.Moves) return;
+		const puzzleFen = puzzle.Fen;
 		const pgnChess = new Chess();
-		pgnChess.load_pgn(puzzle.pgn);
+		const history = puzzle.Moves.split(' ');
+		pgnChess.load_pgn(puzzle.Moves);
 		const history = pgnChess.history();
 		const newChess = new Chess(puzzleFen);
 
@@ -131,7 +131,7 @@ function index() {
 			}
 		}
 
-		if (move && move.san === history[moveNumber]) {
+		if (move && `${move.from}${move.to}` === history[moveNumber]) {
 			setFen(() => chess.fen());
 			setLastMove(move.san); // Move.san
 			setMoveHistory(moveHistory => {
