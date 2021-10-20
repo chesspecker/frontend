@@ -43,6 +43,7 @@ function index() {
 					withCredentials: true,
 				},
 			);
+			console.log('le puzzle', puzlle);
 			setPuzzle(() => puzlle);
 		};
 
@@ -57,6 +58,7 @@ function index() {
 					withCredentials: true,
 				},
 			);
+			console.log('le set', set);
 			setPuzzlesList(() => set.puzzles);
 		};
 
