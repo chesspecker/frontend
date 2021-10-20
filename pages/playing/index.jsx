@@ -172,7 +172,7 @@ function Index() {
 		}
 	};
 
-	const turnColor = string_ => (string_ === 'b' ? 'white' : 'black');
+	const turnColor = string_ => (string_ === 'w' ? 'white' : 'black');
 
 	const calcMovable = () => {
 		const dests = new Map();
@@ -189,7 +189,7 @@ function Index() {
 		return {
 			free: false,
 			dests,
-			color: turnColor(turn),
+			color: (turn === 'b' ? 'white' : 'black'),
 		};
 	};
 
