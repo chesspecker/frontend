@@ -115,7 +115,7 @@ function index() {
 				rightMove(moveNumber);
 			}
 
-			return turn === 'b' ? 'w' : 'b';
+			return turn;
 		});
 	}, [actualPuzzle, puzzlesList, puzzle]);
 
@@ -208,7 +208,7 @@ function index() {
 	};
 
 	const turnColor = string => {
-		return string === 'w' ? 'white' : 'black';
+		return string === 'b' ? 'white' : 'black';
 	};
 
 	const calcMovable = () => {
