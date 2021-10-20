@@ -12,7 +12,8 @@ import {useUserContext} from '../../components/context/UserContext.jsx';
 import style from './index.module.scss';
 
 function Index() {
-	const [puzzlesList, setPuzzlesList] = useState([]);
+	const [puzzleList, setPuzzleList] = useState([]);
+	const [puzzleListSize, setPuzzleListSize] = useState(0);
 	const [puzzle, setPuzzle] = useState({});
 	const [chess, setChess] = useState(new Chess());
 	const [fen, setFen] = useState('');
@@ -21,7 +22,6 @@ function Index() {
 	const [history, setHistory] = useState([]);
 	const [moveNumber, setMoveNumber] = useState(0);
 	const [actualPuzzle, setActualPuzzle] = useState(0);
-	const [puzzleSize, setPuzzleSize] = useState(0);
 	const [timerRunning, setTimerRunning] = useState(false);
 	const [counter, setCounter] = useState(0);
 	const [sucessVisible, setSucessVisible] = useState(false);
@@ -31,10 +31,10 @@ function Index() {
 	const api = process.env.API;
 
 	useEffect(() => {
-		if (puzzlesList.length === 0) return;
+		if (puzzleList.length === 0) return;
 		const getPuzzle = async () => {
 			const {data: puzzle} = await http.get(
-				`${api}/puzzles/id/${puzzlesList[actualPuzzle]}`,
+				`${api}/puzzles/id/${puzzleList[actualPuzzle]}`,
 				{
 					withCredentials: true,
 				},
@@ -43,7 +43,7 @@ function Index() {
 		};
 
 		getPuzzle();
-	}, [puzzlesList, actualPuzzle, api]);
+	}, [puzzleList, actualPuzzle, api]);
 
 	useEffect(() => {
 		const getSet = async () => {
@@ -53,11 +53,16 @@ function Index() {
 					withCredentials: true,
 				},
 			);
-			setPuzzlesList(() => set.puzzles);
+			setPuzzleList(() => set.puzzles);
 		};
 
 		getSet();
 	}, [api, currentUser.currentSet]);
+
+	useEffect(() => {
+		if (puzzleList.length === 0) return;
+		setPuzzleListSize(() => puzzleList.length);
+	}, [puzzleList]);
 
 	useEffect(() => {
 		const timer = () => {
@@ -67,11 +72,6 @@ function Index() {
 		if (timerRunning) timer();
 		if (!timerRunning) clearTimeout(timer);
 	}, [timerRunning, counter]);
-
-	useEffect(() => {
-		if (puzzlesList.length === 0) return;
-		setPuzzleSize(() => puzzlesList.length);
-	}, [puzzlesList]);
 
 	useEffect(() => {
 		if (!puzzle.Moves) return;
@@ -132,7 +132,7 @@ function Index() {
 	};
 
 	const checkSetComplete = async () => {
-		if (actualPuzzle + 1 === puzzleSize) {
+		if (actualPuzzle + 1 === puzzleListSize) {
 			setTimerRunning(() => false);
 			setSucessVisible(() => true);
 			/**
@@ -154,8 +154,11 @@ function Index() {
 		console.log('moveNumber', moveNumber);
 		console.log('history.length', history.length);
 		if (moveNumber === history.length) {
-			if (checkSetComplete()) return;
-			changePuzzle();
+			const isSetComplete = checkSetComplete();
+			console.log(isSetComplete);
+			if (!isSetComplete) {
+				changePuzzle();
+			}
 		}
 	};
 
