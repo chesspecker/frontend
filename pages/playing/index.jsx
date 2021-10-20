@@ -99,7 +99,7 @@ function Index() {
 		const currentMove = history[index];
 		chess.move(currentMove, {sloppy: true});
 		setFen(chess.fen());
-		setMoveNumber(prevMove => prevMove + 1);
+		setMoveNumber(previousMove => previousMove + 1);
 	};
 
 	useEffect(() => {
