@@ -1,4 +1,3 @@
-import React from 'react';
 import Router from 'next/router.js';
 import Image from 'next/image.js';
 import Link from 'next/link.js';
@@ -11,9 +10,11 @@ import plus from '../../public/images/plus.svg';
 import style from './index.module.scss';
 
 function GameMap() {
+	//TODO: Make sure this is loaded correctly
 	const sets = useSets();
-	const {currentUser, updateCurrentUserName, updateCurrentSet} =
-		useUserContext();
+
+	// Unused: const {currentUser, updateCurrentUserName} = useUserContext();
+	const {updateCurrentSet} = useUserContext();
 
 	const handleCurrentSet = set => {
 		updateCurrentSet(set);

@@ -8,8 +8,8 @@ function GameSet({sets, number, setCurrentSet}) {
 		<div className={style.set}>
 			<h3 className={style.title}>{sets.title}</h3>
 			<div className={style.list}>
-				<div className={style.list_element}>🏆: 24:37</div>
-				<div className={style.list_element}>⛔ : 18</div>
+				<div className={style.list_element}>🏆: {sets.bestTime}</div>
+				<div className={style.list_element}>⛔ : {sets.tries}</div>
 			</div>
 			<Stars />
 			<Btn onClick={setCurrentSet}>Start</Btn>
