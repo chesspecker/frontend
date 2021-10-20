@@ -92,15 +92,15 @@ function index() {
 		const puzzleFen = puzzle.Fen;
 		const pgnChess = new Chess();
 		const history = puzzle.Moves.split(' ');
-		pgnChess.load_pgn(puzzle.Moves);
-		const history = pgnChess.history();
+		//pgnChess.load_pgn(puzzle.Moves);
+		//const history = pgnChess.history();
 		const newChess = new Chess(puzzleFen);
 
 		setMoveHistory(() => []);
 		setPuzzleSize(() => puzzlesList.length);
 		setMoveNumber(() => 0);
 		setHistory(() => history);
-		setPgn(() => puzzle.pgn);
+		//setPgn(() => puzzle.pgn);
 		setChess(() => newChess);
 		setFen(() => newChess.fen());
 		setTurn(() => {
