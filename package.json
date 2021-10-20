@@ -21,6 +21,7 @@
 	},
 	"dependencies": {
 		"axios": "^0.22.0",
+		"help-array": "^1.1.1",
 		"next": "11.1.2",
 		"prop-types": "^15.7.2",
 		"react": "17.0.2",

@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import Image from 'next/image.js';
+import {shuffle} from 'help-array';
 import Chess from '../../components/utils/chess.js';
 import rotate from '../../public/images/rotate.svg';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
@@ -49,7 +50,8 @@ function Index() {
 				`${api}/puzzles/set/id/${currentUser.currentSet}`,
 				{withCredentials: true},
 			);
-			setPuzzleList(() => set.puzzles);
+			const puzzleList = shuffle(set.puzzles);
+			setPuzzleList(() => puzzleList);
 		};
 
 		getSet();
