@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import Link from 'next/link.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import Choice from '../../components/03-Create-set/Choice.jsx';
 import {
@@ -58,7 +59,9 @@ function NewSet(props) {
 					))}
 				</div>
 				<div className={style.btn_container}>
-					<Btn>Bonsoir</Btn>
+					<Link href='/new-set/NameAndSize'>
+						<Btn>NEXT</Btn>
+					</Link>
 				</div>
 			</div>
 		</PageHeader>
