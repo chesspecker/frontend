@@ -40,7 +40,6 @@ function Index() {
 					withCredentials: true,
 				},
 			);
-			console.log('le puzzle', puzlle);
 			setPuzzle(() => puzlle);
 		};
 
@@ -138,6 +137,8 @@ function Index() {
 		}
 
 		if (move && `${move.from}${move.to}` === history[moveNumber]) {
+			console.log('onMove', move);
+			console.log(`onMove : from to ${move.from}${move.to}`);
 			setFen(() => chess.fen());
 			setLastMove(move.san);
 			setMoveNumber(previousMove => {
@@ -170,9 +171,7 @@ function Index() {
 		}
 	};
 
-	const turnColor = string => {
-		return string === 'b' ? 'white' : 'black';
-	};
+	const turnColor = string_ => (string_ === 'b' ? 'white' : 'black');
 
 	const calcMovable = () => {
 		const dests = new Map();
@@ -194,7 +193,9 @@ function Index() {
 	};
 
 	const switchOrientation = () => {
-		setOrientation(() => (orientation === 'white' ? 'black' : 'white'));
+		setOrientation(orientation =>
+			orientation === 'white' ? 'black' : 'white',
+		);
 	};
 
 	const handleRestart = () => {
