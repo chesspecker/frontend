@@ -88,7 +88,6 @@ function Index() {
 		const history = puzzle.Moves.split(' ');
 		console.log('history', history);
 
-		setMoveHistory(() => []);
 		setMoveNumber(() => 0);
 		setHistory(() => history);
 		setChess(() => chessJs);
@@ -141,12 +140,6 @@ function Index() {
 		if (move && `${move.from}${move.to}` === history[moveNumber]) {
 			setFen(() => chess.fen());
 			setLastMove(move.san);
-			setMoveHistory(moveHistory => {
-				const lastMovs = [...moveHistory];
-				lastMovs.push(move.san);
-				return lastMovs;
-			});
-
 			setMoveNumber(previousMove => {
 				const move = previousMove + 1;
 				setTimeout(() => checkPuzzleComplete(move), 800);
