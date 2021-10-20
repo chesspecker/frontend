@@ -97,6 +97,18 @@ function Index() {
 		setOrientation(() => (chessJs.turn() === 'b' ? 'white' : 'black'));
 	}, [puzzle]);
 
+	const rightMove = index => {
+		const currentMove = history[index];
+		chess.move(currentMove, {sloppy: true});
+		setFen(chess.fen());
+		setMoveNumber(move => {
+			const newMove = move + 1;
+
+			setTimeout(() => checkPuzzleComplete(newMove), 800);
+			return newMove;
+		});
+	};
+
 	useEffect(() => {
 		if (!history) return;
 		if (moveNumber === 0) {
@@ -144,18 +156,6 @@ function Index() {
 		} else if (move) {
 			goToPrevious();
 		}
-	};
-
-	const rightMove = index => {
-		const currentMove = history[index];
-		chess.move(currentMove, {sloppy: true});
-		setFen(chess.fen());
-		setMoveNumber(move => {
-			const newMove = move + 1;
-
-			setTimeout(() => checkPuzzleComplete(newMove), 800);
-			return newMove;
-		});
 	};
 
 	const changePuzzle = () => {
