@@ -6,7 +6,7 @@ import style from './GameSet.module.scss';
 function GameSet({sets, number, setCurrentSet}) {
 	return (
 		<div className={style.set}>
-			<h3 className={style.title}>Set {number + 1}</h3>
+			<h3 className={style.title}>{sets.title}</h3>
 			<div className={style.list}>
 				<div className={style.list_element}>🏆: 24:37</div>
 				<div className={style.list_element}>⛔ : 18</div>
