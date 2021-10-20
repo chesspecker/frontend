@@ -109,6 +109,10 @@ function index() {
 		setTurn(() => {
 			const turn = newChess.turn();
 			setOrientation(() => {
+				if (moveNumber === 0) {
+					rightMove(moveNumber);
+				}
+
 				return turn === 'b' ? 'white' : 'black';
 			});
 			return turn;
@@ -218,10 +222,6 @@ function index() {
 					s,
 					ms.map(m => m.to),
 				);
-		}
-
-		if (moveNumber === 0) {
-			rightMove(moveNumber);
 		}
 
 		return {
