@@ -89,9 +89,12 @@ function index() {
 		if (puzzlesList.length === 0) return;
 		//const regex = /FEN "(.*?)"/g;
 		if (!puzzle.Moves) return;
+		console.log('in the useEffect');
 		const puzzleFen = puzzle.Fen;
-		const pgnChess = new Chess();
+		console.log('puzzleFen', puzzleFen);
+		//const pgnChess = new Chess();
 		const history = puzzle.Moves.split(' ');
+		console.log('history', history);
 		//pgnChess.load_pgn(puzzle.Moves);
 		//const history = pgnChess.history();
 		const newChess = new Chess(puzzleFen);
