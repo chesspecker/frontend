@@ -7,10 +7,12 @@ import {
 	themesCategory,
 } from '../../services/gameCategorieService.js';
 import Btn from '../../components/layouts/btn/Btn.jsx';
+import {useNewSetContext} from '../../components/context/NewSetContext.jsx';
 import style from './index.module.scss';
 
 function NewSet(props) {
 	const [choicesSelected, setChoicesSelected] = useState([]);
+	const {newSet, updateNewSetOptions} = useNewSetContext();
 
 	const handleClick = id => {
 		console.log(choicesSelected);
@@ -29,6 +31,12 @@ function NewSet(props) {
 			newArray.push(id);
 			return newArray;
 		});
+	};
+
+	const handleNextClick = () => {
+		console.log('next clicked');
+		updateNewSetOptions(choicesSelected);
+		console.log(newSet);
 	};
 
 	return (
@@ -60,7 +68,7 @@ function NewSet(props) {
 				</div>
 				<div className={style.btn_container}>
 					<Link href='/new-set/NameAndSize'>
-						<Btn>NEXT</Btn>
+						<Btn onClick={handleNextClick}>NEXT</Btn>
 					</Link>
 				</div>
 			</div>
