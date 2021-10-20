@@ -208,7 +208,7 @@ function index() {
 	};
 
 	const turnColor = string => {
-		return string === 'b' ? 'white' : 'black';
+		return string === 'w' ? 'white' : 'black';
 	};
 
 	const calcMovable = () => {
