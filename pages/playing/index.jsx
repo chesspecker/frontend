@@ -127,8 +127,9 @@ function Index() {
 		}
 	};
 
-	const changePuzzle = () =>
+	const changePuzzle = () => {
 		setActualPuzzle(previousPuzzle => previousPuzzle + 1);
+	};
 
 	const checkSetComplete = async () => {
 		if (puzzleSize === actualPuzzle + 1) {
@@ -177,10 +178,11 @@ function Index() {
 		};
 	};
 
-	const switchOrientation = () =>
+	const switchOrientation = () => {
 		setOrientation(orientation =>
 			orientation === 'white' ? 'black' : 'white',
 		);
+	};
 
 	const handleRestart = () => {
 		setActualPuzzle(() => 0);
