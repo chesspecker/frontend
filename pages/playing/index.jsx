@@ -146,11 +146,11 @@ function Index() {
 		});
 	};
 
-	const checkPuzzleComplete = newMove => {
+	const checkPuzzleComplete = moveNumber => {
 		console.log('*** *** *** ***');
 		console.log('history.length', history.length);
-		console.log('newMove', newMove);
-		if (history.length === newMove + 1) {
+		console.log('newMove', moveNumber);
+		if (history.length === moveNumber) {
 			if (puzzleSize === actualPuzzle + 1) {
 				setTimerRunning(() => false);
 				setSucessVisible(() => true);
