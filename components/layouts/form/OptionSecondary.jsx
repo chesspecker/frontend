@@ -1,5 +1,5 @@
 import React from 'react';
-import ToggleSwitch from '../layouts/ToggleSwitch.jsx';
+import ToggleSwitch from '../btn/ToggleSwitch.jsx';
 import style from './OptionSecondary.module.scss';
 
 function OptionSecondary({setName, setToggle, children, onChange, id}) {

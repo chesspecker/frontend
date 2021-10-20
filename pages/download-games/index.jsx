@@ -142,7 +142,6 @@ function SetParameters() {
 				>
 					Type of game to import:
 				</OptionToggle>
-				import OptionToggle from '../../components/layouts/form/OptionsToggle';
 				<OptionSecondary
 					id={0}
 					setToggle={checkBoxArrayTime[0]}
