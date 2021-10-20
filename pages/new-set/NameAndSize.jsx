@@ -6,12 +6,14 @@ import OptionTextInput from '../../components/layouts/form/OptionTextInput.jsx';
 import Btn from '../../components/layouts/btn/Btn.jsx';
 import {useNewSetContext} from '../../components/context/NewSetContext.jsx';
 import usePostNewSet from '../../components/hooks/usePostNewSet.jsx';
+import http from '../../services/http-service.js';
 import style from './NameAndSize.module.scss';
 
 function NameAndSize(props) {
 	const [title, setTitle] = useState('');
 	const [size, setSize] = useState(0);
 	const {newSet, updateNewSetSize, updateNewSetTitle} = useNewSetContext();
+	const api = process.env.API;
 	console.log('newSet in NameAndSize', newSet);
 
 	const handleSizeChange = size => {
@@ -26,10 +28,13 @@ function NameAndSize(props) {
 		});
 	};
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		updateNewSetSize(size);
 		updateNewSetTitle(title);
-		usePostNewSet({title: title, themeArray: newSet.themeArray, size: size});
+		// UsePostNewSet({title: title, themeArray: newSet.themeArray, size: size});
+		await http.post(`${api}/puzzles/sets`, newSet, {
+			withCredentials: true,
+		});
 	};
 
 	return (
