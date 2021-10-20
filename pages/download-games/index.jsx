@@ -2,9 +2,9 @@ import {useState} from 'react';
 import router from 'next/router.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import Btn from '../../components/layouts/btn/Btn.jsx';
-import OptionToggle from '../../components/01-Download-games/OptionsToggle.jsx';
-import OptionSecondary from '../../components/01-Download-games/OptionSecondary.jsx';
-import OptionNumber from '../../components/01-Download-games/OptionNumber.jsx';
+import OptionToggle from '../../components/layouts/form/OptionToggle.jsx';
+import OptionSecondary from '../../components/layouts/form/OptionSecondary.jsx';
+import OptionNumber from '../../components/layouts/form/OptionNumber.jsx';
 import http from '../../services/http-service.js';
 import style from './index.module.scss';
 
@@ -142,7 +142,7 @@ function SetParameters() {
 				>
 					Type of game to import:
 				</OptionToggle>
-
+				import OptionToggle from '../../components/layouts/form/OptionsToggle';
 				<OptionSecondary
 					id={0}
 					setToggle={checkBoxArrayTime[0]}
