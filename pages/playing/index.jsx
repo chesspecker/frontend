@@ -157,6 +157,10 @@ function Index() {
 	};
 
 	const checkPuzzleComplete = newMove => {
+		console.log('history.length', history.length);
+		console.log('newMove', newMove);
+		console.log('puzzleSize', puzzleSize);
+		console.log('actualPuzzle', actualPuzzle);
 		if (history.length === newMove + 1) {
 			if (puzzleSize === actualPuzzle + 1) {
 				setTimerRunning(() => false);
