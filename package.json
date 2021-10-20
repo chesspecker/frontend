@@ -16,7 +16,8 @@
 		"env": "browser",
 		"rules": {
 			"unicorn/filename-case": "off",
-			"node/prefer-global/process": "off"
+			"node/prefer-global/process": "off",
+			"react/prop-types": "warn"
 		}
 	},
 	"dependencies": {

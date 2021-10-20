@@ -1,8 +1,8 @@
+import {useState} from 'react';
 import {UserContext} from '../components/context/UserContext.jsx';
 import {NewSetContext} from '../components/context/NewSetContext.jsx';
 import '../styles/globals.css';
 import '../styles/chessground.css';
-import {useState} from 'react';
 
 function MyApp({Component, pageProps}) {
 	const [currentUser, setCurrentUser] = useState({
@@ -11,6 +11,7 @@ function MyApp({Component, pageProps}) {
 		currentSet: '',
 		newSet: [],
 	});
+
 	const [newSet, setNewSet] = useState({
 		title: '',
 		size: 0,
@@ -48,6 +49,9 @@ function MyApp({Component, pageProps}) {
 	};
 
 	return (
+		/**
+		 * TODO: wrap in a useMemo hoo	k
+		 */
 		<UserContext.Provider
 			value={{
 				currentUser,

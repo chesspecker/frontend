@@ -1,3 +1,4 @@
+/** Eslint-disable no-useless-escape */
 const puzzlesId = [
 	'61641996580b920793bacab6',
 	'6164198e580b920793bacab5',
