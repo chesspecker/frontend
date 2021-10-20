@@ -111,9 +111,6 @@ function index() {
 			setOrientation(() => {
 				return turn === 'b' ? 'white' : 'black';
 			});
-			if (moveNumber === 0) {
-				rightMove(moveNumber);
-			}
 
 			return turn;
 		});
