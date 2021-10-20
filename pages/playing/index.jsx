@@ -109,7 +109,7 @@ function index() {
 		setTurn(() => {
 			const turn = newChess.turn();
 			setOrientation(() => {
-				return turn === 'b' ? 'white' : 'black';
+				return turn === 'w' ? 'white' : 'black';
 			});
 			return turn;
 		});
@@ -153,12 +153,6 @@ function index() {
 			goToPrevious();
 		}
 	};
-
-	setTimeout(() => {
-		if (moveNumber === 0) {
-			rightMove(moveNumber);
-		}
-	}, 500);
 
 	const goToPrevious = () => {
 		setFen(() => chess.fen());
