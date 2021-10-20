@@ -189,7 +189,7 @@ function Index() {
 		return {
 			free: false,
 			dests,
-			color: (turn === 'b' ? 'white' : 'black'),
+			color: turn === 'b' ? 'white' : 'black',
 		};
 	};
 
