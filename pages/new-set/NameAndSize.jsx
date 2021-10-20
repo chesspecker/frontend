@@ -5,6 +5,7 @@ import OptionNumber from '../../components/layouts/form/OptionNumber.jsx';
 import OptionTextInput from '../../components/layouts/form/OptionTextInput.jsx';
 import Btn from '../../components/layouts/btn/Btn.jsx';
 import {useNewSetContext} from '../../components/context/NewSetContext.jsx';
+import usePostNewSet from '../../components/hooks/usePostNewSet.jsx';
 import style from './NameAndSize.module.scss';
 
 function NameAndSize(props) {
@@ -28,6 +29,7 @@ function NameAndSize(props) {
 	const handleSubmit = () => {
 		updateNewSetSize(size);
 		updateNewSetTitle(title);
+		usePostNewSet(newSet);
 	};
 
 	return (

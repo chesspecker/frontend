@@ -14,7 +14,7 @@ function MyApp({Component, pageProps}) {
 	const [newSet, setNewSet] = useState({
 		title: '',
 		size: 0,
-		options: [],
+		themeArray: [],
 	});
 
 	const updateCurrentUserName = data => {
@@ -31,7 +31,7 @@ function MyApp({Component, pageProps}) {
 
 	const updateNewSetOptions = data => {
 		setNewSet(rest => {
-			return {...rest, options: data};
+			return {...rest, themeArray: data};
 		});
 	};
 
