@@ -1,8 +1,13 @@
 import React from 'react';
 import Router from 'next/router.js';
+import Image from 'next/image.js';
+import Link from 'next/link.js';
 import useSets from '../../components/hooks/useSets.jsx';
 import GameSet from '../../components/layouts/sets/GameSet.jsx';
 import {useUserContext} from '../../components/context/UserContext.jsx';
+import Stars from '../../components/layouts/stars/Stars.jsx';
+import Btn from '../../components/layouts/btn/Btn.jsx';
+import plus from '../../public/images/plus.svg';
 import style from './index.module.scss';
 
 function GameMap() {
@@ -31,6 +36,21 @@ function GameMap() {
 							setCurrentSet={() => handleCurrentSet(s._id)}
 						/>
 					))}
+				<div className={style.set}>
+					<Link href='./new-set'>
+						<div className={style.bluer}>
+							<Image src={plus} />
+							<p>Create a new Set</p>
+						</div>
+					</Link>
+					<h3 className={style.title}>Set exemple</h3>
+					<div className={style.list}>
+						<div className={style.list_element}>🏆: 24:37</div>
+						<div className={style.list_element}>⛔ : 18</div>
+					</div>
+					<Stars />
+					<Btn>Start</Btn>
+				</div>
 			</div>
 		</div>
 	);
