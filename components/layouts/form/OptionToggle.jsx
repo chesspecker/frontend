@@ -1,5 +1,5 @@
 import React from 'react';
-import ToggleSwitch from '../layouts/ToggleSwitch.jsx';
+import ToggleSwitch from '../../../components/layouts/btn/ToggleSwitch';
 import style from './OptionToggle.module.scss';
 
 function OptionToggle({onChange, setName, setDescription, checked, children}) {
