@@ -164,7 +164,7 @@ function index() {
 
 	const rightMove = index => {
 		const currentMove = history[index];
-		chess.move(currentMove);
+		chess.move(currentMove, {sloppy: true});
 		setFen(chess.fen());
 		setMoveNumber(move => {
 			const newMove = move + 1;
