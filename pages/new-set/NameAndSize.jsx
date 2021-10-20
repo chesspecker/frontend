@@ -32,9 +32,13 @@ function NameAndSize(props) {
 		updateNewSetSize(size);
 		updateNewSetTitle(title);
 		// UsePostNewSet({title: title, themeArray: newSet.themeArray, size: size});
-		await http.post(`${api}/puzzles/sets`, newSet, {
-			withCredentials: true,
-		});
+		await http.post(
+			`${api}/puzzles/sets`,
+			{title, themeArray: newSet.themeArray, size},
+			{
+				withCredentials: true,
+			},
+		);
 	};
 
 	return (
