@@ -99,19 +99,12 @@ function Index() {
 		const currentMove = history[index];
 		chess.move(currentMove, {sloppy: true});
 		setFen(chess.fen());
-		setMoveNumber(move => {
-			const newMove = move + 1;
-
-			setTimeout(() => checkPuzzleComplete(newMove), 800);
-			return newMove;
-		});
+		setMoveNumber(prevMove => prevMove + 1);
 	};
 
 	useEffect(() => {
 		if (!history) return;
-		if (moveNumber === 0) {
-			rightMove(moveNumber);
-		}
+		if (moveNumber === 0) rightMove(moveNumber);
 	}, [history, moveNumber, rightMove]);
 
 	const goToPrevious = () => {
@@ -138,12 +131,9 @@ function Index() {
 
 		if (move && `${move.from}${move.to}` === history[moveNumber]) {
 			setFen(() => chess.fen());
-			setMoveNumber(previousMove => {
-				const move = previousMove + 1;
-				setTimeout(() => checkPuzzleComplete(move), 800);
-				rightMove(move);
-				return move;
-			});
+			setMoveNumber(previousMove => previousMove + 1);
+			setTimeout(() => checkPuzzleComplete(move), 800);
+			rightMove(move);
 		} else if (move) {
 			goToPrevious();
 		}
@@ -157,10 +147,9 @@ function Index() {
 	};
 
 	const checkPuzzleComplete = newMove => {
+		console.log('*** *** *** ***');
 		console.log('history.length', history.length);
 		console.log('newMove', newMove);
-		console.log('puzzleSize', puzzleSize);
-		console.log('actualPuzzle', actualPuzzle);
 		if (history.length === newMove + 1) {
 			if (puzzleSize === actualPuzzle + 1) {
 				setTimerRunning(() => false);
