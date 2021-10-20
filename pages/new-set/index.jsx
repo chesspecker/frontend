@@ -10,7 +10,7 @@ import Btn from '../../components/layouts/btn/Btn.jsx';
 import {useNewSetContext} from '../../components/context/NewSetContext.jsx';
 import style from './index.module.scss';
 
-function NewSet(props) {
+function NewSet() {
 	const [choicesSelected, setChoicesSelected] = useState([]);
 	const {newSet, updateNewSetOptions} = useNewSetContext();
 

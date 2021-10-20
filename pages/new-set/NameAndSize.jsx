@@ -16,27 +16,24 @@ function NameAndSize(props) {
 	const api = process.env.API;
 
 	const handleSizeChange = size => {
-		setSize(() => {
-			return size.target.value;
-		});
+		setSize(() => size.target.value);
 	};
 
 	const handleTitleChange = title => {
-		setTitle(() => {
-			return title.target.value;
-		});
+		setTitle(() => title.target.value);
 	};
 
 	const handleSubmit = async () => {
+		/**
+		 * TODO: Handle set size
+		 */
+		if (size < 20 || size > 40) return;
 		updateNewSetSize(size);
 		updateNewSetTitle(title);
-		// UsePostNewSet({title: title, themeArray: newSet.themeArray, size: size});
 		await http.post(
 			`${api}/puzzles/sets`,
 			{title, themeArray: newSet.themeArray, size},
-			{
-				withCredentials: true,
-			},
+			{withCredentials: true},
 		);
 	};
 
@@ -50,14 +47,14 @@ function NameAndSize(props) {
 						value={title}
 						onChange={handleTitleChange}
 					>
-						Give your set a Name
+						Give your set a name
 					</OptionTextInput>
 					<OptionNumber
 						name='number_game'
 						value={size}
 						onChange={handleSizeChange}
 					>
-						How many game for your set ?
+						How many puzzle in this set ? (20-40)
 					</OptionNumber>
 					<div className={style.btn_container}>
 						<Link href='/dashboard'>

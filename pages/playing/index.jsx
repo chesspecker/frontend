@@ -13,23 +13,23 @@ import {useUserContext} from '../../components/context/UserContext.jsx';
 import style from './index.module.scss';
 
 function Index() {
-	const [puzzleList, setPuzzleList] = useState([]);
-	const [puzzleListSize, setPuzzleListSize] = useState(0);
-	const [puzzle, setPuzzle] = useState({});
-	const [chess, setChess] = useState(new Chess());
+	const api = process.env.API;
 	const [fen, setFen] = useState('');
-	const [orientation, setOrientation] = useState('');
+	const {currentUser} = useUserContext();
 	const [turn, setTurn] = useState('w');
+	const [chess, setChess] = useState(new Chess());
+	const [puzzle, setPuzzle] = useState({});
+	const [counter, setCounter] = useState(0);
 	const [history, setHistory] = useState([]);
 	const [moveNumber, setMoveNumber] = useState(0);
+	const [puzzleList, setPuzzleList] = useState([]);
+	const [orientation, setOrientation] = useState('');
 	const [actualPuzzle, setActualPuzzle] = useState(0);
 	const [timerRunning, setTimerRunning] = useState(false);
-	const [counter, setCounter] = useState(0);
+	const [puzzleListSize, setPuzzleListSize] = useState(0);
 	const [sucessVisible, setSucessVisible] = useState(false);
 	const [startPopupVisible, setStartPopupVisible] = useState(true);
 	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
-	const {currentUser} = useUserContext();
-	const api = process.env.API;
 
 	useEffect(() => {
 		if (puzzleList.length === 0) return;

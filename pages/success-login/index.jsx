@@ -9,12 +9,7 @@ import style from './index.module.css';
 function Index() {
 	const user = useUser();
 	const [username, setUsername] = useState('');
-
-	useEffect(() =>
-		setUsername(() => {
-			return user.name;
-		}),
-	);
+	useEffect(() => setUsername(() => user.name));
 
 	return (
 		<>

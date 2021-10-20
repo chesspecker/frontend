@@ -12,7 +12,7 @@ function NavBar() {
 				<div className={style.logo}>
 					<Image src={logo} />
 				</div>
-				<p className={style.navBar_title}> - ChessPecker</p>
+				<p className={style.navBar_title}> - chesspecker</p>
 			</div>
 			<div className={style.user}>
 				{useUser() && <a href={`${api}/auth/logout`}>Logout</a>}
