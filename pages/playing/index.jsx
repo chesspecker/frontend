@@ -121,8 +121,8 @@ function Index() {
 		} else if (move) {
 			chess.undo();
 			setFen(() => chess.fen());
-			setWrongMoveVisible(() => true);
 			setCounter(lastCount => lastCount + 3);
+			setWrongMoveVisible(() => true);
 			setTimeout(() => setWrongMoveVisible(() => false), 300);
 		}
 	};
@@ -132,26 +132,26 @@ function Index() {
 	};
 
 	const checkSetComplete = async () => {
-		if (puzzleSize === actualPuzzle + 1) {
+		if (actualPuzzle + 1 === puzzleSize) {
 			setTimerRunning(() => false);
 			setSucessVisible(() => true);
 			/**
 			 * TODO: make new put request
-			 */
 			await http.put(
 				`${api}/puzzles/id/${puzzlesList[actualPuzzle]}`,
 				{tries: 1, bestTime: counter},
 				{withCredentials: true},
 			);
+			*/
 
 			return true;
+		} else {
+			return false;
 		}
-
-		return false;
 	};
 
 	const checkPuzzleComplete = moveNumber => {
-		if (history.length === moveNumber) {
+		if (moveNumber === history.length) {
 			if (checkSetComplete()) return;
 			changePuzzle();
 		}
