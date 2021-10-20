@@ -1,13 +1,9 @@
-import React from 'react';
 import ToggleSwitch from '../btn/ToggleSwitch.jsx';
 import style from './OptionSecondary.module.scss';
 
 function OptionSecondary({setName, setToggle, children, onChange, id}) {
 	return (
-		<div
-			className={`${style.option} ${style.option_secondary}`}
-			// Style={setToggle ? {display: 'none'} : {display: 'flex'}}
-		>
+		<div className={`${style.option} ${style.option_secondary}`}>
 			<p htmlFor='number_game' className={style.option_description}>
 				{children}
 			</p>

@@ -1,10 +1,9 @@
-import React from 'react';
 import dynamic from 'next/dynamic.js';
 import style from './ChessGround.module.scss';
 
 const Chessground = dynamic(() => import('react-chessground'), {ssr: false});
 
-function ChessGround({onMove, fen, turnColor, movable, orientation, undo}) {
+function ChessGround({onMove, fen, turnColor, movable, orientation}) {
 	return (
 		<div className={style.chessGround}>
 			<Chessground

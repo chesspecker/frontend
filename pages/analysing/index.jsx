@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {io} from 'socket.io-client';
 import Link from 'next/link.js';
 import http from '../../services/http-service.js';
@@ -41,12 +41,14 @@ function AnalyseProgress() {
 		setInterval(() => {
 			getProgress();
 		}, 500);
-	}, []);
+	}, [api]);
 
 	return (
 		<PageHeader>
 			<div className={style.container}>
-				<h2 className={style.title}>Ok, now let's analyse your game !! 🔥</h2>
+				<h2 className={style.title}>
+					Ok, now let&apos;s analyse your game !! 🔥
+				</h2>
 				<p className={style.description}>
 					Status : {count}/{max} games{' '}
 				</p>

@@ -1,4 +1,3 @@
-import React from 'react';
 import style from './BackgroundPopup.module.scss';
 
 function BackgroundPopup({children}) {

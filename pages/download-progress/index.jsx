@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {io} from 'socket.io-client';
 import Router from 'next/router.js';
 import http from '../../services/http-service.js';
@@ -11,7 +11,7 @@ const ENDPOINT = 'https://api.chesspecker.com';
 function DownloadProgress() {
 	const api = process.env.API;
 	const [percentage, setPercentage] = useState(0);
-	const [progress, setProgress] = useState(0);
+	const [, setProgress] = useState(0);
 	const [count, setCount] = useState(0);
 	const [max, setMax] = useState(0);
 

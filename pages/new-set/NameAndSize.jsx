@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import Link from 'next/link.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import OptionNumber from '../../components/layouts/form/OptionNumber.jsx';
@@ -58,7 +58,7 @@ function NameAndSize(props) {
 					</OptionNumber>
 					<div className={style.btn_container}>
 						<Link href='/dashboard'>
-							<Btn onClick={handleSubmit}>Let's go ! 🎉</Btn>
+							<Btn onClick={handleSubmit}>Let&apos;s go ! 🎉</Btn>
 						</Link>
 					</div>
 				</div>

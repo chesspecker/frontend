@@ -14,22 +14,19 @@ function SetParameters() {
 	const [gameTime, setGameTime] = useState([]);
 	const [gameType, setGameType] = useState(null);
 	const [gameNumber, setGameNumber] = useState();
-	const [checkBoxArrayTime, setCheckBoxArrayTime] = useState([
-		false,
-		false,
-		false,
-		false,
-	]);
+	const falseArray = [false, false, false, false];
+	const trueArray = [true, true, true, true];
+	const [checkBoxArrayTime, setCheckBoxArrayTime] = useState(falseArray);
 	const [checkBoxArrayType, setCheckBoxArrayType] = useState([false, false]);
 
 	const handleToggleTimeChange = () => {
 		setToggleTimeGame(toggleTimeGame => !toggleTimeGame);
 		if (toggleTimeGame) {
 			setGameTime(() => []);
-			setCheckBoxArrayTime(() => [false, false, false, false]);
+			setCheckBoxArrayTime(() => falseArray);
 		} else {
 			setGameTime(() => ['bullet', 'blitz', 'rapide', 'classical']);
-			setCheckBoxArrayTime(() => [true, true, true, true]);
+			setCheckBoxArrayTime(() => trueArray);
 		}
 	};
 

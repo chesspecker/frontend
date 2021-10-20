@@ -1,4 +1,3 @@
-import React from 'react';
 import style from './ToggleSwitch.module.scss';
 
 function ToggleSwitch({name, onChange, setToggle, id, checked}) {

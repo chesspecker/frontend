@@ -1,4 +1,3 @@
-import React from 'react';
 import ToggleSwitch from '../../../components/layouts/btn/ToggleSwitch.jsx';
 import style from './OptionToggle.module.scss';
 

@@ -1,9 +1,8 @@
-import React from 'react';
 import Image from 'next/image.js';
 import star from '../../../public/images/star.svg';
 import style from './Stars.module.scss';
 
-function Stars(props) {
+function Stars() {
 	return (
 		<div className={style.stars_container}>
 			<div

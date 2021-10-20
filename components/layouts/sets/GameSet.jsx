@@ -1,9 +1,8 @@
-import React from 'react';
 import Btn from '../btn/Btn.jsx';
 import Stars from '../stars/Stars.jsx';
 import style from './GameSet.module.scss';
 
-function GameSet({sets, number, setCurrentSet}) {
+function GameSet({sets, _number, setCurrentSet}) {
 	return (
 		<div className={style.set}>
 			<h3 className={style.title}>{sets.title}</h3>

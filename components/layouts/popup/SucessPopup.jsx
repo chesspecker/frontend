@@ -1,4 +1,3 @@
-import React from 'react';
 import BtnSecondary from '../btn/BtnSecondary.jsx';
 import useClock from '../../hooks/useClock.jsx';
 import BackgroundPopup from './BackgroundPopup.jsx';
@@ -11,8 +10,8 @@ function SucessPopup({restart, counter}) {
 				<p>🎉🎉 Good game 🎉🎉 !</p>
 				<p>Time to solve this set : {useClock(counter)}</p>
 				<div className={style.options}>
-					<BtnSecondary onClick={restart}> Restart</BtnSecondary>
-					<BtnSecondary> Next Set</BtnSecondary>
+					<BtnSecondary onClick={restart}>RESTART</BtnSecondary>
+					<BtnSecondary>NEXT SET</BtnSecondary>
 				</div>
 			</div>
 		</BackgroundPopup>

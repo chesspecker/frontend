@@ -1,4 +1,3 @@
-import React from 'react';
 import style from './OptionNumber.module.scss';
 
 function OptionNumber({onChange, setName, children, value}) {

@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import Link from 'next/link.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import Choice from '../../components/03-Create-set/Choice.jsx';
 import {
 	puzzleThemes,
 	themesCategory,
-} from '../../services/gameCategorieService.js';
+} from '../../services/game-categorie-service.js';
 import Btn from '../../components/layouts/btn/Btn.jsx';
 import {useNewSetContext} from '../../components/context/NewSetContext.jsx';
 import style from './index.module.scss';

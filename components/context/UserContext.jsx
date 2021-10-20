@@ -1,14 +1,9 @@
-// Components/common/MenuProvider.js
-import {createContext, useContext, useState} from 'react';
+import {createContext, useContext} from 'react';
 
-// Create Context object.
 export const UserContext = createContext({
 	currentUser: {},
 	updateCurrentUserName: () => {},
 	updateCurrentSet: () => {},
 });
 
-// Export useContext Hook.
-export function useUserContext() {
-	return useContext(UserContext);
-}
+export const useUserContext = () => useContext(UserContext);

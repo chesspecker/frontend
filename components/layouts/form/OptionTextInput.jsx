@@ -1,4 +1,3 @@
-import React from 'react';
 import style from './OptionTextInput.module.scss';
 
 function OptionTextInput({onChange, setName, children, value}) {

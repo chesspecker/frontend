@@ -1,4 +1,3 @@
-import React from 'react';
 import style from './Choice.module.scss';
 
 function Choice({onClick, selected, id, title, description}) {
