@@ -87,7 +87,7 @@ function index() {
 
 	useEffect(() => {
 		if (puzzlesList.length === 0) return;
-		//const regex = /FEN "(.*?)"/g;
+		// Const regex = /FEN "(.*?)"/g;
 		if (!puzzle.Moves) return;
 		console.log('in the useEffect');
 		const puzzleFen = puzzle.Fen;
@@ -103,7 +103,7 @@ function index() {
 		setPuzzleSize(() => puzzlesList.length);
 		setMoveNumber(() => 0);
 		setHistory(() => history);
-		//setPgn(() => puzzle.pgn);
+		// SetPgn(() => puzzle.pgn);
 		setChess(() => newChess);
 		setFen(() => newChess.fen());
 		setTurn(() => {
