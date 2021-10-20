@@ -35,9 +35,7 @@ function Index() {
 		const getPuzzle = async () => {
 			const {data: puzzle} = await http.get(
 				`${api}/puzzles/id/${puzzleList[actualPuzzle]}`,
-				{
-					withCredentials: true,
-				},
+				{withCredentials: true},
 			);
 			setPuzzle(() => puzzle);
 		};
@@ -49,9 +47,7 @@ function Index() {
 		const getSet = async () => {
 			const {data: set} = await http.get(
 				`${api}/puzzles/set/id/${currentUser.currentSet}`,
-				{
-					withCredentials: true,
-				},
+				{withCredentials: true},
 			);
 			setPuzzleList(() => set.puzzles);
 		};
@@ -77,8 +73,6 @@ function Index() {
 		if (!puzzle.Moves) return;
 		const chessJs = new Chess(puzzle.FEN);
 		const history = puzzle.Moves.split(' ');
-		console.log('history', history);
-
 		setMoveNumber(() => 0);
 		setHistory(() => history);
 		setChess(() => chessJs);
@@ -98,7 +92,7 @@ function Index() {
 		if (moveNumber === 0) rightMove(moveNumber);
 	}, [history, moveNumber, rightMove]);
 
-	const onMove = (from, to) => {
+	const onMove = async (from, to) => {
 		const move = chess.move({from, to, promotion: 'x'});
 		const moves = chess.moves({verbose: true});
 
@@ -116,7 +110,7 @@ function Index() {
 		if (move && `${move.from}${move.to}` === history[moveNumber]) {
 			setFen(() => chess.fen());
 			setMoveNumber(previousMove => previousMove + 1);
-			checkPuzzleComplete(moveNumber + 1);
+			await checkPuzzleComplete(moveNumber + 1);
 			rightMove(moveNumber + 1);
 		} else if (move) {
 			chess.undo();
@@ -127,22 +121,18 @@ function Index() {
 		}
 	};
 
-	const changePuzzle = () => {
+	const changePuzzle = () =>
 		setActualPuzzle(previousPuzzle => previousPuzzle + 1);
-	};
 
 	const checkSetComplete = async () => {
 		if (actualPuzzle + 1 === puzzleListSize) {
 			setTimerRunning(() => false);
 			setSucessVisible(() => true);
-			/**
-			 * TODO: make new put request
 			await http.put(
 				`${api}/puzzles/id/${puzzlesList[actualPuzzle]}`,
 				{tries: 1, bestTime: counter},
 				{withCredentials: true},
 			);
-			*/
 
 			return true;
 		}
@@ -150,15 +140,10 @@ function Index() {
 		return false;
 	};
 
-	const checkPuzzleComplete = moveNumber => {
-		console.log('moveNumber', moveNumber);
-		console.log('history.length', history.length);
+	const checkPuzzleComplete = async moveNumber => {
 		if (moveNumber === history.length) {
-			const isSetComplete = checkSetComplete();
-			console.log(isSetComplete);
-			if (!isSetComplete) {
-				changePuzzle();
-			}
+			const isSetComplete = await checkSetComplete();
+			if (!isSetComplete) changePuzzle();
 		}
 	};
 
@@ -183,11 +168,10 @@ function Index() {
 		};
 	};
 
-	const switchOrientation = () => {
+	const switchOrientation = () =>
 		setOrientation(orientation =>
 			orientation === 'white' ? 'black' : 'white',
 		);
-	};
 
 	const handleRestart = () => {
 		setActualPuzzle(() => 0);
