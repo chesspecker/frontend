@@ -1,4 +1,3 @@
-import {useEffect} from 'react';
 import http from '../../services/http-service.js';
 
 export default function usePostNewSet({newSet}) {

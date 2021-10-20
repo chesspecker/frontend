@@ -29,7 +29,7 @@ function NameAndSize(props) {
 	const handleSubmit = () => {
 		updateNewSetSize(size);
 		updateNewSetTitle(title);
-		usePostNewSet(newSet);
+		usePostNewSet({title: title, themeArray: newSet.themeArray, size: size});
 	};
 
 	return (
