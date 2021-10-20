@@ -10,7 +10,7 @@ import plus from '../../public/images/plus.svg';
 import style from './index.module.scss';
 
 function GameMap() {
-	//TODO: Make sure this is loaded correctly
+	// TODO: Make sure this is loaded correctly
 	const sets = useSets();
 
 	// Unused: const {currentUser, updateCurrentUserName} = useUserContext();
