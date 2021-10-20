@@ -171,7 +171,7 @@ function Index() {
 	};
 
 	const turnColor = string => {
-		return string === 'w' ? 'white' : 'black';
+		return string === 'b' ? 'white' : 'black';
 	};
 
 	const calcMovable = () => {
