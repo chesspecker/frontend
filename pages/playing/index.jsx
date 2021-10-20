@@ -87,20 +87,20 @@ function index() {
 
 	useEffect(() => {
 		if (puzzlesList.length === 0) return;
-		//const regex = /FEN "(.*?)"/g;
+		// Const regex = /FEN "(.*?)"/g;
 		if (!puzzle.Moves) return;
 		const puzzleFen = puzzle.Fen;
 		const pgnChess = new Chess();
 		const history = puzzle.Moves.split(' ');
-		//pgnChess.load_pgn(puzzle.Moves);
-		//const history = pgnChess.history();
+		// PgnChess.load_pgn(puzzle.Moves);
+		// const history = pgnChess.history();
 		const newChess = new Chess(puzzleFen);
 
 		setMoveHistory(() => []);
 		setPuzzleSize(() => puzzlesList.length);
 		setMoveNumber(() => 0);
 		setHistory(() => history);
-		//setPgn(() => puzzle.pgn);
+		// SetPgn(() => puzzle.pgn);
 		setChess(() => newChess);
 		setFen(() => newChess.fen());
 		setTurn(() => {
