@@ -109,13 +109,10 @@ function index() {
 		setTurn(() => {
 			const turn = newChess.turn();
 			setOrientation(() => {
-				return turn === 'b' ? 'white' : 'black';
+				return turn === 'w' ? 'white' : 'black';
 			});
 			return turn;
 		});
-		if (moveNumber === 0) {
-			rightMove(moveNumber);
-		}
 	}, [actualPuzzle, puzzlesList, puzzle]);
 
 	const startTimer = () => {
@@ -220,6 +217,10 @@ function index() {
 					s,
 					ms.map(m => m.to),
 				);
+		}
+
+		if (moveNumber === 0) {
+			rightMove(moveNumber);
 		}
 
 		return {
