@@ -136,9 +136,9 @@ function Index() {
 			}
 		}
 
-		console.log('onMove ', move);
+		console.log('onMove', move);
 		console.log(`onMove : from to ${move.from}${move.to}`);
-		console.log('moveHistory ', history[moveNumber]);
+		console.log('moveHistory', history[moveNumber]);
 		if (move && `${move.from}${move.to}` === history[moveNumber]) {
 			setFen(() => chess.fen());
 			setLastMove(move.san);
