@@ -132,7 +132,7 @@ function Index() {
 		if (move && `${move.from}${move.to}` === history[moveNumber]) {
 			setFen(() => chess.fen());
 			setMoveNumber(previousMove => previousMove + 1);
-			setTimeout(() => checkPuzzleComplete(moveNumber + 1), 800);
+			checkPuzzleComplete(moveNumber + 1);
 			rightMove(moveNumber + 1);
 		} else if (move) {
 			goToPrevious();
@@ -140,16 +140,10 @@ function Index() {
 	};
 
 	const changePuzzle = () => {
-		setActualPuzzle(previousPuzzle => {
-			const puzzle = previousPuzzle + 1;
-			return puzzle;
-		});
+		setActualPuzzle(previousPuzzle => previousPuzzle + 1);
 	};
 
 	const checkPuzzleComplete = moveNumber => {
-		console.log('*** *** *** ***');
-		console.log('history.length', history.length);
-		console.log('newMove', moveNumber);
 		if (history.length === moveNumber) {
 			if (puzzleSize === actualPuzzle + 1) {
 				setTimerRunning(() => false);
