@@ -109,9 +109,13 @@ function index() {
 		setTurn(() => {
 			const turn = newChess.turn();
 			setOrientation(() => {
-				return turn === 'w' ? 'white' : 'black';
+				return turn === 'b' ? 'white' : 'black';
 			});
-			return turn;
+			if (moveNumber === 0) {
+				rightMove(moveNumber);
+			}
+
+			return turn === 'b' ? 'w' : 'b';
 		});
 	}, [actualPuzzle, puzzlesList, puzzle]);
 
