@@ -208,6 +208,7 @@ function index() {
 	};
 
 	const calcMovable = () => {
+		console.log('calcmovable');
 		const dests = new Map();
 
 		for (const s of chess.SQUARES) {
