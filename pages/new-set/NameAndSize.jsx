@@ -14,7 +14,6 @@ function NameAndSize(props) {
 	const [size, setSize] = useState(0);
 	const {newSet, updateNewSetSize, updateNewSetTitle} = useNewSetContext();
 	const api = process.env.API;
-	console.log('newSet in NameAndSize', newSet);
 
 	const handleSizeChange = size => {
 		setSize(() => {

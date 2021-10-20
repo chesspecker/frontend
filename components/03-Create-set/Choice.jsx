@@ -2,10 +2,6 @@ import React from 'react';
 import style from './Choice.module.scss';
 
 function Choice({onClick, selected, id, title, description}) {
-	/* 	Console.log(
-		'selected =',
-		selected.find(e => e === id),
-	); */
 	const setActiveTitle = () => {
 		if (selected.includes(id)) return `${style.title_active}`;
 		return `${style.title}`;

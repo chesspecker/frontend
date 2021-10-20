@@ -14,10 +14,8 @@ function GameMap() {
 	const sets = useSets();
 	const {currentUser, updateCurrentUserName, updateCurrentSet} =
 		useUserContext();
-	console.log('userContext in gamemap', useUserContext());
 
 	const handleCurrentSet = set => {
-		console.log(set);
 		updateCurrentSet(set);
 		Router.push('/playing');
 	};

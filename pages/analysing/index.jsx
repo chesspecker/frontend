@@ -35,7 +35,6 @@ function AnalyseProgress() {
 			const {data} = await http.get(`${api}/worker`, {
 				withCredentials: true,
 			});
-			console.log(data);
 			setProgress(() => data.jobProgress);
 		};
 

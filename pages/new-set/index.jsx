@@ -15,7 +15,6 @@ function NewSet(props) {
 	const {newSet, updateNewSetOptions} = useNewSetContext();
 
 	const handleClick = id => {
-		console.log(choicesSelected);
 		if (choicesSelected.includes(id)) {
 			setChoicesSelected(oldArray => {
 				const index = oldArray.indexOf(id);
@@ -34,9 +33,7 @@ function NewSet(props) {
 	};
 
 	const handleNextClick = () => {
-		console.log('next clicked');
 		updateNewSetOptions(choicesSelected);
-		console.log(newSet);
 	};
 
 	return (

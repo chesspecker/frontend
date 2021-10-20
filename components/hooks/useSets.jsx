@@ -11,7 +11,6 @@ export default function useSets() {
 				withCredentials: true,
 			});
 			setGameSet(() => sets);
-			console.log(sets);
 		};
 
 		getSets();
