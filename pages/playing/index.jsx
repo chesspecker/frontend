@@ -145,9 +145,9 @@ function Index() {
 			*/
 
 			return true;
-		} else {
-			return false;
 		}
+
+		return false;
 	};
 
 	const checkPuzzleComplete = moveNumber => {
