@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import {useState, useEffect} from 'react';
 import Image from 'next/image.js';
 import Chess from '../../components/utils/chess.js';
 import rotate from '../../public/images/rotate.svg';
@@ -11,16 +11,13 @@ import useClock from '../../components/hooks/useClock.jsx';
 import {useUserContext} from '../../components/context/UserContext.jsx';
 import style from './index.module.scss';
 
-function index() {
+function Index() {
 	const [puzzlesList, setPuzzlesList] = useState([]);
 	const [puzzle, setPuzzle] = useState({});
 	const [chess, setChess] = useState(new Chess());
 	const [fen, setFen] = useState('');
-	const [lastMove, setLastMove] = useState();
 	const [orientation, setOrientation] = useState('');
-	const [moveHistory, setMoveHistory] = useState([]); // A reset
 	const [turn, setTurn] = useState('w');
-	const [pgn, setPgn] = useState([]);
 	const [history, setHistory] = useState([]);
 	const [moveNumber, setMoveNumber] = useState(0);
 	const [actualPuzzle, setActualPuzzle] = useState(0);
@@ -48,7 +45,7 @@ function index() {
 		};
 
 		getPuzzle();
-	}, [puzzlesList, actualPuzzle]);
+	}, [puzzlesList, actualPuzzle, api]);
 
 	useEffect(() => {
 		const getSet = async () => {
@@ -62,7 +59,7 @@ function index() {
 		};
 
 		getSet();
-	}, []);
+	}, [api, currentUser.currentSet]);
 
 	useEffect(() => {
 		const timer = () => {
@@ -76,58 +73,52 @@ function index() {
 			);
 		};
 
-		if (timerRunning) {
-			timer();
-		}
-
-		if (!timerRunning) {
-			clearTimeout(timer);
-		}
+		if (timerRunning) timer();
+		if (!timerRunning) clearTimeout(timer);
 	}, [timerRunning, counter]);
 
 	useEffect(() => {
 		if (puzzlesList.length === 0) return;
-		// Const regex = /FEN "(.*?)"/g;
+		setPuzzleSize(() => puzzlesList.length);
+	}, [puzzlesList]);
+
+	useEffect(() => {
 		if (!puzzle.Moves) return;
-		console.log('in the useEffect');
-		const puzzleFen = puzzle.FEN;
-		console.log('puzzleFen', puzzleFen);
-		// Const pgnChess = new Chess();
+		const chessJs = new Chess(puzzle.FEN);
 		const history = puzzle.Moves.split(' ');
 		console.log('history', history);
-		// PgnChess.load_pgn(puzzle.Moves);
-		// const history = pgnChess.history();
-		const newChess = new Chess(puzzleFen);
 
 		setMoveHistory(() => []);
-		setPuzzleSize(() => puzzlesList.length);
 		setMoveNumber(() => 0);
 		setHistory(() => history);
-		// SetPgn(() => puzzle.pgn);
-		setChess(() => newChess);
-		setFen(() => newChess.fen());
-		setTurn(() => {
-			const turn = newChess.turn();
-			setOrientation(() => {
-				return turn === 'b' ? 'white' : 'black';
-			});
+		setChess(() => chessJs);
+		setFen(() => chessJs.fen());
+		setTurn(() => chessJs.turn());
+		setOrientation(() => (chessJs.turn() === 'b' ? 'white' : 'black'));
+	}, [puzzle]);
 
-			return turn;
-		});
-	}, [actualPuzzle, puzzlesList, puzzle]);
+	useEffect(() => {
+		if (!history) return;
+		if (moveNumber === 0) {
+			rightMove(moveNumber);
+		}
+	}, [history, moveNumber, rightMove]);
 
-	const startTimer = () => {
-		setTimerRunning(lastValue => {
-			const newValue = !lastValue;
-			return newValue;
-		});
+	const goToPrevious = () => {
+		chess.undo();
+		setFen(() => chess.fen());
+		setWrongMoveVisible(() => true);
+		setTimeout(() => setWrongMoveVisible(() => false), 300);
 	};
 
 	const onMove = (from, to) => {
 		const move = chess.move({from, to, promotion: 'x'});
 		const moves = chess.moves({verbose: true});
+
+		/**
+		 * Don't know what it is supposed to do?
+		 */
 		for (let i = 0, length_ = moves.length; i < length_; i++) {
-			/* eslint-disable-line */
 			if (moves[i].flags.includes('p') && moves[i].from === from) {
 				setPendingMove([from, to]);
 				setSelectVisible(true);
@@ -137,30 +128,22 @@ function index() {
 
 		if (move && `${move.from}${move.to}` === history[moveNumber]) {
 			setFen(() => chess.fen());
-			setLastMove(move.san); // Move.san
+			setLastMove(move.san);
 			setMoveHistory(moveHistory => {
 				const lastMovs = [...moveHistory];
 				lastMovs.push(move.san);
 				return lastMovs;
 			});
 
-			setMoveNumber(move => {
-				const newMove = move + 1;
-				setTimeout(() => checkPuzzleComplete(newMove), 800);
-				rightMove(newMove);
-				return newMove;
+			setMoveNumber(previousMove => {
+				const move = previousMove + 1;
+				setTimeout(() => checkPuzzleComplete(move), 800);
+				rightMove(move);
+				return move;
 			});
 		} else if (move) {
 			goToPrevious();
 		}
-	};
-
-	const goToPrevious = () => {
-		setFen(() => chess.fen());
-		chess.undo();
-		setFen(() => chess.fen());
-		setWrongMoveVisible(() => true);
-		setTimeout(() => setWrongMoveVisible(() => false), 300);
 	};
 
 	const rightMove = index => {
@@ -175,20 +158,10 @@ function index() {
 		});
 	};
 
-	const randomMove = () => {
-		const moves = chess.moves({verbose: true});
-		const move = moves[Math.floor(Math.random() * moves.length)];
-		if (moves.length > 0) {
-			chess.move(move.san);
-			setFen(chess.fen());
-			setLastMove([move.from, move.to]);
-		}
-	};
-
 	const changePuzzle = () => {
 		setActualPuzzle(previousPuzzle => {
-			const nowPuzzle = previousPuzzle + 1;
-			return nowPuzzle;
+			const puzzle = previousPuzzle + 1;
+			return puzzle;
 		});
 	};
 
@@ -209,7 +182,6 @@ function index() {
 	};
 
 	const calcMovable = () => {
-		console.log('calcmovable');
 		const dests = new Map();
 
 		for (const s of chess.SQUARES) {
@@ -279,4 +251,4 @@ function index() {
 	);
 }
 
-export default index;
+export default Index;
