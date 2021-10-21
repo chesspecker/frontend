@@ -120,7 +120,7 @@ function Index() {
 			if (
 				moves[i].flags.includes('p') &&
 				moves[i].from === from &&
-				`${from}${to}` === history[moveNumber]
+				`${from}${to}` === goodMoveWithoutPromote
 			) {
 				setPendingMove([from, to]);
 				setSelectVisible(true);
