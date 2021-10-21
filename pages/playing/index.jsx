@@ -190,16 +190,17 @@ function Index() {
 
 		const from = pendingMove[0];
 		const to = pendingMove[1];
+		const goodMove = history[moveNumber];
+		const goodPromotion = goodMove.slice(-1);
 		const move = chess.move({from, to, promotion: e});
 		console.log('move dans promotion', move);
-		if (move && `${move.from}${move.to}` === history[moveNumber]) {
+		if (e === goodPromotion) {
 			setFen(chess.fen());
 			setLastMove([from, to]);
 			setSelectVisible(false);
 			checkPuzzleComplete(moveNumber + 1);
 			setTimeout(rightMove(moveNumber + 1), 500);
 		} else {
-			const move = chess.move({from, to, promotion: e});
 			setWrongMoveVisible(() => true);
 			setTimeout(() => setWrongMoveVisible(() => false), 300);
 		}
