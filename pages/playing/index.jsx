@@ -185,14 +185,20 @@ function Index() {
 	const promotion = e => {
 		console.log('fen dans promotion', fen);
 		console.log('e dans promotion', e);
+
 		const from = pendingMove[0];
 		const to = pendingMove[1];
-		chess.move({from, to, promotion: e});
-		setFen(chess.fen());
-		setLastMove([from, to]);
-		setSelectVisible(false);
-		checkPuzzleComplete(moveNumber + 1);
-		setTimeout(rightMove(moveNumber + 1), 500);
+		const move = chess.move({from, to, promotion: e});
+		if (move && `${move.from}${move.to}` === history[moveNumber]) {
+			setFen(chess.fen());
+			setLastMove([from, to]);
+			setSelectVisible(false);
+			checkPuzzleComplete(moveNumber + 1);
+			setTimeout(rightMove(moveNumber + 1), 500);
+		} else {
+			setWrongMoveVisible(() => true);
+			setTimeout(() => setWrongMoveVisible(() => false), 300);
+		}
 	};
 
 	const switchOrientation = () =>
