@@ -113,7 +113,12 @@ function Index() {
 		 * FIXME: doesn't work, setPendingMove is undefined
 		 */
 		for (let i = 0, length_ = moves.length; i < length_; i++) {
-			if (moves[i].flags.includes('p') && moves[i].from === from) {
+			if (
+				moves[i].flags.includes('p') &&
+				moves[i].from === from &&
+				move &&
+				`${move.from}${move.to}` === history[moveNumber]
+			) {
 				setPendingMove([from, to]);
 				setSelectVisible(true);
 				return;
