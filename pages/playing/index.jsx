@@ -108,12 +108,7 @@ function Index() {
 	const onMove = async (from, to) => {
 		const move = chess.move({from, to, promotion: 'x'});
 		const moves = chess.moves({verbose: true});
-		console.log(
-			'validation',
-			`${move.from}${move.to}`,
-			' = ',
-			history[moveNumber],
-		);
+		console.log('validation', `${from}${to}`, ' = ', history[moveNumber]);
 
 		/**
 		 * FIXME: doesn't work, setPendingMove is undefined
@@ -122,8 +117,7 @@ function Index() {
 			if (
 				moves[i].flags.includes('p') &&
 				moves[i].from === from &&
-				move &&
-				`${move.from}${move.to}` === history[moveNumber]
+				`${from}${to}` === history[moveNumber]
 			) {
 				setPendingMove([from, to]);
 				setSelectVisible(true);
