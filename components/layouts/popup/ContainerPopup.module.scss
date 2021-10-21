@@ -1,0 +1,28 @@
+.content {
+	background-color: white;
+	padding: 2rem;
+	border-radius: 5%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	font-size: 3rem;
+	width: 80%;
+}
+@media screen and (min-width: 450px) {
+	.content {
+		width: 60%;
+	}
+}
+
+@media screen and (min-width: 750px) {
+	.content {
+		width: 40%;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.content {
+		width: 30%;
+	}
+}
