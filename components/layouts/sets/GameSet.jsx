@@ -4,13 +4,13 @@ import Stars from '../stars/Stars.jsx';
 import supress from '../../../public/images/supress.svg';
 import style from './GameSet.module.scss';
 
-function GameSet({sets, _number, setCurrentSet}) {
+function GameSet({sets, _number, setCurrentSet, onDelete}) {
 	return (
 		<div className={style.set}>
 			<h3 className={style.title}>{sets.title}</h3>
 			<div className={style.list}>
 				<div className={style.supress}>
-					<Image src={supress} />
+					<Image src={supress} onClick={onDelete(sets._id)} />
 				</div>
 				<div className={style.list_element}>🏆: {sets.bestTime}</div>
 				<div className={style.list_element}>🔥 : {sets.tries}</div>

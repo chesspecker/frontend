@@ -7,18 +7,23 @@ import {useUserContext} from '../../components/context/UserContext.jsx';
 import Stars from '../../components/layouts/stars/Stars.jsx';
 import Btn from '../../components/layouts/btn/Btn.jsx';
 import plus from '../../public/images/plus.svg';
+import http from '../../services/http-service.js';
 import style from './index.module.scss';
 
 function GameMap() {
 	// TODO: Make sure this is loaded correctly
+	const api = process.env.API;
 	const sets = useSets();
 
-	// Unused: const {currentUser, updateCurrentUserName} = useUserContext();
 	const {updateCurrentSet} = useUserContext();
 
 	const handleCurrentSet = set => {
 		updateCurrentSet(set);
 		Router.push('/playing');
+	};
+
+	const handleSupress = async set => {
+		await http.delete(`${api}/puzzles/set/id/${set}`, {withCredentials: true});
 	};
 
 	return (
@@ -33,6 +38,7 @@ function GameMap() {
 							number={sets.indexOf(s)}
 							id={s._id}
 							setCurrentSet={() => handleCurrentSet(s._id)}
+							onDelete={handleSupress}
 						/>
 					))}
 				<div className={style.set}>
