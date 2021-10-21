@@ -227,8 +227,8 @@ function Index() {
 							turnColor={turnColor(chess.turn())}
 							movable={calcMovable()}
 							orientation={orientation}
-							onMove={onMove}
 							lastMove={lastMove}
+							onMove={onMove}
 						/>
 						<div
 							style={selectVisible ? {display: 'block'} : {display: 'none'}}
