@@ -36,6 +36,12 @@ function NameAndSize() {
 		);
 	};
 
+	const validate = () => {
+		if (size < 20 || size > 40) {
+			console.log('validate');
+		}
+	};
+
 	return (
 		<PageHeader>
 			<div className={style.container}>
