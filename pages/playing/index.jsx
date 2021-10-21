@@ -108,7 +108,7 @@ function Index() {
 	const onMove = async (from, to) => {
 		const move = chess.move({from, to, promotion: 'x'});
 		const moves = chess.moves({verbose: true});
-		const goodMove = history[0];
+		const goodMove = history[moveNumber];
 		const goodMoveWithoutPromote = goodMove.slice(0, -1);
 
 		console.log('validation', `${from}${to}`, '=', goodMoveWithoutPromote);
