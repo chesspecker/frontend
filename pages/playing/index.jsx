@@ -93,7 +93,6 @@ function Index() {
 	}, [puzzle]);
 
 	const rightMove = index => {
-		console.log(history[index]);
 		const move = chess.move(history[index], {sloppy: true});
 		if (move && move.from) setLastMove([move.from, move.to]);
 		setFen(chess.fen());
@@ -111,11 +110,6 @@ function Index() {
 		const goodMove = history[moveNumber];
 		const goodMoveWithoutPromote = goodMove.slice(0, -1);
 
-		console.log('validation', `${from}${to}`, '=', goodMoveWithoutPromote);
-
-		/**
-		 * FIXME: doesn't work, setPendingMove is undefined
-		 */
 		for (let i = 0, length_ = moves.length; i < length_; i++) {
 			if (
 				moves[i].flags.includes('p') &&
@@ -151,7 +145,7 @@ function Index() {
 			setTimerRunning(() => false);
 			setSucessVisible(() => true);
 			await http.put(
-				`${api}/puzzles/id/${puzzleList[actualPuzzle]}`,
+				`${api}/puzzles/set/id/${currentUser.currentSet}`,
 				{tries: 1, bestTime: counter},
 				{withCredentials: true},
 			);
@@ -191,17 +185,11 @@ function Index() {
 	};
 
 	const promotion = e => {
-		console.log('fen dans promotion', fen);
-		console.log('e dans promotion', e);
-		console.log('history[0]', history[moveNumber]);
-		console.log('history[+1]', history[moveNumber + 1]);
-
 		const from = pendingMove[0];
 		const to = pendingMove[1];
 		const goodMove = history[moveNumber];
 		const goodPromotion = goodMove.slice(-1);
 		const move = chess.move({from, to, promotion: e});
-		console.log('move dans promotion', move);
 		if (e === goodPromotion) {
 			setFen(chess.fen());
 			setLastMove([from, to]);
