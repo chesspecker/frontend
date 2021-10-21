@@ -38,7 +38,7 @@ function GameMap() {
 							number={sets.indexOf(s)}
 							id={s._id}
 							setCurrentSet={() => handleCurrentSet(s._id)}
-							onDelete={handleSupress}
+							onDelete={() => handleSupress}
 						/>
 					))}
 				<div className={style.set}>
