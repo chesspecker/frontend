@@ -180,13 +180,14 @@ function Index() {
 		};
 	};
 
-	const promotion = e => {
+	const promotion = async e => {
 		const from = pendingMove[0];
 		const to = pendingMove[1];
 		chess.move({from, to, promotion: e});
 		setFen(chess.fen());
 		setLastMove([from, to]);
 		setSelectVisible(false);
+		await checkPuzzleComplete(moveNumber + 1);
 		setTimeout(rightMove(moveNumber + 1), 500);
 	};
 
