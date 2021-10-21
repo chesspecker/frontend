@@ -82,6 +82,8 @@ function Index() {
 		if (!puzzle.Moves) return;
 		const chessJs = new Chess(puzzle.FEN);
 		const history = puzzle.Moves.split(' ');
+		setPendingMove(() => {});
+		setLastMove(() => {});
 		setMoveNumber(() => 0);
 		setHistory(() => history);
 		setChess(() => chessJs);
