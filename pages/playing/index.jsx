@@ -23,6 +23,7 @@ function Index() {
 	const [turn, setTurn] = useState('w');
 	const [chess, setChess] = useState(new Chess());
 	const [puzzle, setPuzzle] = useState({});
+	const [lastMove, setLastMove] = useState();
 	const [counter, setCounter] = useState(0);
 	const [history, setHistory] = useState([]);
 	const [moveNumber, setMoveNumber] = useState(0);
@@ -91,6 +92,7 @@ function Index() {
 
 	const rightMove = index => {
 		chess.move(history[index], {sloppy: true});
+		setLastMove([move.from, move.to]);
 		setFen(chess.fen());
 		setMoveNumber(previousMove => previousMove + 1);
 	};
@@ -119,9 +121,10 @@ function Index() {
 			setFen(() => chess.fen());
 			setMoveNumber(previousMove => previousMove + 1);
 			await checkPuzzleComplete(moveNumber + 1);
-			setTimeout(rightMove(moveNumber + 1), 500);
+			setLastMove([from, to]);
+			setTimeout(rightMove(moveNumber + 1), 800);
 		} else if (move) {
-			chess.undo();
+			setTimeout(chess.undo(), 800);
 			setFen(() => chess.fen());
 			// SetCounter(lastCount => lastCount + 3);
 			setWrongMoveVisible(() => true);
@@ -225,6 +228,7 @@ function Index() {
 							movable={calcMovable()}
 							orientation={orientation}
 							onMove={onMove}
+							lastMove={lastMove}
 						/>
 						<div
 							style={selectVisible ? {display: 'block'} : {display: 'none'}}
