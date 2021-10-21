@@ -186,6 +186,7 @@ function Index() {
 		console.log('fen dans promotion', fen);
 		console.log('e dans promotion', e);
 		console.log('history[0]', history[moveNumber]);
+		console.log('history[+1]', history[moveNumber + 1]);
 
 		const from = pendingMove[0];
 		const to = pendingMove[1];
@@ -198,6 +199,7 @@ function Index() {
 			checkPuzzleComplete(moveNumber + 1);
 			setTimeout(rightMove(moveNumber + 1), 500);
 		} else {
+			const move = chess.move({from, to, promotion: e});
 			setWrongMoveVisible(() => true);
 			setTimeout(() => setWrongMoveVisible(() => false), 300);
 		}
