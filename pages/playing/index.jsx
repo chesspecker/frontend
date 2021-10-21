@@ -108,6 +108,12 @@ function Index() {
 	const onMove = async (from, to) => {
 		const move = chess.move({from, to, promotion: 'x'});
 		const moves = chess.moves({verbose: true});
+		console.log(
+			'validation',
+			`${move.from}${move.to}`,
+			' = ',
+			history[moveNumber],
+		);
 
 		/**
 		 * FIXME: doesn't work, setPendingMove is undefined
