@@ -111,7 +111,7 @@ function Index() {
 		console.log(
 			'validation',
 			`${move.from}${move.to}`,
-			' = ',
+			'=',
 			history[moveNumber],
 		);
 
