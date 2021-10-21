@@ -11,7 +11,7 @@ const ENDPOINT = 'https://api.chesspecker.com';
 function AnalyseProgress() {
 	const api = process.env.API;
 	const [percentage, setPercentage] = useState(0);
-	const [progress, setProgress] = useState(0);
+	const [, setProgress] = useState(0);
 	const [count, setCount] = useState(0);
 	const [max, setMax] = useState(0);
 

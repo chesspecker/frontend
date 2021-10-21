@@ -5,11 +5,10 @@ import OptionNumber from '../../components/layouts/form/OptionNumber.jsx';
 import OptionTextInput from '../../components/layouts/form/OptionTextInput.jsx';
 import Btn from '../../components/layouts/btn/Btn.jsx';
 import {useNewSetContext} from '../../components/context/NewSetContext.jsx';
-import usePostNewSet from '../../components/hooks/usePostNewSet.jsx';
 import http from '../../services/http-service.js';
 import style from './NameAndSize.module.scss';
 
-function NameAndSize(props) {
+function NameAndSize() {
 	const [title, setTitle] = useState('');
 	const [size, setSize] = useState(0);
 	const {newSet, updateNewSetSize, updateNewSetTitle} = useNewSetContext();

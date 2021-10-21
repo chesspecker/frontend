@@ -1,4 +1,4 @@
-/** Eslint-disable no-useless-escape */
+/* eslint-disable no-useless-escape */
 const puzzlesId = [
 	'61641996580b920793bacab6',
 	'6164198e580b920793bacab5',
@@ -30,9 +30,8 @@ const puzzles = [
 ];
 
 export const getPuzzle = id => {
-	const puzzle = puzzles.find(e => e._id === id);
-
-	return puzzle ? puzzle : alert("Ce problème n'est pas dans la db");
+	const puzzleId = puzzles.find(puzzle => puzzle._id === id);
+	return puzzleId ? puzzleId : alert("Ce problème n'est pas dans la db");
 };
 
 export const getPuzzleList = () => puzzlesId;

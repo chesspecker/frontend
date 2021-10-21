@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /*
  * Copyright (c) 2021, Jeff Hlywa (jhlywa@gmail.com)
  * All rights reserved.
