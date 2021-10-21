@@ -187,7 +187,7 @@ function Index() {
 		setFen(chess.fen());
 		setLastMove([from, to]);
 		setSelectVisible(false);
-		setTimeout(rightMove, 500);
+		setTimeout(rightMove(moveNumber + 1), 500);
 	};
 
 	const switchOrientation = () =>
