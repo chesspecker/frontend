@@ -123,7 +123,7 @@ function Index() {
 		} else if (move) {
 			chess.undo();
 			setFen(() => chess.fen());
-			//setCounter(lastCount => lastCount + 3);
+			// SetCounter(lastCount => lastCount + 3);
 			setWrongMoveVisible(() => true);
 			setTimeout(() => setWrongMoveVisible(() => false), 300);
 		}
