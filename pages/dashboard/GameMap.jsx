@@ -23,6 +23,7 @@ function GameMap() {
 	};
 
 	const handleSupress = async set => {
+		console.log(set);
 		await http.delete(`${api}/puzzles/set/id/${set}`, {withCredentials: true});
 	};
 
@@ -38,7 +39,7 @@ function GameMap() {
 							number={sets.indexOf(s)}
 							id={s._id}
 							setCurrentSet={() => handleCurrentSet(s._id)}
-							onDelete={() => handleSupress}
+							onDelete={handleSupress}
 						/>
 					))}
 				<div className={style.set}>

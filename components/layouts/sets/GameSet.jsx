@@ -10,7 +10,7 @@ function GameSet({sets, _number, setCurrentSet, onDelete}) {
 			<h3 className={style.title}>{sets.title}</h3>
 			<div className={style.list}>
 				<div className={style.supress}>
-					<Image src={supress} onClick={onDelete(sets._id)} />
+					<Image src={supress} onClick={() => onDelete(sets._id)} />
 				</div>
 				<div className={style.list_element}>🏆: {sets.bestTime}</div>
 				<div className={style.list_element}>🔥 : {sets.tries}</div>
