@@ -13,7 +13,7 @@ function GameSet({sets, _number, setCurrentSet}) {
 					<Image src={supress} />
 				</div>
 				<div className={style.list_element}>🏆: {sets.bestTime}</div>
-				<div className={style.list_element}>⛔ : {sets.tries}</div>
+				<div className={style.list_element}>🔥 : {sets.tries}</div>
 			</div>
 			<Stars />
 			<Btn onClick={setCurrentSet}>Start</Btn>

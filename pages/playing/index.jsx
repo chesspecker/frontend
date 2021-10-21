@@ -21,12 +21,12 @@ function Index() {
 	const [fen, setFen] = useState('');
 	const {currentUser} = useUserContext();
 	const [turn, setTurn] = useState('w');
-	const [chess, setChess] = useState(new Chess());
 	const [puzzle, setPuzzle] = useState({});
 	const [lastMove, setLastMove] = useState();
 	const [counter, setCounter] = useState(0);
 	const [history, setHistory] = useState([]);
 	const [moveNumber, setMoveNumber] = useState(0);
+	const [chess, setChess] = useState(new Chess());
 	const [pendingMove, setPendingMove] = useState();
 	const [puzzleList, setPuzzleList] = useState([]);
 	const [orientation, setOrientation] = useState('');
@@ -37,6 +37,7 @@ function Index() {
 	const [selectVisible, setSelectVisible] = useState(false);
 	const [startPopupVisible, setStartPopupVisible] = useState(true);
 	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
+	const [malus, setMalus] = useState(0);
 
 	useEffect(() => {
 		if (puzzleList.length === 0) return;
@@ -131,7 +132,7 @@ function Index() {
 		} else if (move) {
 			setTimeout(chess.undo(), 800);
 			setFen(() => chess.fen());
-			// SetCounter(lastCount => lastCount + 3);
+			setMalus(lastCount => lastCount + 3);
 			setWrongMoveVisible(() => true);
 			setTimeout(() => setWrongMoveVisible(() => false), 300);
 		}
@@ -210,11 +211,13 @@ function Index() {
 	const handleRestart = () => {
 		setActualPuzzle(() => 0);
 		setCounter(() => 0);
+		setMalus(() => 0);
 		setTimerRunning(() => true);
 		setSucessVisible(() => false);
 	};
 
 	const handleStart = () => {
+		setMalus(() => 0);
 		setStartPopupVisible(() => false);
 		setTimerRunning(true);
 	};
@@ -230,7 +233,7 @@ function Index() {
 				<div>
 					<div className={style.information_container}>
 						<div className={style.timer}>
-							<p>⏲ {useClock(counter)}</p>
+							<p>⏲ {useClock(counter + malus)}</p>
 						</div>
 					</div>
 					<div className={style.chessGroundContainer}>
