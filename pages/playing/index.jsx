@@ -150,14 +150,6 @@ function Index() {
 		if (actualPuzzle + 1 === puzzleListSize) {
 			setTimerRunning(() => false);
 			setSucessVisible(() => true);
-			console.log(
-				'push =',
-				`${api}/puzzles/id/${puzzleList[actualPuzzle]}`,
-				'with try',
-				tries,
-				'and counter',
-				counter,
-			);
 			await http.put(
 				`${api}/puzzles/id/${puzzleList[actualPuzzle]}`,
 				{tries: 1, bestTime: counter},
