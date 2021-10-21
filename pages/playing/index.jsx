@@ -93,7 +93,7 @@ function Index() {
 	const rightMove = index => {
 		console.log(history[index]);
 		chess.move(history[index], {sloppy: true});
-		//setLastMove([chess.move.from, chess.move.to]);
+		// SetLastMove([chess.move.from, chess.move.to]);
 		setFen(chess.fen());
 		setMoveNumber(previousMove => previousMove + 1);
 	};
