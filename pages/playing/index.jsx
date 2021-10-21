@@ -10,6 +10,10 @@ import ChessGround from '../../components/layouts/ChessGround.jsx';
 import http from '../../services/http-service.js';
 import useClock from '../../components/hooks/useClock.jsx';
 import {useUserContext} from '../../components/context/UserContext.jsx';
+import queen from '../../public/images/pieces/merida/wK.svg';
+import rook from '../../public/images/pieces/merida/wR.svg';
+import bishop from '../../public/images/pieces/merida/wB.svg';
+import knight from '../../public/images/pieces/merida/wN.svg';
 import style from './index.module.scss';
 
 function Index() {
@@ -22,12 +26,14 @@ function Index() {
 	const [counter, setCounter] = useState(0);
 	const [history, setHistory] = useState([]);
 	const [moveNumber, setMoveNumber] = useState(0);
+	const [pendingMove, setPendingMove] = useState();
 	const [puzzleList, setPuzzleList] = useState([]);
 	const [orientation, setOrientation] = useState('');
 	const [actualPuzzle, setActualPuzzle] = useState(0);
 	const [timerRunning, setTimerRunning] = useState(false);
 	const [puzzleListSize, setPuzzleListSize] = useState(0);
 	const [sucessVisible, setSucessVisible] = useState(false);
+	const [selectVisible, setSelectVisible] = useState(false);
 	const [startPopupVisible, setStartPopupVisible] = useState(true);
 	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
 
@@ -120,7 +126,6 @@ function Index() {
 			setCounter(lastCount => lastCount + 3);
 			setWrongMoveVisible(() => true);
 			setTimeout(() => setWrongMoveVisible(() => false), 300);
-			return;
 		}
 	};
 
@@ -171,6 +176,16 @@ function Index() {
 		};
 	};
 
+	const promotion = e => {
+		const from = pendingMove[0];
+		const to = pendingMove[1];
+		chess.move({from, to, promotion: e});
+		setFen(chess.fen());
+		setLastMove([from, to]);
+		setSelectVisible(false);
+		setTimeout(randomMove, 500);
+	};
+
 	const switchOrientation = () =>
 		setOrientation(orientation =>
 			orientation === 'white' ? 'black' : 'white',
@@ -211,6 +226,31 @@ function Index() {
 							orientation={orientation}
 							onMove={onMove}
 						/>
+						<div
+							style={selectVisible ? {display: 'block'} : {display: 'none'}}
+							className={style.promotion_container}
+						>
+							<div
+								style={{
+									textAlign: 'center',
+									display: 'flex',
+									cursor: 'pointer',
+								}}
+							>
+								<span onClick={() => promotion('q')}>
+									<Image src={queen} alt='' style={{width: 50}} />
+								</span>
+								<span onClick={() => promotion('r')}>
+									<Image src={rook} alt='' style={{width: 50}} />
+								</span>
+								<span onClick={() => promotion('b')}>
+									<Image src={bishop} alt='' style={{width: 50}} />
+								</span>
+								<span onClick={() => promotion('n')}>
+									<Image src={knight} alt='' style={{width: 50}} />
+								</span>
+							</div>
+						</div>
 						<div className={style.control_bar}>
 							<button className={style.btn} onClick={switchOrientation}>
 								<Image src={rotate} />
