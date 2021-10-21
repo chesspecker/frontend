@@ -185,10 +185,12 @@ function Index() {
 	const promotion = e => {
 		console.log('fen dans promotion', fen);
 		console.log('e dans promotion', e);
+		console.log('history[0]', history[moveNumber]);
 
 		const from = pendingMove[0];
 		const to = pendingMove[1];
 		const move = chess.move({from, to, promotion: e});
+		console.log('move dans promotion', move);
 		if (move && `${move.from}${move.to}` === history[moveNumber]) {
 			setFen(chess.fen());
 			setLastMove([from, to]);
