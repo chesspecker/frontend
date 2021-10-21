@@ -152,14 +152,14 @@ function Index() {
 			setSucessVisible(() => true);
 			console.log(
 				'push =',
-				`${api}/puzzles/id/${puzzlesList[actualPuzzle]}`,
+				`${api}/puzzles/id/${puzzleList[actualPuzzle]}`,
 				'with try',
 				tries,
 				'and counter',
 				counter,
 			);
 			await http.put(
-				`${api}/puzzles/id/${puzzlesList[actualPuzzle]}`,
+				`${api}/puzzles/id/${puzzleList[actualPuzzle]}`,
 				{tries: 1, bestTime: counter},
 				{withCredentials: true},
 			);

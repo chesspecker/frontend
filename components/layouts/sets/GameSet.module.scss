@@ -19,6 +19,7 @@
 .list {
 	height: 100%;
 	display: flex;
+	position: relative;
 	justify-content: space-around;
 	list-style: none;
 	&_element {
