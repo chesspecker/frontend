@@ -183,6 +183,8 @@ function Index() {
 	};
 
 	const promotion = e => {
+		console.log('fen dans promotion', fen);
+		console.log('e dans promotion', e);
 		const from = pendingMove[0];
 		const to = pendingMove[1];
 		chess.move({from, to, promotion: e});
