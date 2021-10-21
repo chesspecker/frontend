@@ -1,8 +1,8 @@
+import Image from 'next/image.js';
 import Btn from '../btn/Btn.jsx';
 import Stars from '../stars/Stars.jsx';
-import style from './GameSet.module.scss';
-import Image from 'next/image.js';
 import supress from '../../../public/images/supress.svg';
+import style from './GameSet.module.scss';
 
 function GameSet({sets, _number, setCurrentSet}) {
 	return (
