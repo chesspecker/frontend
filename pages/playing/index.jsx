@@ -97,7 +97,7 @@ function Index() {
 
 	useEffect(() => {
 		if (!history) return;
-		if (moveNumber === 0) rightMove(moveNumber);
+		if (moveNumber === 0) setTimeout(rightMove(moveNumber), 500);
 	}, [history, moveNumber, rightMove]);
 
 	const onMove = async (from, to) => {
@@ -119,7 +119,7 @@ function Index() {
 			setFen(() => chess.fen());
 			setMoveNumber(previousMove => previousMove + 1);
 			await checkPuzzleComplete(moveNumber + 1);
-			rightMove(moveNumber + 1);
+			setTimeout(rightMove(moveNumber + 1), 500);
 		} else if (move) {
 			chess.undo();
 			setFen(() => chess.fen());
@@ -183,7 +183,7 @@ function Index() {
 		setFen(chess.fen());
 		setLastMove([from, to]);
 		setSelectVisible(false);
-		setTimeout(randomMove, 500);
+		setTimeout(rightMove, 500);
 	};
 
 	const switchOrientation = () =>
