@@ -120,6 +120,7 @@ function Index() {
 			setCounter(lastCount => lastCount + 3);
 			setWrongMoveVisible(() => true);
 			setTimeout(() => setWrongMoveVisible(() => false), 300);
+			return;
 		}
 	};
 
