@@ -109,7 +109,7 @@ function Index() {
 		if (moveNumber === 0) setTimeout(rightMove(moveNumber), 500);
 	}, [history, moveNumber, rightMove]);
 
-	const onMove = async (from, to) => {
+	const onMove = (from, to) => {
 		soundMove();
 		const move = chess.move({from, to, promotion: 'x'});
 		const moves = chess.moves({verbose: true});
@@ -131,11 +131,11 @@ function Index() {
 		if (move && `${move.from}${move.to}` === history[moveNumber]) {
 			setFen(() => chess.fen());
 			setMoveNumber(previousMove => previousMove + 1);
-			await checkPuzzleComplete(moveNumber + 1);
+			checkPuzzleComplete(moveNumber + 1);
 			setLastMove([from, to]);
 			setTimeout(rightMove(moveNumber + 1), 800);
 		} else if (move) {
-			setTimeout(chess.undo(), 800);
+			chess.undo();
 			setFen(() => chess.fen());
 			setMalus(lastCount => lastCount + 3);
 			setWrongMoveVisible(() => true);
@@ -146,15 +146,11 @@ function Index() {
 	const changePuzzle = () =>
 		setActualPuzzle(previousPuzzle => previousPuzzle + 1);
 
-	const checkSetComplete = async () => {
+	const checkSetComplete = () => {
 		if (actualPuzzle + 1 === puzzleListSize) {
 			setTimerRunning(() => false);
 			setSucessVisible(() => true);
-			await http.put(
-				`${api}/puzzles/set/id/${currentUser.currentSet}`,
-				{tries: 1, bestTime: counter},
-				{withCredentials: true},
-			);
+			updatePuzzle();
 
 			return true;
 		}
@@ -162,9 +158,17 @@ function Index() {
 		return false;
 	};
 
-	const checkPuzzleComplete = async moveNumber => {
+	const updatePuzzle = async () => {
+		await http.put(
+			`${api}/puzzles/set/id/${currentUser.currentSet}`,
+			{tries: 1, bestTime: counter},
+			{withCredentials: true},
+		);
+	};
+
+	const checkPuzzleComplete = moveNumber => {
 		if (moveNumber === history.length) {
-			const isSetComplete = await checkSetComplete();
+			const isSetComplete = checkSetComplete();
 			if (!isSetComplete) changePuzzle();
 		}
 	};
@@ -195,7 +199,8 @@ function Index() {
 		const to = pendingMove[1];
 		const goodMove = history[moveNumber];
 		const goodPromotion = goodMove.slice(-1);
-		const move = chess.move({from, to, promotion: e});
+		// Const move = chess.move({from, to, promotion: e});
+		chess.move({from, to, promotion: e});
 		if (e === goodPromotion) {
 			setFen(chess.fen());
 			setLastMove([from, to]);
@@ -263,16 +268,16 @@ function Index() {
 								}}
 							>
 								<span onClick={() => promotion('q')}>
-									<Image src={queen} alt='' style={{width: 50}} />
+									<Image src={queen} alt='' width={50} height={50} />
 								</span>
 								<span onClick={() => promotion('r')}>
-									<Image src={rook} alt='' style={{width: 50}} />
+									<Image src={rook} alt='' width={50} height={50} />
 								</span>
 								<span onClick={() => promotion('b')}>
-									<Image src={bishop} alt='' style={{width: 50}} />
+									<Image src={bishop} alt='' width={50} height={50} />
 								</span>
 								<span onClick={() => promotion('n')}>
-									<Image src={knight} alt='' style={{width: 50}} />
+									<Image src={knight} alt='' width={50} height={50} />
 								</span>
 							</div>
 						</div>
