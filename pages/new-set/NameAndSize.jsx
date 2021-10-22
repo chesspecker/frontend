@@ -1,16 +1,19 @@
 import {useState} from 'react';
 import Link from 'next/link.js';
+import Router from 'next/router.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import OptionNumber from '../../components/layouts/form/OptionNumber.jsx';
 import OptionTextInput from '../../components/layouts/form/OptionTextInput.jsx';
 import Btn from '../../components/layouts/btn/Btn.jsx';
 import {useNewSetContext} from '../../components/context/NewSetContext.jsx';
 import http from '../../services/http-service.js';
+import ErrorPopup from '../../components/layouts/popup/ErrorPopup.jsx';
 import style from './NameAndSize.module.scss';
 
 function NameAndSize() {
 	const [title, setTitle] = useState('');
 	const [size, setSize] = useState(0);
+	const [toggleError, setToggleError] = useState(false);
 	const {newSet, updateNewSetSize, updateNewSetTitle} = useNewSetContext();
 	const api = process.env.API;
 
@@ -38,12 +41,22 @@ function NameAndSize() {
 
 	const validate = () => {
 		if (size < 20 || size > 40) {
-			console.log('validate');
+			setToggleError(() => true);
+			setSize(() => 0);
+			return;
 		}
+
+		handleSubmit();
+		Router.push('/dashboard');
+	};
+
+	const handleClickError = () => {
+		setToggleError(() => false);
 	};
 
 	return (
 		<PageHeader>
+			{toggleError && <ErrorPopup onClick={handleClickError} />}
 			<div className={style.container}>
 				<h2 className={style.title}>On last thing</h2>
 				<div className={style.content}>
@@ -62,9 +75,7 @@ function NameAndSize() {
 						How many puzzle in this set ? (20-40)
 					</OptionNumber>
 					<div className={style.btn_container}>
-						<Link href='/dashboard'>
-							<Btn onClick={handleSubmit}>Let&apos;s go ! 🎉</Btn>
-						</Link>
+						<Btn onClick={validate}>Let&apos;s go ! 🎉</Btn>
 					</div>
 				</div>
 			</div>
