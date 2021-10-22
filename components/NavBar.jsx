@@ -10,7 +10,7 @@ function NavBar() {
 	return (
 		<div className={style.navBar}>
 			<div className={style.navBar_logo}>
-				<Link href='./dashboard'>
+				<Link href='/dashboard'>
 					<div className={style.logo}>
 						<Image src={logo} />
 					</div>
