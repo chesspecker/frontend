@@ -15,12 +15,11 @@ import queen from '../../public/images/pieces/merida/wK.svg';
 import rook from '../../public/images/pieces/merida/wR.svg';
 import bishop from '../../public/images/pieces/merida/wB.svg';
 import knight from '../../public/images/pieces/merida/wN.svg';
-import moveSound from '../../public/sounds/move.mp3';
 import style from './index.module.scss';
 
 function Index() {
 	const api = process.env.API;
-	const [soundMove] = useSound(moveSound);
+	const [soundMove] = useSound('../../public/sounds/move.mp3');
 	const [fen, setFen] = useState('');
 	const {currentUser} = useUserContext();
 	const [turn, setTurn] = useState('w');
