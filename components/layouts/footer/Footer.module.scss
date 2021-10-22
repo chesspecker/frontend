@@ -1,0 +1,43 @@
+.footer {
+	background: #000c3f;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 10rem;
+	width: 100%;
+	z-index: 9999;
+	box-shadow: 0px 0px 12px 0px black;
+}
+
+.content {
+	width: 95%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.buYaCofee {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&_desc {
+		color: white;
+		font-size: 1.5rem;
+		border-bottom: 1px solid white;
+		padding-bottom: 1.5rem;
+		cursor: pointer;
+	}
+}
+
+.bugReport {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&_desc {
+		color: white;
+		font-size: 1.5rem;
+		border-bottom: 1px solid white;
+		padding-bottom: 1.5rem;
+		margin-right: 2rem;
+		cursor: pointer;
+	}
+}
