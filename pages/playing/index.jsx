@@ -18,7 +18,7 @@ import style from './index.module.scss';
 
 function Index() {
 	const api = process.env.API;
-	const moveSound = new Audio('../../public/sounds/move.mp3');
+	const [moveSound, setMoveSound] = useState();
 	const [fen, setFen] = useState('');
 	const {currentUser} = useUserContext();
 	const [turn, setTurn] = useState('w');
@@ -54,7 +54,12 @@ function Index() {
 	}, [puzzleList, actualPuzzle, api]);
 
 	useEffect(() => {
-		moveSound.load();
+		if (typeof Audio !== 'undefined') {
+			// Browser-only code
+			const sound = new Audio('../../public/sounds/move.mp3');
+			sound.load();
+			setMoveSound(() => sound);
+		}
 	}, []);
 
 	useEffect(() => {
@@ -99,7 +104,7 @@ function Index() {
 	}, [puzzle]);
 
 	const rightMove = index => {
-		moveSound.play();
+		if (moveSound) moveSound.play();
 		const move = chess.move(history[index], {sloppy: true});
 		if (move && move.from) setLastMove([move.from, move.to]);
 		setFen(chess.fen());
@@ -112,7 +117,7 @@ function Index() {
 	}, [history, moveNumber, rightMove]);
 
 	const onMove = async (from, to) => {
-		moveSound.play();
+		// MoveSound.play();
 		const move = chess.move({from, to, promotion: 'x'});
 		const moves = chess.moves({verbose: true});
 		const goodMove = history[moveNumber];
