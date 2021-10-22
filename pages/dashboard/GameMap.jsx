@@ -10,8 +10,8 @@ import Stars from '../../components/layouts/stars/Stars.jsx';
 import Btn from '../../components/layouts/btn/Btn.jsx';
 import plus from '../../public/images/plus.svg';
 import http from '../../services/http-service.js';
-import style from './index.module.scss';
 import ConfirmRemovePopup from '../../components/layouts/popup/ConfirmRemovePopup.jsx';
+import style from './index.module.scss';
 
 function GameMap() {
 	const api = process.env.API;
@@ -32,6 +32,7 @@ function GameMap() {
 		updateCurrentSet(set);
 		Router.push('/playing');
 	};
+
 	const handleConfirm = set => {
 		console.log(set);
 		setSetToRemove(() => set);
@@ -41,8 +42,10 @@ function GameMap() {
 	const removeSet = async value => {
 		console.log(value, setToRemove);
 		if (value) {
-			const setToRemove = sets.find(s => s._id === setToRemove);
-			const index = sets.indexOf(setToRemove);
+			const setInArray = sets.find(s => s._id === setToRemove);
+			console.log(setInArray);
+			const index = sets.indexOf(setInArray);
+			console.log(index);
 			setSets(oldArray => {
 				array = [...oldArray];
 				array.splice(index, 1);
