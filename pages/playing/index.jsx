@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import Image from 'next/image.js';
 import {shuffle} from 'help-array';
 import Chess from '../../components/utils/chess.js';
@@ -18,6 +18,7 @@ import style from './index.module.scss';
 
 function Index() {
 	const api = process.env.API;
+	const moveSound = new Audio('../../public/sounds/move.mp3');
 	const [fen, setFen] = useState('');
 	const {currentUser} = useUserContext();
 	const [turn, setTurn] = useState('w');
@@ -51,6 +52,10 @@ function Index() {
 
 		getPuzzle();
 	}, [puzzleList, actualPuzzle, api]);
+
+	useEffect(() => {
+		moveSound.load();
+	}, []);
 
 	useEffect(() => {
 		const getSet = async () => {
@@ -94,6 +99,7 @@ function Index() {
 	}, [puzzle]);
 
 	const rightMove = index => {
+		moveSound.play();
 		const move = chess.move(history[index], {sloppy: true});
 		if (move && move.from) setLastMove([move.from, move.to]);
 		setFen(chess.fen());
@@ -106,6 +112,7 @@ function Index() {
 	}, [history, moveNumber, rightMove]);
 
 	const onMove = async (from, to) => {
+		moveSound.play();
 		const move = chess.move({from, to, promotion: 'x'});
 		const moves = chess.moves({verbose: true});
 		const goodMove = history[moveNumber];
