@@ -1,3 +1,4 @@
+import Link from 'next/link.js';
 import BtnSecondary from '../btn/BtnSecondary.jsx';
 import useClock from '../../hooks/useClock.jsx';
 import BackgroundPopup from './BackgroundPopup.jsx';
@@ -11,7 +12,9 @@ function SucessPopup({restart, counter}) {
 				<p>Time to solve this set : {useClock(counter)}</p>
 				<div className={style.options}>
 					<BtnSecondary onClick={restart}>RESTART</BtnSecondary>
-					<BtnSecondary>NEXT SET</BtnSecondary>
+					<Link href='/dashboard'>
+						<BtnSecondary>Go to Dashboard</BtnSecondary>
+					</Link>
 				</div>
 			</div>
 		</BackgroundPopup>
