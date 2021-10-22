@@ -10,7 +10,7 @@ function OptionNumber({onChange, setName, children, value}) {
 				id={setName}
 				className={style.input_number}
 				type='number'
-				value={value}
+				value={value === 0 ? '' : value}
 				placeholder='ex: 150'
 				onChange={onChange}
 			/>

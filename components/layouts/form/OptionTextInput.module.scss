@@ -9,6 +9,7 @@
 	margin-top: 2rem;
 
 	border-bottom: solid 1px white;
+	overflow: hidden;
 
 	&_description {
 		font-size: 2rem;
@@ -36,11 +37,13 @@
 	font-size: 2rem;
 	border: none;
 	border-radius: 5px;
+	&::placeholder {
+		font-size: 1.5rem;
+	}
 	height: 4rem;
-	width: 30rem;
+	width: 80%;
 	justify-self: center;
 	align-self: center;
-	margin-left: 2rem;
 	text-align: center;
 	@media screen and (max-width: 450px) {
 		transform: scale(0.8);
