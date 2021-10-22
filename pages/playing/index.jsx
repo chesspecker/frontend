@@ -11,7 +11,7 @@ import ChessGround from '../../components/layouts/ChessGround.jsx';
 import http from '../../services/http-service.js';
 import useClock from '../../components/hooks/useClock.jsx';
 import {useUserContext} from '../../components/context/UserContext.jsx';
-import queen from '../../public/images/pieces/merida/wK.svg';
+import queen from '../../public/images/pieces/merida/wQ.svg';
 import rook from '../../public/images/pieces/merida/wR.svg';
 import bishop from '../../public/images/pieces/merida/wB.svg';
 import knight from '../../public/images/pieces/merida/wN.svg';
@@ -257,28 +257,20 @@ function Index() {
 							onMove={onMove}
 						/>
 						<div
-							style={selectVisible ? {display: 'block'} : {display: 'none'}}
+							style={selectVisible ? {display: 'flex'} : {display: 'none'}}
 							className={style.promotion_container}
 						>
-							<div
-								style={{
-									textAlign: 'center',
-									display: 'flex',
-									cursor: 'pointer',
-								}}
-							>
-								<span onClick={() => promotion('q')}>
-									<Image src={queen} alt='' width={50} height={50} />
-								</span>
-								<span onClick={() => promotion('r')}>
-									<Image src={rook} alt='' width={50} height={50} />
-								</span>
-								<span onClick={() => promotion('b')}>
-									<Image src={bishop} alt='' width={50} height={50} />
-								</span>
-								<span onClick={() => promotion('n')}>
-									<Image src={knight} alt='' width={50} height={50} />
-								</span>
+							<div onClick={() => promotion('q')}>
+								<Image src={queen} alt='' width={60} height={60} />
+							</div>
+							<div onClick={() => promotion('r')}>
+								<Image src={rook} alt='' width={60} height={60} />
+							</div>
+							<div onClick={() => promotion('b')}>
+								<Image src={bishop} alt='' width={60} height={60} />
+							</div>
+							<div onClick={() => promotion('n')}>
+								<Image src={knight} alt='' width={60} height={60} />
 							</div>
 						</div>
 						<div className={style.control_bar}>
