@@ -10,12 +10,15 @@ import Stars from '../../components/layouts/stars/Stars.jsx';
 import Btn from '../../components/layouts/btn/Btn.jsx';
 import plus from '../../public/images/plus.svg';
 import http from '../../services/http-service.js';
+import ConfirmRemovePopup from '../../components/layouts/popup/ConfirmRemovePopup.jsx';
 import style from './index.module.scss';
 
 function GameMap() {
 	const api = process.env.API;
 	const setsDatabase = useSets();
 	const [sets, setSets] = useState([]);
+	const [toggleConfirm, setToggleCOnfirm] = useState(false);
+	const [setToRemove, setSetToRemove] = useState('');
 
 	useEffect(() => {
 		setSets(() => {
@@ -30,19 +33,34 @@ function GameMap() {
 		Router.push('/playing');
 	};
 
-	const handleSupress = async set => {
-		const setToRemove = sets.find(s => s._id === set);
-		const index = sets.indexOf(setToRemove);
-		setSets(oldArray => {
-			array = [...oldArray];
-			array.splice(index, 1);
-			return array;
-		});
-		await http.delete(`${api}/puzzles/set/id/${set}`, {withCredentials: true});
+	const handleConfirm = set => {
+		console.log(set);
+		setSetToRemove(() => set);
+		setToggleCOnfirm(() => true);
+	};
+
+	const removeSet = async value => {
+		console.log(value, setToRemove);
+		if (value === true) {
+			const setToRemove = sets.find(s => s._id === setToRemove);
+			const index = sets.indexOf(setToRemove);
+			setSets(oldArray => {
+				array = [...oldArray];
+				array.splice(index, 1);
+				return array;
+			});
+			setToggleCOnfirm(() => false);
+			await http.delete(`${api}/puzzles/set/id/${setToRemove}`, {
+				withCredentials: true,
+			});
+		} else {
+			setToggleCOnfirm(() => false);
+		}
 	};
 
 	return (
 		<div className={style.container}>
+			{toggleConfirm && <ConfirmRemovePopup onRemove={removeSet} />}
 			<div className={style.gameSet}>
 				{sets &&
 					sets.map(s => (
@@ -52,7 +70,7 @@ function GameMap() {
 							number={sets.indexOf(s)}
 							id={s._id}
 							setCurrentSet={() => handleCurrentSet(s._id)}
-							onDelete={handleSupress}
+							onDelete={handleConfirm}
 						/>
 					))}
 				<div className={style.set}>
