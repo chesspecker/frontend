@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Image from 'next/image.js';
 import {shuffle} from 'help-array';
+import useSound from 'use-sound';
 import Chess from '../../components/utils/chess.js';
 import rotate from '../../public/images/rotate.svg';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
@@ -14,11 +15,12 @@ import queen from '../../public/images/pieces/merida/wK.svg';
 import rook from '../../public/images/pieces/merida/wR.svg';
 import bishop from '../../public/images/pieces/merida/wB.svg';
 import knight from '../../public/images/pieces/merida/wN.svg';
+import moveSound from '../../public/sounds/move.mp3';
 import style from './index.module.scss';
 
 function Index() {
 	const api = process.env.API;
-	const [moveSound, setMoveSound] = useState();
+	const [soundMove] = useSound(moveSound);
 	const [fen, setFen] = useState('');
 	const {currentUser} = useUserContext();
 	const [turn, setTurn] = useState('w');
@@ -52,15 +54,6 @@ function Index() {
 
 		getPuzzle();
 	}, [puzzleList, actualPuzzle, api]);
-
-	useEffect(() => {
-		if (typeof Audio !== 'undefined') {
-			// Browser-only code
-			const sound = new Audio('../../public/sounds/move.mp3');
-			sound.load();
-			setMoveSound(() => sound);
-		}
-	}, []);
 
 	useEffect(() => {
 		const getSet = async () => {
@@ -104,7 +97,7 @@ function Index() {
 	}, [puzzle]);
 
 	const rightMove = index => {
-		if (moveSound) moveSound.play();
+		soundMove();
 		const move = chess.move(history[index], {sloppy: true});
 		if (move && move.from) setLastMove([move.from, move.to]);
 		setFen(chess.fen());
@@ -117,7 +110,7 @@ function Index() {
 	}, [history, moveNumber, rightMove]);
 
 	const onMove = async (from, to) => {
-		// MoveSound.play();
+		soundMove();
 		const move = chess.move({from, to, promotion: 'x'});
 		const moves = chess.moves({verbose: true});
 		const goodMove = history[moveNumber];

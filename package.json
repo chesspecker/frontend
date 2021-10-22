@@ -35,6 +35,7 @@
 	},
 	"devDependencies": {
 		"eslint-config-xo-nextjs": "^4.0.2",
+		"file-loader": "^6.2.0",
 		"prettier": "^2.4.1",
 		"prettier-config-xo": "^2.0.0",
 		"xo": "^0.45.0"
