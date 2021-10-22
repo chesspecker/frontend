@@ -29,7 +29,6 @@ function GameMap() {
 
 	return (
 		<div className={style.container}>
-			<h1>Bonsoir</h1>
 			<div className={style.gameSet}>
 				{sets &&
 					sets.map(s => (

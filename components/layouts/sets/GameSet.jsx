@@ -2,6 +2,7 @@ import Image from 'next/image.js';
 import Btn from '../btn/Btn.jsx';
 import Stars from '../stars/Stars.jsx';
 import supress from '../../../public/images/supress.svg';
+import useClock from '../../hooks/useClock.jsx';
 import style from './GameSet.module.scss';
 
 function GameSet({sets, _number, setCurrentSet, onDelete}) {
@@ -12,7 +13,7 @@ function GameSet({sets, _number, setCurrentSet, onDelete}) {
 				<div className={style.supress}>
 					<Image src={supress} onClick={() => onDelete(sets._id)} />
 				</div>
-				<div className={style.list_element}>🏆: {sets.bestTime}</div>
+				<div className={style.list_element}>🏆: {useClock(sets.bestTime)}</div>
 				<div className={style.list_element}>🔥 : {sets.tries}</div>
 			</div>
 			<Stars />

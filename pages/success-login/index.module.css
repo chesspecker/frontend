@@ -1,6 +1,7 @@
 .container {
 	height: 100vh;
-	margin: 0;
+	width: 90%;
+	margin: 0 auto 0 auto;
 	color: #222;
 	font-family: sans-serif;
 	display: flex;
@@ -8,6 +9,7 @@
 	align-items: center;
 	display: flex;
 	flex-direction: column;
+	text-align: center;
 }
 .title {
 	font-family: sans-serif;

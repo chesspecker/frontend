@@ -12,7 +12,7 @@
 
 .title {
 	margin: 1rem;
-	font-size: 2rem;
+	font-size: 3rem;
 	font-weight: 500;
 }
 
@@ -23,8 +23,9 @@
 	justify-content: space-around;
 	list-style: none;
 	&_element {
-		font-size: 1.5rem;
+		font-size: 3rem;
 		margin-top: 1rem;
+		font-weight: 300;
 	}
 }
 
