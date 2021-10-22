@@ -168,7 +168,7 @@ function Index() {
 	const updatePuzzle = async () => {
 		await http.put(
 			`${api}/puzzles/set/id/${currentUser.currentSet}`,
-			{tries: 1, bestTime: counter},
+			{tries: 1, bestTime: counter + malus},
 			{withCredentials: true},
 		);
 	};
@@ -243,7 +243,7 @@ function Index() {
 	return (
 		<PageHeader>
 			{sucessVisible && (
-				<SucessPopup counter={counter} restart={handleRestart} />
+				<SucessPopup counter={counter + malus} restart={handleRestart} />
 			)}
 			{startPopupVisible && <StartingPopup onStart={handleStart} />}
 
