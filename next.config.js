@@ -1,9 +1,9 @@
-module.exports = {
+/* Module.exports = {
 	reactStrictMode: true,
 	env: {
 		API: process.env.API,
 	},
-};
+}; */
 module.exports = {
 	webpack(config, options) {
 		const {isServer} = options;
@@ -26,5 +26,9 @@ module.exports = {
 		});
 
 		return config;
+	},
+	reactStrictMode: true,
+	env: {
+		API: process.env.API,
 	},
 };
