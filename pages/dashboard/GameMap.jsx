@@ -16,6 +16,7 @@ import style from './index.module.scss';
 function GameMap() {
 	const api = process.env.API;
 	const setsDatabase = useSets();
+	console.log(setsDatabase);
 	const [sets, setSets] = useState([]);
 	const [toggleConfirm, setToggleCOnfirm] = useState(false);
 	const [setToRemove, setSetToRemove] = useState('');

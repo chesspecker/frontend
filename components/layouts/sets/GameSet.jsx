@@ -5,7 +5,19 @@ import supress from '../../../public/images/supress.svg';
 import useClock from '../../hooks/useClock.jsx';
 import style from './GameSet.module.scss';
 
-function GameSet({sets, _number, setCurrentSet, onDelete}) {
+function GameSet({sets, setCurrentSet, onDelete}) {
+	const useRate = (bestTime, length) => {
+		return bestTime === 0
+			? 0
+			: bestTime / length <= 10
+			? 3
+			: bestTime / length <= 15
+			? 2
+			: bestTime / length <= 25
+			? 1
+			: 0;
+	};
+
 	return (
 		<div className={style.set}>
 			<h3 className={style.title}>{sets.title}</h3>
@@ -16,7 +28,7 @@ function GameSet({sets, _number, setCurrentSet, onDelete}) {
 				<div className={style.list_element}>🏆: {useClock(sets.bestTime)}</div>
 				<div className={style.list_element}>🔥 : {sets.tries}</div>
 			</div>
-			<Stars />
+			<Stars numberStar={useRate(sets.bestTime, sets.length)} />
 			<Btn onClick={setCurrentSet}>Start</Btn>
 		</div>
 	);
