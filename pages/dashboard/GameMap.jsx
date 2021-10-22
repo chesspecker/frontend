@@ -1,6 +1,8 @@
 import Router from 'next/router.js';
 import Image from 'next/image.js';
 import Link from 'next/link.js';
+import {useEffect, useState} from 'react';
+import {array} from 'prop-types';
 import useSets from '../../components/hooks/useSets.jsx';
 import GameSet from '../../components/layouts/sets/GameSet.jsx';
 import {useUserContext} from '../../components/context/UserContext.jsx';
@@ -11,9 +13,15 @@ import http from '../../services/http-service.js';
 import style from './index.module.scss';
 
 function GameMap() {
-	// TODO: Make sure this is loaded correctly
 	const api = process.env.API;
-	const sets = useSets();
+	const setsDatabase = useSets();
+	const [sets, setSets] = useState([]);
+
+	useEffect(() => {
+		setSets(() => {
+			return setsDatabase;
+		});
+	}, [setsDatabase]);
 
 	const {updateCurrentSet} = useUserContext();
 
@@ -23,7 +31,13 @@ function GameMap() {
 	};
 
 	const handleSupress = async set => {
-		console.log(set);
+		const setToRemove = sets.find(s => s._id === set);
+		const index = sets.indexOf(setToRemove);
+		setSets(oldArray => {
+			array = [...oldArray];
+			array.splice(index, 1);
+			return array;
+		});
 		await http.delete(`${api}/puzzles/set/id/${set}`, {withCredentials: true});
 	};
 
