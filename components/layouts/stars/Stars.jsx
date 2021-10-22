@@ -4,7 +4,6 @@ import starGrey from '../../../public/images/star-grey.svg';
 import style from './Stars.module.scss';
 
 function Stars({numberStar}) {
-	console.log('in the star', numberStar);
 	return (
 		<div className={style.stars_container}>
 			<div

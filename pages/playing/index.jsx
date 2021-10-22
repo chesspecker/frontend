@@ -101,6 +101,7 @@ function Index() {
 		const move = chess.move(history[index], {sloppy: true});
 		if (move && move.from) setLastMove([move.from, move.to]);
 		setFen(chess.fen());
+		checkPuzzleComplete(moveNumber + 1);
 		setMoveNumber(previousMove => previousMove + 1);
 	};
 
@@ -127,6 +128,8 @@ function Index() {
 				return;
 			}
 		}
+
+		console.log('validation', from, to, history[moveNumber]);
 
 		if (move && `${move.from}${move.to}` === history[moveNumber]) {
 			setFen(() => chess.fen());
@@ -204,6 +207,7 @@ function Index() {
 		if (e === goodPromotion) {
 			setFen(chess.fen());
 			setLastMove([from, to]);
+			setMoveNumber(previousMove => previousMove + 1);
 			setSelectVisible(false);
 			checkPuzzleComplete(moveNumber + 1);
 			setTimeout(rightMove(moveNumber + 1), 500);
