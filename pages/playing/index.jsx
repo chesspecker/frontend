@@ -138,7 +138,7 @@ function Index() {
 		if (move && `${move.from}${move.to}` === history[moveNumber]) {
 			setFen(() => chess.fen());
 			setMoveNumber(previousMove => previousMove + 1);
-			checkPuzzleComplete(moveNumber + 1);
+			checkPuzzleComplete(moveNumber);
 			setLastMove([from, to]);
 			setTimeout(rightMove(moveNumber + 1), 800);
 		} else if (move) {
@@ -213,7 +213,7 @@ function Index() {
 			setLastMove([from, to]);
 			setMoveNumber(previousMove => previousMove + 1);
 			setSelectVisible(false);
-			checkPuzzleComplete(moveNumber + 1);
+			checkPuzzleComplete(moveNumber);
 			setTimeout(rightMove(moveNumber + 1), 500);
 		} else {
 			setWrongMoveVisible(() => true);
