@@ -25,18 +25,20 @@ function NameAndSize() {
 		setTitle(() => title.target.value);
 	};
 
-	const handleSubmit = async () => {
-		/**
-		 * TODO: Handle set size
-		 */
-		if (size < 20 || size > 40) return;
+	const handleSubmit = () => {
+		console.log('clicked');
 		updateNewSetSize(size);
 		updateNewSetTitle(title);
-		await http.post(
-			`${api}/puzzles/sets`,
-			{title, themeArray: newSet.themeArray, size},
-			{withCredentials: true},
-		);
+		http
+			.post(
+				`${api}/puzzles/sets`,
+				{title, themeArray: newSet.themeArray, size},
+				{withCredentials: true},
+			)
+			.then(value => {
+				console.log(value);
+				Router.push('/dashboard');
+			});
 	};
 
 	const validate = () => {
@@ -47,7 +49,6 @@ function NameAndSize() {
 		}
 
 		handleSubmit();
-		Router.push('/dashboard');
 	};
 
 	const handleClickError = () => {
