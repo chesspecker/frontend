@@ -2,6 +2,11 @@
 	width: 100vw;
 	min-height: 100vh;
 	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.content {
+	width: 90%;
 }
 
 .gameSet {
@@ -27,9 +32,13 @@
 }
 
 .title {
-	margin: 1rem;
-	font-size: 2rem;
+	font-size: 3rem;
 	font-weight: 500;
+	color: white;
+}
+.description {
+	color: #ccc;
+	font-size: 2rem;
 }
 
 .list {

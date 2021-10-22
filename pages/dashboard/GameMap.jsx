@@ -60,32 +60,42 @@ function GameMap() {
 	return (
 		<div className={style.container}>
 			{toggleConfirm && <ConfirmRemovePopup onRemove={removeSet} />}
-			<div className={style.gameSet}>
-				{sets &&
-					sets.map(s => (
-						<GameSet
-							key={s._id}
-							sets={s}
-							number={sets.indexOf(s)}
-							id={s._id}
-							setCurrentSet={() => handleCurrentSet(s._id)}
-							onDelete={handleConfirm}
-						/>
-					))}
-				<div className={style.set}>
-					<Link href='./new-set'>
-						<div className={style.bluer}>
-							<Image src={plus} />
-							<p>Create a new Set</p>
+			<div className={style.content}>
+				<h1 className={style.title}>Here are your sets !</h1>
+				<p className={style.description}>
+					Solve the same puzzles again and again, only faster. It’s not a lazy
+					shortcut to success – hard work is required. But the reward can be
+					re-programming your unconscious mind. Benefits include sharper
+					tactical vision, fewer blunders, better play when in time trouble and
+					improved intuition.
+				</p>
+				<div className={style.gameSet}>
+					{sets &&
+						sets.map(s => (
+							<GameSet
+								key={s._id}
+								sets={s}
+								number={sets.indexOf(s)}
+								id={s._id}
+								setCurrentSet={() => handleCurrentSet(s._id)}
+								onDelete={handleConfirm}
+							/>
+						))}
+					<div className={style.set}>
+						<Link href='./new-set'>
+							<div className={style.bluer}>
+								<Image src={plus} />
+								<p>Create a new Set</p>
+							</div>
+						</Link>
+						<h3>Set exemple</h3>
+						<div className={style.list}>
+							<div className={style.list_element}>🏆: 24:37</div>
+							<div className={style.list_element}>⛔ : 18</div>
 						</div>
-					</Link>
-					<h3 className={style.title}>Set exemple</h3>
-					<div className={style.list}>
-						<div className={style.list_element}>🏆: 24:37</div>
-						<div className={style.list_element}>⛔ : 18</div>
+						<Stars />
+						<Btn>Start</Btn>
 					</div>
-					<Stars />
-					<Btn>Start</Btn>
 				</div>
 			</div>
 		</div>
