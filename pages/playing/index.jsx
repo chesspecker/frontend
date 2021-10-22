@@ -273,11 +273,11 @@ function Index() {
 								<Image src={knight} alt='' width={60} height={60} />
 							</div>
 						</div>
-						<div className={style.control_bar}>
+						{/* <div className={style.control_bar}>
 							<button className={style.btn} onClick={switchOrientation}>
 								<Image src={rotate} />
 							</button>
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</div>
