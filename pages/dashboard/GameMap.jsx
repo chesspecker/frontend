@@ -34,18 +34,14 @@ function GameMap() {
 	};
 
 	const handleConfirm = set => {
-		console.log(set);
 		setSetToRemove(() => set);
 		setToggleCOnfirm(() => true);
 	};
 
 	const removeSet = async value => {
-		console.log(value, setToRemove);
 		if (value) {
 			const setInArray = sets.find(s => s._id === setToRemove);
-			console.log(setInArray);
 			const index = sets.indexOf(setInArray);
-			console.log(index);
 			setSets(oldArray => {
 				array = [...oldArray];
 				array.splice(index, 1);
