@@ -11,10 +11,14 @@ import ChessGround from '../../components/layouts/ChessGround.jsx';
 import http from '../../services/http-service.js';
 import useClock from '../../components/hooks/useClock.jsx';
 import {useUserContext} from '../../components/context/UserContext.jsx';
-import queen from '../../public/images/pieces/merida/wQ.svg';
-import rook from '../../public/images/pieces/merida/wR.svg';
-import bishop from '../../public/images/pieces/merida/wB.svg';
-import knight from '../../public/images/pieces/merida/wN.svg';
+import queenW from '../../public/images/pieces/merida/wQ.svg';
+import rookW from '../../public/images/pieces/merida/wR.svg';
+import bishopW from '../../public/images/pieces/merida/wB.svg';
+import knightW from '../../public/images/pieces/merida/wN.svg';
+import queenB from '../../public/images/pieces/merida/bQ.svg';
+import rookB from '../../public/images/pieces/merida/bR.svg';
+import bishopB from '../../public/images/pieces/merida/bB.svg';
+import knightB from '../../public/images/pieces/merida/bN.svg';
 import moveSound from '../../public/sounds/move.mp3';
 import style from './index.module.scss';
 
@@ -265,16 +269,36 @@ function Index() {
 							className={style.promotion_container}
 						>
 							<div onClick={() => promotion('q')}>
-								<Image src={queen} alt='' width={60} height={60} />
+								<Image
+									src={chess.turn() === 'w' ? queenW : queenB}
+									alt=''
+									width={60}
+									height={60}
+								/>
 							</div>
 							<div onClick={() => promotion('r')}>
-								<Image src={rook} alt='' width={60} height={60} />
+								<Image
+									src={chess.turn() === 'w' ? rookW : rookB}
+									alt=''
+									width={60}
+									height={60}
+								/>
 							</div>
 							<div onClick={() => promotion('b')}>
-								<Image src={bishop} alt='' width={60} height={60} />
+								<Image
+									src={chess.turn() === 'w' ? bishopW : bishopB}
+									alt=''
+									width={60}
+									height={60}
+								/>
 							</div>
 							<div onClick={() => promotion('n')}>
-								<Image src={knight} alt='' width={60} height={60} />
+								<Image
+									src={chess.turn() === 'w' ? knightW : knightB}
+									alt=''
+									width={60}
+									height={60}
+								/>
 							</div>
 						</div>
 						{/* <div className={style.control_bar}>
