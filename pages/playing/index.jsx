@@ -255,7 +255,7 @@ function Index() {
 						</div>
 					</div>
 					<div className={style.chessGroundContainer}>
-						{wrongMoveVisible && <div className={style.wrong_move} />}
+						{wrongMoveVisible && <div className={style.wrong_move}> +3 !!</div>}
 						<ChessGround
 							fen={fen}
 							turnColor={turnColor(chess.turn())}
