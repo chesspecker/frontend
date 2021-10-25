@@ -12,9 +12,9 @@ import OptionSize from '../../components/layouts/form/OptionSize.jsx';
 import style from './NameAndSize.module.scss';
 
 function NameAndSize() {
-	const [title, setTitle] = useState('easy');
+	const [title, setTitle] = useState('');
 	const [size, setSize] = useState(0);
-	const [difficulty, setDifficulty] = useState('');
+	const [difficulty, setDifficulty] = useState('easy');
 	const [toggleError, setToggleError] = useState(false);
 	const {newSet, updateNewSetSize, updateNewSetTitle} = useNewSetContext();
 	const api = process.env.API;
