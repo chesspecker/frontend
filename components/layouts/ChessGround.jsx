@@ -8,6 +8,7 @@ function ChessGround({onMove, fen, turnColor, movable, orientation, lastMove}) {
 		<div className={style.chessGround}>
 			<Chessground
 				addDimensionsCssVars
+				check
 				fen={fen}
 				turnColor={turnColor}
 				movable={movable}
@@ -15,7 +16,6 @@ function ChessGround({onMove, fen, turnColor, movable, orientation, lastMove}) {
 				style={{margin: '30px', backgroundColor: 'white'}}
 				lastMove={lastMove}
 				onMove={onMove}
-				check={true}
 			/>
 		</div>
 	);
