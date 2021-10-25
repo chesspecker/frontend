@@ -24,10 +24,11 @@ import style from './index.module.scss';
 
 function Index() {
 	const api = process.env.API;
-	const [soundMove] = useSound(moveSound);
 	const [fen, setFen] = useState('');
+	const [malus, setMalus] = useState(0);
 	const {currentUser} = useUserContext();
 	const [turn, setTurn] = useState('w');
+	const [soundMove] = useSound(moveSound);
 	const [puzzle, setPuzzle] = useState({});
 	const [lastMove, setLastMove] = useState();
 	const [counter, setCounter] = useState(0);
@@ -44,7 +45,8 @@ function Index() {
 	const [selectVisible, setSelectVisible] = useState(false);
 	const [startPopupVisible, setStartPopupVisible] = useState(true);
 	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
-	const [malus, setMalus] = useState(0);
+	const [actualPuzzleMistake, setActualPuzzleMistake] = useState(0);
+	const [previousPuzzleTimer, setPreviousPuzzleTimer] = useState(0);
 
 	useEffect(() => {
 		if (puzzleList.length === 0) return;
@@ -65,7 +67,8 @@ function Index() {
 				`${api}/puzzles/set/id/${currentUser.currentSet}`,
 				{withCredentials: true},
 			);
-			const puzzleList = shuffle(set.puzzles);
+
+			const puzzleList = shuffle(set.puzzles.filter(p => p.played === false));
 			setPuzzleList(() => puzzleList);
 		};
 
@@ -145,13 +148,31 @@ function Index() {
 			chess.undo();
 			setFen(() => chess.fen());
 			setMalus(lastCount => lastCount + 3);
+			setActualPuzzleMistake(previous => previous + 1);
 			setWrongMoveVisible(() => true);
 			setTimeout(() => setWrongMoveVisible(() => false), 300);
 		}
 	};
 
-	const changePuzzle = () =>
+	const changePuzzle = async () => {
+		const actualPuzzleId = puzzleList[actualPuzzle];
+		const timeTaken = counter - previousPuzzleTimer + 3 * mistakes;
+		const mistakes = actualPuzzleMistake;
+
+		await http.put(
+			`${api}/puzzles/set/id/${currentUser.currentSet}`,
+			{puzzleId: actualPuzzleId, options: {mistakes, timeTaken}},
+			{withCredentials: true},
+		);
+
+		setActualPuzzleMistake(() => 0);
+		setPreviousPuzzleTimer(() => counter);
 		setActualPuzzle(previousPuzzle => previousPuzzle + 1);
+	};
+
+	// Nombre d'erreur
+	// time to play
+	// puzzle id puis objet mistakes:number timeTaken:secondes
 
 	const checkSetComplete = () => {
 		if (actualPuzzle + 1 === puzzleListSize) {
@@ -212,6 +233,7 @@ function Index() {
 			setFen(chess.fen());
 			setLastMove([from, to]);
 			setMoveNumber(previousMove => previousMove + 1);
+			setActualPuzzleMistake(previous => previous + 1);
 			setSelectVisible(false);
 			checkPuzzleComplete(moveNumber);
 			setTimeout(rightMove(moveNumber + 1), 500);
