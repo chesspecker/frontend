@@ -166,11 +166,15 @@ function Index() {
 		const mistakes = actualPuzzleMistake;
 		console.log('mistakes', mistakes);
 
-		await http.put(
-			`${api}/puzzles/set/id/${currentUser.currentSet}`,
-			{puzzleId: actualPuzzleId._id, options: {mistakes, timeTaken}},
-			{withCredentials: true},
-		);
+		try {
+			await http.put(
+				`${api}/puzzles/set/id/${currentUser.currentSet}`,
+				{puzzleId: actualPuzzleId._id, options: {mistakes, timeTaken}},
+				{withCredentials: true},
+			);
+		} catch (error) {
+			console.log(error);
+		}
 
 		setActualPuzzleMistake(() => 0);
 		setPreviousPuzzleTimer(() => counter);
