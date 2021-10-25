@@ -178,7 +178,10 @@ function Index() {
 
 		setActualPuzzleMistake(() => 0);
 		setPreviousPuzzleTimer(() => counter);
-		setActualPuzzle(previousPuzzle => previousPuzzle + 1);
+		setActualPuzzle(previousPuzzle => {
+			console.log(previousPuzzle + 1);
+			return previousPuzzle + 1;
+		});
 	};
 
 	// Nombre d'erreur
