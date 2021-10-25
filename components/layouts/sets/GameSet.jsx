@@ -28,7 +28,9 @@ function GameSet({sets, setCurrentSet, onDelete}) {
 				<div className={style.list_element}>
 					⏲: {useClock(sets.currentTime)}
 				</div>
-				<div className={style.list_element}>🎯 : {sets.accuracy * 100} %</div>
+				<div className={style.list_element}>
+					🎯 : {sets.accuracy.toFixed(2) * 100} %
+				</div>
 			</div>
 			<div className={style.informations}>
 				<div>Best time : {useClock(sets.bestTime)}</div>
