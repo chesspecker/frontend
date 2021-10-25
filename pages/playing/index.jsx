@@ -70,6 +70,7 @@ function Index() {
 				`${api}/puzzles/set/id/${currentUser.currentSet}`,
 				{withCredentials: true},
 			);
+			console.log(set);
 
 			const puzzleList = shuffle(set.puzzles.filter(p => p.played === false));
 			setPuzzleList(() => puzzleList);
