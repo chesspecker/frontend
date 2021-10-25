@@ -12,7 +12,7 @@ import OptionSize from '../../components/layouts/form/OptionSize.jsx';
 import style from './NameAndSize.module.scss';
 
 function NameAndSize() {
-	const [title, setTitle] = useState('');
+	const [title, setTitle] = useState('easy');
 	const [size, setSize] = useState(0);
 	const [difficulty, setDifficulty] = useState('');
 	const [toggleError, setToggleError] = useState(false);
