@@ -194,7 +194,7 @@ function Index() {
 		if (actualPuzzle + 1 === puzzleListSize) {
 			setTimerRunning(() => false);
 			setSucessVisible(() => true);
-			updatePuzzle();
+			updatePuzzleFinished();
 
 			return true;
 		}
@@ -202,7 +202,7 @@ function Index() {
 		return false;
 	};
 
-	const updatePuzzle = async () => {
+	const updatePuzzleFinished = async () => {
 		await http.put(
 			`${api}/puzzles/set/id/${currentUser.currentSet}`,
 			{tries: 1, bestTime: counter + malus},
@@ -280,7 +280,7 @@ function Index() {
 
 	const handleLeaveGame = () => {
 		console.log('leave game');
-		updatePuzzle();
+		updatePuzzleFinished();
 		Router.push('/dashboard');
 	};
 

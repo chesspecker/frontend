@@ -25,7 +25,9 @@ function GameSet({sets, setCurrentSet, onDelete}) {
 				<div className={style.supress}>
 					<Image src={supress} onClick={() => onDelete(sets._id)} />
 				</div>
-				<div className={style.list_element}>🏆: {useClock(sets.bestTime)}</div>
+				<div className={style.list_element}>
+					🏆: {useClock(sets.currentTime)}
+				</div>
 				<div className={style.list_element}>🔥 : {sets.tries}</div>
 			</div>
 			<Stars numberStar={useRate(sets.bestTime, sets.length)} />
