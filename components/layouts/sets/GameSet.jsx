@@ -48,7 +48,7 @@ function GameSet({sets, setCurrentSet, onDelete}) {
 									: 'Playing'
 								: sets.currentTime === 0
 								? 'Finished'
-								: 'error'}
+								: 'Playing'}
 						</span>
 					</p>
 				</div>
