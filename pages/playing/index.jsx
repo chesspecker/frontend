@@ -280,7 +280,6 @@ function Index() {
 
 	const handleLeaveGame = () => {
 		console.log('leave game');
-		updatePuzzleFinished();
 		Router.push('/dashboard');
 	};
 
