@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Image from 'next/image.js';
 import {shuffle} from 'help-array';
 import useSound from 'use-sound';
+import Router from 'next/router.js';
 import Chess from '../../components/utils/chess.js';
 import rotate from '../../public/images/rotate.svg';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
@@ -277,6 +278,12 @@ function Index() {
 		setTimerRunning(true);
 	};
 
+	const handleLeaveGame = () => {
+		console.log('leave game');
+		updatePuzzle();
+		Router.push('/dashboard');
+	};
+
 	return (
 		<PageHeader>
 			{sucessVisible && (
@@ -291,7 +298,7 @@ function Index() {
 							<p>⏲ {useClock(counter + malus)}</p>
 						</div>
 						<div>
-							<BtnSecondary>Leave game</BtnSecondary>
+							<BtnSecondary onClick={handleLeaveGame}>Leave game</BtnSecondary>
 						</div>
 					</div>
 					<div className={style.chessGroundContainer}>
