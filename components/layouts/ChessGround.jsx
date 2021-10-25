@@ -15,6 +15,7 @@ function ChessGround({onMove, fen, turnColor, movable, orientation, lastMove}) {
 				style={{margin: '30px', backgroundColor: 'white'}}
 				lastMove={lastMove}
 				onMove={onMove}
+				check={true}
 			/>
 		</div>
 	);
