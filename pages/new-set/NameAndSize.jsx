@@ -8,11 +8,13 @@ import Btn from '../../components/layouts/btn/Btn.jsx';
 import {useNewSetContext} from '../../components/context/NewSetContext.jsx';
 import http from '../../services/http-service.js';
 import ErrorPopup from '../../components/layouts/popup/ErrorPopup.jsx';
+import OptionSize from '../../components/layouts/form/OptionSize.jsx';
 import style from './NameAndSize.module.scss';
 
 function NameAndSize() {
 	const [title, setTitle] = useState('');
 	const [size, setSize] = useState(0);
+	const [difficulty, setDifficulty] = useState('');
 	const [toggleError, setToggleError] = useState(false);
 	const {newSet, updateNewSetSize, updateNewSetTitle} = useNewSetContext();
 	const api = process.env.API;
@@ -25,6 +27,10 @@ function NameAndSize() {
 		setTitle(() => title.target.value);
 	};
 
+	const handleDifficultyChange = dif => {
+		setDifficulty(() => dif.target.value);
+	};
+
 	const handleSubmit = () => {
 		console.log('clicked');
 		updateNewSetSize(size);
@@ -32,7 +38,7 @@ function NameAndSize() {
 		http
 			.post(
 				`${api}/puzzles/sets`,
-				{title, themeArray: newSet.themeArray, size},
+				{title, themeArray: newSet.themeArray, size, difficulty},
 				{withCredentials: true},
 			)
 			.then(value => {
@@ -75,6 +81,9 @@ function NameAndSize() {
 					>
 						How many puzzle in this set ? (20-40)
 					</OptionNumber>
+					<OptionSize checked={difficulty} onChange={handleDifficultyChange}>
+						Difficulty
+					</OptionSize>
 					<div className={style.btn_container}>
 						<Btn onClick={validate}>Let&apos;s go ! 🎉</Btn>
 					</div>
