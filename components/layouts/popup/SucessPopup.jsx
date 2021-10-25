@@ -3,11 +3,12 @@ import BtnSecondary from '../btn/BtnSecondary.jsx';
 import useClock from '../../hooks/useClock.jsx';
 import BackgroundPopup from './BackgroundPopup.jsx';
 import style from './SucessPopup.module.scss';
+import ContainerPopup from './ContainerPopup.jsx';
 
 function SucessPopup({restart, counter}) {
 	return (
 		<BackgroundPopup>
-			<div className={style.sucess}>
+			<ContainerPopup>
 				<p>🎉🎉 Good game 🎉🎉 !</p>
 				<p>Time to solve this set : {useClock(counter)}</p>
 				<div className={style.options}>
@@ -16,7 +17,7 @@ function SucessPopup({restart, counter}) {
 						<BtnSecondary>Go to Dashboard</BtnSecondary>
 					</Link>
 				</div>
-			</div>
+			</ContainerPopup>
 		</BackgroundPopup>
 	);
 }
