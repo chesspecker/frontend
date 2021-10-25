@@ -49,6 +49,7 @@ function Index() {
 	const [previousPuzzleTimer, setPreviousPuzzleTimer] = useState(0);
 
 	useEffect(() => {
+		if (!puzzleList[actualPuzzle]) return;
 		const puzzleToSet = puzzleList[actualPuzzle];
 		console.log(puzzleToSet, puzzleToSet._id);
 		if (puzzleList.length === 0) return;
