@@ -43,10 +43,12 @@ function GameSet({sets, setCurrentSet, onDelete}) {
 							}
 						>
 							{sets.tries === 0
-								? 'Not started'
+								? sets.currentTime === 0
+									? 'Not started'
+									: 'Playing'
 								: sets.currentTime === 0
 								? 'Finished'
-								: 'Playing'}
+								: 'error'}
 						</span>
 					</p>
 				</div>
