@@ -32,13 +32,13 @@ function NameAndSize() {
 	};
 
 	const handleSubmit = () => {
-		console.log('clicked');
 		updateNewSetSize(size);
 		updateNewSetTitle(title);
+		console.log(difficulty);
 		http
 			.post(
 				`${api}/puzzles/sets`,
-				{title, themeArray: newSet.themeArray, size, difficulty},
+				{title, themeArray: newSet.themeArray, size, level: difficulty},
 				{withCredentials: true},
 			)
 			.then(value => {

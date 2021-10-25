@@ -52,7 +52,10 @@ function GameSet({sets, setCurrentSet, onDelete}) {
 						</span>
 					</p>
 					<p>
-						Difficulty : <span>{sets.dificulty}</span>
+						Difficulty :{' '}
+						<span className={`${style.badge} ${style.badge_primary}`}>
+							{sets.level}`
+						</span>
 					</p>
 				</div>
 			</div>
