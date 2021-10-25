@@ -50,6 +50,7 @@ function Index() {
 
 	useEffect(() => {
 		const puzzleToSet = puzzleList[actualPuzzle];
+		console.log(puzzleToSet, puzzleToSet._id);
 		if (puzzleList.length === 0) return;
 		const getPuzzle = async () => {
 			const {data: puzzle} = await http.get(
@@ -156,7 +157,7 @@ function Index() {
 	};
 
 	const changePuzzle = async () => {
-		const actualPuzzleId = puzzleList[actualPuzzle];
+		const actualPuzzleId = puzzleList[actualPuzzle]._id;
 		const timeTaken = counter - previousPuzzleTimer + 3 * mistakes;
 		const mistakes = actualPuzzleMistake;
 
