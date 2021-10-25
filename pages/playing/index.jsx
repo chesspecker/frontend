@@ -20,6 +20,7 @@ import rookB from '../../public/images/pieces/merida/bR.svg';
 import bishopB from '../../public/images/pieces/merida/bB.svg';
 import knightB from '../../public/images/pieces/merida/bN.svg';
 import moveSound from '../../public/sounds/move.mp3';
+import BtnSecondary from '../../components/layouts/btn/BtnSecondary.jsx';
 import style from './index.module.scss';
 
 function Index() {
@@ -288,6 +289,9 @@ function Index() {
 					<div className={style.information_container}>
 						<div className={style.timer}>
 							<p>⏲ {useClock(counter + malus)}</p>
+						</div>
+						<div>
+							<BtnSecondary>Leave game</BtnSecondary>
 						</div>
 					</div>
 					<div className={style.chessGroundContainer}>
