@@ -28,7 +28,7 @@ function GameSet({sets, setCurrentSet, onDelete}) {
 				<div className={style.list_element}>
 					⏲: {useClock(sets.currentTime)}
 				</div>
-				<div className={style.list_element}>🔥 : {sets.tries}</div>
+				<div className={style.list_element}>🎯 : {sets.tries}</div>
 			</div>
 			<div className={style.informations}>
 				<div>Best time : {useClock(sets.bestTime)}</div>
@@ -38,8 +38,8 @@ function GameSet({sets, setCurrentSet, onDelete}) {
 						<span
 							className={
 								sets.currentTime === 0
-									? `${style.badge} ${style.badge_primary}`
-									: `${style.badge} ${style.badge_secondary}`
+									? `${style.badge} ${style.badge_secondary}`
+									: `${style.badge} ${style.badge_primary}`
 							}
 						>
 							{sets.tries === 0
