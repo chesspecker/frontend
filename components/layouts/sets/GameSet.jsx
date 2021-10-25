@@ -29,7 +29,7 @@ function GameSet({sets, setCurrentSet, onDelete}) {
 					⏲: {useClock(sets.currentTime)}
 				</div>
 				<div className={style.list_element}>
-					🎯 : {sets.accuracy.toFixed(2) * 100} %
+					🎯 : {Math.round(sets.accuracy * 100)} %
 				</div>
 			</div>
 			<div className={style.informations}>
