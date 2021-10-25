@@ -308,6 +308,7 @@ function Index() {
 							movable={calcMovable()}
 							orientation={orientation}
 							lastMove={lastMove}
+							check={chess.check()}
 							onMove={onMove}
 						/>
 						<div
