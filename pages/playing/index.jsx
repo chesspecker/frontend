@@ -49,10 +49,11 @@ function Index() {
 	const [previousPuzzleTimer, setPreviousPuzzleTimer] = useState(0);
 
 	useEffect(() => {
+		const puzzleToSet = puzzleList[actualPuzzle];
 		if (puzzleList.length === 0) return;
 		const getPuzzle = async () => {
 			const {data: puzzle} = await http.get(
-				`${api}/puzzles/id/${puzzleList[actualPuzzle]._id}`,
+				`${api}/puzzles/id/${puzzleToSet._id}`,
 				{withCredentials: true},
 			);
 			setPuzzle(() => puzzle);
