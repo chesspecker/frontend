@@ -52,7 +52,7 @@ function Index() {
 		if (puzzleList.length === 0) return;
 		const getPuzzle = async () => {
 			const {data: puzzle} = await http.get(
-				`${api}/puzzles/id/${puzzleList[actualPuzzle]}`,
+				`${api}/puzzles/id/${puzzleList[actualPuzzle]._id}`,
 				{withCredentials: true},
 			);
 			setPuzzle(() => puzzle);
