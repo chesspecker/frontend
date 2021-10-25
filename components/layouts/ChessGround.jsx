@@ -16,6 +16,7 @@ function ChessGround({
 		<div className={style.chessGround}>
 			<Chessground
 				addDimensionsCssVars
+				check
 				fen={fen}
 				turnColor={turnColor}
 				movable={movable}
