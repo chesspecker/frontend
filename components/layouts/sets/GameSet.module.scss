@@ -36,3 +36,19 @@
 	right: 0;
 	cursor: pointer;
 }
+
+.informations {
+	font-size: 1.5rem;
+}
+
+.badge {
+	color: white;
+	padding: 0.5rem 1rem;
+	border-radius: 5px;
+	&_primary {
+		background-color: green;
+	}
+	&_secondary {
+		background-color: grey;
+	}
+}
