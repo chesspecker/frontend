@@ -160,7 +160,7 @@ function Index() {
 	const changePuzzle = async () => {
 		const actualPuzzleId = puzzleList[actualPuzzle];
 		console.log('actualpuzzle', actualPuzzleId);
-		const timeTaken = counter - previousPuzzleTimer + 3 * mistakes;
+		const timeTaken = counter - previousPuzzleTimer;
 		console.log('time taken', timeTaken);
 		const mistakes = actualPuzzleMistake;
 		console.log('mistakes', mistakes);
