@@ -68,8 +68,12 @@ function Index() {
 	}, [puzzleList, actualPuzzle, api]);
 
 	useEffect(() => {
-		setCurrentSet(() => currentUser.currentSet);
 		const getSet = async () => {
+			setCurrentSet(currentUser.currentSet);
+			localStorage.setItem(
+				'currentSet',
+				JSON.stringify(currentUser.currentSet),
+			);
 			const {data: set} = await http.get(
 				`${api}/puzzles/set/id/${currentUser.currentSet}`,
 				{withCredentials: true},
