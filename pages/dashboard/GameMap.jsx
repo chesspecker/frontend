@@ -61,7 +61,7 @@ function GameMap() {
 		<div className={style.container}>
 			{toggleConfirm && <ConfirmRemovePopup onRemove={removeSet} />}
 			<div className={style.content}>
-				<h1 className={style.title}>Here are your sets !</h1>
+				<h1 className={style.title}>Here are your sets!</h1>
 				<p className={style.description}>
 					Solve the same puzzles again and again, only faster. It’s not a lazy
 					shortcut to success – hard work is required. But the reward can be
