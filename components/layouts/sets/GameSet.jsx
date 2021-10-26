@@ -20,7 +20,10 @@ function GameSet({sets, setCurrentSet, onDelete}) {
 
 	return (
 		<div className={style.set}>
-			<h3 className={style.title}>{sets.title}</h3>
+			<h3 className={`${style.title} ${style.tooltip}`}>
+				{sets.title.length > 13 ? sets.title.slice(0, 12) + ' ...' : sets.title}
+				<span className={style.tooltiptext}>{sets.title}</span>
+			</h3>
 			<div className={style.list}>
 				<div className={style.supress}>
 					<Image src={supress} onClick={() => onDelete(sets._id)} />
