@@ -1,8 +1,6 @@
 import {useState} from 'react';
-import Link from 'next/link.js';
 import Router from 'next/router.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
-import OptionNumber from '../../components/layouts/form/OptionNumber.jsx';
 import OptionTextInput from '../../components/layouts/form/OptionTextInput.jsx';
 import Btn from '../../components/layouts/btn/Btn.jsx';
 import {useNewSetContext} from '../../components/context/NewSetContext.jsx';
@@ -16,7 +14,7 @@ function NameAndSize() {
 	const [size, setSize] = useState(400);
 	const [difficulty, setDifficulty] = useState('easy');
 	const [toggleError, setToggleError] = useState(false);
-	const {newSet, updateNewSetSize, updateNewSetTitle} = useNewSetContext();
+	const {newSet} = useNewSetContext();
 	const api = process.env.API;
 
 	const handleTitleChange = title => {
@@ -41,8 +39,7 @@ function NameAndSize() {
 				{title, themeArray: newSet.themeArray, size, level: difficulty},
 				{withCredentials: true},
 			)
-			.then(value => {
-				console.log(value);
+			.then(() => {
 				Router.push('/dashboard');
 			});
 	};
@@ -64,7 +61,7 @@ function NameAndSize() {
 		<PageHeader>
 			{toggleError && <ErrorPopup onClick={handleClickError} />}
 			<div className={style.container}>
-				<h2 className={style.title}>On last thing</h2>
+				<h2 className={style.title}>One last thing...</h2>
 				<div className={style.content}>
 					<OptionTextInput
 						name='title'
