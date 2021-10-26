@@ -73,6 +73,7 @@ function Index() {
 				{withCredentials: true},
 			);
 			console.log(set);
+			setCounter(() => set.currentTime);
 
 			const puzzleList = shuffle(set.puzzles.filter(p => p.played === false));
 			setPuzzleList(() => puzzleList);
@@ -99,8 +100,8 @@ function Index() {
 		if (!puzzle.Moves) return;
 		const chessJs = new Chess(puzzle.FEN);
 		const history = puzzle.Moves.split(' ');
-		setCounter(() => currentUser.currentSet.currentTime);
-		console.log(currentUser.currentSet.currentTime);
+
+		console.log(currentUser.currentSet);
 		setPendingMove(() => {});
 		setLastMove(() => {});
 		setMoveNumber(() => 0);
