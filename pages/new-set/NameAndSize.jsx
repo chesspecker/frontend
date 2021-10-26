@@ -19,22 +19,22 @@ function NameAndSize() {
 	const {newSet, updateNewSetSize, updateNewSetTitle} = useNewSetContext();
 	const api = process.env.API;
 
-	const handleSizeChange = size => {
-		setSize(() => size.target.value);
-	};
-
 	const handleTitleChange = title => {
 		setTitle(() => title.target.value);
 	};
 
 	const handleDifficultyChange = dif => {
 		setDifficulty(() => dif.target.value);
+		setSize(() => {
+			dif.target.value === 'easy'
+				? 400
+				: dif.target.value === 'intermediate'
+				? 600
+				: 800;
+		});
 	};
 
 	const handleSubmit = () => {
-		updateNewSetSize(size);
-		updateNewSetTitle(title);
-		console.log(difficulty);
 		http
 			.post(
 				`${api}/puzzles/sets`,
@@ -48,9 +48,8 @@ function NameAndSize() {
 	};
 
 	const validate = () => {
-		if (size < 20 || size > 40) {
+		if (title === '') {
 			setToggleError(() => true);
-			setSize(() => 0);
 			return;
 		}
 
@@ -74,16 +73,10 @@ function NameAndSize() {
 					>
 						Give your set a name
 					</OptionTextInput>
-					<OptionNumber
-						name='number_game'
-						value={size}
-						onChange={handleSizeChange}
-					>
-						How many puzzle in this set ? (20-40)
-					</OptionNumber>
 					<OptionSize checked={difficulty} onChange={handleDifficultyChange}>
 						Difficulty
 					</OptionSize>
+
 					<div className={style.btn_container}>
 						<Btn onClick={validate}>Let&apos;s go ! 🎉</Btn>
 					</div>

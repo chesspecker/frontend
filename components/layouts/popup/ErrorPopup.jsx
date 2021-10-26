@@ -11,9 +11,7 @@ function ErrorPopup({onClick}) {
 		<BackgroundPopup>
 			<ContainerPopup>
 				<Image src={error} width={70} height={70} />
-				<h3 className={style.title}>
-					Sorry your set must contain between 20 and 40 puzzles
-				</h3>
+				<h3 className={style.title}>Sorry your set must have a name.</h3>
 				<BtnSecondary onClick={onClick}> Retry </BtnSecondary>
 			</ContainerPopup>
 		</BackgroundPopup>
