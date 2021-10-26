@@ -29,6 +29,7 @@ function Index() {
 	const [fen, setFen] = useState('');
 	const [malus, setMalus] = useState(0);
 	const {currentUser} = useUserContext();
+	const [currentSet, setCurrentSet] = useState('');
 	const [turn, setTurn] = useState('w');
 	const [soundMove] = useSound(moveSound);
 	const [puzzle, setPuzzle] = useState({});
@@ -67,9 +68,10 @@ function Index() {
 	}, [puzzleList, actualPuzzle, api]);
 
 	useEffect(() => {
+		if (currentUser.currentSet) setCurrentSet(() => currentUser.currentSet);
 		const getSet = async () => {
 			const {data: set} = await http.get(
-				`${api}/puzzles/set/id/${currentUser.currentSet}`,
+				`${api}/puzzles/set/id/${currentSet}`,
 				{withCredentials: true},
 			);
 			console.log(set);
@@ -102,7 +104,6 @@ function Index() {
 		const chessJs = new Chess(puzzle.FEN);
 		const history = puzzle.Moves.split(' ');
 
-		console.log(currentUser.currentSet);
 		setPendingMove(() => {});
 		setLastMove(() => {});
 		setMoveNumber(() => 0);
@@ -174,7 +175,7 @@ function Index() {
 
 		try {
 			await http.put(
-				`${api}/puzzles/set/id/${currentUser.currentSet}`,
+				`${api}/puzzles/set/id/${currentSet}`,
 				{puzzleId: actualPuzzleId._id, options: {mistakes, timeTaken}},
 				{withCredentials: true},
 			);
@@ -208,7 +209,7 @@ function Index() {
 
 	const updatePuzzleFinished = async () => {
 		await http.put(
-			`${api}/puzzles/set/id/${currentUser.currentSet}`,
+			`${api}/puzzles/set/id/${currentSet}`,
 			{cycles: true, bestTime: counter + 1},
 			{withCredentials: true},
 		);
