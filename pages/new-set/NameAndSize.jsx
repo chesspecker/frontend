@@ -13,7 +13,7 @@ import style from './NameAndSize.module.scss';
 
 function NameAndSize() {
 	const [title, setTitle] = useState('');
-	const [size, setSize] = useState(0);
+	const [size, setSize] = useState(400);
 	const [difficulty, setDifficulty] = useState('easy');
 	const [toggleError, setToggleError] = useState(false);
 	const {newSet, updateNewSetSize, updateNewSetTitle} = useNewSetContext();
@@ -26,7 +26,7 @@ function NameAndSize() {
 	const handleDifficultyChange = dif => {
 		setDifficulty(() => dif.target.value);
 		setSize(() => {
-			dif.target.value === 'easy'
+			return dif.target.value === 'easy'
 				? 400
 				: dif.target.value === 'intermediate'
 				? 600
@@ -35,7 +35,6 @@ function NameAndSize() {
 	};
 
 	const handleSubmit = () => {
-		console.log(size, difficulty, newSet.themeArray);
 		http
 			.post(
 				`${api}/puzzles/sets`,
