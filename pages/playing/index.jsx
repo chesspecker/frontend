@@ -74,6 +74,7 @@ function Index() {
 			);
 			console.log(set);
 			setCounter(() => set.currentTime);
+			setPreviousPuzzleTimer(() => set.currentTime);
 
 			const puzzleList = shuffle(set.puzzles.filter(p => p.played === false));
 			setPuzzleList(() => puzzleList);
