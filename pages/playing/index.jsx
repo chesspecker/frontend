@@ -68,7 +68,7 @@ function Index() {
 	}, [puzzleList, actualPuzzle, api]);
 
 	useEffect(() => {
-		if (currentUser.currentSet) setCurrentSet(() => currentUser.currentSet);
+		setCurrentSet(() => currentUser.currentSet);
 		const getSet = async () => {
 			const {data: set} = await http.get(
 				`${api}/puzzles/set/id/${currentSet}`,
