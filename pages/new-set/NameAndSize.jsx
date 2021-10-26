@@ -35,6 +35,7 @@ function NameAndSize() {
 	};
 
 	const handleSubmit = () => {
+		console.log(size, difficulty, newSet.themeArray);
 		http
 			.post(
 				`${api}/puzzles/sets`,
