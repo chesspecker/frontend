@@ -58,7 +58,7 @@ function NewSet() {
 			<div className={style.container}>
 				<h2 className={style.title}>
 					{' '}
-					Select one or more category to create your set !
+					Select one or more category to create your set!
 				</h2>
 				<div className={style.set_container}>
 					{themesCategory.map(c => (

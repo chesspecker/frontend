@@ -12,9 +12,10 @@ function ErrorPopupNewSet({onClick}) {
 			<ContainerPopup>
 				<Image src={error} width={70} height={70} />
 				<h3 className={style.title}>
-					Sorry if you choose Healthy Mix, you can't select other categories
+					If you choose Healthy Mix we will fill your set with various puzzles
+					from random themes. That's why choosing another theme is not possible.
 				</h3>
-				<BtnSecondary onClick={onClick}>RETRY</BtnSecondary>
+				<BtnSecondary onClick={onClick}>RETURN</BtnSecondary>
 			</ContainerPopup>
 		</BackgroundPopup>
 	);
