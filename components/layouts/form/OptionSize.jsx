@@ -32,7 +32,7 @@ function OptionSize({onChange, children, checked}) {
 							onChange={onChange}
 						/>
 						<label className={style.label} htmlFor='intermediate'>
-							Medium
+							Intermediate
 						</label>
 					</div>
 					<div>

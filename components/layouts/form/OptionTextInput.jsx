@@ -11,7 +11,7 @@ function OptionTextInput({onChange, setName, children, value}) {
 				className={style.input_text}
 				type='text'
 				value={value}
-				placeholder='ex : Road to 2300 elo :)'
+				placeholder='ex: Road to 2300 elo :)'
 				onChange={onChange}
 			/>
 		</div>
