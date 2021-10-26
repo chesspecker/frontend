@@ -100,6 +100,7 @@ function Index() {
 		const chessJs = new Chess(puzzle.FEN);
 		const history = puzzle.Moves.split(' ');
 		setCounter(() => currentUser.currentSet.currentTime);
+		console.log(currentUser.currentSet.currentTime);
 		setPendingMove(() => {});
 		setLastMove(() => {});
 		setMoveNumber(() => 0);
