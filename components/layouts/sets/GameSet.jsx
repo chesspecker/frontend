@@ -47,7 +47,7 @@ function GameSet({sets, setCurrentSet, onDelete}) {
 									: `${style.badge} ${style.badge_primary}`
 							}
 						>
-							{sets.tries === 0
+							{sets.cycles === 0
 								? sets.currentTime === 0
 									? 'Not started'
 									: 'Playing'
