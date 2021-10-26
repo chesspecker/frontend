@@ -77,7 +77,7 @@ function GameSet({sets, setCurrentSet, onDelete}) {
 				</div>
 			</div>
 			<Btn onClick={setCurrentSet}>
-				{sets.currentTime === 0 ? 'START' : 'RESUME'}
+				{sets.currentTime === 0 ? 'START ⚔️' : 'RESUME 🗡'}
 			</Btn>
 		</div>
 	);

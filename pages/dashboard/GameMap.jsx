@@ -94,7 +94,7 @@ function GameMap() {
 							<div className={style.list_element}>⛔ : 18</div>
 						</div>
 						<Stars />
-						<Btn>Start</Btn>
+						<Btn>START ⚔️</Btn>
 					</div>
 				</div>
 			</div>

@@ -14,7 +14,7 @@ function SucessPopup({restart, counter}) {
 				<div className={style.options}>
 					<BtnSecondary onClick={restart}>RESTART</BtnSecondary>
 					<Link href='/dashboard'>
-						<BtnSecondary>Go to Dashboard</BtnSecondary>
+						<BtnSecondary>RETURN TO DASHBOARD</BtnSecondary>
 					</Link>
 				</div>
 			</ContainerPopup>
