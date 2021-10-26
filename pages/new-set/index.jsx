@@ -17,15 +17,14 @@ function NewSet() {
 	const [toggleErrorPopup, setToggleErrorPopup] = useState(false);
 
 	const handleClick = id => {
-		console.log(id);
-		if (
+		const bool =
 			(choicesSelected.length > 0 &&
 				id === 'healthyMix' &&
 				!choicesSelected.includes(id)) ||
-			(choicesSelected[0] === 'healthyMix' && id !== 'healthyMix')
-		) {
-			setToggleErrorPopup(() => true);
+			(choicesSelected[0] === 'healthyMix' && id !== 'healthyMix');
 
+		if (bool) {
+			setToggleErrorPopup(() => true);
 			return;
 		}
 
@@ -36,6 +35,11 @@ function NewSet() {
 				array.splice(index, 1);
 				return array;
 			});
+			return;
+		}
+
+		if (choicesSelected.length > 3) {
+			setToggleErrorPopup(() => true);
 			return;
 		}
 
