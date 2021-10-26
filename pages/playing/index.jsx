@@ -68,11 +68,10 @@ function Index() {
 	}, [puzzleList, actualPuzzle, api]);
 
 	useEffect(() => {
-		if (!currentUser.currentSet) return;
 		setCurrentSet(() => currentUser.currentSet);
 		const getSet = async () => {
 			const {data: set} = await http.get(
-				`${api}/puzzles/set/id/${currentSet}`,
+				`${api}/puzzles/set/id/${currentUser.currentSet}`,
 				{withCredentials: true},
 			);
 			console.log(set);
@@ -176,7 +175,7 @@ function Index() {
 
 		try {
 			await http.put(
-				`${api}/puzzles/set/id/${currentSet}`,
+				`${api}/puzzles/set/id/${currentUser.currentSet}`,
 				{puzzleId: actualPuzzleId._id, options: {mistakes, timeTaken}},
 				{withCredentials: true},
 			);
@@ -210,7 +209,7 @@ function Index() {
 
 	const updatePuzzleFinished = async () => {
 		await http.put(
-			`${api}/puzzles/set/id/${currentSet}`,
+			`${api}/puzzles/set/id/${currentUser.currentSet}`,
 			{cycles: true, bestTime: counter + 1},
 			{withCredentials: true},
 		);
