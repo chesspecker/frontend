@@ -24,7 +24,7 @@ export default function LoginRegister() {
 					</div>
 					<div className={style.contentBottom}>
 						<Link href={`${process.env.API}/auth/login`}>
-							<Btn link={`${process.env.API}/auth/login`}>SIGN IN</Btn>
+							<Btn link={`${process.env.API}/auth/login`}>SIGN IN 🧩</Btn>
 						</Link>
 					</div>
 				</div>
