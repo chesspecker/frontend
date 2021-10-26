@@ -33,7 +33,7 @@ function Index() {
 	const [soundMove] = useSound(moveSound);
 	const [puzzle, setPuzzle] = useState({});
 	const [lastMove, setLastMove] = useState();
-	const [counter, setCounter] = useState(0);
+	const [counter, setCounter] = useState(currentUser.currentSet.currentTime);
 	const [history, setHistory] = useState([]);
 	const [moveNumber, setMoveNumber] = useState(0);
 	const [chess, setChess] = useState(new Chess());
