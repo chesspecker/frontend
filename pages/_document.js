@@ -38,7 +38,7 @@ class MyDocument extends Document {
 						sizes='16x16'
 						href='../public/favicon/favicon-16x16.png'
 					></link>
-					<link rel='manifest' href='public/favicon/site.webmanifest'></link>
+					<link rel='manifest' href='../public/favicon/site.webmanifest'></link>
 				</Head>
 				<body>
 					<Main />
