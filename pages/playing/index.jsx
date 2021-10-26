@@ -71,10 +71,7 @@ function Index() {
 		const getSet = async () => {
 			setCurrentSet(currentUser.currentSet);
 			if (currentUser.currentSet.length > 5)
-				localStorage.setItem(
-					'currentSet',
-					JSON.stringify(currentUser.currentSet),
-				);
+				localStorage.setItem('currentSet', currentUser.currentSet);
 			const {data: set} = await http.get(
 				`${api}/puzzles/set/id/${localStorage.getItem('currentSet')}`,
 				{withCredentials: true},
