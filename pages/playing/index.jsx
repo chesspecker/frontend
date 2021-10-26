@@ -205,7 +205,7 @@ function Index() {
 	const updatePuzzleFinished = async () => {
 		await http.put(
 			`${api}/puzzles/set/id/${currentUser.currentSet}`,
-			{tries: 1, bestTime: counter + malus + 1},
+			{tries: 1, bestTime: counter + 1},
 			{withCredentials: true},
 		);
 	};
