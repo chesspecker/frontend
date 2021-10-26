@@ -4,6 +4,7 @@ import Link from 'next/link.js';
 import {useEffect, useState} from 'react';
 import {array} from 'prop-types';
 import useSets from '../../components/hooks/useSets.jsx';
+import useSetsDashboard from '../../components/hooks/useSetsDashboard.jsx';
 import GameSet from '../../components/layouts/sets/GameSet.jsx';
 import {useUserContext} from '../../components/context/UserContext.jsx';
 import Stars from '../../components/layouts/stars/Stars.jsx';
@@ -15,7 +16,7 @@ import style from './index.module.scss';
 
 function GameMap() {
 	const api = process.env.API;
-	const setsDatabase = useSets();
+	const setsDatabase = useSetsDashboard();
 	console.log(setsDatabase);
 	const [sets, setSets] = useState([]);
 	const [toggleConfirm, setToggleCOnfirm] = useState(false);
