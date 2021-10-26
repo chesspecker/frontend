@@ -33,7 +33,7 @@ function Index() {
 	const [soundMove] = useSound(moveSound);
 	const [puzzle, setPuzzle] = useState({});
 	const [lastMove, setLastMove] = useState();
-	const [counter, setCounter] = useState(currentUser.currentSet.currentTime);
+	const [counter, setCounter] = useState(0);
 	const [history, setHistory] = useState([]);
 	const [moveNumber, setMoveNumber] = useState(0);
 	const [chess, setChess] = useState(new Chess());
@@ -99,6 +99,7 @@ function Index() {
 		if (!puzzle.Moves) return;
 		const chessJs = new Chess(puzzle.FEN);
 		const history = puzzle.Moves.split(' ');
+		setCounter(() => currentUser.currentSet.currentTime);
 		setPendingMove(() => {});
 		setLastMove(() => {});
 		setMoveNumber(() => 0);
