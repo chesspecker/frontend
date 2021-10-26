@@ -15,9 +15,9 @@ function ConfirmRemovePopup({onRemove}) {
 				<Image src={trash} />
 				<h3 className={style.title}>Are you sur to remove this set ?</h3>
 				<div>
-					<BtnWarning onClick={() => onRemove(true)}>Yes</BtnWarning>
+					<BtnWarning onClick={() => onRemove(true)}>YES</BtnWarning>
 					<BtnSecondary onClick={() => onRemove(false)}>
-						No go back !
+						ABORT! GO BACK!
 					</BtnSecondary>
 				</div>
 			</ContainerPopup>

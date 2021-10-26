@@ -8,7 +8,7 @@ function StartingPopup({onStart}) {
 		<BackgroundPopup>
 			<ContainerPopup>
 				<p>Try to solve all the puzzles as fast as possible! ⏲</p>
-				<BtnSecondary onClick={onStart}> START 🔥 </BtnSecondary>
+				<BtnSecondary onClick={onStart}>START 🔥</BtnSecondary>
 			</ContainerPopup>
 		</BackgroundPopup>
 	);

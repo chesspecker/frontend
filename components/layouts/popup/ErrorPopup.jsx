@@ -12,7 +12,7 @@ function ErrorPopup({onClick}) {
 			<ContainerPopup>
 				<Image src={error} width={70} height={70} />
 				<h3 className={style.title}>Sorry your set must have a name.</h3>
-				<BtnSecondary onClick={onClick}> Retry </BtnSecondary>
+				<BtnSecondary onClick={onClick}>RETRY</BtnSecondary>
 			</ContainerPopup>
 		</BackgroundPopup>
 	);

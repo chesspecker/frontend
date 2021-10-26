@@ -301,11 +301,13 @@ function Index() {
 							<p>⏲ {useClock(counter + malus)}</p>
 						</div>
 						<div>
-							<BtnSecondary onClick={handleLeaveGame}>Leave game</BtnSecondary>
+							<BtnSecondary onClick={handleLeaveGame}>LEAVE 🧨</BtnSecondary>
 						</div>
 					</div>
 					<div className={style.chessGroundContainer}>
-						{wrongMoveVisible && <div className={style.wrong_move}> +3 !!</div>}
+						{wrongMoveVisible && (
+							<div className={style.wrong_move}>+3 seconds!</div>
+						)}
 						<ChessGround
 							fen={fen}
 							turnColor={turnColor(chess.turn())}

@@ -26,7 +26,7 @@ function Index() {
 						<h1 className={style.title}>
 							Hello {username}👋 <br /> Welcome to ChessPecker
 						</h1>
-						<Btn link='/dashboard'>LET&apos;S GO !</Btn>
+						<Btn link='/dashboard'>LET&apos;S GO! 🔥</Btn>
 					</div>
 				</div>
 			</PageHeader>

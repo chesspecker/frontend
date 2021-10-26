@@ -195,7 +195,7 @@ function SetParameters() {
 				>
 					Casual
 				</OptionSecondary>
-				<Btn onClick={validate}>Download 🔥</Btn>
+				<Btn onClick={validate}>DOWNLOAD 🔥</Btn>
 			</div>
 		</PageHeader>
 	);

@@ -78,7 +78,7 @@ function NameAndSize() {
 					</OptionSize>
 
 					<div className={style.btn_container}>
-						<Btn onClick={validate}>Let&apos;s go ! 🎉</Btn>
+						<Btn onClick={validate}>LET&apos;S GO! 🎉</Btn>
 					</div>
 				</div>
 			</div>
