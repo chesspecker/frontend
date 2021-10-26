@@ -11,10 +11,12 @@ function NavBar() {
 		<div className={style.navBar}>
 			<div className={style.navBar_logo}>
 				<Link href='/dashboard'>
-					<div className={style.logo}>
-						<Image src={logo} />
+					<div style={{display: 'flex'}}>
+						<div className={style.logo}>
+							<Image src={logo} />
+						</div>
+						<p className={style.navBar_title}> - chesspecker</p>
 					</div>
-					<p className={style.navBar_title}> - chesspecker</p>
 				</Link>
 			</div>
 			<div className={style.user}>
