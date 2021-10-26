@@ -8,13 +8,27 @@ import {
 } from '../../services/game-categorie-service.js';
 import Btn from '../../components/layouts/btn/Btn.jsx';
 import {useNewSetContext} from '../../components/context/NewSetContext.jsx';
+import ErrorPopupNewSet from '../../components/layouts/popup/ErrorPopupNewSet.jsx';
 import style from './index.module.scss';
 
 function NewSet() {
 	const [choicesSelected, setChoicesSelected] = useState([]);
 	const {newSet, updateNewSetOptions} = useNewSetContext();
+	const [toggleErrorPopup, setToggleErrorPopup] = useState(false);
 
 	const handleClick = id => {
+		console.log(id);
+		if (
+			(choicesSelected.length > 0 &&
+				id === 'healthyMix' &&
+				!choicesSelected.includes(id)) ||
+			(choicesSelected[0] === 'healthyMix' && id !== 'healthyMix')
+		) {
+			setToggleErrorPopup(() => true);
+
+			return;
+		}
+
 		if (choicesSelected.includes(id)) {
 			setChoicesSelected(oldArray => {
 				const index = oldArray.indexOf(id);
@@ -38,6 +52,9 @@ function NewSet() {
 
 	return (
 		<PageHeader>
+			{toggleErrorPopup && (
+				<ErrorPopupNewSet onClick={() => setToggleErrorPopup(() => false)} />
+			)}
 			<div className={style.container}>
 				<h2 className={style.title}>
 					{' '}
