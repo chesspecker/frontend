@@ -21,7 +21,7 @@ function GameSet({sets, setCurrentSet, onDelete}) {
 	return (
 		<div className={style.set}>
 			<h3 className={`${style.title} ${style.tooltip}`}>
-				{sets.title.length > 13 ? sets.title.slice(0, 12) + ' ...' : sets.title}
+				{sets.title.length > 12 ? sets.title.slice(0, 11) + ' ...' : sets.title}
 				<span className={style.tooltiptext}>{sets.title}</span>
 			</h3>
 			<div className={style.list}>
