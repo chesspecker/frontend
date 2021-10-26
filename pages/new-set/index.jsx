@@ -16,7 +16,8 @@ function NewSet() {
 	const [choicesSelected, setChoicesSelected] = useState([]);
 	const {newSet, updateNewSetOptions} = useNewSetContext();
 	const [toggleHealthyMixPopup, setToggleHealthyMixPopup] = useState(false);
-	const [toggleNumerousChoicesPopup, setToggleNumerousChoicesPopup] = useState(false);
+	const [toggleNumerousChoicesPopup, setToggleNumerousChoicesPopup] =
+		useState(false);
 
 	const handleClick = id => {
 		const selectingHealthyMixWithOther =
