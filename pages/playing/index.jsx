@@ -76,7 +76,7 @@ function Index() {
 					JSON.stringify(currentUser.currentSet),
 				);
 			const {data: set} = await http.get(
-				`${api}/puzzles/set/id/${currentUser.currentSet}`,
+				`${api}/puzzles/set/id/${localStorage.getItem('currentSet')}`,
 				{withCredentials: true},
 			);
 			console.log(set);
@@ -180,7 +180,7 @@ function Index() {
 
 		try {
 			await http.put(
-				`${api}/puzzles/set/id/${currentUser.currentSet}`,
+				`${api}/puzzles/set/id/${localStorage.getItem('currentSet')}`,
 				{puzzleId: actualPuzzleId._id, options: {mistakes, timeTaken}},
 				{withCredentials: true},
 			);
@@ -214,7 +214,7 @@ function Index() {
 
 	const updatePuzzleFinished = async () => {
 		await http.put(
-			`${api}/puzzles/set/id/${currentUser.currentSet}`,
+			`${api}/puzzles/set/id/${localStorage.getItem('currentSet')}`,
 			{cycles: true, bestTime: counter + 1},
 			{withCredentials: true},
 		);
