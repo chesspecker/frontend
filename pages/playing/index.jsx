@@ -51,6 +51,7 @@ function Index() {
 	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
 	const [actualPuzzleMistake, setActualPuzzleMistake] = useState(0);
 	const [previousPuzzleTimer, setPreviousPuzzleTimer] = useState(0);
+	const [puzzleCompleteInSession, setPuzzleCompleteInSession] = useState(0);
 
 	useEffect(() => {
 		if (!puzzleList[actualPuzzle]) return;
@@ -169,6 +170,7 @@ function Index() {
 	};
 
 	const changePuzzle = async () => {
+		setPuzzleCompleteInSession(prev => prev + 1);
 		const actualPuzzleId = puzzleList[actualPuzzle];
 		console.log('actualpuzzle', actualPuzzleId);
 		const timeTaken = counter - previousPuzzleTimer;
@@ -361,7 +363,12 @@ function Index() {
 						<div className={style.control_bar}>
 							<ProgressBarCircle
 								colour='green'
-								percentage={(1 - puzzleList.length / currentSet.length) * 100}
+								percentage={
+									(1 -
+										(puzzleList.length + puzzleCompleteInSession) /
+											currentSet.length) *
+									100
+								}
 								colourFont='grey'
 							/>
 						</div>
