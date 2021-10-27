@@ -170,7 +170,7 @@ function Index() {
 	};
 
 	const changePuzzle = async () => {
-		setPuzzleCompleteInSession(prev => prev + 1);
+		setPuzzleCompleteInSession(previous => previous + 1);
 		const actualPuzzleId = puzzleList[actualPuzzle];
 		console.log('actualpuzzle', actualPuzzleId);
 		const timeTaken = counter - previousPuzzleTimer;
