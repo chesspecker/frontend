@@ -22,6 +22,7 @@ import bishopB from '../../public/images/pieces/merida/bB.svg';
 import knightB from '../../public/images/pieces/merida/bN.svg';
 import moveSound from '../../public/sounds/move.mp3';
 import BtnSecondary from '../../components/layouts/btn/BtnSecondary.jsx';
+import {ProgressBarCircle} from '../../components/layouts/progress-bar/ProgressBarCirle.jsx';
 import style from './index.module.scss';
 
 function Index() {
@@ -69,14 +70,14 @@ function Index() {
 
 	useEffect(() => {
 		const getSet = async () => {
-			setCurrentSet(currentUser.currentSet);
 			if (currentUser.currentSet.length > 5)
 				localStorage.setItem('currentSet', currentUser.currentSet);
 			const {data: set} = await http.get(
 				`${api}/puzzles/set/id/${localStorage.getItem('currentSet')}`,
 				{withCredentials: true},
 			);
-			console.log(set);
+			console.log('this is the set', set);
+			setCurrentSet(() => set);
 			setCounter(() => set.currentTime);
 			setPreviousPuzzleTimer(() => set.currentTime);
 
@@ -357,11 +358,13 @@ function Index() {
 								/>
 							</div>
 						</div>
-						{/* <div className={style.control_bar}>
-							<button className={style.btn} onClick={switchOrientation}>
-								<Image src={rotate} />
-							</button>
-						</div> */}
+						<div className={style.control_bar}>
+							<ProgressBarCircle
+								colour='green'
+								percentage={currentSet.length / puzzleList.length}
+								colourFont='grey'
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
