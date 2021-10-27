@@ -361,7 +361,7 @@ function Index() {
 						<div className={style.control_bar}>
 							<ProgressBarCircle
 								colour='green'
-								percentage={(currentSet.length / puzzleList.length) * 100}
+								percentage={(puzzleList.length / currentSet.length) * 100}
 								colourFont='grey'
 							/>
 						</div>
