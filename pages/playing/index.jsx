@@ -365,7 +365,7 @@ function Index() {
 								colour='green'
 								percentage={
 									(1 -
-										(puzzleList.length + puzzleCompleteInSession) /
+										(puzzleList.length - puzzleCompleteInSession) /
 											currentSet.length) *
 									100
 								}
