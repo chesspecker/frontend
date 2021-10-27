@@ -4,16 +4,16 @@ import BtnSecondary from '../btn/BtnSecondary.jsx';
 import error from '../../../public/images/supress.svg';
 import BackgroundPopup from './BackgroundPopup.jsx';
 import ContainerPopup from './ContainerPopup.jsx';
-import style from './ErrorPopupNewSet.module.scss';
+import style from './ErrorPopupNumerousChoices.module.scss';
 
-function ErrorPopupNewSet({onClick}) {
+function ErrorPopupNumerousChoices({onClick}) {
 	return (
 		<BackgroundPopup>
 			<ContainerPopup>
 				<Image src={error} width={70} height={70} />
 				<h3 className={style.title}>
-					You can't choose Healthy Mix and other themes. We will fill your set
-					with various puzzles from random themes.
+					You can't choose more than three themes. It's time to be specific
+					about what you want to improve!
 				</h3>
 				<BtnSecondary onClick={onClick}>RETURN</BtnSecondary>
 			</ContainerPopup>
@@ -21,4 +21,4 @@ function ErrorPopupNewSet({onClick}) {
 	);
 }
 
-export default ErrorPopupNewSet;
+export default ErrorPopupNumerousChoices;

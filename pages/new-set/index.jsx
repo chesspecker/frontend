@@ -9,23 +9,28 @@ import {
 import Btn from '../../components/layouts/btn/Btn.jsx';
 import {useNewSetContext} from '../../components/context/NewSetContext.jsx';
 import ErrorPopupNewSet from '../../components/layouts/popup/ErrorPopupNewSet.jsx';
+import ErrorPopupNumerousChoices from '../../components/layouts/popup/ErrorPopupNumerousChoices.jsx';
 import style from './index.module.scss';
 
 function NewSet() {
 	const [choicesSelected, setChoicesSelected] = useState([]);
 	const {newSet, updateNewSetOptions} = useNewSetContext();
-	const [toggleErrorPopup, setToggleErrorPopup] = useState(false);
+	const [toggleHealthyMixPopup, setToggleHealthyMixPopup] = useState(false);
+	const [toggleNumerousChoicesPopup, setToggleNumerousChoicesPopup] =
+		useState(false);
 
 	const handleClick = id => {
-		console.log(id);
-		if (
-			(choicesSelected.length > 0 &&
-				id === 'healthyMix' &&
-				!choicesSelected.includes(id)) ||
-			(choicesSelected[0] === 'healthyMix' && id !== 'healthyMix')
-		) {
-			setToggleErrorPopup(() => true);
+		const selectingHealthyMixWithOther =
+			choicesSelected.length > 0 &&
+			id === 'healthyMix' &&
+			!choicesSelected.includes(id);
+		const healthyMixAlreadySelected =
+			choicesSelected[0] === 'healthyMix' && id !== 'healthyMix';
+		const healthyMixError =
+			selectingHealthyMixWithOther || healthyMixAlreadySelected;
 
+		if (healthyMixError) {
+			setToggleHealthyMixPopup(() => true);
 			return;
 		}
 
@@ -36,6 +41,11 @@ function NewSet() {
 				array.splice(index, 1);
 				return array;
 			});
+			return;
+		}
+
+		if (choicesSelected.length > 2) {
+			setToggleNumerousChoicesPopup(() => true);
 			return;
 		}
 
@@ -52,13 +62,20 @@ function NewSet() {
 
 	return (
 		<PageHeader>
-			{toggleErrorPopup && (
-				<ErrorPopupNewSet onClick={() => setToggleErrorPopup(() => false)} />
+			{toggleHealthyMixPopup && (
+				<ErrorPopupNewSet
+					onClick={() => setToggleHealthyMixPopup(() => false)}
+				/>
+			)}
+			{toggleNumerousChoicesPopup && (
+				<ErrorPopupNumerousChoices
+					onClick={() => setToggleNumerousChoicesPopup(() => false)}
+				/>
 			)}
 			<div className={style.container}>
 				<h2 className={style.title}>
 					{' '}
-					Select one or more category to create your set !
+					Select one or more category to create your set!
 				</h2>
 				<div className={style.set_container}>
 					{themesCategory.map(c => (
