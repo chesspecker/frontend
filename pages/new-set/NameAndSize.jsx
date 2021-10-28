@@ -35,7 +35,7 @@ function NameAndSize() {
 	const handleSubmit = () => {
 		http
 			.post(
-				`${api}/puzzles/sets`,
+				`${api}/set`,
 				{title, themeArray: newSet.themeArray, size, level: difficulty},
 				{withCredentials: true},
 			)
