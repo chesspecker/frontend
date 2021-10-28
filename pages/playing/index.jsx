@@ -300,19 +300,20 @@ function Index() {
 			{startPopupVisible && <StartingPopup onStart={handleStart} />}
 
 			<div className={style.container}>
-				<div>
-					<div className={style.information_container}>
-						<div className={style.timer}>
-							<p>⏲ {useClock(counter + malus)}</p>
-						</div>
-						<div>
-							<BtnSecondary onClick={handleLeaveGame}>LEAVE 🧨</BtnSecondary>
-						</div>
+				<div className={style.information_container}>
+					<div className={style.timer}>
+						<p>⏲ {useClock(counter + malus)}</p>
 					</div>
+					<div>
+						<BtnSecondary onClick={handleLeaveGame}>LEAVE 🧨</BtnSecondary>
+					</div>
+				</div>
+				<div>
 					<div className={style.chessGroundContainer}>
 						{wrongMoveVisible && (
 							<div className={style.wrong_move}>+3 seconds!</div>
 						)}
+						<div className={style.chessGround_left_container}></div>
 						<ChessGround
 							fen={fen}
 							turnColor={turnColor(chess.turn())}
@@ -359,17 +360,20 @@ function Index() {
 								/>
 							</div>
 						</div>
-						<div className={style.control_bar}>
-							<ProgressBarCircle
-								colour='green'
-								percentage={
-									(1 -
-										(puzzleList.length - puzzleCompleteInSession) /
-											currentSet.length) *
-									100
-								}
-								colourFont='grey'
-							/>
+						<div className={style.control_bar_container}>
+							<div className={style.control_bar_content}>
+								<h3 className={style.progression_title}>Progression</h3>
+								<ProgressBarCircle
+									colour='green'
+									percentage={
+										(1 -
+											(puzzleList.length - puzzleCompleteInSession) /
+												currentSet.length) *
+										100
+									}
+									colourFont='grey'
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
