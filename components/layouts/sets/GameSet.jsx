@@ -39,7 +39,7 @@ function GameSet({sets, setCurrentSet, onDelete}) {
 				<div>Best time : {useClock(sets.bestTime)}</div>
 				<div>
 					<p>
-						Status :{' '}
+						Completed :{' '}
 						<span
 							className={
 								sets.cycles < 1
