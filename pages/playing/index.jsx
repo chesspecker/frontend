@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import Image from 'next/image.js';
-import {shuffle} from 'help-array';
 import useSound from 'use-sound';
 import Router from 'next/router.js';
 import Chess from '../../components/utils/chess.js';
@@ -82,7 +81,7 @@ function Index() {
 			setCounter(() => set.currentTime);
 			setPreviousPuzzleTimer(() => set.currentTime);
 
-			const puzzleList = shuffle(set.puzzles.filter(p => p.played === false));
+			const puzzleList = set.puzzles.filter(p => p.played === false);
 			setPuzzleList(() => puzzleList);
 		};
 
