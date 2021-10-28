@@ -51,7 +51,7 @@ function GameSet({sets, setCurrentSet, onDelete}) {
 									: `${style.badge} ${style.badge_primary}`
 							}
 						>
-							Played {sets.cycles} time{sets.cycles > 1 && 's'}
+							{sets.cycles} time{sets.cycles > 1 && 's'}
 						</span>
 					</p>
 					<p>
