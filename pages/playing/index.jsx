@@ -3,7 +3,6 @@ import Image from 'next/image.js';
 import useSound from 'use-sound';
 import Router from 'next/router.js';
 import Chess from '../../components/utils/chess.js';
-// Import rotate from '../../public/images/rotate.svg';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import SucessPopup from '../../components/layouts/popup/SucessPopup.jsx';
 import StartingPopup from '../../components/layouts/popup/StartingPopup.jsx';
@@ -246,9 +245,9 @@ function Index() {
 	/**
 	 * Called after each correct move.
 	 */
-	const checkPuzzleComplete = moveNumber => {
+	const checkPuzzleComplete = async moveNumber => {
 		if (moveNumber === history.length) {
-			const isSetComplete = checkSetComplete();
+			const isSetComplete = await checkSetComplete();
 			if (!isSetComplete) changePuzzle();
 		}
 	};
