@@ -18,27 +18,31 @@ class MyDocument extends Document {
 					<meta property='og:title' content='ChessPecker' />
 					<meta
 						property='og:description'
-						content='An application to practice playing chess with the woodpecker method!'
+						content='Application to practice chess with the woodpecker method!'
+					/>
+					<meta
+						name='description'
+						content='Application to practice chess with the woodpecker method!'
 					/>
 					{/* Favicon */}
 					<link
 						rel='apple-touch-icon'
 						sizes='180x180'
-						href='../public/favicon/apple-touch-icon.png'
+						href='/favicon/apple-touch-icon.png'
 					/>
 					<link
 						rel='icon'
 						type='image/png'
 						sizes='32x32'
-						href='../public/favicon/favicon-32x32.png'
+						href='/favicon/favicon-32x32.png'
 					/>
 					<link
 						rel='icon'
 						type='image/png'
 						sizes='16x16'
-						href='../public/favicon/favicon-16x16.png'
+						href='/favicon/favicon-16x16.png'
 					/>
-					<link rel='manifest' href='../public/favicon/site.webmanifest' />
+					<link rel='manifest' href='/favicon/site.webmanifest' />
 				</Head>
 				<body>
 					<Main />
