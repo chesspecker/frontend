@@ -2,8 +2,9 @@
 	background: rgb(71, 43, 186);
 	background: linear-gradient(0deg, #000428 0%, #004e92 70%);
 	display: flex;
-	height: min-content;
+	min-height: 100vh;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	overflow: hidden;
 }

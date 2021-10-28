@@ -1,5 +1,5 @@
 .container {
-	display: flex;
+	flex: 1;
 	margin-top: 10rem;
 	flex-direction: column;
 	justify-content: center;
@@ -29,12 +29,11 @@
 	flex-wrap: wrap;
 }
 .chessGround_left_container {
-	width: 33vw;
+	flex: 1;
 }
 
 .control_bar_container {
-	display: flex;
-	width: 33vw;
+	flex: 1;
 }
 .control_bar_content {
 	background-color: beige;
