@@ -1,7 +1,6 @@
 import Image from 'next/image.js';
 import Link from 'next/link.js';
 import logo from '../../../public/images/logo.svg';
-import useUser from '../../hooks/useUser.jsx';
 import style from './NavBar.module.css';
 
 function NavBar() {
@@ -20,7 +19,7 @@ function NavBar() {
 				</Link>
 			</div>
 			<div className={style.user}>
-				{useUser() && <a href={`${api}/auth/logout`}>Logout</a>}
+				<a href={`${api}/auth/logout`}>Logout</a>
 			</div>
 		</div>
 	);

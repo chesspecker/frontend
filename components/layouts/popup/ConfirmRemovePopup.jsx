@@ -1,6 +1,4 @@
 import Image from 'next/image.js';
-
-import React from 'react';
 import trash from '../../../public/images/trash.svg';
 import BtnWarning from '../btn/BtnWarning.jsx';
 import BtnSecondary from '../btn/BtnSecondary.jsx';

@@ -1,4 +1,3 @@
-import React from 'react';
 import Image from 'next/image.js';
 import BtnSecondary from '../btn/BtnSecondary.jsx';
 import error from '../../../public/images/supress.svg';

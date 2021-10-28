@@ -58,7 +58,7 @@ function Index() {
 		if (puzzleList.length === 0) return;
 		const getPuzzle = async () => {
 			const {data: puzzle} = await http.get(
-				`${api}/puzzles/id/${puzzleToSet._id}`,
+				`${api}/puzzle/${puzzleToSet._id}`,
 				{withCredentials: true},
 			);
 			setPuzzle(() => puzzle);
@@ -72,7 +72,7 @@ function Index() {
 			if (currentUser.currentSet.length > 5)
 				localStorage.setItem('currentSet', currentUser.currentSet);
 			const {data: set} = await http.get(
-				`${api}/puzzles/set/id/${localStorage.getItem('currentSet')}`,
+				`${api}/set/id/${localStorage.getItem('currentSet')}`,
 				{withCredentials: true},
 			);
 			setCurrentSet(() => set);
@@ -171,7 +171,7 @@ function Index() {
 		const mistakes = actualPuzzleMistake;
 		try {
 			await http.put(
-				`${api}/puzzles/set/id/${localStorage.getItem('currentSet')}`,
+				`${api}/puzzle/${localStorage.getItem('currentSet')}`,
 				{puzzleId: actualPuzzleId._id, options: {mistakes, timeTaken}},
 				{withCredentials: true},
 			);
@@ -197,7 +197,7 @@ function Index() {
 
 	const updatePuzzleFinished = async () => {
 		await http.put(
-			`${api}/puzzles/set/id/${localStorage.getItem('currentSet')}`,
+			`${api}/set/complete/${localStorage.getItem('currentSet')}`,
 			{cycles: true, bestTime: counter + 1},
 			{withCredentials: true},
 		);

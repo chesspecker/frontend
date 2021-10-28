@@ -7,7 +7,7 @@ export default function useSetsDashboard() {
 
 	useEffect(() => {
 		const getSets = async () => {
-			const {data: sets} = await http.get(`${api}/puzzles/sets/dashboard`, {
+			const {data: sets} = await http.get(`${api}/set/dashboard`, {
 				withCredentials: true,
 			});
 			setPuzzleSet(() => sets);

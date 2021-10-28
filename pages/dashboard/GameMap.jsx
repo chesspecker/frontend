@@ -2,8 +2,6 @@ import Router from 'next/router.js';
 import Image from 'next/image.js';
 import Link from 'next/link.js';
 import {useEffect, useState} from 'react';
-import {array} from 'prop-types';
-import useSets from '../../components/hooks/useSets.jsx';
 import useSetsDashboard from '../../components/hooks/useSetsDashboard.jsx';
 import GameSet from '../../components/layouts/sets/GameSet.jsx';
 import {useUserContext} from '../../components/context/UserContext.jsx';
@@ -17,7 +15,6 @@ import style from './index.module.scss';
 function GameMap() {
 	const api = process.env.API;
 	const setsDatabase = useSetsDashboard();
-	console.log(setsDatabase);
 	const [sets, setSets] = useState([]);
 	const [toggleConfirm, setToggleCOnfirm] = useState(false);
 	const [setToRemove, setSetToRemove] = useState('');
@@ -45,12 +42,12 @@ function GameMap() {
 			const setInArray = sets.find(s => s._id === setToRemove);
 			const index = sets.indexOf(setInArray);
 			setSets(oldArray => {
-				array = [...oldArray];
+				const array = [...oldArray];
 				array.splice(index, 1);
 				return array;
 			});
 			setToggleCOnfirm(() => false);
-			await http.delete(`${api}/puzzles/set/id/${setToRemove}`, {
+			await http.delete(`${api}/set/id/${setToRemove}`, {
 				withCredentials: true,
 			});
 		} else {
