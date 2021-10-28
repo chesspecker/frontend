@@ -42,18 +42,16 @@ function GameSet({sets, setCurrentSet, onDelete}) {
 						Status :{' '}
 						<span
 							className={
-								sets.currentTime === 0
+								sets.cycles < 1
 									? `${style.badge} ${style.badge_secondary}`
+									: sets.cycles < 3
+									? `${style.badge} ${style.badge_warning}`
+									: sets.cycles < 5
+									? `${style.badge} ${style.badge_yellow}`
 									: `${style.badge} ${style.badge_primary}`
 							}
 						>
-							{sets.cycles === 0
-								? sets.currentTime === 0
-									? 'Not started'
-									: 'Playing'
-								: sets.currentTime === 0
-								? 'Finished'
-								: 'Playing'}
+							Played {sets.cycles} time{sets.cycles > 1 && 's'}
 						</span>
 					</p>
 					<p>
