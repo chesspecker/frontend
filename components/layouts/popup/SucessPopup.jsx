@@ -9,12 +9,12 @@ function SucessPopup({restart, counter}) {
 	return (
 		<BackgroundPopup>
 			<ContainerPopup>
-				<p>🎉 Good game 🎉 !</p>
-				<p>Time to solve this set : {useClock(counter)}</p>
+				<p>🎉 Good game 🎉</p>
+				<p>Time spent : {useClock(counter)}</p>
 				<div className={style.options}>
 					<BtnSecondary onClick={restart}>RESTART</BtnSecondary>
 					<Link href='/dashboard'>
-						<BtnSecondary>RETURN TO DASHBOARD</BtnSecondary>
+						<BtnSecondary>DASHBOARD</BtnSecondary>
 					</Link>
 				</div>
 			</ContainerPopup>
