@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import Image from 'next/image.js';
 import useSound from 'use-sound';
 import Router from 'next/router.js';
 import Chess from '../../components/utils/chess.js';
-import rotate from '../../public/images/rotate.svg';
+// Import rotate from '../../public/images/rotate.svg';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import SucessPopup from '../../components/layouts/popup/SucessPopup.jsx';
 import StartingPopup from '../../components/layouts/popup/StartingPopup.jsx';
@@ -24,6 +24,9 @@ import BtnSecondary from '../../components/layouts/btn/BtnSecondary.jsx';
 import {ProgressBarCircle} from '../../components/layouts/progress-bar/ProgressBarCirle.jsx';
 import style from './index.module.scss';
 
+const sortBy = (array, p) =>
+	[...array].sort((a, b) => (a[p] > b[p] ? 1 : a[p] < b[p] ? -1 : 0));
+
 function Index() {
 	const api = process.env.API;
 	const [soundMove] = useSound(moveSound);
@@ -32,7 +35,7 @@ function Index() {
 	const [turn, setTurn] = useState('w');
 	const [malus, setMalus] = useState(0);
 	const [chess, setChess] = useState(new Chess());
-	const [puzzle, setPuzzle] = useState({});
+	const [currentPuzzle, setCurrentPuzzle] = useState({});
 	const [counter, setCounter] = useState(0);
 	const [history, setHistory] = useState([]);
 	const [lastMove, setLastMove] = useState();
@@ -45,28 +48,29 @@ function Index() {
 	const [timerRunning, setTimerRunning] = useState(false);
 	const [sucessVisible, setSucessVisible] = useState(false);
 	const [selectVisible, setSelectVisible] = useState(false);
-	const [puzzleListSize, setPuzzleListSize] = useState(0);
+	const [puzzleListLength, setPuzzleListLength] = useState(0);
 	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
 	const [startPopupVisible, setStartPopupVisible] = useState(true);
-	const [actualPuzzleMistake, setActualPuzzleMistake] = useState(0);
-	const [previousPuzzleTimer, setPreviousPuzzleTimer] = useState(0);
+	const [mistakesNumber, setMistakesNumber] = useState(0);
+	const [timerBeforeCurrentPuzzle, setTimerBeforeCurrentPuzzle] = useState(0);
 	const [puzzleCompleteInSession, setPuzzleCompleteInSession] = useState(0);
 
+	/**
+	 * Setup timer.
+	 */
 	useEffect(() => {
-		if (!puzzleList[actualPuzzle]) return;
-		const puzzleToSet = puzzleList[actualPuzzle];
-		if (puzzleList.length === 0) return;
-		const getPuzzle = async () => {
-			const {data: puzzle} = await http.get(
-				`${api}/puzzle/${puzzleToSet._id}`,
-				{withCredentials: true},
-			);
-			setPuzzle(() => puzzle);
+		const timer = () => {
+			setTimeout(() => setCounter(lastCount => lastCount + 1), 1000);
 		};
 
-		getPuzzle();
-	}, [puzzleList, actualPuzzle, api]);
+		if (timerRunning) timer();
+		if (!timerRunning) clearTimeout(timer);
+	}, [timerRunning, counter]);
 
+	/**
+	 * Retrieve the set.
+	 * Extract the list of puzzles.
+	 */
 	useEffect(() => {
 		const getSet = async () => {
 			if (currentUser.currentSet.length > 5)
@@ -77,33 +81,48 @@ function Index() {
 			);
 			setCurrentSet(() => set);
 			setCounter(() => set.currentTime);
-			setPreviousPuzzleTimer(() => set.currentTime);
+			setTimerBeforeCurrentPuzzle(() => set.currentTime);
 
-			const puzzleList = set.puzzles.filter(p => p.played === false);
+			let puzzleList = set.puzzles.filter(p => p.played === false);
+			puzzleList = sortBy(puzzleList, 'order');
 			setPuzzleList(() => puzzleList);
 		};
 
 		getSet();
-	}, [api, currentUser.currentSet]);
+	}, [currentUser.currentSet]);
 
+	/**
+	 * Set the number of puzzles remaining.
+	 */
 	useEffect(() => {
 		if (puzzleList.length === 0) return;
-		setPuzzleListSize(() => puzzleList.length);
+		setPuzzleListLength(() => puzzleList.length);
 	}, [puzzleList]);
 
+	/**
+	 * Retrieve current puzzle.
+	 */
 	useEffect(() => {
-		const timer = () => {
-			setTimeout(() => setCounter(lastCount => lastCount + 1), 1000);
+		if (!puzzleList[actualPuzzle] || puzzleList.length === 0) return;
+		const puzzleToGet = puzzleList[actualPuzzle];
+		const getCurrentPuzzle = async () => {
+			const {data: puzzle} = await http.get(
+				`${api}/puzzle/${puzzleToGet._id}`,
+				{withCredentials: true},
+			);
+			setCurrentPuzzle(() => puzzle);
 		};
 
-		if (timerRunning) timer();
-		if (!timerRunning) clearTimeout(timer);
-	}, [timerRunning, counter]);
+		getCurrentPuzzle();
+	}, [puzzleList, actualPuzzle]);
 
+	/**
+	 * Setup the board.
+	 */
 	useEffect(() => {
-		if (!puzzle.Moves) return;
-		const chessJs = new Chess(puzzle.FEN);
-		const history = puzzle.Moves.split(' ');
+		if (!currentPuzzle.Moves) return;
+		const chessJs = new Chess(currentPuzzle.FEN);
+		const history = currentPuzzle.Moves.split(' ');
 
 		setPendingMove(() => {});
 		setLastMove(() => {});
@@ -113,108 +132,33 @@ function Index() {
 		setFen(() => chessJs.fen());
 		setTurn(() => chessJs.turn());
 		setOrientation(() => (chessJs.turn() === 'b' ? 'white' : 'black'));
-	}, [puzzle]);
+	}, [currentPuzzle]);
 
-	const rightMove = index => {
-		soundMove();
+	/**
+	 * Function making the computer play the next move.
+	 */
+	const computerMove = index => {
 		const move = chess.move(history[index], {sloppy: true});
 		if (move && move.from) setLastMove([move.from, move.to]);
 		setFen(chess.fen());
 		checkPuzzleComplete(moveNumber + 1);
 		setMoveNumber(previousMove => previousMove + 1);
+		soundMove();
 	};
 
+	/**
+	 * When the board is setup, make the first move.
+	 */
 	useEffect(() => {
 		if (!history) return;
-		if (moveNumber === 0) setTimeout(rightMove(moveNumber), 500);
-	}, [history, moveNumber, rightMove]);
+		if (moveNumber === 0) setTimeout(computerMove(moveNumber), 500);
+	}, [history, moveNumber]);
 
-	const onMove = (from, to) => {
-		soundMove();
-		const move = chess.move({from, to, promotion: 'x'});
-		const moves = chess.moves({verbose: true});
-		const goodMove = history[moveNumber];
-		const goodMoveWithoutPromote = goodMove.slice(0, -1);
-
-		for (let i = 0, length_ = moves.length; i < length_; i++) {
-			if (
-				moves[i].flags.includes('p') &&
-				moves[i].from === from &&
-				`${from}${to}` === goodMoveWithoutPromote
-			) {
-				setPendingMove([from, to]);
-				setSelectVisible(true);
-				return;
-			}
-		}
-
-		if (move && `${move.from}${move.to}` === history[moveNumber]) {
-			setFen(() => chess.fen());
-			setMoveNumber(previousMove => previousMove + 1);
-			checkPuzzleComplete(moveNumber);
-			setLastMove([from, to]);
-			setTimeout(rightMove(moveNumber + 1), 800);
-		} else if (move) {
-			chess.undo();
-			setFen(() => chess.fen());
-			setMalus(lastCount => lastCount + 3);
-			setActualPuzzleMistake(previous => previous + 1);
-			setWrongMoveVisible(() => true);
-			setTimeout(() => setWrongMoveVisible(() => false), 300);
-		}
-	};
-
-	const changePuzzle = async () => {
-		setPuzzleCompleteInSession(previous => previous + 1);
-		const actualPuzzleId = puzzleList[actualPuzzle];
-		const timeTaken = counter - previousPuzzleTimer;
-		const mistakes = actualPuzzleMistake;
-		try {
-			await http.put(
-				`${api}/puzzle/${localStorage.getItem('currentSet')}`,
-				{puzzleId: actualPuzzleId._id, options: {mistakes, timeTaken}},
-				{withCredentials: true},
-			);
-		} catch (error) {
-			console.log(error);
-		}
-
-		setActualPuzzleMistake(() => 0);
-		setPreviousPuzzleTimer(() => counter);
-		setActualPuzzle(previousPuzzle => previousPuzzle + 1);
-	};
-
-	const checkSetComplete = () => {
-		if (actualPuzzle + 1 === puzzleListSize) {
-			setTimerRunning(() => false);
-			setSucessVisible(() => true);
-			updatePuzzleFinished();
-			return true;
-		}
-
-		return false;
-	};
-
-	const updatePuzzleFinished = async () => {
-		await http.put(
-			`${api}/set/complete/${localStorage.getItem('currentSet')}`,
-			{cycles: true, bestTime: counter + 1},
-			{withCredentials: true},
-		);
-	};
-
-	const checkPuzzleComplete = moveNumber => {
-		if (moveNumber === history.length) {
-			const isSetComplete = checkSetComplete();
-			if (!isSetComplete) changePuzzle();
-		}
-	};
-
-	const turnColor = string_ => (string_ === 'w' ? 'white' : 'black');
-
+	/**
+	 * Allow only legal moves.
+	 */
 	const calcMovable = () => {
 		const dests = new Map();
-
 		for (const s of chess.SQUARES) {
 			const ms = chess.moves({square: s, verbose: true});
 			if (ms.length > 0)
@@ -228,28 +172,149 @@ function Index() {
 			free: false,
 			dests,
 			color: turn === 'b' ? 'white' : 'black',
+			draggable: {
+				showGhost: true,
+			},
 		};
 	};
 
-	const promotion = e => {
-		const from = pendingMove[0];
-		const to = pendingMove[1];
-		const goodMove = history[moveNumber];
-		const goodPromotion = goodMove.slice(-1);
-		chess.move({from, to, promotion: e});
-		if (e === goodPromotion) {
-			setFen(chess.fen());
-			setLastMove([from, to]);
+	/**
+	 * Function called when the user plays.
+	 */
+	const onMove = (from, to) => {
+		const moves = chess.moves({verbose: true});
+		for (let i = 0, length_ = moves.length; i < length_; i++) {
+			if (moves[i].flags.includes('p') && moves[i].from === from) {
+				setPendingMove([from, to]);
+				setSelectVisible(true);
+				return;
+			}
+		}
+
+		const move = chess.move({from, to, promotion: 'x'});
+		if (move === null) return;
+		soundMove();
+
+		const isCorrectMove = validateMove(move, moves);
+		if (isCorrectMove) {
+			setFen(() => chess.fen());
 			setMoveNumber(previousMove => previousMove + 1);
-			setActualPuzzleMistake(previous => previous + 1);
-			setSelectVisible(false);
 			checkPuzzleComplete(moveNumber);
-			setTimeout(rightMove(moveNumber + 1), 500);
+			setLastMove([from, to]);
+			setTimeout(computerMove(moveNumber + 1), 800);
 		} else {
+			chess.undo();
+			setFen(() => chess.fen());
+			setMalus(lastCount => lastCount + 3);
+			setMistakesNumber(previous => previous + 1);
 			setWrongMoveVisible(() => true);
 			setTimeout(() => setWrongMoveVisible(() => false), 300);
 		}
 	};
+
+	/**
+	 * Check if the move is valid.
+	 */
+	const validateMove = move => `${move.from}${move.to}` === history[moveNumber];
+
+	/**
+	 * Handle promotions via chessground.
+	 */
+	const promotion = piece => {
+		setSelectVisible(false);
+		const from = pendingMove[0];
+		const to = pendingMove[1];
+		chess.move({from, to, promotion: piece});
+		const isCorrectMove = piece === history[moveNumber].slice(-1);
+
+		if (isCorrectMove) {
+			setFen(() => chess.fen());
+			setMoveNumber(previousMove => previousMove + 1);
+			checkPuzzleComplete(moveNumber);
+			setLastMove([from, to]);
+			setTimeout(computerMove(moveNumber + 1), 800);
+		} else {
+			chess.undo();
+			setFen(() => chess.fen());
+			setMalus(lastCount => lastCount + 3);
+			setMistakesNumber(previous => previous + 1);
+			setWrongMoveVisible(() => true);
+			setTimeout(() => setWrongMoveVisible(() => false), 300);
+		}
+	};
+
+	/**
+	 * Called after each correct move.
+	 */
+	const checkPuzzleComplete = moveNumber => {
+		if (moveNumber === history.length) {
+			const isSetComplete = checkSetComplete();
+			if (!isSetComplete) changePuzzle();
+		}
+	};
+
+	/**
+	 * Called after each correct move.
+	 */
+	const checkSetComplete = async () => {
+		if (actualPuzzle + 1 === puzzleListLength) {
+			setTimerRunning(() => false);
+			setSucessVisible(() => true);
+			await updateFinishedSet();
+			return true;
+		}
+
+		return false;
+	};
+
+	/**
+	 * Push the data of the current set when complete.
+	 */
+	const updateFinishedSet = async () => {
+		try {
+			await http.put(
+				`${api}/set/complete/${localStorage.getItem('currentSet')}`,
+				{cycles: true, bestTime: counter + 1},
+				{withCredentials: true},
+			);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	/**
+	 * Called when puzzle is completed, switch to the next one.
+	 */
+	const changePuzzle = async () => {
+		await updateFinishedPuzzle();
+		setPuzzleCompleteInSession(previous => previous + 1);
+		setMistakesNumber(() => 0);
+		setTimerBeforeCurrentPuzzle(() => counter);
+		setActualPuzzle(previousPuzzle => previousPuzzle + 1);
+	};
+
+	/**
+	 * Push the data of the current set when complete.
+	 */
+	const updateFinishedPuzzle = async () => {
+		const actualPuzzleId = puzzleList[actualPuzzle];
+		const timeTaken = counter - timerBeforeCurrentPuzzle;
+		const mistakes = mistakesNumber;
+		try {
+			await http.put(
+				`${api}/puzzle/${localStorage.getItem('currentSet')}`,
+				{puzzleId: actualPuzzleId._id, options: {mistakes, timeTaken}},
+				{withCredentials: true},
+			);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	/**
+	 * Return the correct turn color as a string.
+	 */
+	const turnColor = string_ => (string_ === 'w' ? 'white' : 'black');
 
 	const switchOrientation = () =>
 		setOrientation(orientation =>
@@ -293,7 +358,7 @@ function Index() {
 				<div>
 					<div className={style.chessGroundContainer}>
 						{wrongMoveVisible && (
-							<div className={style.wrong_move}>+3 seconds!</div>
+							<div className={style.wrong_move}>+3&quot;!</div>
 						)}
 						<div className={style.chessGround_left_container} />
 						<ChessGround
