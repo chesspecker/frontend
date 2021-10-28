@@ -26,28 +26,28 @@ import style from './index.module.scss';
 
 function Index() {
 	const api = process.env.API;
-	const [fen, setFen] = useState('');
-	const [malus, setMalus] = useState(0);
-	const {currentUser} = useUserContext();
-	const [currentSet, setCurrentSet] = useState('');
-	const [turn, setTurn] = useState('w');
 	const [soundMove] = useSound(moveSound);
+	const [fen, setFen] = useState('');
+	const {currentUser} = useUserContext();
+	const [turn, setTurn] = useState('w');
+	const [malus, setMalus] = useState(0);
+	const [chess, setChess] = useState(new Chess());
 	const [puzzle, setPuzzle] = useState({});
-	const [lastMove, setLastMove] = useState();
 	const [counter, setCounter] = useState(0);
 	const [history, setHistory] = useState([]);
+	const [lastMove, setLastMove] = useState();
+	const [currentSet, setCurrentSet] = useState('');
 	const [moveNumber, setMoveNumber] = useState(0);
-	const [chess, setChess] = useState(new Chess());
-	const [pendingMove, setPendingMove] = useState();
 	const [puzzleList, setPuzzleList] = useState([]);
+	const [pendingMove, setPendingMove] = useState();
 	const [orientation, setOrientation] = useState('');
 	const [actualPuzzle, setActualPuzzle] = useState(0);
 	const [timerRunning, setTimerRunning] = useState(false);
-	const [puzzleListSize, setPuzzleListSize] = useState(0);
 	const [sucessVisible, setSucessVisible] = useState(false);
 	const [selectVisible, setSelectVisible] = useState(false);
-	const [startPopupVisible, setStartPopupVisible] = useState(true);
+	const [puzzleListSize, setPuzzleListSize] = useState(0);
 	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
+	const [startPopupVisible, setStartPopupVisible] = useState(true);
 	const [actualPuzzleMistake, setActualPuzzleMistake] = useState(0);
 	const [previousPuzzleTimer, setPreviousPuzzleTimer] = useState(0);
 	const [puzzleCompleteInSession, setPuzzleCompleteInSession] = useState(0);
@@ -55,7 +55,6 @@ function Index() {
 	useEffect(() => {
 		if (!puzzleList[actualPuzzle]) return;
 		const puzzleToSet = puzzleList[actualPuzzle];
-		console.log(puzzleToSet, puzzleToSet._id);
 		if (puzzleList.length === 0) return;
 		const getPuzzle = async () => {
 			const {data: puzzle} = await http.get(
@@ -76,7 +75,6 @@ function Index() {
 				`${api}/puzzles/set/id/${localStorage.getItem('currentSet')}`,
 				{withCredentials: true},
 			);
-			console.log('this is the set', set);
 			setCurrentSet(() => set);
 			setCounter(() => set.currentTime);
 			setPreviousPuzzleTimer(() => set.currentTime);
@@ -150,8 +148,6 @@ function Index() {
 			}
 		}
 
-		console.log('validation', from, to, history[moveNumber]);
-
 		if (move && `${move.from}${move.to}` === history[moveNumber]) {
 			setFen(() => chess.fen());
 			setMoveNumber(previousMove => previousMove + 1);
@@ -171,12 +167,8 @@ function Index() {
 	const changePuzzle = async () => {
 		setPuzzleCompleteInSession(previous => previous + 1);
 		const actualPuzzleId = puzzleList[actualPuzzle];
-		console.log('actualpuzzle', actualPuzzleId);
 		const timeTaken = counter - previousPuzzleTimer;
-		console.log('time taken', timeTaken);
 		const mistakes = actualPuzzleMistake;
-		console.log('mistakes', mistakes);
-
 		try {
 			await http.put(
 				`${api}/puzzles/set/id/${localStorage.getItem('currentSet')}`,
@@ -189,22 +181,14 @@ function Index() {
 
 		setActualPuzzleMistake(() => 0);
 		setPreviousPuzzleTimer(() => counter);
-		setActualPuzzle(previousPuzzle => {
-			console.log(previousPuzzle + 1);
-			return previousPuzzle + 1;
-		});
+		setActualPuzzle(previousPuzzle => previousPuzzle + 1);
 	};
-
-	// Nombre d'erreur
-	// time to play
-	// puzzle id puis objet mistakes:number timeTaken:secondes
 
 	const checkSetComplete = () => {
 		if (actualPuzzle + 1 === puzzleListSize) {
 			setTimerRunning(() => false);
 			setSucessVisible(() => true);
 			updatePuzzleFinished();
-
 			return true;
 		}
 
@@ -252,7 +236,6 @@ function Index() {
 		const to = pendingMove[1];
 		const goodMove = history[moveNumber];
 		const goodPromotion = goodMove.slice(-1);
-		// Const move = chess.move({from, to, promotion: e});
 		chess.move({from, to, promotion: e});
 		if (e === goodPromotion) {
 			setFen(chess.fen());
@@ -288,7 +271,6 @@ function Index() {
 	};
 
 	const handleLeaveGame = () => {
-		console.log('leave game');
 		Router.push('/dashboard');
 	};
 
