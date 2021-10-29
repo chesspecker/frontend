@@ -437,16 +437,6 @@ function Index() {
 		);
 	 */
 
-	const handleStart = () => {
-		setMalus(() => 0);
-		setStartPopupVisible(() => false);
-		setTimerRunning(true);
-	};
-
-	const handleLeaveGame = () => {
-		Router.push('/dashboard');
-	};
-
 	const toggleSound = () => setIsSoundDisabled(previous => !previous);
 
 	const handleRestart = () => {
@@ -458,6 +448,12 @@ function Index() {
 		setSucessVisible(() => false);
 	};
 
+		const handleStart = () => {
+		setMalus(() => 0);
+		setStartPopupVisible(() => false);
+		setTimerRunning(true);
+	};
+
 	const keepPlaying = () => {
 		setPuzzleCompleteInSession(() => 0);
 		setActualPuzzle(() => 0);
@@ -466,6 +462,10 @@ function Index() {
 		setTimerRunning(() => true);
 		setSucessVisible(() => false);
 		setCurrentChunk(previousChunk => previousChunk + 1);
+	};
+
+	const handleLeaveGame = () => {
+		router.push('/dashboard');
 	};
 
 	const handleSoundStatus = () => {
@@ -483,6 +483,12 @@ function Index() {
 			<PageHeader>
 				{sucessVisible && (
 					<SucessPopup counter={counter + malus} restart={handleRestart} />
+				)}{' '}
+				{chunkSucessVisible && (
+					<ChunkSucessPopup
+						keepPlaying={keepPlaying}
+						currentChunk={currentChunk}
+					/>
 				)}
 				{chunkSucessVisible && (
 					<ChunkSucessPopup
@@ -492,7 +498,6 @@ function Index() {
 				)}
 				{startPopupVisible && <StartingPopup onStart={handleStart} />}
 				{wrongMoveVisible && <div className={style.wrong_move}>+3&quot;!</div>}
-
 				<div className={style.container}>
 					<div className={style.information_container}>
 						<div className={style.timer}>
