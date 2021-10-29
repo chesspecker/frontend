@@ -9,7 +9,7 @@ function Footer(props) {
 		<div className={style.footer}>
 			<div className={style.content}>
 				<div className={style.buYaCofee}>
-					<p className={style.buYaCofee_desc}>Made with 🤍 Buy us a ☕️ </p>
+					<p className={style.buYaCofee_desc}>Currently in beta</p>
 				</div>
 				<Link href='https://github.com/chesspecker'>
 					<div className={style.bugReport}>
