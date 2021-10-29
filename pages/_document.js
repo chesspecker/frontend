@@ -43,6 +43,12 @@ class MyDocument extends Document {
 						href='/favicon/favicon-16x16.png'
 					/>
 					<link rel='manifest' href='/favicon/site.webmanifest' />
+					{/* Plausible */}
+					<script
+						defer
+						data-domain='chesspecker.com'
+						src='https://plausible.io/js/plausible.js'
+					></script>
 				</Head>
 				<body>
 					<Main />
