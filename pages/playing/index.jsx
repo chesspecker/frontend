@@ -5,6 +5,7 @@ import Router from 'next/router.js';
 import Chess from '../../components/utils/chess.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import SucessPopup from '../../components/layouts/popup/SucessPopup.jsx';
+import ChunkSucessPopup from '../../components/layouts/popup/ChunkSucessPopup.jsx';
 import StartingPopup from '../../components/layouts/popup/StartingPopup.jsx';
 import ChessGround from '../../components/layouts/ChessGround.jsx';
 import http from '../../services/http-service.js';
@@ -54,6 +55,12 @@ function Index() {
 	const [timerBeforeCurrentPuzzle, setTimerBeforeCurrentPuzzle] = useState(0);
 	const [puzzleCompleteInSession, setPuzzleCompleteInSession] = useState(0);
 
+	const [spacedRepetition, setSpacedRepetition] = useState(false);
+	const [chunkLength, setchunkLength] = useState(false);
+	const [currentChunk, setCurrentChunk] = useState(0);
+	const [chunkSucessVisible, setChunkSucessVisible] = useState(false);
+	const [currentPuzzleNumber, setCurrentPuzzleNumber] = useState(0);
+
 	/**
 	 * Setup timer.
 	 */
@@ -81,6 +88,9 @@ function Index() {
 			setCurrentSet(() => set);
 			setCounter(() => set.currentTime);
 			setTimerBeforeCurrentPuzzle(() => set.currentTime);
+			setSpacedRepetition(() => set.spacedRepetition);
+			setchunkLength(() => set.chunkLength);
+			setCurrentPuzzleNumber(() => set.totalPuzzlesPlayed);
 
 			let puzzleList = set.puzzles.filter(p => p.played === false);
 			puzzleList = sortBy(puzzleList, 'order');
@@ -247,8 +257,13 @@ function Index() {
 	 */
 	const checkPuzzleComplete = async moveNumber => {
 		if (moveNumber === history.length) {
-			const isSetComplete = await checkSetComplete();
-			if (!isSetComplete) changePuzzle();
+			if (spacedRepetition) {
+				const isChunkComplete = await checkChunkComplete();
+				if (!isChunkComplete) changePuzzle();
+			} else {
+				const isSetComplete = await checkSetComplete();
+				if (!isSetComplete) changePuzzle();
+			}
 		}
 	};
 
@@ -282,10 +297,41 @@ function Index() {
 	};
 
 	/**
+	 * Called after each correct move.
+	 */
+	const checkChunkComplete = async () => {
+		// TODO: add modulo
+		if (currentPuzzleNumber + 1 === chunkLength) {
+			setTimerRunning(() => false);
+			setChunkSucessVisible(() => true);
+			await updateFinishedChunk();
+			return true;
+		}
+
+		return false;
+	};
+
+	/**
+	 * Push the data of the current set when complete.
+	 */
+	const updateFinishedChunk = async () => {
+		try {
+			await http.put(
+				`${api}/set/chunk/${localStorage.getItem('currentSet')}`,
+				undefined,
+				{withCredentials: true},
+			);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	/**
 	 * Called when puzzle is completed, switch to the next one.
 	 */
 	const changePuzzle = async () => {
 		await updateFinishedPuzzle();
+		setCurrentPuzzleNumber(previous => previous + 1);
 		setPuzzleCompleteInSession(previous => previous + 1);
 		setMistakesNumber(() => 0);
 		setTimerBeforeCurrentPuzzle(() => counter);
@@ -320,15 +366,6 @@ function Index() {
 			orientation === 'white' ? 'black' : 'white',
 		);
 
-	const handleRestart = () => {
-		setPuzzleCompleteInSession(() => 0);
-		setActualPuzzle(() => 0);
-		setCounter(() => 0);
-		setMalus(() => 0);
-		setTimerRunning(() => true);
-		setSucessVisible(() => false);
-	};
-
 	const handleStart = () => {
 		setMalus(() => 0);
 		setStartPopupVisible(() => false);
@@ -339,10 +376,35 @@ function Index() {
 		Router.push('/dashboard');
 	};
 
+	const handleRestart = () => {
+		setPuzzleCompleteInSession(() => 0);
+		setActualPuzzle(() => 0);
+		setCounter(() => 0);
+		setMalus(() => 0);
+		setTimerRunning(() => true);
+		setSucessVisible(() => false);
+	};
+
+	const keepPlaying = () => {
+		setPuzzleCompleteInSession(() => 0);
+		setActualPuzzle(() => 0);
+		setCounter(() => 0);
+		setMalus(() => 0);
+		setTimerRunning(() => true);
+		setSucessVisible(() => false);
+		setCurrentChunk(previousChunk => previousChunk + 1);
+	};
+
 	return (
 		<PageHeader>
 			{sucessVisible && (
-				<SucessPopup counter={counter + malus} restart={handleRestart} />
+				<SucessPopup restart={handleRestart} counter={counter + malus} />
+			)}
+			{chunkSucessVisible && (
+				<ChunkSucessPopup
+					keepPlaying={keepPlaying}
+					currentChunk={currentChunk}
+				/>
 			)}
 			{startPopupVisible && <StartingPopup onStart={handleStart} />}
 
