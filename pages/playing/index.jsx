@@ -57,7 +57,7 @@ function Index() {
 
 	const [spacedRepetition, setSpacedRepetition] = useState(false);
 	const [chunkLength, setchunkLength] = useState(false);
-	const [currentChunk, setCurrentChunk] = useState(0);
+	const [currentChunk, setCurrentChunk] = useState(1);
 	const [chunkSucessVisible, setChunkSucessVisible] = useState(false);
 	const [currentPuzzleNumber, setCurrentPuzzleNumber] = useState(0);
 
@@ -301,7 +301,7 @@ function Index() {
 	 */
 	const checkChunkComplete = async () => {
 		// TODO: add modulo
-		if (currentPuzzleNumber + 1 === chunkLength) {
+		if (currentPuzzleNumber + 1 === chunkLength * currentChunk) {
 			setTimerRunning(() => false);
 			setChunkSucessVisible(() => true);
 			await updateFinishedChunk();
