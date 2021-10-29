@@ -12,6 +12,7 @@ import style from './NameAndSize.module.scss';
 function NameAndSize() {
 	const [title, setTitle] = useState('');
 	const [size, setSize] = useState(400);
+	const [disabled, setDisabled] = useState(false);
 	const [difficulty, setDifficulty] = useState('easy');
 	const [toggleError, setToggleError] = useState(false);
 	const {newSet} = useNewSetContext();
@@ -45,11 +46,12 @@ function NameAndSize() {
 	};
 
 	const validate = () => {
+		if (disabled) return;
 		if (title === '') {
 			setToggleError(() => true);
 			return;
 		}
-
+		setDisabled(() => true);
 		handleSubmit();
 	};
 
@@ -75,7 +77,9 @@ function NameAndSize() {
 					</OptionSize>
 
 					<div className={style.btn_container}>
-						<Btn onClick={validate}>LET&apos;S GO! 🎉</Btn>
+						<Btn disabled={disabled} onClick={validate}>
+							LET&apos;S GO! 🎉
+						</Btn>
 					</div>
 				</div>
 			</div>

@@ -194,7 +194,7 @@ function Index() {
 		if (move === null) return;
 		soundMove();
 
-		const isCorrectMove = validateMove(move, moves);
+		const isCorrectMove = validateMove(move);
 		if (isCorrectMove) {
 			setFen(() => chess.fen());
 			setMoveNumber(previousMove => previousMove + 1);
@@ -223,8 +223,8 @@ function Index() {
 		setSelectVisible(false);
 		const from = pendingMove[0];
 		const to = pendingMove[1];
-		chess.move({from, to, promotion: piece});
 		const isCorrectMove = piece === history[moveNumber].slice(-1);
+		chess.move({from, to, promotion: piece});
 
 		if (isCorrectMove) {
 			setFen(() => chess.fen());
@@ -321,6 +321,7 @@ function Index() {
 		);
 
 	const handleRestart = () => {
+		setPuzzleCompleteInSession(() => 0);
 		setActualPuzzle(() => 0);
 		setCounter(() => 0);
 		setMalus(() => 0);
