@@ -51,6 +51,7 @@ function NameAndSize() {
 			setToggleError(() => true);
 			return;
 		}
+
 		setDisabled(() => true);
 		handleSubmit();
 	};
