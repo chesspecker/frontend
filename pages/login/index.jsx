@@ -8,7 +8,7 @@ export default function LoginRegister() {
 		<Container>
 			<div className={style.container}>
 				<div>
-					<img className={style.imgLichess} src='./lichess.png' />
+					<img className={style.logo} src='/images/logo.svg' />
 					<h1 className={style.title}>
 						Happy to see you
 						<br />
@@ -17,7 +17,9 @@ export default function LoginRegister() {
 				</div>
 				<div className={style.contentBottom}>
 					<Link href={`${process.env.API}/auth/login`}>
-						<Btn link={`${process.env.API}/auth/login`}>SIGN IN 🧩</Btn>
+						<Btn link={`${process.env.API}/auth/login`}>
+							SIGN IN WITH LICHESS
+						</Btn>
 					</Link>
 				</div>
 			</div>
