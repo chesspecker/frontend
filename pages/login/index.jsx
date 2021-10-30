@@ -10,17 +10,10 @@ export default function LoginRegister() {
 				<div>
 					<img className={style.logo} src='/images/logo.svg' />
 					<h1 className={style.title}>
-						Happy to see you
+						Currenlty down
 						<br />
-						newcomer 👋
+						will be back in a few minutes 
 					</h1>
-				</div>
-				<div className={style.contentBottom}>
-					<Link href={`${process.env.API}/auth/login`}>
-						<Btn link={`${process.env.API}/auth/login`}>
-							SIGN IN WITH LICHESS
-						</Btn>
-					</Link>
 				</div>
 			</div>
 		</Container>
