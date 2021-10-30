@@ -12,7 +12,7 @@ export default function LoginRegister() {
 					<h1 className={style.title}>
 						Currenlty down
 						<br />
-						will be back in a few minutes 
+						will be back in a few minutes
 					</h1>
 				</div>
 			</div>
