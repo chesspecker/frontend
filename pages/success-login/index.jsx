@@ -1,3 +1,4 @@
+import Head from 'next/head.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import useConffeti from '../../components/hooks/useConffeti.jsx';
 import Btn from '../../components/layouts/btn/Btn.jsx';
@@ -6,17 +7,23 @@ import style from './index.module.css';
 
 function Index() {
 	return (
-		<PageHeader>
-			{useConffeti()}
-			<div className={style.container}>
-				<div>
-					<h1 className={style.title}>
-						Hello {useUserName()} 👋 <br /> Welcome to ChessPecker
-					</h1>
-					<Btn link='/dashboard'>LET&apos;S GO! 🔥</Btn>
+		<>
+			<Head>
+				<title>Chesspecker - Success</title>
+				<meta property='og:title' content='Chesspecker' />
+			</Head>
+			<PageHeader>
+				{useConffeti()}
+				<div className={style.container}>
+					<div>
+						<h1 className={style.title}>
+							Hello {useUserName()} 👋 <br /> Welcome to ChessPecker
+						</h1>
+						<Btn link='/dashboard'>LET&apos;S GO! 🔥</Btn>
+					</div>
 				</div>
-			</div>
-		</PageHeader>
+			</PageHeader>
+		</>
 	);
 }
 

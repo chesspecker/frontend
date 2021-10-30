@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import Link from 'next/link.js';
+import Head from 'next/head.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import Choice from '../../components/03-Create-set/Choice.jsx';
 import {
@@ -61,49 +62,55 @@ function NewSet() {
 	};
 
 	return (
-		<PageHeader>
-			{toggleHealthyMixPopup && (
-				<ErrorPopupNewSet
-					onClick={() => setToggleHealthyMixPopup(() => false)}
-				/>
-			)}
-			{toggleNumerousChoicesPopup && (
-				<ErrorPopupNumerousChoices
-					onClick={() => setToggleNumerousChoicesPopup(() => false)}
-				/>
-			)}
-			<div className={style.container}>
-				<h2 className={style.title}>
-					{' '}
-					Select one or more category to create your set!
-				</h2>
-				<div className={style.set_container}>
-					{themesCategory.map(c => (
-						<div className={style.set_category}>
-							<h3 className={style.set_category_title}>{c.nom}</h3>
-							<div className={style.set_category_choices}>
-								{puzzleThemes
-									.filter(p => p.category.nom === c.nom)
-									.map(p => (
-										<Choice
-											selected={choicesSelected}
-											id={p.id}
-											title={p.title}
-											description={p.description}
-											onClick={handleClick}
-										/>
-									))}
+		<>
+			<Head>
+				<title>Chesspecker - New set</title>
+				<meta property='og:title' content='Chesspecker' />
+			</Head>
+			<PageHeader>
+				{toggleHealthyMixPopup && (
+					<ErrorPopupNewSet
+						onClick={() => setToggleHealthyMixPopup(() => false)}
+					/>
+				)}
+				{toggleNumerousChoicesPopup && (
+					<ErrorPopupNumerousChoices
+						onClick={() => setToggleNumerousChoicesPopup(() => false)}
+					/>
+				)}
+				<div className={style.container}>
+					<h2 className={style.title}>
+						{' '}
+						Select one or more category to create your set!
+					</h2>
+					<div className={style.set_container}>
+						{themesCategory.map(c => (
+							<div className={style.set_category}>
+								<h3 className={style.set_category_title}>{c.nom}</h3>
+								<div className={style.set_category_choices}>
+									{puzzleThemes
+										.filter(p => p.category.nom === c.nom)
+										.map(p => (
+											<Choice
+												selected={choicesSelected}
+												id={p.id}
+												title={p.title}
+												description={p.description}
+												onClick={handleClick}
+											/>
+										))}
+								</div>
 							</div>
-						</div>
-					))}
+						))}
+					</div>
+					<div className={style.btn_container}>
+						<Link href='/new-set/NameAndSize'>
+							<Btn onClick={handleNextClick}>NEXT</Btn>
+						</Link>
+					</div>
 				</div>
-				<div className={style.btn_container}>
-					<Link href='/new-set/NameAndSize'>
-						<Btn onClick={handleNextClick}>NEXT</Btn>
-					</Link>
-				</div>
-			</div>
-		</PageHeader>
+			</PageHeader>
+		</>
 	);
 }
 

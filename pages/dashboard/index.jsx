@@ -1,11 +1,18 @@
+import Head from 'next/head.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import GameMap from './GameMap.jsx';
 
 function Dashboard() {
 	return (
-		<PageHeader>
-			<GameMap />
-		</PageHeader>
+		<>
+			<Head>
+				<title>Chesspecker - Dashboard</title>
+				<meta property='og:title' content='Chesspecker' />
+			</Head>
+			<PageHeader>
+				<GameMap />
+			</PageHeader>
+		</>
 	);
 }
 
