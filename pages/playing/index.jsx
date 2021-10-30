@@ -195,7 +195,7 @@ function Index() {
 		soundMove();
 
 		const isCorrectMove = validateMove(move);
-		if (isCorrectMove) {
+		if (isCorrectMove || chess.in_checkmate()) {
 			setFen(() => chess.fen());
 			setMoveNumber(previousMove => previousMove + 1);
 			checkPuzzleComplete(moveNumber);
@@ -226,7 +226,7 @@ function Index() {
 		const isCorrectMove = piece === history[moveNumber].slice(-1);
 		chess.move({from, to, promotion: piece});
 
-		if (isCorrectMove) {
+		if (isCorrectMove || chess.in_checkmate()) {
 			setFen(() => chess.fen());
 			setMoveNumber(previousMove => previousMove + 1);
 			checkPuzzleComplete(moveNumber);
