@@ -13,7 +13,15 @@ export default function RightColumn({
 	const [solutionDisplayed, setSolutionDisplayed] = useState(false);
 
 	const handleClick = () => {
-		setSolutionDisplayed(bool => !bool);
+		if (solutionDisplayed){
+			setSolutionDisplayed(() => false);
+		}else {
+			setSolutionDisplayed(() => true);
+			setTimeout(() => {
+				setSolutionDisplayed(() => false);
+			}, 3000);
+
+		}
 	};
 
 	return (
