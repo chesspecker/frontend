@@ -119,8 +119,8 @@ function Index() {
 			title: 'Your turn',
 			subtitle: `Find the best move for ${orientation}.`,
 		};
-		setText(text);
-	}, [orientation]);
+		setText(() => text);
+	}, [orientation, actualPuzzle]);
 
 	/**
 	 * Retrieve current puzzle.
@@ -232,6 +232,10 @@ function Index() {
 			setMistakesNumber(previous => previous + 1);
 			setWrongMoveVisible(() => true);
 			setTimeout(() => setWrongMoveVisible(() => false), 300);
+			setText(() => ({
+				title: `That's not the move!`,
+				subtitle: `Try something else.`,
+			}));
 		}
 	};
 
