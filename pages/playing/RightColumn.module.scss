@@ -1,6 +1,7 @@
 .container {
 	flex: 1;
 }
+
 .content {
 	background-color: rgb(245, 245, 245);
 	border-radius: 10px;
@@ -9,7 +10,21 @@
 	align-items: center;
 	justify-content: center;
 }
+
 .progression_title {
 	font-size: 2rem;
 	font-weight: 500;
+}
+
+.turn {
+	font-size: 2rem;
+	font-weight: 500;
+	line-height: 3rem;
+	align-items: center;
+	text-align: center;
+}
+
+.text_title{
+	font-weight: 700;
+	margin-bottom: -20px;
 }

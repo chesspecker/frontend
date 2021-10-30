@@ -3,7 +3,12 @@ import {ProgressBarCircle} from '../../components/layouts/progress-bar/ProgressB
 import BtnSecondary from '../../components/layouts/btn/BtnSecondary.jsx';
 import style from './RightColumn.module.scss';
 
-export default function RightColumn({percentage, solutionVisible, nextMove}) {
+export default function RightColumn({
+	percentage,
+	text,
+	solutionVisible,
+	nextMove,
+}) {
 	const [solutionDisplayed, setSolutionDisplayed] = useState(false);
 
 	const handleClick = () => {
@@ -19,6 +24,10 @@ export default function RightColumn({percentage, solutionVisible, nextMove}) {
 					percentage={percentage}
 					colourFont='DarkGray'
 				/>
+				<div className={style.turn}>
+					<p className={style.text_title}>{text.title}</p>
+					<p>{text.subtitle}</p>
+				</div>
 				<div>
 					{solutionVisible && !solutionDisplayed && (
 						<BtnSecondary onClick={handleClick}>SOLUTION 🧩</BtnSecondary>

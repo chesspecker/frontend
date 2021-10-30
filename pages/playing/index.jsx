@@ -47,6 +47,7 @@ function Index() {
 	const [mistakesNumber, setMistakesNumber] = useState(0);
 	const [timerBeforeCurrentPuzzle, setTimerBeforeCurrentPuzzle] = useState(0);
 	const [puzzleCompleteInSession, setPuzzleCompleteInSession] = useState(0);
+	const [text, setText] = useState({});
 
 	const [spacedRepetition, setSpacedRepetition] = useState(false);
 	const [chunkLength, setchunkLength] = useState(false);
@@ -101,16 +102,25 @@ function Index() {
 		setPuzzleListLength(() => puzzleList.length);
 	}, [puzzleList]);
 
+	/**
+	 * Wait to show solution button.
+	 */
 	useEffect(() => {
 		const timeTaken = counter - timerBeforeCurrentPuzzle;
-		if (timeTaken < 6) {
-			setSolutionVisible(() => false);
-		}
-
-		if (timeTaken > 6) {
-			setSolutionVisible(() => true);
-		}
+		if (timeTaken < 6) setSolutionVisible(() => false);
+		if (timeTaken > 6) setSolutionVisible(() => true);
 	}, [counter, timerBeforeCurrentPuzzle]);
+
+	/**
+	 * RightBar title.
+	 */
+	useEffect(() => {
+		const text = {
+			title: 'Your turn',
+			subtitle: `Find the best move for ${orientation}.`,
+		};
+		setText(text);
+	}, [orientation]);
 
 	/**
 	 * Retrieve current puzzle.
@@ -449,6 +459,7 @@ function Index() {
 										currentSet.length) *
 								100
 							}
+							text={text}
 							solutionVisible={solutionVisible}
 							nextMove={history[moveNumber]}
 						/>
