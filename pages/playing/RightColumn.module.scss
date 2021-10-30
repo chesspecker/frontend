@@ -1,0 +1,15 @@
+.container {
+	flex: 1;
+}
+.content {
+	background-color: rgb(245, 245, 245);
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.progression_title {
+	font-size: 2rem;
+	font-weight: 500;
+}

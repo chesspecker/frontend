@@ -1,0 +1,13 @@
+.promotion_container {
+	position: absolute;
+	top: 5rem;
+	z-index: 999;
+	display: flex;
+	background-color: rgb(245, 245, 245);
+	justify-content: center;
+	width: 50%;
+	height: 15%;
+	align-items: center;
+	border-radius: 5px;
+	box-shadow: 0 0 3rem 3rem rgba(0, 0, 0, 0.5);
+}
