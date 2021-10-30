@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import useSound from 'use-sound';
 import Router from 'next/router.js';
+import Head from 'next/head.js';
 import Chess from '../../components/utils/chess.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import SucessPopup from '../../components/layouts/popup/SucessPopup.jsx';
@@ -418,62 +419,68 @@ function Index() {
 	};
 
 	return (
-		<PageHeader>
-			{sucessVisible && (
-				<SucessPopup restart={handleRestart} counter={counter + malus} />
-			)}
-			{chunkSucessVisible && (
-				<ChunkSucessPopup
-					keepPlaying={keepPlaying}
-					currentChunk={currentChunk}
-				/>
-			)}
-			{startPopupVisible && <StartingPopup onStart={handleStart} />}
+		<>
+			<Head>
+				<title>Chesspecker - Playing</title>
+				<meta property='og:title' content='Chesspecker' />
+			</Head>
+			<PageHeader>
+				{sucessVisible && (
+					<SucessPopup counter={counter + malus} restart={handleRestart} />
+				)}
+				{chunkSucessVisible && (
+					<ChunkSucessPopup
+						keepPlaying={keepPlaying}
+						currentChunk={currentChunk}
+					/>
+				)}
+				{startPopupVisible && <StartingPopup onStart={handleStart} />}
 
-			<div className={style.container}>
-				<div className={style.information_container}>
-					<div className={style.timer}>
-						<p>⏲ {useClock(counter + malus)}</p>
+				<div className={style.container}>
+					<div className={style.information_container}>
+						<div className={style.timer}>
+							<p>⏲ {useClock(counter + malus)}</p>
+						</div>
+						<div>
+							<BtnSecondary onClick={handleLeaveGame}>LEAVE 🧨</BtnSecondary>
+						</div>
 					</div>
 					<div>
-						<BtnSecondary onClick={handleLeaveGame}>LEAVE 🧨</BtnSecondary>
+						<div className={style.chessGroundContainer}>
+							{wrongMoveVisible && (
+								<div className={style.wrong_move}>+3&quot;!</div>
+							)}
+							<div className={style.chessGround_left_container} />
+							<ChessGround
+								fen={fen}
+								turnColor={turnColor(chess.turn())}
+								movable={calcMovable()}
+								orientation={orientation}
+								lastMove={lastMove}
+								check={chess.in_check()}
+								onMove={onMove}
+							/>
+							<PromotionContainer
+								chess={chess}
+								promotion={promotion}
+								selectVisible={selectVisible}
+							/>
+							<RightColumn
+								percentage={
+									(1 -
+										(puzzleList.length - puzzleCompleteInSession) /
+											currentSet.length) *
+									100
+								}
+								text={text}
+								solutionVisible={solutionVisible}
+								nextMove={history[moveNumber]}
+							/>
+						</div>
 					</div>
 				</div>
-				<div>
-					<div className={style.chessGroundContainer}>
-						{wrongMoveVisible && (
-							<div className={style.wrong_move}>+3&quot;!</div>
-						)}
-						<div className={style.chessGround_left_container} />
-						<ChessGround
-							fen={fen}
-							turnColor={turnColor(chess.turn())}
-							movable={calcMovable()}
-							orientation={orientation}
-							lastMove={lastMove}
-							check={chess.in_check()}
-							onMove={onMove}
-						/>
-						<PromotionContainer
-							chess={chess}
-							promotion={promotion}
-							selectVisible={selectVisible}
-						/>
-						<RightColumn
-							percentage={
-								(1 -
-									(puzzleList.length - puzzleCompleteInSession) /
-										currentSet.length) *
-								100
-							}
-							text={text}
-							solutionVisible={solutionVisible}
-							nextMove={history[moveNumber]}
-						/>
-					</div>
-				</div>
-			</div>
-		</PageHeader>
+			</PageHeader>
+		</>
 	);
 }
 

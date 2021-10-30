@@ -3,7 +3,7 @@ import Container from '../../components/layouts/Container.jsx';
 import Btn from '../../components/layouts/btn/Btn.jsx';
 import style from './index.module.css';
 
-export default function LoginRegister() {
+function LoginRegister() {
 	return (
 		<Container>
 			<div className={style.container}>
@@ -26,3 +26,5 @@ export default function LoginRegister() {
 		</Container>
 	);
 }
+
+export default LoginRegister;

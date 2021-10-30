@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import Router from 'next/router.js';
+import Head from 'next/head.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import OptionTextInput from '../../components/layouts/form/OptionTextInput.jsx';
 import Btn from '../../components/layouts/btn/Btn.jsx';
@@ -61,30 +62,36 @@ function NameAndSize() {
 	};
 
 	return (
-		<PageHeader>
-			{toggleError && <ErrorPopup onClick={handleClickError} />}
-			<div className={style.container}>
-				<h2 className={style.title}>One last thing...</h2>
-				<div className={style.content}>
-					<OptionTextInput
-						name='title'
-						value={title}
-						onChange={handleTitleChange}
-					>
-						Give your set a name
-					</OptionTextInput>
-					<OptionSize checked={difficulty} onChange={handleDifficultyChange}>
-						Difficulty
-					</OptionSize>
+		<>
+			<Head>
+				<title>Chesspecker - New set</title>
+				<meta property='og:title' content='Chesspecker' />
+			</Head>
+			<PageHeader>
+				{toggleError && <ErrorPopup onClick={handleClickError} />}
+				<div className={style.container}>
+					<h2 className={style.title}>One last thing...</h2>
+					<div className={style.content}>
+						<OptionTextInput
+							name='title'
+							value={title}
+							onChange={handleTitleChange}
+						>
+							Give your set a name
+						</OptionTextInput>
+						<OptionSize checked={difficulty} onChange={handleDifficultyChange}>
+							Difficulty
+						</OptionSize>
 
-					<div className={style.btn_container}>
-						<Btn disabled={disabled} onClick={validate}>
-							LET&apos;S GO! 🎉
-						</Btn>
+						<div className={style.btn_container}>
+							<Btn disabled={disabled} onClick={validate}>
+								LET&apos;S GO! 🎉
+							</Btn>
+						</div>
 					</div>
 				</div>
-			</div>
-		</PageHeader>
+			</PageHeader>
+		</>
 	);
 }
 

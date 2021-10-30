@@ -14,16 +14,18 @@ class MyDocument extends Document {
 		return (
 			<Html>
 				<Head>
-					{/* Meta title */}
-					<meta property='og:title' content='ChessPecker' />
+					{/* Meta properties */}
+					<meta property='og:title' content='Chesspecker' />
 					<meta
 						property='og:description'
-						content='Application to practice chess with the woodpecker method!'
+						content='Application to practice chess with the woodpecker method! Puzzles are from Lichess!'
 					/>
 					<meta
 						name='description'
-						content='Application to practice chess with the woodpecker method!'
+						content='Application to practice chess with the woodpecker method! Puzzles are from Lichess!'
 					/>
+					<link rel='canonical' href='https://www.chesspecker.com/' />
+					<meta name='robots' content='index, nofollow' />
 					{/* Favicon */}
 					<link
 						rel='apple-touch-icon'

@@ -3,6 +3,7 @@ import {UserContext} from '../components/context/UserContext.jsx';
 import {NewSetContext} from '../components/context/NewSetContext.jsx';
 import '../styles/globals.css';
 import '../styles/chessground.css';
+import Head from 'next/head.js';
 
 function MyApp({Component, pageProps}) {
 	const [currentUser, setCurrentUser] = useState({
@@ -50,26 +51,32 @@ function MyApp({Component, pageProps}) {
 
 	return (
 		/**
-		 * TODO: wrap in a useMemo hoo	k
+		 * TODO: wrap in a useMemo hook
 		 */
-		<UserContext.Provider
-			value={{
-				currentUser,
-				updateCurrentUserName,
-				updateCurrentSet,
-			}}
-		>
-			<NewSetContext.Provider
+		<>
+			<Head>
+				<title>Chesspecker</title>
+				<meta name='viewport' content='initial-scale=1.0, width=device-width' />
+			</Head>
+			<UserContext.Provider
 				value={{
-					newSet,
-					updateNewSetOptions,
-					updateNewSetSize,
-					updateNewSetTitle,
+					currentUser,
+					updateCurrentUserName,
+					updateCurrentSet,
 				}}
 			>
-				<Component {...pageProps} />
-			</NewSetContext.Provider>
-		</UserContext.Provider>
+				<NewSetContext.Provider
+					value={{
+						newSet,
+						updateNewSetOptions,
+						updateNewSetSize,
+						updateNewSetTitle,
+					}}
+				>
+					<Component {...pageProps} />
+				</NewSetContext.Provider>
+			</UserContext.Provider>
+		</>
 	);
 }
 
