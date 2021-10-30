@@ -10,6 +10,7 @@ import knightB from '../../public/images/pieces/merida/bN.svg';
 import style from './PromotionContainer.module.scss';
 
 export default function ({chess, promotion, selectVisible}) {
+	if (!chess) return;
 	return (
 		<div
 			style={selectVisible ? {display: 'flex'} : {display: 'none'}}
