@@ -57,7 +57,7 @@ function OptionSize({onChange, children, checked}) {
 					: checked === 'intermediate'
 					? '600'
 					: '800'}{' '}
-				problemes
+				problems
 			</p>
 		</div>
 	);
