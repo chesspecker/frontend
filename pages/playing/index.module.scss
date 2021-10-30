@@ -33,21 +33,6 @@
 	flex: 1;
 }
 
-.control_bar_container {
-	flex: 1;
-}
-.control_bar_content {
-	background-color: beige;
-	border-radius: 10px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-.progression_title {
-	font-size: 2rem;
-	font-weight: 500;
-}
 .information_container {
 	display: flex;
 	align-items: center;
@@ -57,16 +42,12 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border: solid 1px white;
-	height: 5rem;
-	width: 15rem;
+	border: solid 3px rgb(245, 245, 245);
+	height: 4.5rem;
+	width: 16rem;
 	border-radius: 10px;
-	color: white;
+	color: rgb(245, 245, 245);
 	font-size: 2rem;
-}
-
-.timer p {
-	padding: 0.8rem 0 0 0;
 }
 
 .dashboard {
@@ -75,7 +56,7 @@
 	height: 20rem;
 	width: 20rem;
 	border-radius: 10px;
-	border: 1px solid white;
+	border: 1px solid rgb(245, 245, 245);
 	padding: 2rem;
 	display: flex;
 	font-size: 1.5rem;
@@ -89,23 +70,10 @@
 	justify-content: center;
 	align-items: center;
 	font-size: 8rem;
-	color: white;
+	color: rgb(245, 245, 245);
 	height: 100%;
 	width: 100%;
 	background-color: rgb(100, 0, 0, 0.4);
 	z-index: 3;
 	margin-bottom: 8rem;
-}
-
-.promotion_container {
-	position: absolute;
-	top: 5rem;
-	z-index: 999;
-	display: flex;
-	background-color: beige;
-	justify-content: center;
-	width: 80%;
-	align-items: center;
-	border-radius: 5px;
-	box-shadow: 0 0 3rem 3rem rgba(0, 0, 0, 0.5);
 }

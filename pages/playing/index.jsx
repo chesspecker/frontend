@@ -1,5 +1,4 @@
 import {useState, useEffect} from 'react';
-import Image from 'next/image.js';
 import useSound from 'use-sound';
 import Router from 'next/router.js';
 import Chess from '../../components/utils/chess.js';
@@ -11,17 +10,10 @@ import ChessGround from '../../components/layouts/ChessGround.jsx';
 import http from '../../services/http-service.js';
 import useClock from '../../components/hooks/useClock.jsx';
 import {useUserContext} from '../../components/context/UserContext.jsx';
-import queenW from '../../public/images/pieces/merida/wQ.svg';
-import rookW from '../../public/images/pieces/merida/wR.svg';
-import bishopW from '../../public/images/pieces/merida/wB.svg';
-import knightW from '../../public/images/pieces/merida/wN.svg';
-import queenB from '../../public/images/pieces/merida/bQ.svg';
-import rookB from '../../public/images/pieces/merida/bR.svg';
-import bishopB from '../../public/images/pieces/merida/bB.svg';
-import knightB from '../../public/images/pieces/merida/bN.svg';
 import moveSound from '../../public/sounds/move.mp3';
 import BtnSecondary from '../../components/layouts/btn/BtnSecondary.jsx';
-import {ProgressBarCircle} from '../../components/layouts/progress-bar/ProgressBarCirle.jsx';
+import PromotionContainer from './PromotionContainer.jsx';
+import RightColumn from './RightColumn.jsx';
 import style from './index.module.scss';
 
 const sortBy = (array, p) =>
@@ -48,6 +40,7 @@ function Index() {
 	const [timerRunning, setTimerRunning] = useState(false);
 	const [sucessVisible, setSucessVisible] = useState(false);
 	const [selectVisible, setSelectVisible] = useState(false);
+	const [solutionVisible, setSolutionVisible] = useState(false);
 	const [puzzleListLength, setPuzzleListLength] = useState(0);
 	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
 	const [startPopupVisible, setStartPopupVisible] = useState(true);
@@ -107,6 +100,17 @@ function Index() {
 		if (puzzleList.length === 0) return;
 		setPuzzleListLength(() => puzzleList.length);
 	}, [puzzleList]);
+
+	useEffect(() => {
+		const timeTaken = counter - timerBeforeCurrentPuzzle;
+		if (timeTaken < 6) {
+			setSolutionVisible(() => false);
+		}
+
+		if (timeTaken > 6) {
+			setSolutionVisible(() => true);
+		}
+	}, [counter, timerBeforeCurrentPuzzle]);
 
 	/**
 	 * Retrieve current puzzle.
@@ -334,6 +338,7 @@ function Index() {
 		setCurrentPuzzleNumber(previous => previous + 1);
 		setPuzzleCompleteInSession(previous => previous + 1);
 		setMistakesNumber(() => 0);
+		setSolutionVisible(() => false);
 		setTimerBeforeCurrentPuzzle(() => counter);
 		setActualPuzzle(previousPuzzle => previousPuzzle + 1);
 	};
@@ -432,58 +437,21 @@ function Index() {
 							check={chess.in_check()}
 							onMove={onMove}
 						/>
-						<div
-							style={selectVisible ? {display: 'flex'} : {display: 'none'}}
-							className={style.promotion_container}
-						>
-							<div onClick={() => promotion('q')}>
-								<Image
-									src={chess.turn() === 'w' ? queenW : queenB}
-									alt=''
-									width={60}
-									height={60}
-								/>
-							</div>
-							<div onClick={() => promotion('r')}>
-								<Image
-									src={chess.turn() === 'w' ? rookW : rookB}
-									alt=''
-									width={60}
-									height={60}
-								/>
-							</div>
-							<div onClick={() => promotion('b')}>
-								<Image
-									src={chess.turn() === 'w' ? bishopW : bishopB}
-									alt=''
-									width={60}
-									height={60}
-								/>
-							</div>
-							<div onClick={() => promotion('n')}>
-								<Image
-									src={chess.turn() === 'w' ? knightW : knightB}
-									alt=''
-									width={60}
-									height={60}
-								/>
-							</div>
-						</div>
-						<div className={style.control_bar_container}>
-							<div className={style.control_bar_content}>
-								<h3 className={style.progression_title}>Progression</h3>
-								<ProgressBarCircle
-									colour='green'
-									percentage={
-										(1 -
-											(puzzleList.length - puzzleCompleteInSession) /
-												currentSet.length) *
-										100
-									}
-									colourFont='grey'
-								/>
-							</div>
-						</div>
+						<PromotionContainer
+							chess={chess}
+							promotion={promotion}
+							selectVisible={selectVisible}
+						/>
+						<RightColumn
+							percentage={
+								(1 -
+									(puzzleList.length - puzzleCompleteInSession) /
+										currentSet.length) *
+								100
+							}
+							solutionVisible={solutionVisible}
+							nextMove={history[moveNumber]}
+						/>
 					</div>
 				</div>
 			</div>
