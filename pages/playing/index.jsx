@@ -47,7 +47,10 @@ function Index() {
 	const [mistakesNumber, setMistakesNumber] = useState(0);
 	const [timerBeforeCurrentPuzzle, setTimerBeforeCurrentPuzzle] = useState(0);
 	const [puzzleCompleteInSession, setPuzzleCompleteInSession] = useState(0);
-	const [text, setText] = useState({});
+	const [text, setText] = useState({
+		title: 'Your turn',
+		subtitle: `Find the best move.`,
+	});
 
 	const [spacedRepetition, setSpacedRepetition] = useState(false);
 	const [chunkLength, setchunkLength] = useState(false);
