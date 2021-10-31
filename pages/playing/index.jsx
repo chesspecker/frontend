@@ -413,6 +413,7 @@ function Index() {
 					<SucessPopup counter={counter + malus} restart={handleRestart} />
 				)}
 				{startPopupVisible && <StartingPopup onStart={handleStart} />}
+				{wrongMoveVisible && <div className={style.wrong_move}>+3&quot;!</div>}
 
 				<div className={style.container}>
 					<div className={style.information_container}>
@@ -425,9 +426,6 @@ function Index() {
 					</div>
 					<div>
 						<div className={style.chessGroundContainer}>
-							{wrongMoveVisible && (
-								<div className={style.wrong_move}>+3&quot;!</div>
-							)}
 							<div className={style.chessGround_left_container} />
 							<ChessGround
 								fen={fen}
