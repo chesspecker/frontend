@@ -1,3 +1,4 @@
+import router from 'next/router.js';
 import {useState, useEffect} from 'react';
 import http from '../../services/http-service.js';
 
@@ -13,7 +14,11 @@ export default function useSetsDashboard() {
 					withCredentials: true,
 				});
 			} catch (error) {
-				return console.log(error);
+				if (error.message === 'Request failed with status code 403') {
+					router.push(`${api}/auth/logout`);
+				}
+
+				return console.log(error.message);
 			}
 
 			const sets = response.data;
