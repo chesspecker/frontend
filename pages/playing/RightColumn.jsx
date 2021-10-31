@@ -37,9 +37,7 @@ export default function RightColumn({
 					<p>{text.subtitle}</p>
 				</div>
 				<div>
-					{!solutionVisible && (
-						<BtnSecondary>NO CHEATING</BtnSecondary>
-					)}
+					{!solutionVisible && <BtnSecondary>NO CHEATING</BtnSecondary>}
 				</div>
 				<div>
 					{solutionVisible && !solutionDisplayed && (
