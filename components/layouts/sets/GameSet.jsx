@@ -1,6 +1,5 @@
 import Image from 'next/image.js';
 import Btn from '../btn/Btn.jsx';
-import Stars from '../stars/Stars.jsx';
 import supress from '../../../public/images/supress.svg';
 import useClock from '../../hooks/useClock.jsx';
 import style from './GameSet.module.scss';

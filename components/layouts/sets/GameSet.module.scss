@@ -1,6 +1,6 @@
 .set {
-	border: 1px solid white;
-	border-radius: 20px;
+	border: 3px solid white;
+	border-radius: 30px;
 	height: 35rem;
 	width: 25rem;
 	display: flex;
@@ -12,6 +12,7 @@
 
 .title {
 	margin: 1rem;
+	margin-top: 0rem;
 	font-size: 3rem;
 	font-weight: 500;
 }

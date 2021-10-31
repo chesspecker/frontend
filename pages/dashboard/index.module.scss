@@ -17,9 +17,8 @@
 }
 
 .set {
-	border: 1px solid white;
 	position: relative;
-	border-radius: 20px;
+	border-radius: 30px;
 	height: 35rem;
 	width: 25rem;
 	display: flex;
@@ -79,8 +78,8 @@
 	background-color: #ccc;
 	height: 100%;
 	width: 100%;
-	color: grey;
-	font-size: 2rem;
-	font-weight: 300;
+	color: #004e92;
+	font-size: 2.5rem;
+	font-weight: 500;
 	cursor: pointer;
 }
