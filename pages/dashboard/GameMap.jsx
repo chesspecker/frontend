@@ -5,7 +5,6 @@ import {useEffect, useState} from 'react';
 import useSetsDashboard from '../../components/hooks/useSetsDashboard.jsx';
 import GameSet from '../../components/layouts/sets/GameSet.jsx';
 import {useUserContext} from '../../components/context/UserContext.jsx';
-import Stars from '../../components/layouts/stars/Stars.jsx';
 import Btn from '../../components/layouts/btn/Btn.jsx';
 import plus from '../../public/images/plus.svg';
 import http from '../../services/http-service.js';
@@ -85,15 +84,9 @@ function GameMap() {
 						<Link href='./new-set'>
 							<div className={style.bluer}>
 								<Image src={plus} />
-								<p>Create a new Set</p>
+								<p>Create a set</p>
 							</div>
 						</Link>
-						<h3>Set exemple</h3>
-						<div className={style.list}>
-							<div className={style.list_element}>🏆: 24:37</div>
-							<div className={style.list_element}>⛔ : 18</div>
-						</div>
-						<Stars />
 						<Btn>START ⚔️</Btn>
 					</div>
 				</div>
