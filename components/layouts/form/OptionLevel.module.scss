@@ -1,0 +1,91 @@
+.option {
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	justify-content: space-between;
+	align-items: stretch;
+	margin-top: 2rem;
+	border-bottom: solid 1px white;
+
+	&_description {
+		font-size: 2rem;
+		margin: 0;
+		color: white;
+		align-self: center;
+		margin-right: 1rem;
+		@media screen and (max-width: 450px) {
+			font-size: 1.5rem;
+		}
+	}
+
+	&_input {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&_secondary {
+		width: 60%;
+		align-self: flex-end;
+		@media screen and (max-width: 450px) {
+			font-size: 1.5rem;
+		}
+	}
+}
+
+.input {
+	&_number {
+		background-color: white;
+		color: var(--color-primary);
+		font-size: 2rem;
+		border: none;
+		border-radius: 5px;
+		height: 4rem;
+		width: 10rem;
+		justify-self: center;
+		align-self: center;
+		margin-left: 2rem;
+		text-align: center;
+		@media screen and (max-width: 450px) {
+			transform: scale(0.8);
+		}
+	}
+
+	&_radio {
+		display: none;
+	}
+
+	&_radio:checked + label {
+		background-color: #6edc5f;
+		color: white;
+	}
+
+	&_container {
+		display: flex;
+		background-color: white;
+		border-radius: 5px;
+		@media screen and (max-width: 450px) {
+			transform: scale(0.8);
+		}
+	}
+}
+
+.label {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.5rem;
+	width: 100px;
+	height: 4rem;
+	border-radius: 5px;
+	background-color: white;
+	transition: all 0.3s;
+	@media screen and (max-width: 450px) {
+		width: 65px;
+	}
+}
+
+.placeHolder {
+	color: white;
+	font-size: 1.5rem;
+}

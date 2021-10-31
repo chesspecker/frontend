@@ -1,4 +1,4 @@
-import style from './OptionSize.module.scss';
+import style from './OptionLevel.module.scss';
 
 function OptionDifficulty({handleChange}) {
 	return (
