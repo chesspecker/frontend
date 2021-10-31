@@ -85,7 +85,7 @@ function NewSet() {
 					</h2>
 					<div className={style.set_container}>
 						{themesCategory.map(c => (
-							<div className={style.set_category} key={c.id}>
+							<div key={c.id} className={style.set_category}>
 								<h3 className={style.set_category_title}>{c.nom}</h3>
 								<div className={style.set_category_choices}>
 									{puzzleThemes
