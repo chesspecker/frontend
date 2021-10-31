@@ -64,7 +64,7 @@ function NewSet() {
 	return (
 		<>
 			<Head>
-				<title>Chesspecker - New set</title>
+				<title>Chesspecker - Create</title>
 				<meta property='og:title' content='Chesspecker' />
 			</Head>
 			<PageHeader>
