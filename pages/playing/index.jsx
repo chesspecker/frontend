@@ -10,7 +10,12 @@ import ChessGround from '../../components/layouts/ChessGround.jsx';
 import http from '../../services/http-service.js';
 import useClock from '../../components/hooks/useClock.jsx';
 import {useUserContext} from '../../components/context/UserContext.jsx';
-import moveSound from '../../public/sounds/move.mp3';
+import SOUND_MOVE from '../../public/sounds/Move.mp3';
+import SOUND_CAPTURE from '../../public/sounds/Capture.mp3';
+import SOUND_CHECK from '../../public/sounds/Check.mp3';
+import SOUND_ERROR from '../../public/sounds/Error.mp3';
+import SOUND_GENERIC from '../../public/sounds/GenericNotify.mp3';
+import SOUND_VICTORY from '../../public/sounds/Victory.mp3';
 import BtnSecondary from '../../components/layouts/btn/BtnSecondary.jsx';
 import PromotionContainer from './PromotionContainer.jsx';
 import RightColumn from './RightColumn.jsx';
@@ -21,7 +26,12 @@ const sortBy = (array, p) =>
 
 function Index() {
 	const api = process.env.API;
-	const [soundMove] = useSound(moveSound);
+	const [moveSound] = useSound(SOUND_MOVE);
+	const [captureSound] = useSound(SOUND_CAPTURE);
+	const [checkSound] = useSound(SOUND_CHECK);
+	const [errorSound] = useSound(SOUND_ERROR);
+	const [genericSound] = useSound(SOUND_GENERIC);
+	const [victorySound] = useSound(SOUND_VICTORY);
 	const [fen, setFen] = useState('');
 	const {currentUser} = useUserContext();
 	const [turn, setTurn] = useState('w');
@@ -175,7 +185,7 @@ function Index() {
 		setFen(chess.fen());
 		checkPuzzleComplete(moveNumber + 1);
 		setMoveNumber(previousMove => previousMove + 1);
-		soundMove();
+		moveSound();
 	};
 
 	/**
@@ -225,7 +235,7 @@ function Index() {
 
 		const move = chess.move({from, to, promotion: 'x'});
 		if (move === null) return;
-		soundMove();
+		moveSound();
 
 		const isCorrectMove = validateMove(move);
 		if (isCorrectMove || chess.in_checkmate()) {
@@ -240,6 +250,7 @@ function Index() {
 			setMalus(lastCount => lastCount + 3);
 			setMistakesNumber(previous => previous + 1);
 			setWrongMoveVisible(() => true);
+			errorSound();
 			setTimeout(() => setWrongMoveVisible(() => false), 300);
 			setText(() => ({
 				title: `That's not the move!`,
@@ -275,6 +286,7 @@ function Index() {
 			setMalus(lastCount => lastCount + 3);
 			setMistakesNumber(previous => previous + 1);
 			setWrongMoveVisible(() => true);
+			errorSound();
 			setTimeout(() => setWrongMoveVisible(() => false), 300);
 		}
 	};
@@ -285,7 +297,9 @@ function Index() {
 	const checkPuzzleComplete = async moveNumber => {
 		if (moveNumber === history.length) {
 			const isSetComplete = await checkSetComplete();
-			if (!isSetComplete) changePuzzle();
+			if (!isSetComplete) {
+				genericSound();
+				changePuzzle();}
 		}
 	};
 
@@ -296,6 +310,7 @@ function Index() {
 		if (actualPuzzle + 1 === puzzleListLength) {
 			setTimerRunning(() => false);
 			setSucessVisible(() => true);
+			victorySound();
 			await updateFinishedSet();
 			return true;
 		}
