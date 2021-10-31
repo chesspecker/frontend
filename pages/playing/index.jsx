@@ -45,6 +45,7 @@ function Index() {
 	const [pendingMove, setPendingMove] = useState();
 	const [orientation, setOrientation] = useState('');
 	const [actualPuzzle, setActualPuzzle] = useState(0);
+	const [isSoundDisabled, setisSoundDisabled] = useState(false);
 	const [timerRunning, setTimerRunning] = useState(false);
 	const [sucessVisible, setSucessVisible] = useState(false);
 	const [selectVisible, setSelectVisible] = useState(false);
@@ -182,7 +183,7 @@ function Index() {
 		setFen(chess.fen());
 		checkPuzzleComplete(moveNumber + 1);
 		setMoveNumber(previousMove => previousMove + 1);
-		moveSound();
+		if (!isSoundDisabled) moveSound();
 	};
 
 	/**
@@ -232,9 +233,9 @@ function Index() {
 
 		const move = chess.move({from, to, promotion: 'x'});
 		if (move === null) return;
-		if (move.captured) {
+		if (move.captured && !isSoundDisabled) {
 			captureSound();
-		} else {
+		} else if (!isSoundDisabled) {
 			moveSound();
 		}
 
@@ -251,7 +252,7 @@ function Index() {
 			setMalus(lastCount => lastCount + 3);
 			setMistakesNumber(previous => previous + 1);
 			setWrongMoveVisible(() => true);
-			errorSound();
+			if (!isSoundDisabled) errorSound();
 			setTimeout(() => setWrongMoveVisible(() => false), 300);
 			setText(() => ({
 				title: `That's not the move!`,
@@ -287,7 +288,7 @@ function Index() {
 			setMalus(lastCount => lastCount + 3);
 			setMistakesNumber(previous => previous + 1);
 			setWrongMoveVisible(() => true);
-			errorSound();
+			if (!isSoundDisabled) errorSound();
 			setTimeout(() => setWrongMoveVisible(() => false), 300);
 		}
 	};
@@ -299,7 +300,7 @@ function Index() {
 		if (moveNumber === history.length) {
 			const isSetComplete = await checkSetComplete();
 			if (!isSetComplete) {
-				genericSound();
+				if (!isSoundDisabled) genericSound();
 				changePuzzle();
 			}
 		}
@@ -312,7 +313,7 @@ function Index() {
 		if (actualPuzzle + 1 === puzzleListLength) {
 			setTimerRunning(() => false);
 			setSucessVisible(() => true);
-			victorySound();
+			if (!isSoundDisabled) victorySound();
 			await updateFinishedSet();
 			return true;
 		}
@@ -379,6 +380,8 @@ function Index() {
 			orientation === 'white' ? 'black' : 'white',
 		);
 	 */
+
+	const toggleSound = () => setisSoundDisabled(prev => !prev);
 
 	const handleRestart = () => {
 		setPuzzleCompleteInSession(() => 0);
