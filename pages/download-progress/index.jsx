@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {io} from 'socket.io-client';
-import Router from 'next/router.js';
+import router from 'next/router.js';
 import http from '../../services/http-service.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
 import ProgressBar from '../../components/02-Download-progress/ProgressBar.jsx';
@@ -44,7 +44,7 @@ function DownloadProgress() {
 
 	useEffect(() => {
 		if (percentage === 100) {
-			Router.push('/analysing');
+			router.push('/analysing');
 		}
 	}, [percentage]);
 
