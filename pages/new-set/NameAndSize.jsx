@@ -43,7 +43,8 @@ function NameAndSize() {
 			)
 			.then(() => {
 				Router.push('/dashboard');
-			});
+			})
+			.catch(error => console.error(error));
 	};
 
 	const validate = () => {

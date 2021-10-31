@@ -7,9 +7,16 @@ export default function useSets() {
 
 	useEffect(() => {
 		const getSets = async () => {
-			const {data: sets} = await http.get(`${api}/set`, {
-				withCredentials: true,
-			});
+			let response;
+			try {
+				response = await http.get(`${api}/set`, {
+					withCredentials: true,
+				});
+			} catch (error) {
+				return console.log(error);
+			}
+
+			const sets = response.data;
 			setGameSet(() => sets);
 		};
 
