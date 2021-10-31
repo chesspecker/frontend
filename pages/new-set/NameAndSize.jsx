@@ -7,18 +7,18 @@ import Btn from '../../components/layouts/btn/Btn.jsx';
 import {useNewSetContext} from '../../components/context/NewSetContext.jsx';
 import http from '../../services/http-service.js';
 import ErrorPopup from '../../components/layouts/popup/ErrorPopup.jsx';
-import OptionSize from '../../components/layouts/form/OptionSize_.jsx';
-import OptionDifficulty from '../../components/layouts/form/OptionDifficulty.jsx';
+import OptionSize from '../../components/layouts/form/OptionSize.jsx';
+import OptionDifficulty from '../../components/layouts/form/OptionLevel.jsx';
 import style from './NameAndSize.module.scss';
 
 function NameAndSize() {
+	const api = process.env.API;
+	const {newSet} = useNewSetContext();
 	const [title, setTitle] = useState('');
+	const [level, setLevel] = useState('normal');
 	const [size, setSize] = useState(500);
 	const [isDisabled, setIsDisabled] = useState(false);
-	const [level, setLevel] = useState('normal');
 	const [toggleError, setToggleError] = useState(false);
-	const {newSet} = useNewSetContext();
-	const api = process.env.API;
 
 	const handleTitleChange = title => {
 		setTitle(() => title.target.value);
