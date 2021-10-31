@@ -81,7 +81,7 @@ function GameMap() {
 							/>
 						))}
 					<div className={style.set}>
-						<Link href='./new-set'>
+						<Link href='./create'>
 							<div className={style.bluer}>
 								<Image src={plus} />
 								<p>Create a set</p>

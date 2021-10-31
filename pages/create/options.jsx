@@ -9,9 +9,9 @@ import http from '../../services/http-service.js';
 import ErrorPopup from '../../components/layouts/popup/ErrorPopup.jsx';
 import OptionSize from '../../components/layouts/form/OptionSize.jsx';
 import OptionDifficulty from '../../components/layouts/form/OptionLevel.jsx';
-import style from './NameAndSize.module.scss';
+import style from './options.module.scss';
 
-function NameAndSize() {
+function options() {
 	const api = process.env.API;
 	const {newSet} = useNewSetContext();
 	const [title, setTitle] = useState('');
@@ -94,4 +94,4 @@ function NameAndSize() {
 	);
 }
 
-export default NameAndSize;
+export default options;
