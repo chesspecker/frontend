@@ -104,7 +104,7 @@ function NewSet() {
 						))}
 					</div>
 					<div className={style.btn_container}>
-						<Link href='/new-set/NameAndSize'>
+						<Link href='/create/options'>
 							<Btn onClick={handleNextClick}>NEXT</Btn>
 						</Link>
 					</div>
