@@ -29,6 +29,7 @@
 		"react-chessground": "^1.5.0",
 		"react-confetti": "^6.0.1",
 		"react-dom": "17.0.2",
+		"react-input-slider": "^6.0.1",
 		"sass": "^1.42.1",
 		"socket.io-client": "^4.2.0",
 		"use-sound": "^4.0.1"

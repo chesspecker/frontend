@@ -1,4 +1,4 @@
-import Router from 'next/router.js';
+import router from 'next/router.js';
 import Image from 'next/image.js';
 import Link from 'next/link.js';
 import {useEffect, useState} from 'react';
@@ -20,16 +20,14 @@ function GameMap() {
 	const [setToRemove, setSetToRemove] = useState('');
 
 	useEffect(() => {
-		setSets(() => {
-			return setsDatabase;
-		});
+		setSets(() => setsDatabase);
 	}, [setsDatabase]);
 
 	const {updateCurrentSet} = useUserContext();
 
 	const handleCurrentSet = set => {
 		updateCurrentSet(set);
-		Router.push('/playing');
+		router.push('/playing');
 	};
 
 	const handleConfirm = set => {

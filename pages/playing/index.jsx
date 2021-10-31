@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import useSound from 'use-sound';
-import Router from 'next/router.js';
+import router from 'next/router.js';
 import Head from 'next/head.js';
 import Chess from '../../components/utils/chess.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
@@ -374,7 +374,7 @@ function Index() {
 	};
 
 	const handleLeaveGame = () => {
-		Router.push('/dashboard');
+		router.push('/dashboard');
 	};
 
 	return (

@@ -6,18 +6,6 @@ import useClock from '../../hooks/useClock.jsx';
 import style from './GameSet.module.scss';
 
 function GameSet({sets, setCurrentSet, onDelete}) {
-	const useRate = (bestTime, length) => {
-		return bestTime === 0
-			? 0
-			: bestTime / length <= 10
-			? 3
-			: bestTime / length <= 15
-			? 2
-			: bestTime / length <= 25
-			? 1
-			: 0;
-	};
-
 	return (
 		<div className={style.set}>
 			<h3 className={`${style.title} ${style.tooltip}`}>
@@ -58,17 +46,21 @@ function GameSet({sets, setCurrentSet, onDelete}) {
 						Difficulty :{' '}
 						<span
 							className={
-								sets.level === 'hard'
+								sets.level === 'hard' ||
+								sets.level === 'harder' ||
+								sets.level === 'hardest'
 									? `${style.badge} ${style.badge_warning}`
-									: sets.level === 'intermediate'
+									: sets.level === 'intermediate' || sets.level === 'normal'
 									? `${style.badge} ${style.badge_yellow}`
 									: `${style.badge} ${style.badge_primary}`
 							}
 						>
-							{sets.level === 'hard'
+							{sets.level === 'hard' ||
+							sets.level === 'harder' ||
+							sets.level === 'hardest'
 								? `Hard`
-								: sets.level === 'intermediate'
-								? `Intermediate`
+								: sets.level === 'intermediate' || sets.level === 'normal'
+								? `Normal`
 								: `Easy`}
 						</span>
 					</p>
