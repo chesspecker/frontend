@@ -16,11 +16,7 @@ function LoginRegister() {
 					</h1>
 				</div>
 				<div className={style.contentBottom}>
-					<Link href={`${process.env.API}/auth/login`}>
-						<Btn link={`${process.env.API}/auth/login`}>
-							SIGN IN WITH LICHESS
-						</Btn>
-					</Link>
+					<Btn link={`${process.env.API}/auth/login`}>SIGN IN WITH LICHESS</Btn>
 				</div>
 			</div>
 		</Container>
