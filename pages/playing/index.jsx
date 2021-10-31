@@ -440,7 +440,7 @@ function Index() {
 		Router.push('/dashboard');
 	};
 
-	const toggleSound = () => setisSoundDisabled(prev => !prev);
+	const toggleSound = () => setisSoundDisabled(previous => !previous);
 
 	const handleRestart = () => {
 		setPuzzleCompleteInSession(() => 0);
