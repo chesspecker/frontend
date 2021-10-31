@@ -31,7 +31,7 @@
 	@media screen and (max-width: 450px) {
 		flex-direction: column;
 	}
-	@media (orientation: landscape) {
+	@media (orientation: landscape) and (max-width: 450px) {
 		flex-direction: column;
 	}
 }
@@ -43,7 +43,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	@media (orientation: landscape) {
+	@media (orientation: landscape) and (max-width: 450px) {
 		transform: scale(0.8);
 	}
 }
