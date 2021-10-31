@@ -308,10 +308,16 @@ function Index() {
 		if (moveNumber === history.length) {
 			if (spacedRepetition) {
 				const isChunkComplete = await checkChunkComplete();
-				if (!isChunkComplete) changePuzzle();
+				if (!isChunkComplete) {
+					genericSound();
+					changePuzzle();
+				}
 			} else {
 				const isSetComplete = await checkSetComplete();
-				if (!isSetComplete) changePuzzle();
+				if (!isSetComplete) {
+					genericSound();
+					changePuzzle();
+				}
 			}
 		}
 	};
