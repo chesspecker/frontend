@@ -12,7 +12,6 @@ import useClock from '../../components/hooks/useClock.jsx';
 import {useUserContext} from '../../components/context/UserContext.jsx';
 import SOUND_MOVE from '../../public/sounds/Move.mp3';
 import SOUND_CAPTURE from '../../public/sounds/Capture.mp3';
-import SOUND_CHECK from '../../public/sounds/Check.mp3';
 import SOUND_ERROR from '../../public/sounds/Error.mp3';
 import SOUND_GENERIC from '../../public/sounds/GenericNotify.mp3';
 import SOUND_VICTORY from '../../public/sounds/Victory.mp3';
@@ -28,7 +27,6 @@ function Index() {
 	const api = process.env.API;
 	const [moveSound] = useSound(SOUND_MOVE);
 	const [captureSound] = useSound(SOUND_CAPTURE);
-	const [checkSound] = useSound(SOUND_CHECK);
 	const [errorSound] = useSound(SOUND_ERROR);
 	const [genericSound] = useSound(SOUND_GENERIC);
 	const [victorySound] = useSound(SOUND_VICTORY);
@@ -93,7 +91,6 @@ function Index() {
 			}
 
 			const set = response.data;
-
 			setCurrentSet(() => set);
 			setCounter(() => set.currentTime);
 			setTimerBeforeCurrentPuzzle(() => set.currentTime);
@@ -235,7 +232,11 @@ function Index() {
 
 		const move = chess.move({from, to, promotion: 'x'});
 		if (move === null) return;
-		moveSound();
+		if (move.captured) {
+			captureSound();
+		} else {
+			moveSound();
+		}
 
 		const isCorrectMove = validateMove(move);
 		if (isCorrectMove || chess.in_checkmate()) {
