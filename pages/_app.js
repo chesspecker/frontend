@@ -1,9 +1,9 @@
+import Head from 'next/head.js';
 import {useState} from 'react';
 import {UserContext} from '../components/context/UserContext.jsx';
 import {NewSetContext} from '../components/context/NewSetContext.jsx';
 import '../styles/globals.css';
 import '../styles/chessground.css';
-import Head from 'next/head.js';
 
 function MyApp({Component, pageProps}) {
 	const [currentUser, setCurrentUser] = useState({
