@@ -58,8 +58,6 @@
 }
 @media screen and (min-width: 350px) {
 	.cg-wrap {
-		width: 340px;
-		height: 340px;
 	}
 }
 @media screen and (min-width: 450px) {
