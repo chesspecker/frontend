@@ -74,6 +74,12 @@
 		height: 540px;
 	}
 }
+@media (orientation: landscape) {
+	.cg-wrap {
+		width: 250px;
+		height: 250px;
+	}
+}
 
 cg-helper {
 	position: absolute;
