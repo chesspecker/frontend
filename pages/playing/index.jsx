@@ -299,7 +299,8 @@ function Index() {
 			const isSetComplete = await checkSetComplete();
 			if (!isSetComplete) {
 				genericSound();
-				changePuzzle();}
+				changePuzzle();
+			}
 		}
 	};
 
