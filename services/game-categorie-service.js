@@ -400,6 +400,7 @@ export const puzzleThemes = [
 		category: {nom: 'Recommended', id: '1'},
 	},
 ];
+
 export const themesCategory = [
 	{nom: 'Recommended', id: '1'},
 	{nom: 'Phases', id: '2'},

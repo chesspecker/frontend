@@ -1,5 +1,5 @@
 import Head from 'next/head.js';
-import {useState} from 'react';
+import {useState, useMemo} from 'react';
 import {UserContext} from '../components/context/UserContext.jsx';
 import {NewSetContext} from '../components/context/NewSetContext.jsx';
 import '../styles/globals.css';
@@ -49,30 +49,33 @@ function MyApp({Component, pageProps}) {
 		});
 	};
 
+	const UserContextValue = useMemo(
+		() => ({
+			currentUser,
+			updateCurrentUserName,
+			updateCurrentSet,
+		}),
+		[],
+	);
+
+	const newSetContextValue = useMemo(
+		() => ({
+			newSet,
+			updateNewSetOptions,
+			updateNewSetSize,
+			updateNewSetTitle,
+		}),
+		[],
+	);
+
 	return (
-		/**
-		 * TODO: wrap in a useMemo hook
-		 */
 		<>
 			<Head>
 				<title>Chesspecker</title>
 				<meta name='viewport' content='initial-scale=1.0, width=device-width' />
 			</Head>
-			<UserContext.Provider
-				value={{
-					currentUser,
-					updateCurrentUserName,
-					updateCurrentSet,
-				}}
-			>
-				<NewSetContext.Provider
-					value={{
-						newSet,
-						updateNewSetOptions,
-						updateNewSetSize,
-						updateNewSetTitle,
-					}}
-				>
+			<UserContext.Provider value={UserContextValue}>
+				<NewSetContext.Provider value={newSetContextValue}>
 					<Component {...pageProps} />
 				</NewSetContext.Provider>
 			</UserContext.Provider>
