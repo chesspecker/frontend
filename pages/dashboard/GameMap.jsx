@@ -47,9 +47,13 @@ function GameMap() {
 				return array;
 			});
 			setToggleCOnfirm(() => false);
-			await http.delete(`${api}/set/id/${setToRemove}`, {
-				withCredentials: true,
-			});
+			try {
+				await http.delete(`${api}/set/id/${setToRemove}`, {
+					withCredentials: true,
+				});
+			} catch (error) {
+				console.error(error);
+			}
 		} else {
 			setToggleCOnfirm(() => false);
 		}

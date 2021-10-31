@@ -9,7 +9,7 @@ import bishopB from '../../public/images/pieces/merida/bB.svg';
 import knightB from '../../public/images/pieces/merida/bN.svg';
 import style from './PromotionContainer.module.scss';
 
-export default function ({chess, promotion, selectVisible}) {
+function PromotionContainer({chess, promotion, selectVisible}) {
 	if (!chess) return null;
 	return (
 		<div
@@ -51,3 +51,5 @@ export default function ({chess, promotion, selectVisible}) {
 		</div>
 	);
 }
+
+export default PromotionContainer;

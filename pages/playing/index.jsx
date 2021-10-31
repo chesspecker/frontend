@@ -72,10 +72,18 @@ function Index() {
 		const getSet = async () => {
 			if (currentUser.currentSet.length > 5)
 				localStorage.setItem('currentSet', currentUser.currentSet);
-			const {data: set} = await http.get(
-				`${api}/set/id/${localStorage.getItem('currentSet')}`,
-				{withCredentials: true},
-			);
+			let response;
+			try {
+				response = await http.get(
+					`${api}/set/id/${localStorage.getItem('currentSet')}`,
+					{withCredentials: true},
+				);
+			} catch (error) {
+				return console.log(error);
+			}
+
+			const set = response.data;
+
 			setCurrentSet(() => set);
 			setCounter(() => set.currentTime);
 			setTimerBeforeCurrentPuzzle(() => set.currentTime);
@@ -123,10 +131,17 @@ function Index() {
 		if (!puzzleList[actualPuzzle] || puzzleList.length === 0) return;
 		const puzzleToGet = puzzleList[actualPuzzle];
 		const getCurrentPuzzle = async () => {
-			const {data: puzzle} = await http.get(
-				`${api}/puzzle/${puzzleToGet._id}`,
-				{withCredentials: true},
-			);
+			let response;
+			try {
+				response = await http.get(`${api}/puzzle/${puzzleToGet._id}`, {
+					withCredentials: true,
+				});
+			} catch (error) {
+				return console.log(error);
+			}
+
+			const puzzle = response.data;
+
 			setCurrentPuzzle(() => puzzle);
 		};
 

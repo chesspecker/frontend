@@ -9,12 +9,18 @@ export default function useUserName() {
 
 	useEffect(() => {
 		const getUserName = async () => {
-			const {data} = await http.get(`${api}/user/name`, {
-				withCredentials: true,
-			});
+			let response;
+			try {
+				response = await http.get(`${api}/user/name`, {
+					withCredentials: true,
+				});
+			} catch (error) {
+				return console.log(error);
+			}
+
 			setUserName(() => {
-				updateCurrentUserName(data.name);
-				return data.name;
+				updateCurrentUserName(response.data.name);
+				return response.data.name;
 			});
 		};
 
