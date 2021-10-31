@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {useState, useEffect} from 'react';
 import useSound from 'use-sound';
 import router from 'next/router.js';
@@ -46,7 +47,7 @@ function Index() {
 	const [pendingMove, setPendingMove] = useState();
 	const [orientation, setOrientation] = useState('');
 	const [actualPuzzle, setActualPuzzle] = useState(0);
-	const [isSoundDisabled, setisSoundDisabled] = useState(false);
+	const [isSoundDisabled, setIsSoundDisabled] = useState(false);
 	const [timerRunning, setTimerRunning] = useState(false);
 	const [sucessVisible, setSucessVisible] = useState(false);
 	const [selectVisible, setSelectVisible] = useState(false);
@@ -440,7 +441,7 @@ function Index() {
 		Router.push('/dashboard');
 	};
 
-	const toggleSound = () => setisSoundDisabled(previous => !previous);
+	const toggleSound = () => setIsSoundDisabled(previous => !previous);
 
 	const handleRestart = () => {
 		setPuzzleCompleteInSession(() => 0);
@@ -498,7 +499,7 @@ function Index() {
 								movable={calcMovable()}
 								orientation={orientation}
 								lastMove={lastMove}
-								check={chess.in_check()}
+								check={chess.in_check() === 'true'}
 								onMove={onMove}
 							/>
 							<PromotionContainer
