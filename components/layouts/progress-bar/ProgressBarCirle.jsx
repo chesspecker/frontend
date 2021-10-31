@@ -17,7 +17,7 @@ function Circle({colour, percentage}) {
 			cx={100}
 			cy={100}
 			fill='transparent'
-			stroke={strokePct !== circ ? colour : ''} // Remove colour as 0% sets full circumference
+			stroke={strokePct === circ ? '' : colour} // Remove colour as 0% sets full circumference
 			strokeWidth='2rem'
 			strokeDasharray={circ}
 			strokeDashoffset={percentage ? strokePct : 0}

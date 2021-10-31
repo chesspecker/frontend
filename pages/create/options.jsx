@@ -11,7 +11,7 @@ import OptionSize from '../../components/layouts/form/OptionSize.jsx';
 import OptionDifficulty from '../../components/layouts/form/OptionLevel.jsx';
 import style from './options.module.scss';
 
-function options() {
+function Options() {
 	const api = process.env.API;
 	const {newSet} = useNewSetContext();
 	const [title, setTitle] = useState('');
@@ -94,4 +94,4 @@ function options() {
 	);
 }
 
-export default options;
+export default Options;
