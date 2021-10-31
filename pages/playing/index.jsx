@@ -86,6 +86,12 @@ function Index() {
 	 * Extract the list of puzzles.
 	 */
 	useEffect(() => {
+		if (
+			currentUser.currentSet === '' ||
+			currentUser.currentSet === null ||
+			currentUser.currentSet === undefined
+		)
+			return;
 		const getSet = async () => {
 			if (currentUser.currentSet.length > 5)
 				localStorage.setItem('currentSet', currentUser.currentSet);
