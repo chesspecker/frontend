@@ -1,4 +1,3 @@
-import Link from 'next/link.js';
 import Container from '../../components/layouts/Container.jsx';
 import Btn from '../../components/layouts/btn/Btn.jsx';
 import style from './index.module.css';
