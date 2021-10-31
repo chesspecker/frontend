@@ -9,8 +9,8 @@ export default function RightColumn({
 	solutionVisible,
 	nextMove,
 }) {
-	if (!text) return null;
 	const [solutionDisplayed, setSolutionDisplayed] = useState(false);
+	if (!text) return null;
 
 	const handleClick = () => {
 		if (solutionDisplayed) {
