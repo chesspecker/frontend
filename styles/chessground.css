@@ -74,7 +74,7 @@
 		height: 540px;
 	}
 }
-@media (orientation: landscape) {
+@media (orientation: landscape) and (max-width: 450px) {
 	.cg-wrap {
 		width: 250px;
 		height: 250px;
