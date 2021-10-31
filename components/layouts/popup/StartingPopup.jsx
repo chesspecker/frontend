@@ -1,6 +1,5 @@
 import BtnSecondary from '../btn/BtnSecondary.jsx';
 import BackgroundPopup from './BackgroundPopup.jsx';
-import style from './StartingPopup.module.scss';
 import ContainerPopup from './ContainerPopup.jsx';
 
 function StartingPopup({onStart}) {

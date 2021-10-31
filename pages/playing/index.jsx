@@ -419,10 +419,15 @@ function Index() {
 	 */
 	const turnColor = string_ => (string_ === 'w' ? 'white' : 'black');
 
-	const switchOrientation = () =>
+	/**
+	 * Useless for now but should be re-implemented.
+	 * Needs a button
+	 *
+	 const switchOrientation = () =>
 		setOrientation(orientation =>
 			orientation === 'white' ? 'black' : 'white',
 		);
+	 */
 
 	const handleStart = () => {
 		setMalus(() => 0);

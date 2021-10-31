@@ -1,4 +1,4 @@
-/* eslint-disable no-useless-escape */
+/* eslint-disable no-useless-escape, camelcase, no-alert */
 const puzzlesId = [
 	'61641996580b920793bacab6',
 	'6164198e580b920793bacab5',

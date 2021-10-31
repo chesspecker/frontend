@@ -15,7 +15,7 @@ import style from './index.module.scss';
 
 function NewSet() {
 	const [choicesSelected, setChoicesSelected] = useState([]);
-	const {newSet, updateNewSetOptions} = useNewSetContext();
+	const {updateNewSetOptions} = useNewSetContext();
 	const [toggleHealthyMixPopup, setToggleHealthyMixPopup] = useState(false);
 	const [toggleNumerousChoicesPopup, setToggleNumerousChoicesPopup] =
 		useState(false);
