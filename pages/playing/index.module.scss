@@ -28,6 +28,9 @@
 	width: 100%;
 	height: min-content;
 	flex-wrap: wrap;
+	@media screen and (max-width: 450px) {
+		flex-direction: column;
+	}
 }
 .chessGround_left_container {
 	flex: 1;
