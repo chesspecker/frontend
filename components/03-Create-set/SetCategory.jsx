@@ -1,4 +1,5 @@
 import style from './SetCategory.module.scss';
+import Choice from './Choice.jsx';
 
 function SetCategory() {
 	return (

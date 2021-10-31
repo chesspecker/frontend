@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import {useState} from 'react';
 import router from 'next/router.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
@@ -33,9 +34,11 @@ function SetParameters() {
 	const handleToggleTypeChange = () => {
 		setToggleTypeGame(toggleTypeGame => !toggleTypeGame);
 		setGameType(() => null);
-		toggleTypeGame
-			? setCheckBoxArrayType(() => [false, false])
-			: setCheckBoxArrayType(() => [true, true]);
+		if (toggleTypeGame) {
+			setCheckBoxArrayType(() => [false, false]);
+		} else {
+			setCheckBoxArrayType(() => [true, true]);
+		}
 	};
 
 	const handleAddGameTime = (name, id) => {
@@ -67,7 +70,12 @@ function SetParameters() {
 	};
 
 	const handleAddGameType = (name, id) => {
-		name === 'rated' ? setGameType(() => true) : setGameType(() => false);
+		if (name === 'rated') {
+			setGameType(() => true);
+		} else {
+			setGameType(() => false);
+		}
+
 		setCheckBoxArrayType(previousArray => {
 			const array = [...previousArray];
 			array.splice(id, 1, !array[id]);

@@ -15,9 +15,11 @@
 		"extends": "xo-nextjs",
 		"env": "browser",
 		"rules": {
-			"unicorn/filename-case": "off",
 			"node/prefer-global/process": "off",
-			"react/prop-types": "warn"
+			"react/prop-types": "warn",
+			"react/button-has-type": "warn",
+			"unicorn/filename-case": "off",
+			"unicorn/no-abusive-eslint-disable": "warn"
 		}
 	},
 	"dependencies": {
