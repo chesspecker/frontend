@@ -55,7 +55,7 @@ function MyApp({Component, pageProps}) {
 			updateCurrentUserName,
 			updateCurrentSet,
 		}),
-		[],
+		[currentUser, updateCurrentUserName, updateCurrentSet],
 	);
 
 	const newSetContextValue = useMemo(
@@ -65,7 +65,7 @@ function MyApp({Component, pageProps}) {
 			updateNewSetSize,
 			updateNewSetTitle,
 		}),
-		[],
+		[newSet, updateNewSetOptions, updateNewSetSize, updateNewSetTitle],
 	);
 
 	return (
