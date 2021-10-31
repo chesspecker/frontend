@@ -381,7 +381,7 @@ function Index() {
 		);
 	 */
 
-	const toggleSound = () => setisSoundDisabled(prev => !prev);
+	const toggleSound = () => setisSoundDisabled(previous => !previous);
 
 	const handleRestart = () => {
 		setPuzzleCompleteInSession(() => 0);
