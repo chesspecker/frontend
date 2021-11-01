@@ -14,6 +14,15 @@
 .progression_title {
 	font-size: 2rem;
 	font-weight: 500;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.icon {
+	margin-top: 0.6rem;
+	margin-left: 0.5rem;
 }
 
 .turn {
