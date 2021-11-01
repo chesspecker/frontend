@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {BsVolumeUp, BsFillVolumeMuteFill} from 'react-icons/bs.js';
+import {BsFillVolumeUpFill, BsFillVolumeMuteFill} from 'react-icons/bs';
 import {ProgressBarCircle} from '../../components/layouts/progress-bar/ProgressBarCirle.jsx';
 import BtnSecondary from '../../components/layouts/btn/BtnSecondary.jsx';
 import style from './RightColumn.module.scss';
@@ -32,7 +32,7 @@ export default function RightColumn({
 				<h3 className={style.progression_title}>
 					Progression{' '}
 					<span className={style.icon} onClick={changeSoundStatus}>
-						{!soundStatus ? <BsVolumeUp /> : <BsFillVolumeMuteFill />}
+						{soundStatus ? <BsFillVolumeMuteFill /> : <BsFillVolumeUpFill />}
 					</span>
 				</h3>
 				<ProgressBarCircle
