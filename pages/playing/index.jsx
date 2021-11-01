@@ -8,7 +8,6 @@ import SucessPopup from '../../components/layouts/popup/SucessPopup.jsx';
 import StartingPopup from '../../components/layouts/popup/StartingPopup.jsx';
 import ChessGround from '../../components/layouts/ChessGround.jsx';
 import http from '../../services/http-service.js';
-import useClock from '../../components/hooks/useClock.jsx';
 import {useUserContext} from '../../components/context/UserContext.jsx';
 import SOUND_MOVE from '../../public/sounds/Move.mp3';
 import SOUND_CAPTURE from '../../public/sounds/Capture.mp3';
@@ -19,6 +18,7 @@ import BtnSecondary from '../../components/layouts/btn/BtnSecondary.jsx';
 import PromotionContainer from './PromotionContainer.jsx';
 import RightColumn from './RightColumn.jsx';
 import style from './index.module.scss';
+import Timer from './Timer.jsx'
 
 const sortBy = (array, p) =>
 	[...array].sort((a, b) => (a[p] > b[p] ? 1 : a[p] < b[p] ? -1 : 0));
@@ -420,12 +420,9 @@ function Index() {
 				)}
 				{startPopupVisible && <StartingPopup onStart={handleStart} />}
 				{wrongMoveVisible && <div className={style.wrong_move}>+3&quot;!</div>}
-
 				<div className={style.container}>
 					<div className={style.information_container}>
-						<div className={style.timer}>
-							<p>⏲ {useClock(counter + malus)}</p>
-						</div>
+						<Timer value={counter + malus} />
 						<div>
 							<BtnSecondary onClick={handleLeaveGame}>LEAVE 🧨</BtnSecondary>
 						</div>
