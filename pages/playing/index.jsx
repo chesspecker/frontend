@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import {useState, useEffect} from 'react';
 import useSound from 'use-sound';
 import router from 'next/router.js';
@@ -409,12 +408,6 @@ function Index() {
 		router.push('/dashboard');
 	};
 
-	const handleSoundStatus = () => {
-		setIsSoundDisabled(lastValue => {
-			return !lastValue;
-		});
-	};
-
 	return (
 		<>
 			<Head>
@@ -462,7 +455,7 @@ function Index() {
 									100
 								}
 								text={text}
-								changeSoundStatus={handleSoundStatus}
+								changeSoundStatus={toggleSound}
 								soundStatus={isSoundDisabled}
 								solutionVisible={solutionVisible}
 								nextMove={history[moveNumber]}

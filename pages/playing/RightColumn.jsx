@@ -1,4 +1,5 @@
 import {useState} from 'react';
+/* eslint-disable-next-line */
 import {BsFillVolumeUpFill, BsFillVolumeMuteFill} from 'react-icons/bs';
 import {ProgressBarCircle} from '../../components/layouts/progress-bar/ProgressBarCirle.jsx';
 import BtnSecondary from '../../components/layouts/btn/BtnSecondary.jsx';
