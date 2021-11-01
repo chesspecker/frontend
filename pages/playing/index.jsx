@@ -450,8 +450,8 @@ function Index() {
 								orientation={orientation}
 								lastMove={lastMove}
 								check={chess.in_check() === 'true'}
-								onMove={onMove}
 								background={BOARD_LIST[0]}
+								onMove={onMove}
 							/>
 							<PromotionContainer
 								chess={chess}
