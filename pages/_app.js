@@ -1,5 +1,5 @@
 import Head from 'next/head.js';
-import {useState, useMemo} from 'react';
+import {useState, useMemo, useCallback} from 'react';
 import {UserContext} from '../components/context/UserContext.jsx';
 import {NewSetContext} from '../components/context/NewSetContext.jsx';
 import '../styles/globals.css';
@@ -20,35 +20,35 @@ function MyApp({Component, pageProps}) {
 		themeArray: [],
 	});
 
-	const updateCurrentUserName = data => {
+	const updateCurrentUserName = useCallback(data => {
 		setCurrentUser(rest => {
 			return {...rest, name: data};
 		});
-	};
+	}, []);
 
-	const updateCurrentSet = data => {
+	const updateCurrentSet = useCallback(data => {
 		setCurrentUser(rest => {
 			return {...rest, currentSet: data};
 		});
-	};
+	}, []);
 
-	const updateNewSetOptions = data => {
+	const updateNewSetOptions = useCallback(data => {
 		setNewSet(rest => {
 			return {...rest, themeArray: data};
 		});
-	};
+	}, []);
 
-	const updateNewSetSize = data => {
+	const updateNewSetSize = useCallback(data => {
 		setNewSet(rest => {
 			return {...rest, size: data};
 		});
-	};
+	}, []);
 
-	const updateNewSetTitle = data => {
+	const updateNewSetTitle = useCallback(data => {
 		setNewSet(rest => {
 			return {...rest, title: data};
 		});
-	};
+	}, []);
 
 	const UserContextValue = useMemo(
 		() => ({
