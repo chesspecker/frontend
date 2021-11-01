@@ -18,7 +18,7 @@ import BtnSecondary from '../../components/layouts/btn/BtnSecondary.jsx';
 import PromotionContainer from './PromotionContainer.jsx';
 import RightColumn from './RightColumn.jsx';
 import style from './index.module.scss';
-import Timer from './Timer.jsx'
+import Timer from './Timer.jsx';
 
 const sortBy = (array, p) =>
 	[...array].sort((a, b) => (a[p] > b[p] ? 1 : a[p] < b[p] ? -1 : 0));
