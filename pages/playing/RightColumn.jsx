@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {BsVolumeUp, BsFillVolumeMuteFill} from 'react-icons/bs.js';
 import {ProgressBarCircle} from '../../components/layouts/progress-bar/ProgressBarCirle.jsx';
 import BtnSecondary from '../../components/layouts/btn/BtnSecondary.jsx';
 import style from './RightColumn.module.scss';
@@ -8,6 +9,8 @@ export default function RightColumn({
 	text,
 	solutionVisible,
 	nextMove,
+	changeSoundStatus,
+	soundStatus,
 }) {
 	const [solutionDisplayed, setSolutionDisplayed] = useState(false);
 	if (!text) return null;
@@ -26,7 +29,12 @@ export default function RightColumn({
 	return (
 		<div className={style.container}>
 			<div className={style.content}>
-				<h3 className={style.progression_title}>Progression</h3>
+				<h3 className={style.progression_title}>
+					Progression{' '}
+					<span className={style.icon} onClick={changeSoundStatus}>
+						{!soundStatus ? <BsVolumeUp /> : <BsFillVolumeMuteFill />}
+					</span>
+				</h3>
 				<ProgressBarCircle
 					colour='green'
 					percentage={percentage}

@@ -468,6 +468,12 @@ function Index() {
 		setCurrentChunk(previousChunk => previousChunk + 1);
 	};
 
+	const handleSoundStatus = () => {
+		setIsSoundDisabled(lastValue => {
+			return !lastValue;
+		});
+	};
+
 	return (
 		<>
 			<Head>
@@ -521,6 +527,8 @@ function Index() {
 									100
 								}
 								text={text}
+								changeSoundStatus={handleSoundStatus}
+								soundStatus={isSoundDisabled}
 								solutionVisible={solutionVisible}
 								nextMove={history[moveNumber]}
 							/>
