@@ -2,7 +2,7 @@
 	height: 100vh;
 	margin: 0;
 	color: #222;
-	font-family: sans-serif;
+	font-family: 'Merriweather Sans', sans-serif;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -11,7 +11,7 @@
 }
 
 .title {
-	font-family: sans-serif;
+	font-family: 'Merriweather Sans', sans-serif;
 	font-size: 26px;
 	margin: 32px auto 24px;
 	line-height: 40px;
@@ -49,6 +49,6 @@
 	margin: 0 auto;
 	border: none;
 	font-size: 18px;
-	font-family: sans-serif;
+	font-family: 'Merriweather Sans', sans-serif;
 	font-weight: bold;
 }
