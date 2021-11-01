@@ -11,6 +11,7 @@ function ChessGround({
 	orientation,
 	lastMove,
 	check,
+	background,
 }) {
 	return (
 		<div className={style.chessGround}>
@@ -20,7 +21,11 @@ function ChessGround({
 				turnColor={turnColor}
 				movable={movable}
 				orientation={orientation}
-				style={{margin: '30px', backgroundColor: 'white'}}
+				style={{
+					margin: '30px',
+					backgroundColor: 'white',
+					'background-image': `url(/images/board/${background})`,
+				}}
 				lastMove={lastMove}
 				check={check}
 				onMove={onMove}

@@ -23,6 +23,19 @@ import Timer from './Timer.jsx';
 const sortBy = (array, p) =>
 	[...array].sort((a, b) => (a[p] > b[p] ? 1 : a[p] < b[p] ? -1 : 0));
 
+const BOARD_LIST = [
+	'blue.svg',
+	'brown.svg',
+	'gray.jpg',
+	'green.svg',
+	'leather.jpg',
+	'marble.jpg',
+	'purple.svg',
+	'wood1.jpg',
+	'wood2.jpg',
+	'wood3.jpg',
+];
+
 function Index() {
 	const api = process.env.API;
 	const [moveSound] = useSound(SOUND_MOVE);
@@ -438,6 +451,7 @@ function Index() {
 								lastMove={lastMove}
 								check={chess.in_check() === 'true'}
 								onMove={onMove}
+								background={BOARD_LIST[0]}
 							/>
 							<PromotionContainer
 								chess={chess}
