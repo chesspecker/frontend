@@ -5,7 +5,6 @@ import {NewSetContext} from '../components/context/NewSetContext.jsx';
 import '../styles/globals.css';
 import '../styles/chessground.css';
 import '../styles/pieces.css';
-import '../styles/board.css';
 
 function MyApp({Component, pageProps}) {
 	const [currentUser, setCurrentUser] = useState({
