@@ -43,32 +43,41 @@ function Index() {
 	const [errorSound] = useSound(SOUND_ERROR);
 	const [genericSound] = useSound(SOUND_GENERIC);
 	const [victorySound] = useSound(SOUND_VICTORY);
+	const [isSoundDisabled, setIsSoundDisabled] = useState(false);
+
 	const [fen, setFen] = useState('');
 	const {currentUser} = useUserContext();
 	const [turn, setTurn] = useState('w');
 	const [malus, setMalus] = useState(0);
 	const [chess, setChess] = useState(new Chess());
-	const [currentPuzzle, setCurrentPuzzle] = useState({});
 	const [counter, setCounter] = useState(0);
+
 	const [history, setHistory] = useState([]);
 	const [lastMove, setLastMove] = useState();
-	const [currentSet, setCurrentSet] = useState('');
 	const [moveNumber, setMoveNumber] = useState(0);
+	const [currentSet, setCurrentSet] = useState('');
+	const [mistakesNumber, setMistakesNumber] = useState(0);
+
 	const [puzzleList, setPuzzleList] = useState([]);
+	const [puzzleListLength, setPuzzleListLength] = useState(0);
+	const [currentPuzzle, setCurrentPuzzle] = useState({});
+	const [actualPuzzle, setActualPuzzle] = useState(0);
+	const [puzzleCompleteInSession, setPuzzleCompleteInSession] = useState(0);
+
 	const [pendingMove, setPendingMove] = useState();
 	const [orientation, setOrientation] = useState('');
-	const [actualPuzzle, setActualPuzzle] = useState(0);
-	const [isSoundDisabled, setIsSoundDisabled] = useState(false);
+
 	const [timerRunning, setTimerRunning] = useState(false);
+	const [timerBeforeCurrentPuzzle, setTimerBeforeCurrentPuzzle] = useState(0);
+
 	const [sucessVisible, setSucessVisible] = useState(false);
 	const [selectVisible, setSelectVisible] = useState(false);
 	const [solutionVisible, setSolutionVisible] = useState(false);
-	const [puzzleListLength, setPuzzleListLength] = useState(0);
 	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
 	const [startPopupVisible, setStartPopupVisible] = useState(true);
-	const [mistakesNumber, setMistakesNumber] = useState(0);
-	const [timerBeforeCurrentPuzzle, setTimerBeforeCurrentPuzzle] = useState(0);
-	const [puzzleCompleteInSession, setPuzzleCompleteInSession] = useState(0);
+
+	const [boardColor, setBoardColor] = useState(0);
+
 	const [text, setText] = useState({
 		title: 'Your turn',
 		subtitle: `Find the best move.`,
@@ -450,7 +459,7 @@ function Index() {
 								orientation={orientation}
 								lastMove={lastMove}
 								check={chess.in_check() === 'true'}
-								background={BOARD_LIST[0]}
+								background={BOARD_LIST[boardColor]}
 								onMove={onMove}
 							/>
 							<PromotionContainer
