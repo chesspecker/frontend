@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {BsFillVolumeUpFill, BsFillVolumeMuteFill} from 'react-icons/bs';
+import {BsFillVolumeUpFill, BsFillVolumeMuteFill} from 'react-icons/bs.js';
 import {ProgressBarCircle} from '../../components/layouts/progress-bar/ProgressBarCirle.jsx';
 import BtnSecondary from '../../components/layouts/btn/BtnSecondary.jsx';
 import style from './RightColumn.module.scss';
