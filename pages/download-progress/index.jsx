@@ -40,7 +40,7 @@ function DownloadProgress() {
 		setInterval(() => {
 			getProgress();
 		}, 500);
-	}, []);
+	}, [api]);
 
 	useEffect(() => {
 		if (percentage === 100) {

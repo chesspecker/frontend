@@ -26,7 +26,7 @@ export default function useSetsDashboard() {
 		};
 
 		getSets();
-	}, []);
+	}, [api]);
 
 	return puzzleSet;
 }

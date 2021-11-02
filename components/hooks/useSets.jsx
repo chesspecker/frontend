@@ -21,7 +21,7 @@ export default function useSets() {
 		};
 
 		getSets();
-	}, []);
+	}, [api]);
 
 	return gameSet;
 }
