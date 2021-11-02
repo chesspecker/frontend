@@ -458,7 +458,7 @@ function Index() {
 								movable={calcMovable()}
 								orientation={orientation}
 								lastMove={lastMove}
-								check={chess.in_check() === 'true'}
+								check={chess.in_check()}
 								background={BOARD_LIST[boardColor]}
 								onMove={onMove}
 							/>
