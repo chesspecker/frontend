@@ -76,6 +76,7 @@ function Index() {
 	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
 	const [startPopupVisible, setStartPopupVisible] = useState(true);
 
+	/* eslint-disable-next-line */
 	const [boardColor, setBoardColor] = useState(0);
 
 	const [text, setText] = useState({
@@ -130,7 +131,7 @@ function Index() {
 		};
 
 		getSet();
-	}, [currentUser.currentSet]);
+	}, [currentUser.currentSet, api]);
 
 	/**
 	 * Set the number of puzzles remaining.
@@ -182,7 +183,7 @@ function Index() {
 		};
 
 		getCurrentPuzzle();
-	}, [puzzleList, actualPuzzle]);
+	}, [puzzleList, actualPuzzle, api]);
 
 	/**
 	 * Setup the board.
@@ -220,7 +221,7 @@ function Index() {
 	useEffect(() => {
 		if (!history) return;
 		if (moveNumber === 0) setTimeout(computerMove(moveNumber), 500);
-	}, [history, moveNumber]);
+	}, [history, moveNumber, computerMove]);
 
 	/**
 	 * Allow only legal moves.

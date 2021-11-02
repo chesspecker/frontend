@@ -24,7 +24,7 @@ function ChessGround({
 				style={{
 					margin: '30px',
 					backgroundColor: 'white',
-					'background-image': `url(/images/board/${background})`,
+					backgroundImage: `url(/images/board/${background})`,
 				}}
 				lastMove={lastMove}
 				check={check}

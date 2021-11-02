@@ -16,7 +16,7 @@
 		"env": "browser",
 		"rules": {
 			"node/prefer-global/process": "off",
-			"react/prop-types": "warn",
+			"react/prop-types": "off",
 			"react/button-has-type": "warn",
 			"unicorn/filename-case": "off",
 			"unicorn/no-abusive-eslint-disable": "warn"
