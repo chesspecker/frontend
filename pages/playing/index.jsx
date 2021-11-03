@@ -56,6 +56,7 @@ function Index() {
 	const [lastMove, setLastMove] = useState();
 	const [moveNumber, setMoveNumber] = useState(0);
 	const [currentSet, setCurrentSet] = useState('');
+	const [gameLink, setGameLink] = useState('');
 	const [mistakesNumber, setMistakesNumber] = useState(0);
 
 	const [puzzleList, setPuzzleList] = useState([]);
@@ -178,6 +179,7 @@ function Index() {
 			}
 
 			const puzzle = response.data;
+			setGameLink(() => puzzle.GameUrl);
 
 			setCurrentPuzzle(() => puzzle);
 		};
@@ -480,6 +482,7 @@ function Index() {
 								soundStatus={isSoundDisabled}
 								solutionVisible={solutionVisible}
 								nextMove={history[moveNumber]}
+								gameLink={gameLink}
 							/>
 						</div>
 					</div>
