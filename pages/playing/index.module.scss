@@ -9,9 +9,6 @@
 
 .btn {
 	z-index: 1;
-}
-
-.btn {
 	height: 4rem;
 	width: 4rem;
 	margin: 2rem;
@@ -28,14 +25,18 @@
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	gap: 5rem;
-
 	height: min-content;
 	flex-wrap: wrap;
+	gap: 5rem;
+
+	@media screen and (max-width: 1100px) {
+		gap: 0.6rem;
+	}
 
 	@media screen and (max-width: 450px) {
 		flex-direction: column;
 	}
+
 	@media (orientation: landscape) and (max-width: 450px) {
 		flex-direction: column;
 	}
@@ -45,7 +46,7 @@
 }
 
 .plateau_container {
-	@media screen and (max-width: 1024px) {
+	@media screen and (max-width: 1100px) {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -64,6 +65,7 @@
 		transform: scale(0.8);
 	}
 }
+
 .timer {
 	display: flex;
 	align-items: center;
