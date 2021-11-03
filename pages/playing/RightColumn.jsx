@@ -1,5 +1,4 @@
 import {useState} from 'react';
-import router from 'next/router.js';
 import {ProgressBarCircle} from '../../components/layouts/progress-bar/ProgressBarCirle.jsx';
 import BtnSecondary from '../../components/layouts/btn/BtnSecondary.jsx';
 import style from './RightColumn.module.scss';
@@ -55,7 +54,7 @@ export default function RightColumn({
 				<div>
 					<button
 						className={style.btn_lichess}
-						onClick={() => router.push(gameLink)}
+						onClick={() => window.open(gameLink, '_blank')}
 					>
 						SEE IN LICHESS
 					</button>
