@@ -72,6 +72,9 @@ function Index() {
 	const [timerRunning, setTimerRunning] = useState(false);
 	const [timerBeforeCurrentPuzzle, setTimerBeforeCurrentPuzzle] = useState(0);
 
+	const [isComplete, setIsComplete] = useState(false);
+	const [autoMove, setAutoMove] = useState(true);
+
 	const [sucessVisible, setSucessVisible] = useState(false);
 	const [selectVisible, setSelectVisible] = useState(false);
 	const [solutionVisible, setSolutionVisible] = useState(false);
@@ -196,6 +199,7 @@ function Index() {
 		const chessJs = new Chess(currentPuzzle.FEN);
 		const history = currentPuzzle.Moves.split(' ');
 
+		setIsComplete(() => false);
 		setPendingMove(() => {});
 		setLastMove(() => {});
 		setMoveNumber(() => 0);
@@ -331,10 +335,10 @@ function Index() {
 	const checkPuzzleComplete = async moveNumber => {
 		if (moveNumber === history.length) {
 			const isSetComplete = await checkSetComplete();
-			if (!isSetComplete) {
-				if (!isSoundDisabled) genericSound();
-				changePuzzle();
-			}
+			if (isSetComplete) return;
+			if (!isSoundDisabled) genericSound();
+			setIsComplete(() => true);
+			if (autoMove) changePuzzle();
 		}
 	};
 
@@ -411,7 +415,13 @@ function Index() {
 			orientation === 'white' ? 'black' : 'white',
 		);
 
+	/**
+	 * Toggle autoMove
+	 */
+	const toggleAutoMove = () => setAutoMove(previous => !previous);
+
 	const toggleSound = () => setIsSoundDisabled(previous => !previous);
+	const moveToNext = () => changePuzzle();
 
 	const handleRestart = () => {
 		setPuzzleCompleteInSession(() => 0);
@@ -462,6 +472,7 @@ function Index() {
 								changeSoundStatus={toggleSound}
 								soundStatus={isSoundDisabled}
 								switchOrientation={switchOrientation}
+								toggleAutoMove={toggleAutoMove}
 							/>
 							<div className={style.plateau_container}>
 								<ChessGround
@@ -483,8 +494,10 @@ function Index() {
 							<RightColumn
 								percentage={getPercentage()}
 								text={text}
+								isComplete={isComplete}
 								solutionVisible={solutionVisible}
 								nextMove={history[moveNumber]}
+								moveToNext={moveToNext}
 								gameLink={gameLink}
 							/>
 						</div>

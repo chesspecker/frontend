@@ -6,8 +6,10 @@ import style from './RightColumn.module.scss';
 export default function RightColumn({
 	percentage,
 	text,
+	isComplete,
 	solutionVisible,
 	nextMove,
+	moveToNext,
 	gameLink,
 }) {
 	const [solutionDisplayed, setSolutionDisplayed] = useState(false);
@@ -39,25 +41,34 @@ export default function RightColumn({
 					<p>{text.subtitle}</p>
 				</div>
 				<div>
-					{!solutionVisible && <BtnSecondary>NO CHEATING</BtnSecondary>}
+					{!solutionVisible && !isComplete && (
+						<BtnSecondary>NO CHEATING</BtnSecondary>
+					)}
 				</div>
 				<div>
-					{solutionVisible && !solutionDisplayed && (
+					{solutionVisible && !isComplete && !solutionDisplayed && (
 						<BtnSecondary onClick={handleClick}>SOLUTION 🧩</BtnSecondary>
 					)}
 				</div>
 				<div>
-					{solutionVisible && solutionDisplayed && (
+					{solutionVisible && !isComplete && solutionDisplayed && (
 						<BtnSecondary onClick={handleClick}>{nextMove}</BtnSecondary>
 					)}
 				</div>
 				<div>
-					<button
-						className={style.btn_lichess}
-						onClick={() => window.open(gameLink, '_blank')}
-					>
-						SEE IN LICHESS
-					</button>
+					{isComplete && (
+						<BtnSecondary onClick={moveToNext}>NEXT PUZZLE</BtnSecondary>
+					)}
+				</div>
+				<div>
+					{isComplete && (
+						<button
+							className={style.btn_lichess}
+							onClick={() => window.open(gameLink, '_blank')}
+						>
+							SEE IN LICHESS
+						</button>
+					)}
 				</div>
 			</div>
 		</div>

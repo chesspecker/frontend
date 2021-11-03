@@ -44,7 +44,7 @@ function Text({percentage}) {
 export function ProgressBarCircle({percentage, colour, colourFont}) {
 	const pct = cleanPercentage(percentage);
 	return (
-		<svg width={200} height={200}>
+		<svg width={200} height={200} className={style.container}>
 			<g transform={`rotate(-90 ${'100 100'})`}>
 				<Circle colour={colourFont} />
 				<Circle colour={colour} percentage={pct} />
