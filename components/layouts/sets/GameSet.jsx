@@ -54,13 +54,7 @@ function GameSet({sets, setCurrentSet, onDelete}) {
 									: `${style.badge} ${style.badge_primary}`
 							}
 						>
-							{sets.level === 'hard' ||
-							sets.level === 'harder' ||
-							sets.level === 'hardest'
-								? `Hard`
-								: sets.level === 'intermediate' || sets.level === 'normal'
-								? `Normal`
-								: `Easy`}
+							{sets.level}
 						</span>
 					</p>
 				</div>
