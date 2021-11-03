@@ -24,7 +24,7 @@
 }
 
 .logo {
-	max-width: 4.5rem;
+	max-width: 3.5rem;
 	margin: 0.5rem;
 }
 
@@ -45,12 +45,12 @@
 	}
 
 	.logo {
-		max-width: 6rem;
+		max-width: 4.5rem;
 	}
 }
 
 @media screen and (min-width: 1024px) {
 	.logo {
-		max-width: 7rem;
+		max-width: 5.5rem;
 	}
 }
