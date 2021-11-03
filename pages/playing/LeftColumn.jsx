@@ -8,7 +8,7 @@ export default function LeftColumn({
 	changeSoundStatus,
 	soundStatus,
 	switchOrientation,
-	setAutoMove,
+	toggleAutoMove,
 }) {
 	return (
 		<div className={style.container}>
