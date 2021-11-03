@@ -463,16 +463,18 @@ function Index() {
 								soundStatus={isSoundDisabled}
 								switchOrientation={switchOrientation}
 							/>
-							<ChessGround
-								fen={fen}
-								turnColor={turnColor(chess.turn())}
-								movable={calcMovable()}
-								orientation={orientation}
-								lastMove={lastMove}
-								check={chess.in_check()}
-								background={BOARD_LIST[boardColor]}
-								onMove={onMove}
-							/>
+							<div className={style.plateau_container}>
+								<ChessGround
+									fen={fen}
+									turnColor={turnColor(chess.turn())}
+									movable={calcMovable()}
+									orientation={orientation}
+									lastMove={lastMove}
+									check={chess.in_check()}
+									background={BOARD_LIST[boardColor]}
+									onMove={onMove}
+								/>
+							</div>
 							<PromotionContainer
 								chess={chess}
 								promotion={promotion}

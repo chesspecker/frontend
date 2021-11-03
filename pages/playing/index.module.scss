@@ -22,12 +22,16 @@
 
 .chessGroundContainer {
 	position: relative;
+	flex: 1;
 	display: flex;
+	flex-direction: row;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: center;
 	width: 100%;
+
 	height: min-content;
 	flex-wrap: wrap;
+
 	@media screen and (max-width: 450px) {
 		flex-direction: column;
 	}
@@ -39,11 +43,23 @@
 	flex: 1;
 }
 
+.plateau_container {
+	@media screen and (max-width: 1024px) {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+	}
+}
+
 .information_container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	@media (orientation: landscape) and (max-width: 450px) {
+		transform: scale(0.8);
+	}
+	@media screen and (max-width: 450px) {
 		transform: scale(0.8);
 	}
 }

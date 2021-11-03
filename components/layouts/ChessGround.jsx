@@ -22,8 +22,6 @@ function ChessGround({
 				movable={movable}
 				orientation={orientation}
 				style={{
-					margin: '30px',
-					backgroundColor: 'white',
 					backgroundImage: `url(/images/board/${background})`,
 				}}
 				lastMove={lastMove}

@@ -1,5 +1,16 @@
 .container {
-	flex: 1;
+	@media screen and (max-width: 1024px) {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
+		margin: 1rem;
+	}
+	@media screen and (max-width: 450px) {
+		transform: scale(0.5);
+		margin: 0;
+	}
 }
 
 .content {
@@ -13,6 +24,10 @@
 	width: 5rem;
 	margin-top: 2rem;
 	margin-bottom: 2rem;
+	@media screen and (max-width: 1024px) {
+		align-self: center;
+		margin: 0.5rem;
+	}
 }
 
 .icon_mute {
