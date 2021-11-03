@@ -1,6 +1,5 @@
 .container {
 	flex: 1;
-	width: 70rem;
 }
 
 .content {
@@ -10,28 +9,30 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	height: 5rem;
+	width: 5rem;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
 }
 
-.progression_title {
-	font-size: 2rem;
-	font-weight: 500;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
+.icon_mute {
+	margin-top: 10%;
+	margin-left: 10%;
 }
 
-.turn {
-	font-size: 2rem;
-	font-weight: 500;
-	line-height: 3rem;
-	align-items: center;
-	text-align: center;
+.icon_mute * {
+	height: 4rem;
+	width: 4rem;
 }
 
-.text_title {
-	font-weight: 700;
-	margin-bottom: -20px;
+.icon_rotate {
+	margin-top: 5%;
+	margin-left: 2%;
+}
+
+.icon_rotate * {
+	height: 4rem;
+	width: 4rem;
 }
 
 .btn_lichess {

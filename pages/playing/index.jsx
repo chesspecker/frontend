@@ -17,6 +17,7 @@ import SOUND_VICTORY from '../../public/sounds/Victory.mp3';
 import BtnSecondary from '../../components/layouts/btn/BtnSecondary.jsx';
 import PromotionContainer from './PromotionContainer.jsx';
 import RightColumn from './RightColumn.jsx';
+import LeftColumn from './LeftColumn.jsx';
 import style from './index.module.scss';
 import Timer from './Timer.jsx';
 
@@ -403,14 +404,12 @@ function Index() {
 	const turnColor = string_ => (string_ === 'w' ? 'white' : 'black');
 
 	/**
-	 * Useless for now but should be re-implemented.
-	 * Needs a button
-	 *
-	 const switchOrientation = () =>
+	 * Switch board orientation
+	 */
+	const switchOrientation = () =>
 		setOrientation(orientation =>
 			orientation === 'white' ? 'black' : 'white',
 		);
-	 */
 
 	const toggleSound = () => setIsSoundDisabled(previous => !previous);
 
@@ -432,6 +431,10 @@ function Index() {
 	const handleLeaveGame = () => {
 		router.push('/dashboard');
 	};
+
+	const getPercentage = () =>
+		(1 - (puzzleList.length - puzzleCompleteInSession) / currentSet.length) *
+		100;
 
 	return (
 		<>
@@ -455,6 +458,11 @@ function Index() {
 					<div>
 						<div className={style.chessGroundContainer}>
 							<div className={style.chessGround_left_container} />
+							<LeftColumn
+								changeSoundStatus={toggleSound}
+								soundStatus={isSoundDisabled}
+								switchOrientation={switchOrientation}
+							/>
 							<ChessGround
 								fen={fen}
 								turnColor={turnColor(chess.turn())}
@@ -471,15 +479,8 @@ function Index() {
 								selectVisible={selectVisible}
 							/>
 							<RightColumn
-								percentage={
-									(1 -
-										(puzzleList.length - puzzleCompleteInSession) /
-											currentSet.length) *
-									100
-								}
+								percentage={getPercentage()}
 								text={text}
-								changeSoundStatus={toggleSound}
-								soundStatus={isSoundDisabled}
 								solutionVisible={solutionVisible}
 								nextMove={history[moveNumber]}
 								gameLink={gameLink}
