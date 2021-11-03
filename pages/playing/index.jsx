@@ -73,6 +73,8 @@ function Index() {
 	const [timerBeforeCurrentPuzzle, setTimerBeforeCurrentPuzzle] = useState(0);
 
 	const [isComplete, setIsComplete] = useState(false);
+	const [autoMove, setAutoMove] = useState(true);
+
 	const [sucessVisible, setSucessVisible] = useState(false);
 	const [selectVisible, setSelectVisible] = useState(false);
 	const [solutionVisible, setSolutionVisible] = useState(false);
@@ -336,7 +338,7 @@ function Index() {
 			if (isSetComplete) return;
 			if (!isSoundDisabled) genericSound();
 			setIsComplete(() => true);
-			// ChangePuzzle();
+			if (autoMove) changePuzzle();
 		}
 	};
 
@@ -465,6 +467,7 @@ function Index() {
 								changeSoundStatus={toggleSound}
 								soundStatus={isSoundDisabled}
 								switchOrientation={switchOrientation}
+								setAutoMove={setAutoMove}
 							/>
 							<div className={style.plateau_container}>
 								<ChessGround
