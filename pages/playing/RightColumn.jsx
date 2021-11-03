@@ -1,6 +1,4 @@
 import {useState} from 'react';
-/* eslint-disable-next-line */
-import {BsFillVolumeUpFill, BsFillVolumeMuteFill} from 'react-icons/bs';
 import router from 'next/router.js';
 import {ProgressBarCircle} from '../../components/layouts/progress-bar/ProgressBarCirle.jsx';
 import BtnSecondary from '../../components/layouts/btn/BtnSecondary.jsx';
@@ -11,8 +9,6 @@ export default function RightColumn({
 	text,
 	solutionVisible,
 	nextMove,
-	changeSoundStatus,
-	soundStatus,
 	gameLink,
 }) {
 	const [solutionDisplayed, setSolutionDisplayed] = useState(false);
@@ -33,12 +29,7 @@ export default function RightColumn({
 	return (
 		<div className={style.container}>
 			<div className={style.content}>
-				<h3 className={style.progression_title}>
-					Progression{' '}
-					<span className={style.icon} onClick={changeSoundStatus}>
-						{soundStatus ? <BsFillVolumeMuteFill /> : <BsFillVolumeUpFill />}
-					</span>
-				</h3>
+				<h3 className={style.progression_title}>Progression </h3>
 				<ProgressBarCircle
 					colour='green'
 					percentage={percentage}
