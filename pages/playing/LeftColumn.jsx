@@ -8,6 +8,7 @@ export default function LeftColumn({
 	changeSoundStatus,
 	soundStatus,
 	switchOrientation,
+	/* eslint-disable-next-line no-unused-vars */
 	toggleAutoMove,
 }) {
 	return (

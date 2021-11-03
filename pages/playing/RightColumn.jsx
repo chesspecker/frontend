@@ -10,6 +10,7 @@ export default function RightColumn({
 	solutionVisible,
 	nextMove,
 	moveToNext,
+	autoMove,
 	gameLink,
 }) {
 	const [solutionDisplayed, setSolutionDisplayed] = useState(false);
@@ -61,7 +62,7 @@ export default function RightColumn({
 					)}
 				</div>
 				<div>
-					{isComplete && (
+					{isComplete && !autoMove && (
 						<button
 							className={style.btn_lichess}
 							onClick={() => window.open(gameLink, '_blank')}

@@ -81,7 +81,7 @@ function Index() {
 	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
 	const [startPopupVisible, setStartPopupVisible] = useState(true);
 
-	/* eslint-disable-next-line */
+	/* eslint-disable-next-line no-unused-vars */
 	const [boardColor, setBoardColor] = useState(0);
 
 	const [text, setText] = useState({
@@ -498,6 +498,7 @@ function Index() {
 								solutionVisible={solutionVisible}
 								nextMove={history[moveNumber]}
 								moveToNext={moveToNext}
+								autoMove={autoMove}
 								gameLink={gameLink}
 							/>
 						</div>
