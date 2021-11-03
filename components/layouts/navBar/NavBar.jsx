@@ -14,7 +14,7 @@ function NavBar() {
 						<div className={style.logo}>
 							<Image src={logo} />
 						</div>
-						<p className={style.navBar_title}> - chesspecker</p>
+						<p className={style.navBar_title}> — Chesspecker</p>
 					</div>
 				</Link>
 			</div>
