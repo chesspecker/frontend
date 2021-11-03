@@ -47,16 +47,18 @@ function Index() {
 	const [isSoundDisabled, setIsSoundDisabled] = useState(false);
 
 	const [fen, setFen] = useState('');
-	const {currentUser} = useUserContext();
 	const [turn, setTurn] = useState('w');
 	const [malus, setMalus] = useState(0);
 	const [chess, setChess] = useState(new Chess());
 	const [counter, setCounter] = useState(0);
 
+	const {currentUser} = useUserContext();
+	const [currentSet, setCurrentSet] = useState('');
+	const [currentSetId, setCurrentSetId] = useState('');
+
 	const [history, setHistory] = useState([]);
 	const [lastMove, setLastMove] = useState();
 	const [moveNumber, setMoveNumber] = useState(0);
-	const [currentSet, setCurrentSet] = useState('');
 	const [gameLink, setGameLink] = useState('');
 	const [mistakesNumber, setMistakesNumber] = useState(0);
 
@@ -102,25 +104,32 @@ function Index() {
 	}, [timerRunning, counter]);
 
 	/**
+	 * Get current set from local storage
+	 */
+	useEffect(() => {
+		setCurrentSetId(localStorage.getItem('currentSet'));
+	}, []);
+
+	/**
+	 * Save current set to local storage
+	 */
+	useEffect(() => {
+		localStorage.setItem('currentSet', currentUser.currentSet);
+	}, [currentUser.currentSet]);
+
+	/**
 	 * Retrieve the set.
 	 * Extract the list of puzzles.
 	 */
 	useEffect(() => {
-		if (
-			currentUser.currentSet === '' ||
-			currentUser.currentSet === null ||
-			currentUser.currentSet === undefined
-		)
-			return;
+		if (!currentSetId) return;
+
 		const getSet = async () => {
-			if (currentUser.currentSet.length > 5)
-				localStorage.setItem('currentSet', currentUser.currentSet);
 			let response;
 			try {
-				response = await http.get(
-					`${api}/set/id/${localStorage.getItem('currentSet')}`,
-					{withCredentials: true},
-				);
+				response = await http.get(`${api}/set/id/${currentSetId}`, {
+					withCredentials: true,
+				});
 			} catch (error) {
 				return console.log(error);
 			}
@@ -136,7 +145,7 @@ function Index() {
 		};
 
 		getSet();
-	}, [currentUser.currentSet, api]);
+	}, [currentSetId, api]);
 
 	/**
 	 * Set the number of puzzles remaining.
@@ -184,7 +193,6 @@ function Index() {
 
 			const puzzle = response.data;
 			setGameLink(() => puzzle.GameUrl);
-
 			setCurrentPuzzle(() => puzzle);
 		};
 
@@ -363,7 +371,7 @@ function Index() {
 	const updateFinishedSet = async () => {
 		try {
 			await http.put(
-				`${api}/set/complete/${localStorage.getItem('currentSet')}`,
+				`${api}/set/complete/${currentSetId}`,
 				{cycles: true, bestTime: counter + 1},
 				{withCredentials: true},
 			);

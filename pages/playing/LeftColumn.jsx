@@ -14,14 +14,14 @@ export default function LeftColumn({
 	return (
 		<div className={style.container}>
 			<div className={style.content}>
-				<btn className={style.icon_mute} onClick={changeSoundStatus}>
+				<a className={style.icon_mute} onClick={changeSoundStatus}>
 					{soundStatus ? <BsFillVolumeMuteFill /> : <BsFillVolumeUpFill />}
-				</btn>
+				</a>
 			</div>
 			<div className={style.content}>
-				<btn className={style.icon_rotate} onClick={switchOrientation}>
+				<a className={style.icon_rotate} onClick={switchOrientation}>
 					<Image src={rotate} width={50} height={50} />
-				</btn>
+				</a>
 			</div>
 		</div>
 	);

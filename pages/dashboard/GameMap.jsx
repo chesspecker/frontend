@@ -26,6 +26,7 @@ function GameMap() {
 
 	const handleCurrentSet = set => {
 		updateCurrentSet(set);
+		localStorage.setItem('currentSet', set);
 		router.push('/playing');
 	};
 
