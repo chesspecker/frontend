@@ -80,8 +80,11 @@ function Index() {
 	const [sucessVisible, setSucessVisible] = useState(false);
 	const [selectVisible, setSelectVisible] = useState(false);
 	const [solutionVisible, setSolutionVisible] = useState(false);
-	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
 	const [startPopupVisible, setStartPopupVisible] = useState(true);
+
+	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
+	const [rightMoveVisible, setRightMoveVisible] = useState(false);
+	const [finishMoveVisible, setFinishMoveVisible] = useState(false);
 
 	/* eslint-disable-next-line no-unused-vars */
 	const [boardColor, setBoardColor] = useState(0);
@@ -270,7 +273,7 @@ function Index() {
 	/**
 	 * Function called when the user plays.
 	 */
-	const onMove = (from, to) => {
+	const onMove = async (from, to) => {
 		const moves = chess.moves({verbose: true});
 		for (let i = 0, length_ = moves.length; i < length_; i++) {
 			if (moves[i].flags.includes('p') && moves[i].from === from) {
@@ -292,17 +295,21 @@ function Index() {
 		if (isCorrectMove || chess.in_checkmate()) {
 			setFen(() => chess.fen());
 			setMoveNumber(previousMove => previousMove + 1);
-			checkPuzzleComplete(moveNumber);
 			setLastMove([from, to]);
+			const isPuzzleComplete = await checkPuzzleComplete(moveNumber);
+			console.log(isPuzzleComplete);
+			if (isPuzzleComplete) return;
+			setRightMoveVisible(() => true);
+			setTimeout(() => setRightMoveVisible(() => false), 600);
 			setTimeout(computerMove(moveNumber + 1), 800);
 		} else {
 			chess.undo();
 			setFen(() => chess.fen());
 			setMalus(lastCount => lastCount + 3);
 			setMistakesNumber(previous => previous + 1);
-			setWrongMoveVisible(() => true);
 			if (!isSoundDisabled) errorSound();
-			setTimeout(() => setWrongMoveVisible(() => false), 300);
+			setWrongMoveVisible(() => true);
+			setTimeout(() => setWrongMoveVisible(() => false), 600);
 			setText(() => ({
 				title: `That's not the move!`,
 				subtitle: `Try something else.`,
@@ -318,7 +325,7 @@ function Index() {
 	/**
 	 * Handle promotions via chessground.
 	 */
-	const promotion = piece => {
+	const promotion = async piece => {
 		setSelectVisible(false);
 		const from = pendingMove[0];
 		const to = pendingMove[1];
@@ -328,17 +335,20 @@ function Index() {
 		if (isCorrectMove || chess.in_checkmate()) {
 			setFen(() => chess.fen());
 			setMoveNumber(previousMove => previousMove + 1);
-			checkPuzzleComplete(moveNumber);
+			const isPuzzleComplete = await checkPuzzleComplete(moveNumber);
+			if (isPuzzleComplete) return;
 			setLastMove([from, to]);
+			setRightMoveVisible(() => true);
+			setTimeout(() => setRightMoveVisible(() => false), 600);
 			setTimeout(computerMove(moveNumber + 1), 800);
 		} else {
 			chess.undo();
 			setFen(() => chess.fen());
 			setMalus(lastCount => lastCount + 3);
 			setMistakesNumber(previous => previous + 1);
-			setWrongMoveVisible(() => true);
 			if (!isSoundDisabled) errorSound();
-			setTimeout(() => setWrongMoveVisible(() => false), 300);
+			setWrongMoveVisible(() => true);
+			setTimeout(() => setWrongMoveVisible(() => false), 600);
 		}
 	};
 
@@ -346,13 +356,18 @@ function Index() {
 	 * Called after each correct move.
 	 */
 	const checkPuzzleComplete = async moveNumber => {
+		console.log('hello');
 		if (moveNumber === history.length) {
+			console.log('headdllo');
 			const isSetComplete = await checkSetComplete();
-			if (isSetComplete) return;
+			if (isSetComplete) return true;
 			if (!isSoundDisabled) genericSound();
 			setIsComplete(() => true);
 			if (autoMove) changePuzzle();
+			return true;
 		}
+
+		return false;
 	};
 
 	/**
@@ -470,7 +485,6 @@ function Index() {
 					<SucessPopup counter={counter + malus} restart={handleRestart} />
 				)}
 				{startPopupVisible && <StartingPopup onStart={handleStart} />}
-				{wrongMoveVisible && <div className={style.wrong_move}>+3&quot;!</div>}
 				<div className={style.container}>
 					<div className={style.information_container}>
 						<Timer value={counter + malus} />
@@ -496,6 +510,9 @@ function Index() {
 									lastMove={lastMove}
 									check={chess.in_check()}
 									background={BOARD_LIST[boardColor]}
+									wrongMoveVisible={wrongMoveVisible}
+									rightMoveVisible={rightMoveVisible}
+									finishMoveVisible={finishMoveVisible}
 									onMove={onMove}
 								/>
 							</div>

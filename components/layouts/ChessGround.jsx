@@ -12,9 +12,22 @@ function ChessGround({
 	lastMove,
 	check,
 	background,
+	wrongMoveVisible,
+	rightMoveVisible,
+	finishMoveVisible,
 }) {
 	return (
-		<div className={style.chessGround}>
+		<div
+			className={
+				wrongMoveVisible
+					? `${style.wrong_move} ${style.chessGround}`
+					: rightMoveVisible
+					? `${style.right_move} ${style.chessGround}`
+					: finishMoveVisible
+					? `${style.finish_move} ${style.chessGround}`
+					: style.chessGround
+			}
+		>
 			<Chessground
 				addDimensionsCssVars
 				fen={fen}
