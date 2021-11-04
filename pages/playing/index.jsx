@@ -116,7 +116,7 @@ function Index() {
 				: currentUser.currentSet;
 
 		setCurrentSetId(newSetId);
-	}, []);
+	}, [currentUser.currentSet]);
 
 	/**
 	 * Save current set to local storage
@@ -297,7 +297,6 @@ function Index() {
 			setMoveNumber(previousMove => previousMove + 1);
 			setLastMove([from, to]);
 			const isPuzzleComplete = await checkPuzzleComplete(moveNumber);
-			console.log(isPuzzleComplete);
 			if (isPuzzleComplete) return;
 			setRightMoveVisible(() => true);
 			setTimeout(() => setRightMoveVisible(() => false), 600);
@@ -356,12 +355,16 @@ function Index() {
 	 * Called after each correct move.
 	 */
 	const checkPuzzleComplete = async moveNumber => {
-		console.log('hello');
 		if (moveNumber === history.length) {
-			console.log('headdllo');
 			const isSetComplete = await checkSetComplete();
 			if (isSetComplete) return true;
 			if (!isSoundDisabled) genericSound();
+			/**
+			 * Not working properly yet
+			 * 
+			setFinishMoveVisible(() => true);
+			setTimeout(() => setFinishMoveVisible(() => false), 600);
+			 */
 			setIsComplete(() => true);
 			if (autoMove) changePuzzle();
 			return true;
@@ -378,6 +381,12 @@ function Index() {
 			setTimerRunning(() => false);
 			setSucessVisible(() => true);
 			if (!isSoundDisabled) victorySound();
+			/**
+			 * Not working properly yet
+			 * 
+			setFinishMoveVisible(() => true);
+			setTimeout(() => setFinishMoveVisible(() => false), 600);
+			 */
 			await updateFinishedSet();
 			return true;
 		}
