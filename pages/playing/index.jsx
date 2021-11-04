@@ -84,6 +84,7 @@ function Index() {
 
 	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
 	const [rightMoveVisible, setRightMoveVisible] = useState(false);
+	/* eslint-disable-next-line no-unused-vars */
 	const [finishMoveVisible, setFinishMoveVisible] = useState(false);
 
 	/* eslint-disable-next-line no-unused-vars */
