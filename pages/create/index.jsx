@@ -58,7 +58,13 @@ function NewSet() {
 	};
 
 	const handleNextClick = () => {
-		updateNewSetOptions(choicesSelected);
+		let result = [...choicesSelected];
+		if (choicesSelected.length === 0) {
+			result = ['healthyMix'];
+			setChoicesSelected(() => result);
+		}
+
+		updateNewSetOptions(result);
 	};
 
 	return (
