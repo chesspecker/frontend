@@ -82,6 +82,7 @@ function Index() {
 	const [solutionVisible, setSolutionVisible] = useState(false);
 	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
 	const [startPopupVisible, setStartPopupVisible] = useState(true);
+	const [hasPlayedMultipleTime, setHasPlayeMultipleTime] = useState(0);
 
 	/* eslint-disable-next-line no-unused-vars */
 	const [boardColor, setBoardColor] = useState(0);
@@ -150,7 +151,7 @@ function Index() {
 		};
 
 		getSet();
-	}, [currentSetId, api]);
+	}, [currentSetId, api, hasPlayedMultipleTime]);
 
 	/**
 	 * Set the number of puzzles remaining.
@@ -443,6 +444,7 @@ function Index() {
 		setMalus(() => 0);
 		setTimerRunning(() => true);
 		setSucessVisible(() => false);
+		setHasPlayeMultipleTime(oldValue => oldValue + 1);
 	};
 
 	const handleStart = () => {
