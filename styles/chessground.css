@@ -4,19 +4,19 @@
 	position: relative;
 	display: block;
 }
-@media screen and (min-width: 350px) {
+@media screen and (min-width: 350px) and (min-height: 550px) {
 	.cg-wrap {
 		width: 330px;
 		height: 330px;
 	}
 }
-@media screen and (min-width: 450px) {
+@media screen and (min-width: 450px) and (min-height: 650px) {
 	.cg-wrap {
 		width: 440px;
 		height: 440px;
 	}
 }
-@media screen and (min-width: 550px) {
+@media screen and (min-width: 550px) and (min-height: 750px) {
 	.cg-wrap {
 		width: 540px;
 		height: 540px;
