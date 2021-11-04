@@ -50,6 +50,41 @@
 	width: 4rem;
 }
 
+.icon_rotate * {
+	height: 4rem;
+	width: 4rem;
+}
+
+.icon_enabled {
+	margin-top: 8%;
+	margin-left: 6%;
+}
+
+.icon_disabled {
+	margin-top: 8%;
+	margin-left: 6%;
+}
+
+.icon_enabled * {
+	height: 4rem;
+	width: 4rem;
+	fill: #004e92;
+}
+
+.icon_disabled * {
+	height: 4rem;
+	width: 4rem;
+	fill: rgb(245, 245, 245);
+}
+
+.autoMove_enabled {
+	background-color: rgb(245, 245, 245);
+}
+
+.autoMove_disabled {
+	background-color: #004e92;
+}
+
 .btn_lichess {
 	margin: 1rem;
 	color: rgb(104, 104, 104);

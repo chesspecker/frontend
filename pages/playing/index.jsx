@@ -455,6 +455,7 @@ function Index() {
 	const toggleAutoMove = () => setAutoMove(previous => !previous);
 
 	const toggleSound = () => setIsSoundDisabled(previous => !previous);
+
 	const moveToNext = () => changePuzzle();
 
 	const handleRestart = () => {
@@ -507,6 +508,7 @@ function Index() {
 								soundStatus={isSoundDisabled}
 								switchOrientation={switchOrientation}
 								toggleAutoMove={toggleAutoMove}
+								autoMove={autoMove}
 							/>
 							<div className={style.plateau_container}>
 								<ChessGround
