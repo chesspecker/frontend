@@ -272,6 +272,31 @@ function Index() {
 		};
 	};
 
+	const onRightMove = async (from, to) => {
+		setFen(() => chess.fen());
+		setMoveNumber(previousMove => previousMove + 1);
+		setLastMove([from, to]);
+		const isPuzzleComplete = await checkPuzzleComplete(moveNumber);
+		if (isPuzzleComplete) return;
+		setRightMoveVisible(() => true);
+		setTimeout(() => setRightMoveVisible(() => false), 600);
+		setTimeout(computerMove(moveNumber + 1), 800);
+	};
+
+	const onWrongMove = () => {
+		chess.undo();
+		setFen(() => chess.fen());
+		setMalus(lastCount => lastCount + 3);
+		setMistakesNumber(previous => previous + 1);
+		if (!isSoundDisabled) errorSound();
+		setWrongMoveVisible(() => true);
+		setTimeout(() => setWrongMoveVisible(() => false), 600);
+		setText(() => ({
+			title: `That's not the move!`,
+			subtitle: `Try something else.`,
+		}));
+	};
+
 	/**
 	 * Function called when the user plays.
 	 */
@@ -295,26 +320,9 @@ function Index() {
 
 		const isCorrectMove = validateMove(move);
 		if (isCorrectMove || chess.in_checkmate()) {
-			setFen(() => chess.fen());
-			setMoveNumber(previousMove => previousMove + 1);
-			setLastMove([from, to]);
-			const isPuzzleComplete = await checkPuzzleComplete(moveNumber);
-			if (isPuzzleComplete) return;
-			setRightMoveVisible(() => true);
-			setTimeout(() => setRightMoveVisible(() => false), 600);
-			setTimeout(computerMove(moveNumber + 1), 800);
+			onRightMove(from, to);
 		} else {
-			chess.undo();
-			setFen(() => chess.fen());
-			setMalus(lastCount => lastCount + 3);
-			setMistakesNumber(previous => previous + 1);
-			if (!isSoundDisabled) errorSound();
-			setWrongMoveVisible(() => true);
-			setTimeout(() => setWrongMoveVisible(() => false), 600);
-			setText(() => ({
-				title: `That's not the move!`,
-				subtitle: `Try something else.`,
-			}));
+			onWrongMove();
 		}
 	};
 
@@ -334,22 +342,9 @@ function Index() {
 		chess.move({from, to, promotion: piece});
 
 		if (isCorrectMove || chess.in_checkmate()) {
-			setFen(() => chess.fen());
-			setMoveNumber(previousMove => previousMove + 1);
-			const isPuzzleComplete = await checkPuzzleComplete(moveNumber);
-			if (isPuzzleComplete) return;
-			setLastMove([from, to]);
-			setRightMoveVisible(() => true);
-			setTimeout(() => setRightMoveVisible(() => false), 600);
-			setTimeout(computerMove(moveNumber + 1), 800);
+			onRightMove(from, to);
 		} else {
-			chess.undo();
-			setFen(() => chess.fen());
-			setMalus(lastCount => lastCount + 3);
-			setMistakesNumber(previous => previous + 1);
-			if (!isSoundDisabled) errorSound();
-			setWrongMoveVisible(() => true);
-			setTimeout(() => setWrongMoveVisible(() => false), 600);
+			onWrongMove();
 		}
 	};
 
