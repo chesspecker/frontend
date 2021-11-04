@@ -104,10 +104,15 @@ function Index() {
 	}, [timerRunning, counter]);
 
 	/**
-	 * Get current set from local storage
+	 * Get current set id
 	 */
 	useEffect(() => {
-		setCurrentSetId(localStorage.getItem('currentSet'));
+		const newSetId =
+			currentUser.currentSet === ''
+				? localStorage.getItem('currentSet')
+				: currentUser.currentSet;
+
+		setCurrentSetId(newSetId);
 	}, []);
 
 	/**
