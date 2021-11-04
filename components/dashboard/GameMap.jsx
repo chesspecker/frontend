@@ -2,14 +2,14 @@ import router from 'next/router.js';
 import Image from 'next/image.js';
 import Link from 'next/link.js';
 import {useEffect, useState} from 'react';
-import useSetsDashboard from '../../components/hooks/useSetsDashboard.jsx';
-import GameSet from '../../components/layouts/sets/GameSet.jsx';
-import {useUserContext} from '../../components/context/UserContext.jsx';
-import Btn from '../../components/layouts/btn/Btn.jsx';
+import useSetsDashboard from '../hooks/useSetsDashboard.jsx';
+import GameSet from '../layouts/sets/GameSet.jsx';
+import {useUserContext} from '../context/UserContext.jsx';
+import Btn from '../layouts/btn/Btn.jsx';
 import plus from '../../public/images/plus.svg';
 import http from '../../services/http-service.js';
-import ConfirmRemovePopup from '../../components/layouts/popup/ConfirmRemovePopup.jsx';
-import style from './index.module.scss';
+import ConfirmRemovePopup from '../layouts/popup/ConfirmRemovePopup.jsx';
+import style from './GameMap.module.scss';
 
 function GameMap() {
 	const api = process.env.API;

@@ -2,7 +2,7 @@ import {useState} from 'react';
 import Link from 'next/link.js';
 import Head from 'next/head.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
-import Choice from '../../components/03-Create-set/Choice.jsx';
+import Choice from '../../components/create/Choice.jsx';
 import {
 	puzzleThemes,
 	themesCategory,

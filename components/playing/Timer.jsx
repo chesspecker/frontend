@@ -1,5 +1,5 @@
 import useClock from '../../components/hooks/useClock.jsx';
-import style from './index.module.scss';
+import style from './timer.module.scss';
 
 function Timer({value}) {
 	return (

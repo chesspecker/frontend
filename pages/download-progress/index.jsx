@@ -3,7 +3,7 @@ import {io} from 'socket.io-client';
 import router from 'next/router.js';
 import http from '../../services/http-service.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
-import ProgressBar from '../../components/02-Download-progress/ProgressBar.jsx';
+import ProgressBar from '../../components/download/ProgressBar.jsx';
 import style from './index.module.scss';
 
 const ENDPOINT = 'https://api.chesspecker.com';

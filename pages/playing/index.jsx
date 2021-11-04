@@ -15,11 +15,11 @@ import SOUND_ERROR from '../../public/sounds/Error.mp3';
 import SOUND_GENERIC from '../../public/sounds/GenericNotify.mp3';
 import SOUND_VICTORY from '../../public/sounds/Victory.mp3';
 import BtnSecondary from '../../components/layouts/btn/BtnSecondary.jsx';
-import PromotionContainer from './PromotionContainer.jsx';
-import RightColumn from './RightColumn.jsx';
-import LeftColumn from './LeftColumn.jsx';
+import PromotionContainer from '../../components/playing/PromotionContainer.jsx';
+import RightColumn from '../../components/playing/RightColumn.jsx';
+import LeftColumn from '../../components/playing/LeftColumn.jsx';
+import Timer from '../../components/playing/Timer.jsx';
 import style from './index.module.scss';
-import Timer from './Timer.jsx';
 
 const sortBy = (array, p) =>
 	[...array].sort((a, b) => (a[p] > b[p] ? 1 : a[p] < b[p] ? -1 : 0));

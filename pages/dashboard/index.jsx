@@ -1,6 +1,6 @@
 import Head from 'next/head.js';
 import PageHeader from '../../components/layouts/PageHeader.jsx';
-import GameMap from './GameMap.jsx';
+import GameMap from '../../components/dashboard/GameMap.jsx';
 
 function Dashboard() {
 	return (
