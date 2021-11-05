@@ -128,6 +128,40 @@ function Index() {
 	}, [currentUser.currentSet]);
 
 	/**
+	 * Get last value setIsSoundDisabled
+	 */
+	useEffect(() => {
+		let soundDisabled = localStorage.getItem('isSoundDisabled');
+		if (soundDisabled === 'true') soundDisabled = true;
+		if (soundDisabled === 'false') soundDisabled = false;
+		setIsSoundDisabled(soundDisabled);
+	}, []);
+
+	/**
+	 * Save setIsSoundDisabled to local storage
+	 */
+	useEffect(() => {
+		localStorage.setItem('isSoundDisabled', isSoundDisabled);
+	}, [isSoundDisabled]);
+
+	/**
+	 * Get last value autoMove
+	 */
+	useEffect(() => {
+		let newAutoMove = localStorage.getItem('autoMove');
+		if (newAutoMove === 'true') newAutoMove = true;
+		if (newAutoMove === 'false') newAutoMove = false;
+		setAutoMove(newAutoMove);
+	}, []);
+
+	/**
+	 * Save autoMove to local storage
+	 */
+	useEffect(() => {
+		localStorage.setItem('autoMove', autoMove);
+	}, [autoMove]);
+
+	/**
 	 * Retrieve the set.
 	 * Extract the list of puzzles.
 	 */
