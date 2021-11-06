@@ -1,9 +1,9 @@
 import Image from 'next/image.js';
+import Tippy from '@tippyjs/react';
 import Btn from '../btn/Btn.jsx';
 import supress from '../../../public/images/supress.svg';
 import useClock from '../../hooks/useClock.jsx';
 import style from './GameSet.module.scss';
-import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
 function GameSet({sets, setCurrentSet, onDelete}) {

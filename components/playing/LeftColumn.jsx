@@ -1,10 +1,10 @@
 /* eslint-disable-next-line */
 import {BsFillVolumeUpFill, BsFillVolumeMuteFill} from 'react-icons/bs';
 import Image from 'next/image.js';
+import Tippy from '@tippyjs/react';
 import rotate from '../../public/images/rotate.svg';
 import fastForward from '../../public/images/fast-forward.svg';
 import style from './LeftColumn.module.scss';
-import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
 export default function LeftColumn({
