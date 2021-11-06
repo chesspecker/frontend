@@ -5,6 +5,7 @@ import Tippy from '@tippyjs/react';
 import STYLE from './left-column.module.scss';
 import rotate from '@/public/images/rotate.svg';
 import fastForward from '@/public/images/fast-forward.svg';
+import paint from '../../public/images/paint.svg';
 import 'tippy.js/dist/tippy.css';
 
 export default function LeftColumn({
@@ -27,6 +28,13 @@ export default function LeftColumn({
 				<Tippy content='Flip board'>
 					<a className={STYLE.icon_rotate} onClick={switchOrientation}>
 						<Image src={rotate} width={50} height={50} />
+					</a>
+				</Tippy>
+			</div>
+			<div className={style.content}>
+				<Tippy content='Change board theme'>
+					<a className={style.icon_paint} onClick={() => console.log('ss')}>
+						<Image src={paint} width={50} height={50} />
 					</a>
 				</Tippy>
 			</div>
