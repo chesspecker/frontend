@@ -30,24 +30,22 @@ export default function LeftColumn({
 					</a>
 				</Tippy>
 			</div>
-			{autoMove && (
-				<div className={`${style.content} ${style.autoMove_enabled}`}>
-					<Tippy content='Jump to next puzzle immediately'>
-						<a className={style.icon_enabled} onClick={toggleAutoMove}>
-							<Image src={fastForward} width={50} height={50} />
-						</a>
-					</Tippy>
+			<Tippy content='Jump to next puzzle immediately'>
+				<div
+					className={
+						autoMove
+							? `${style.content} ${style.autoMove_enabled}`
+							: `${style.content} ${style.autoMove_disabled}`
+					}
+				>
+					<a
+						className={autoMove ? style.icon_enabled : style.icon_disabled}
+						onClick={toggleAutoMove}
+					>
+						<Image src={fastForward} width={50} height={50} />
+					</a>
 				</div>
-			)}
-			{!autoMove && (
-				<div className={`${style.content} ${style.autoMove_disabled}`}>
-					<Tippy content='Jump to next puzzle immediately'>
-						<a className={style.icon_disabled} onClick={toggleAutoMove}>
-							<Image src={fastForward} width={50} height={50} />
-						</a>
-					</Tippy>
-				</div>
-			)}
+			</Tippy>
 		</div>
 	);
 }
