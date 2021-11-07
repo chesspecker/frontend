@@ -2,9 +2,9 @@ import style from './OptionLevel.module.scss';
 
 function OptionDifficulty({handleChange}) {
 	return (
-		<div className={style.option}>
-			<div className={style.option_input}>
-				<label htmlFor='number_game' className={style.option_description}>
+		<div className={style.container}>
+			<div className={style.container_input}>
+				<label htmlFor='number_game' className={style.container_description}>
 					Difficulty level
 				</label>
 				<div className={style.input_container}>
@@ -12,6 +12,7 @@ function OptionDifficulty({handleChange}) {
 						id='puzzle-difficulty'
 						name='difficulty'
 						defaultValue='normal'
+						className={style.select_css}
 						onChange={handleChange}
 					>
 						<option value='easiest' title='600 points below your puzzle rating'>
