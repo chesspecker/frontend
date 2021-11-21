@@ -31,7 +31,7 @@ export default function RightColumn({
 	return (
 		<div className={STYLE.container}>
 			<div className={STYLE.content}>
-				<h3 className={STYLE.progression_title}>Progression </h3>
+				<h3 className={STYLE.progression_title}>Progression</h3>
 				<ProgressBarCircle
 					colour='green'
 					percentage={percentage}

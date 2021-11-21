@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import useSound from 'use-sound';
 import Router from 'next/router.js';
 import STYLE from './index.module.scss';
-import http from '@/services/http-service.js';
+import http from '@/lib/http.js';
 import {useUserContext} from '@/context/user-context.jsx';
 import Chess from '@/lib/chess.js';
 
@@ -169,25 +169,20 @@ function Index() {
 	 */
 	useEffect(() => {
 		if (!currentSetId) return;
-
 		const getSet = async () => {
-			let response;
 			try {
-				response = await http.get(`${api}/set/id/${currentSetId}`, {
+				const response = await http.get(`${api}/set/id/${currentSetId}`, {
 					withCredentials: true,
 				});
+				setCurrentSet(() => response.data);
+				setCounter(() => response.data.currentTime);
+				setTimerBeforeCurrentPuzzle(() => response.data.currentTime);
+				let puzzleList = response.data.puzzles.filter(p => p.played === false);
+				puzzleList = sortBy(puzzleList, 'order');
+				setPuzzleList(() => puzzleList);
 			} catch (error) {
 				return console.log(error);
 			}
-
-			const set = response.data;
-			setCurrentSet(() => set);
-			setCounter(() => set.currentTime);
-			setTimerBeforeCurrentPuzzle(() => set.currentTime);
-
-			let puzzleList = set.puzzles.filter(p => p.played === false);
-			puzzleList = sortBy(puzzleList, 'order');
-			setPuzzleList(() => puzzleList);
 		};
 
 		getSet();
@@ -228,18 +223,15 @@ function Index() {
 		if (!puzzleList[actualPuzzle] || puzzleList.length === 0) return;
 		const puzzleToGet = puzzleList[actualPuzzle];
 		const getCurrentPuzzle = async () => {
-			let response;
 			try {
-				response = await http.get(`${api}/puzzle/${puzzleToGet._id}`, {
+				const response = await http.get(`${api}/puzzle/${puzzleToGet._id}`, {
 					withCredentials: true,
 				});
+				setGameLink(() => response.data.GameUrl);
+				setCurrentPuzzle(() => response.data);
 			} catch (error) {
 				return console.log(error);
 			}
-
-			const puzzle = response.data;
-			setGameLink(() => puzzle.GameUrl);
-			setCurrentPuzzle(() => puzzle);
 		};
 
 		getCurrentPuzzle();

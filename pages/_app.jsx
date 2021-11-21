@@ -1,7 +1,7 @@
 import Head from 'next/head.js';
 import {useState, useMemo, useCallback} from 'react';
-import {UserContext} from '../context/user-context.jsx';
-import {NewSetContext} from '../context/new-set-context.jsx';
+import {UserContext} from '@/context/user-context.jsx';
+import {NewSetContext} from '@/context/new-set-context.jsx';
 import '@/styles/globals.css';
 import '@/styles/chessground.css';
 import '@/styles/pieces.css';

@@ -3,7 +3,7 @@ import Image from 'next/image.js';
 import Link from 'next/link.js';
 import {useEffect, useState} from 'react';
 import STYLE from './index.module.scss';
-import http from '@/services/http-service.js';
+import http from '@/lib/http.js';
 import Container from '@/layouts/container/index.jsx';
 import Button from '@/components/button/index.jsx';
 import plus from '@/public/images/plus.svg';

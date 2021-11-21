@@ -7,7 +7,4 @@ export const NewSetContext = createContext({
 	updateNewSetTitle: () => {},
 });
 
-// Export useContext Hook.
-export function useNewSetContext() {
-	return useContext(NewSetContext);
-}
+export const useNewSetContext = () => useContext(NewSetContext);

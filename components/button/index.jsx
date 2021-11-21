@@ -1,14 +1,9 @@
 import STYLE from './index.module.scss';
 
-export default function Button({link, onClick, children}) {
+export default function Button({onClick, children}) {
 	return (
-		<a
-			type='button'
-			className={STYLE.button}
-			href={link || '#'}
-			onClick={onClick}
-		>
+		<button type='button' className={STYLE.button} onClick={onClick}>
 			{children}
-		</a>
+		</button>
 	);
 }

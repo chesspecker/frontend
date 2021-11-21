@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
-import http from '../services/http-service.js';
-import {useUserContext} from '../context/user-context.jsx';
+import http from '@/lib/http.js';
+import {useUserContext} from '@/context/user-context.jsx';
 
 export default function useUserName() {
 	const api = process.env.API;
@@ -9,19 +9,15 @@ export default function useUserName() {
 
 	useEffect(() => {
 		const getUserName = async () => {
-			let response;
 			try {
-				response = await http.get(`${api}/user/name`, {
+				const response = await http.get(`${api}/user/name`, {
 					withCredentials: true,
 				});
+				updateCurrentUserName(response.data.name);
+				setUserName(() => response.data.name);
 			} catch (error) {
 				return console.log(error);
 			}
-
-			setUserName(() => {
-				updateCurrentUserName(response.data.name);
-				return response.data.name;
-			});
 		};
 
 		getUserName();

@@ -1,4 +1,4 @@
-import http from '../services/http-service.js';
+import http from '@/lib/http.js';
 
 export default function usePostNewSet({newSet}) {
 	const api = process.env.API;

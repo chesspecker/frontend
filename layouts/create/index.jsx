@@ -55,13 +55,8 @@ function NewSet() {
 	};
 
 	const handleNextClick = () => {
-		let result = [...choicesSelected];
-		if (choicesSelected.length === 0) {
-			result = ['healthyMix'];
-			setChoicesSelected(() => result);
-		}
-
-		updateNewSetOptions(result);
+		if (choicesSelected.length === 0) setChoicesSelected(() => ['healthyMix']);
+		updateNewSetOptions([...choicesSelected]);
 		Router.push('/options');
 	};
 

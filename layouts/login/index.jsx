@@ -1,3 +1,4 @@
+import Link from 'next/link.js';
 import STYLE from './index.module.scss';
 import Button from '@/components/button/index.jsx';
 
@@ -12,9 +13,9 @@ function LoginRegister() {
 					newcomer 👋
 				</h1>
 				<div className={STYLE.contentBottom}>
-					<Button link={`${process.env.API}/auth/login`}>
-						SIGN IN WITH LICHESS
-					</Button>
+					<Link href={`${process.env.API}/auth/login`}>
+						<Button>SIGN IN WITH LICHESS</Button>
+					</Link>
 				</div>
 			</div>
 		</div>

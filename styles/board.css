@@ -2,108 +2,108 @@
 
 #blueBoardThemeButton,
 .blueBoardTheme {
-	background-image: url('../public/images/board/blue.svg');
+	background-image: url('/public/board/blue.svg');
 }
 
 .blueBoardThemePreview {
-	background-image: url('../public/images/board/blue.svg') !important;
+	background-image: url('/public/board/blue.svg') !important;
 }
 
 /** Brown */
 
 #brownBoardThemeButton,
 .brownBoardTheme {
-	background-image: url('../public/images/board/brown.svg');
+	background-image: url('/public/board/brown.svg');
 }
 
 .brownBoardThemePreview {
-	background-image: url('../public/images/board/brown.svg') !important;
+	background-image: url('/public/board/brown.svg') !important;
 }
 
 /** Gray */
 
 #grayBoardThemeButton,
 .grayBoardTheme {
-	background-image: url('../public/images/board/gray.jpg');
+	background-image: url('/public/board/gray.jpg');
 }
 
 .grayBoardThemePreview {
-	background-image: url('../public/images/board/gray.jpg') !important;
+	background-image: url('/public/board/gray.jpg') !important;
 }
 
 /** Green */
 
 #greenBoardThemeButton,
 .greenBoardTheme {
-	background-image: url('../public/images/board/green.svg');
+	background-image: url('/public/board/green.svg');
 }
 
 .greenBoardThemePreview {
-	background-image: url('../public/images/board/green.svg') !important;
+	background-image: url('/public/board/green.svg') !important;
 }
 
 /** Leather */
 
 #leatherBoardThemeButton,
 .leatherBoardTheme {
-	background-image: url('../public/images/board/leather.jpg');
+	background-image: url('/public/board/leather.jpg');
 }
 
 .leatherBoardThemePreview {
-	background-image: url('../public/images/board/leather.jpg') !important;
+	background-image: url('/public/board/leather.jpg') !important;
 }
 
 /** Marble */
 
 #marbleBoardThemeButton,
 .marbleBoardTheme {
-	background-image: url('../public/images/board/marble.jpg');
+	background-image: url('/public/board/marble.jpg');
 }
 
 .marbleBoardThemePreview {
-	background-image: url('../public/images/board/marble.jpg') !important;
+	background-image: url('/public/board/marble.jpg') !important;
 }
 
 /** Purple */
 
 #purpleBoardThemeButton,
 .purpleBoardTheme {
-	background-image: url('../public/images/board/purple.svg');
+	background-image: url('/public/board/purple.svg');
 }
 
 .purpleBoardThemePreview {
-	background-image: url('../public/images/board/purple.svg') !important;
+	background-image: url('/public/board/purple.svg') !important;
 }
 
 /** Wood1 */
 
 #wood1BoardThemeButton,
 .wood1BoardTheme {
-	background-image: url('../public/images/board/wood1.jpg');
+	background-image: url('/public/board/wood1.jpg');
 }
 
 .wood1BoardThemePreview {
-	background-image: url('../public/images/board/wood1.jpg') !important;
+	background-image: url('/public/board/wood1.jpg') !important;
 }
 
 /** Wood2 */
 
 #wood2BoardThemeButton,
 .wood2BoardTheme {
-	background-image: url('../public/images/board/wood2.jpg');
+	background-image: url('/public/board/wood2.jpg');
 }
 
 .wood2BoardThemePreview {
-	background-image: url('../public/images/board/wood2.jpg') !important;
+	background-image: url('/public/board/wood2.jpg') !important;
 }
 
 /** Wood3 */
 
 #wood3BoardThemeButton,
 .wood3BoardTheme {
-	background-image: url('../public/images/board/wood3.jpg');
+	background-image: url('/public/board/wood3.jpg');
 }
 
 .wood3BoardThemePreview {
-	background-image: url('../public/images/board/wood3.jpg') !important;
+	background-image: url('/public/board/wood3.jpg') !important;
 }

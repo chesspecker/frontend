@@ -7,9 +7,9 @@ function Footer() {
 	return (
 		<div className={STYLE.footer}>
 			<div className={STYLE.content}>
-				<Link href='https://github.com/chesspecker'>
-					<div className={STYLE.buYaCofee}>
-						<p className={STYLE.buYaCofee_desc}>Currently in beta</p>
+				<Link href='https://github.com/sponsors/chesspecker'>
+					<div className={STYLE.buyACoffee}>
+						<p className={STYLE.buyACoffee_desc}>Buy us coffee</p>
 					</div>
 				</Link>
 				<Link href='https://github.com/chesspecker'>

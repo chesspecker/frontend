@@ -2,7 +2,7 @@ import {useState} from 'react';
 import Router from 'next/router.js';
 import STYLE from './index.module.scss';
 import {useNewSetContext} from '@/context/new-set-context.jsx';
-import http from '@/services/http-service.js';
+import http from '@/lib/http.js';
 import Container from '@/layouts/container/index.jsx';
 
 import OptionTextInput from '@/components/option/text-input.jsx';
@@ -15,23 +15,17 @@ import ErrorPopup from '@/components/popup/error.jsx';
 function Options() {
 	const api = process.env.API;
 	const {newSet} = useNewSetContext();
-	const [title, setTitle] = useState('');
-	const [level, setLevel] = useState('normal');
-	const [size, setSize] = useState(500);
 	const [isDisabled, setIsDisabled] = useState(false);
 	const [toggleError, setToggleError] = useState(false);
 
-	const handleTitleChange = title => {
-		setTitle(() => title.target.value);
-	};
+	const [title, setTitle] = useState('');
+	const handleTitleChange = title => setTitle(() => title.target.value);
 
-	const handleLevelChange = element => {
-		setLevel(() => element.target.value);
-	};
+	const [level, setLevel] = useState('normal');
+	const handleLevelChange = element => setLevel(() => element.target.value);
 
-	const handleSizeChange = value => {
-		setSize(() => value);
-	};
+	const [size, setSize] = useState(500);
+	const handleSizeChange = value => setSize(() => value);
 
 	const handleSubmit = () => {
 		http
@@ -48,18 +42,12 @@ function Options() {
 
 	const validate = () => {
 		if (isDisabled) return;
-		if (title === '') {
-			setToggleError(() => true);
-			return;
-		}
-
+		if (title === '') return setToggleError(() => true);
 		setIsDisabled(() => true);
 		handleSubmit();
 	};
 
-	const handleClickError = () => {
-		setToggleError(() => false);
-	};
+	const handleClickError = () => setToggleError(() => false);
 
 	return (
 		<Container>

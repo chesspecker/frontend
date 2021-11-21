@@ -1,6 +1,6 @@
 import router from 'next/router.js';
 import {useState, useEffect} from 'react';
-import http from '../services/http-service.js';
+import http from '@/lib/http.js';
 
 export default function useSetsDashboard() {
 	const api = process.env.API;
@@ -8,11 +8,11 @@ export default function useSetsDashboard() {
 
 	useEffect(() => {
 		const getSets = async () => {
-			let response;
 			try {
-				response = await http.get(`${api}/set/dashboard`, {
+				const response = await http.get(`${api}/set/dashboard`, {
 					withCredentials: true,
 				});
+				setPuzzleSet(() => response.data);
 			} catch (error) {
 				if (error.message === 'Request failed with status code 403') {
 					router.push(`${api}/auth/logout`);
@@ -20,9 +20,6 @@ export default function useSetsDashboard() {
 
 				return console.log(error.message);
 			}
-
-			const sets = response.data;
-			setPuzzleSet(() => sets);
 		};
 
 		getSets();
