@@ -1,16 +1,12 @@
 import {useState} from 'react';
-import Link from 'next/link.js';
-import Router from 'next/router';
+import Router from 'next/router.js';
 import STYLE from './index.module.scss';
 import {useNewSetContext} from '@/context/new-set-context.jsx';
 import Container from '@/layouts/container/index.jsx';
-
 import CATEGORIES from '@/data/categories.js';
 import THEMES from '@/data/themes.js';
-
 import Button from '@/components/button/index.jsx';
 import Choice from '@/components/choice/index.jsx';
-
 import ErrorPopupNewSet from '@/components/popup/error-new-set.jsx';
 import ErrorPopupNumerousChoices from '@/components/popup/error-numerous-choices.jsx';
 
@@ -106,7 +102,7 @@ function NewSet() {
 					))}
 				</div>
 				<div className={STYLE.btn_container}>
-						<Button onClick={handleNextClick}>NEXT</Button>
+					<Button onClick={handleNextClick}>NEXT</Button>
 				</div>
 			</div>
 		</Container>
