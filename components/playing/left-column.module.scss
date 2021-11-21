@@ -1,0 +1,89 @@
+.container {
+	@media screen and (max-width: 1100px) {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
+		margin: 1rem;
+	}
+	@media screen and (max-width: 450px) {
+		transform: scale(0.5);
+		margin: 0;
+	}
+}
+
+.content {
+	background-color: rgb(245, 245, 245);
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 5rem;
+	width: 5rem;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	@media screen and (max-width: 1100px) {
+		align-self: center;
+		margin: 0.5rem;
+	}
+}
+
+.icon_mute {
+	margin-top: 10%;
+	margin-left: 10%;
+	* {
+		height: 4rem;
+		width: 4rem;
+	}
+}
+
+.icon_rotate {
+	margin-top: 5%;
+	margin-left: 2%;
+	* {
+		height: 4rem;
+		width: 4rem;
+	}
+}
+
+.icon_enabled {
+	margin-top: 8%;
+	margin-left: 6%;
+	* {
+		height: 4rem;
+		width: 4rem;
+		fill: #004e92;
+	}
+}
+
+.icon_disabled {
+	margin-top: 8%;
+	margin-left: 6%;
+	* {
+		height: 4rem;
+		width: 4rem;
+		fill: rgb(245, 245, 245);
+	}
+}
+
+.autoMove {
+	&_enabled {
+		background-color: rgb(245, 245, 245);
+	}
+	&_disabled {
+		background-color: #ccc;
+	}
+}
+
+.btn_lichess {
+	margin: 1rem;
+	color: rgb(104, 104, 104);
+	font-size: 2rem;
+	background-color: rgb(245, 245, 245);
+	border: none;
+	padding: 1rem 2rem;
+	border-radius: 5px;
+	cursor: pointer;
+}

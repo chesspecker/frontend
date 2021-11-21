@@ -1,0 +1,42 @@
+.button {
+	align-self: center;
+	text-decoration: none;
+	text-align: center;
+	display: block;
+	width: 100%;
+	line-height: 58px;
+	padding-top: 2px;
+	border-radius: 20px;
+	color: #004e92;
+	background: white;
+	border: none;
+	font-size: 18px;
+	font-family: 'Merriweather Sans', sans-serif;
+	font-weight: bold;
+	cursor: pointer;
+	@media screen and (max-width: 450px) {
+		transform: scale(0.9);
+	}
+
+	&_secondary {
+		margin: 1rem;
+		color: white;
+		font-size: 2rem;
+		background-color: rgb(104, 104, 104);
+		border: none;
+		padding: 1rem 2rem;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+
+	&_warning {
+		margin: 1rem;
+		color: white;
+		font-size: 2rem;
+		background-color: #dd3333;
+		border: none;
+		padding: 1rem 2rem;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+}

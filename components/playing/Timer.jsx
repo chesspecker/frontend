@@ -1,9 +1,9 @@
-import useClock from '../../components/hooks/useClock.jsx';
-import style from './timer.module.scss';
+import STYLE from './timer.module.scss';
+import useClock from '@/hooks/use-clock.jsx';
 
 function Timer({value}) {
 	return (
-		<div className={style.timer}>
+		<div className={STYLE.timer}>
 			<p>⏲ {useClock(value)}</p>
 		</div>
 	);
