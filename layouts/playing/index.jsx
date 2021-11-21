@@ -21,7 +21,7 @@ import ButtonSecondary from '@/components/button/secondary.jsx';
 import PromotionContainer from '@/components/playing/promotion-container.jsx';
 import RightColumn from '@/components/playing/right-column.jsx';
 import LeftColumn from '@/components/playing/left-column.jsx';
-import Timer from '../../components/playing/timer.jsx';
+import Timer from '@/components/playing/timer.jsx';
 
 const sortBy = (array, p) =>
 	[...array].sort((a, b) => (a[p] > b[p] ? 1 : a[p] < b[p] ? -1 : 0));
