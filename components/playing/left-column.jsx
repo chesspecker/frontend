@@ -31,9 +31,9 @@ export default function LeftColumn({
 					</a>
 				</Tippy>
 			</div>
-			<div className={style.content}>
+			<div className={STYLE.content}>
 				<Tippy content='Change board theme'>
-					<a className={style.icon_paint} onClick={() => console.log('ss')}>
+					<a className={STYLE.icon_paint} onClick={() => console.log('ss')}>
 						<Image src={paint} width={50} height={50} />
 					</a>
 				</Tippy>

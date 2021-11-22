@@ -34,9 +34,7 @@ function ChessGround({
 				turnColor={turnColor}
 				movable={movable}
 				orientation={orientation}
-				style={{
-					backgroundImage: `url(/board/${background})`,
-				}}
+				style={{backgroundImage: `url(/board/${background})`}}
 				lastMove={lastMove}
 				check={check}
 				onMove={onMove}
