@@ -1,0 +1,39 @@
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 90%;
+	flex-direction: column;
+}
+
+.title {
+	color: white;
+	margin-top: 15rem;
+}
+
+.set {
+	&_container {
+		display: flex;
+		flex-direction: column;
+	}
+	&_category {
+		&_choices {
+			display: flex;
+			flex-wrap: wrap;
+		}
+		&_title {
+			color: white;
+			font-size: 2.3rem;
+			padding-bottom: 2rem;
+			margin: 4rem 2rem 3rem 2rem;
+			border-bottom: 1px solid white;
+		}
+	}
+}
+
+.btn_container {
+	position: sticky;
+	width: 50%;
+	bottom: 0;
+	right: 0;
+}
