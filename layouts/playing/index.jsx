@@ -1,27 +1,29 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useCallback} from 'react';
 import useSound from 'use-sound';
 import Router from 'next/router.js';
 import STYLE from './index.module.scss';
-import http from '@/lib/http.js';
-import {useUserContext} from '@/context/user-context.jsx';
-import Chess from '@/lib/chess.js';
 
-import Container from '@/layouts/container/index.jsx';
 import SuccessPopup from '@/components/popup/success.jsx';
 import StartingPopup from '@/components/popup/starting.jsx';
 import ChessGround from '@/components/chessground/index.jsx';
-
-import SOUND_MOVE from '@/public/sounds/Move.mp3';
-import SOUND_CAPTURE from '@/public/sounds/Capture.mp3';
-import SOUND_ERROR from '@/public/sounds/Error.mp3';
-import SOUND_GENERIC from '@/public/sounds/GenericNotify.mp3';
-import SOUND_VICTORY from '@/public/sounds/Victory.mp3';
-
 import ButtonSecondary from '@/components/button/secondary.jsx';
 import PromotionContainer from '@/components/playing/promotion-container.jsx';
 import RightColumn from '@/components/playing/right-column.jsx';
 import LeftColumn from '@/components/playing/left-column.jsx';
 import Timer from '@/components/playing/timer.jsx';
+
+import SOUND_MOVE from '@/sounds/Move.mp3';
+import SOUND_CAPTURE from '@/sounds/Capture.mp3';
+import SOUND_ERROR from '@/sounds/Error.mp3';
+import SOUND_GENERIC from '@/sounds/GenericNotify.mp3';
+import SOUND_VICTORY from '@/sounds/Victory.mp3';
+
+import {useUserContext} from '@/context/user-context.jsx';
+
+import http from '@/lib/http.js';
+import Chess from '@/lib/chess.js';
+
+import Container from '@/layouts/container/index.jsx';
 
 const sortBy = (array, p) =>
 	[...array].sort((a, b) => (a[p] > b[p] ? 1 : a[p] < b[p] ? -1 : 0));
@@ -257,16 +259,137 @@ function Index() {
 	}, [currentPuzzle]);
 
 	/**
+	 * Push the data of the current set when complete.
+	 */
+	const updateFinishedPuzzle = useCallback(async () => {
+		const actualPuzzleId = puzzleList[actualPuzzle];
+		const timeTaken = counter - timerBeforeCurrentPuzzle;
+		const mistakes = mistakesNumber;
+		try {
+			await http.put(
+				`${api}/puzzle/${localStorage.getItem('currentSet')}`,
+				{puzzleId: actualPuzzleId._id, options: {mistakes, timeTaken}},
+				{withCredentials: true},
+			);
+		} catch (error) {
+			console.log(error);
+		}
+	}, [
+		actualPuzzle,
+		api,
+		counter,
+		mistakesNumber,
+		puzzleList,
+		timerBeforeCurrentPuzzle,
+	]);
+
+	/**
+	 * Called when puzzle is completed, switch to the next one.
+	 */
+	const changePuzzle = useCallback(async () => {
+		await updateFinishedPuzzle();
+		setPuzzleCompleteInSession(previous => previous + 1);
+		setMistakesNumber(() => 0);
+		setSolutionVisible(() => false);
+		setTimerBeforeCurrentPuzzle(() => counter);
+		setActualPuzzle(previousPuzzle => previousPuzzle + 1);
+	}, [counter, updateFinishedPuzzle]);
+
+	/**
+	 * Push the data of the current set when complete.
+	 */
+	const updateFinishedSet = useCallback(async () => {
+		try {
+			await http.put(
+				`${api}/set/complete/${currentSetId}`,
+				{cycles: true, bestTime: counter + 1},
+				{withCredentials: true},
+			);
+		} catch (error) {
+			console.log(error);
+		}
+	}, [api, counter, currentSetId]);
+
+	/**
+	 * Called after each correct move.
+	 */
+	const checkSetComplete = useCallback(async () => {
+		if (actualPuzzle + 1 === puzzleListLength) {
+			setTimerRunning(() => false);
+			setSucessVisible(() => true);
+			if (!isSoundDisabled) victorySound();
+			/**
+			 * Not working properly yet
+			 * 
+			setFinishMoveVisible(() => true);
+			setTimeout(() => setFinishMoveVisible(() => false), 600);
+			 */
+			await updateFinishedSet();
+			return true;
+		}
+
+		return false;
+	}, [
+		actualPuzzle,
+		isSoundDisabled,
+		puzzleListLength,
+		updateFinishedSet,
+		victorySound,
+	]);
+
+	/**
+	 * Called after each correct move.
+	 */
+	const checkPuzzleComplete = useCallback(
+		async moveNumber => {
+			if (moveNumber === history.length) {
+				const isSetComplete = await checkSetComplete();
+				if (isSetComplete) return true;
+				if (!isSoundDisabled) genericSound();
+				/**
+			 * Not working properly yet
+			 * 
+			setFinishMoveVisible(() => true);
+			setTimeout(() => setFinishMoveVisible(() => false), 600);
+			 */
+				setIsComplete(() => true);
+				if (autoMove) changePuzzle();
+				return true;
+			}
+
+			return false;
+		},
+		[
+			autoMove,
+			changePuzzle,
+			checkSetComplete,
+			genericSound,
+			history.length,
+			isSoundDisabled,
+		],
+	);
+
+	/**
 	 * Function making the computer play the next move.
 	 */
-	const computerMove = index => {
-		const move = chess.move(history[index], {sloppy: true});
-		if (move && move.from) setLastMove([move.from, move.to]);
-		setFen(chess.fen());
-		checkPuzzleComplete(moveNumber + 1);
-		setMoveNumber(previousMove => previousMove + 1);
-		if (!isSoundDisabled) moveSound();
-	};
+	const computerMove = useCallback(
+		index => {
+			const move = chess.move(history[index], {sloppy: true});
+			if (move && move.from) setLastMove([move.from, move.to]);
+			setFen(chess.fen());
+			checkPuzzleComplete(moveNumber + 1);
+			setMoveNumber(previousMove => previousMove + 1);
+			if (!isSoundDisabled) moveSound();
+		},
+		[
+			checkPuzzleComplete,
+			chess,
+			history,
+			isSoundDisabled,
+			moveNumber,
+			moveSound,
+		],
+	);
 
 	/**
 	 * When the board is setup, make the first move.
@@ -373,94 +496,6 @@ function Index() {
 			onRightMove(from, to);
 		} else {
 			onWrongMove();
-		}
-	};
-
-	/**
-	 * Called after each correct move.
-	 */
-	const checkPuzzleComplete = async moveNumber => {
-		if (moveNumber === history.length) {
-			const isSetComplete = await checkSetComplete();
-			if (isSetComplete) return true;
-			if (!isSoundDisabled) genericSound();
-			/**
-			 * Not working properly yet
-			 * 
-			setFinishMoveVisible(() => true);
-			setTimeout(() => setFinishMoveVisible(() => false), 600);
-			 */
-			setIsComplete(() => true);
-			if (autoMove) changePuzzle();
-			return true;
-		}
-
-		return false;
-	};
-
-	/**
-	 * Called after each correct move.
-	 */
-	const checkSetComplete = async () => {
-		if (actualPuzzle + 1 === puzzleListLength) {
-			setTimerRunning(() => false);
-			setSucessVisible(() => true);
-			if (!isSoundDisabled) victorySound();
-			/**
-			 * Not working properly yet
-			 * 
-			setFinishMoveVisible(() => true);
-			setTimeout(() => setFinishMoveVisible(() => false), 600);
-			 */
-			await updateFinishedSet();
-			return true;
-		}
-
-		return false;
-	};
-
-	/**
-	 * Push the data of the current set when complete.
-	 */
-	const updateFinishedSet = async () => {
-		try {
-			await http.put(
-				`${api}/set/complete/${currentSetId}`,
-				{cycles: true, bestTime: counter + 1},
-				{withCredentials: true},
-			);
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	/**
-	 * Called when puzzle is completed, switch to the next one.
-	 */
-	const changePuzzle = async () => {
-		await updateFinishedPuzzle();
-		setPuzzleCompleteInSession(previous => previous + 1);
-		setMistakesNumber(() => 0);
-		setSolutionVisible(() => false);
-		setTimerBeforeCurrentPuzzle(() => counter);
-		setActualPuzzle(previousPuzzle => previousPuzzle + 1);
-	};
-
-	/**
-	 * Push the data of the current set when complete.
-	 */
-	const updateFinishedPuzzle = async () => {
-		const actualPuzzleId = puzzleList[actualPuzzle];
-		const timeTaken = counter - timerBeforeCurrentPuzzle;
-		const mistakes = mistakesNumber;
-		try {
-			await http.put(
-				`${api}/puzzle/${localStorage.getItem('currentSet')}`,
-				{puzzleId: actualPuzzleId._id, options: {mistakes, timeTaken}},
-				{withCredentials: true},
-			);
-		} catch (error) {
-			console.log(error);
 		}
 	};
 

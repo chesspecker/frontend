@@ -20,25 +20,30 @@ function MyApp({Component, pageProps}) {
 		themeArray: [],
 	});
 
-	const updateCurrentUserName = useCallback(data => {
-		setCurrentUser(rest => ({...rest, name: data}));
-	}, []);
+	const updateCurrentUserName = useCallback(
+		data => setCurrentUser(rest => ({...rest, name: data})),
+		[],
+	);
 
-	const updateCurrentSet = useCallback(data => {
-		setCurrentUser(rest => ({...rest, currentSet: data}));
-	}, []);
+	const updateCurrentSet = useCallback(
+		data => setCurrentUser(rest => ({...rest, currentSet: data})),
+		[],
+	);
 
-	const updateNewSetOptions = useCallback(data => {
-		setNewSet(rest => ({...rest, themeArray: data}));
-	}, []);
+	const updateNewSetOptions = useCallback(
+		data => setNewSet(rest => ({...rest, themeArray: data})),
+		[],
+	);
 
-	const updateNewSetSize = useCallback(data => {
-		setNewSet(rest => ({...rest, size: data}));
-	}, []);
+	const updateNewSetSize = useCallback(
+		data => setNewSet(rest => ({...rest, size: data})),
+		[],
+	);
 
-	const updateNewSetTitle = useCallback(data => {
-		setNewSet(rest => ({...rest, title: data}));
-	}, []);
+	const updateNewSetTitle = useCallback(
+		data => setNewSet(rest => ({...rest, title: data})),
+		[],
+	);
 
 	const UserContextValue = useMemo(
 		() => ({
