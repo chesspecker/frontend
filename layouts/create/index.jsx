@@ -27,10 +27,7 @@ function NewSet() {
 		const healthyMixError =
 			selectingHealthyMixWithOther || healthyMixAlreadySelected;
 
-		if (healthyMixError) {
-			setToggleHealthyMixPopup(() => true);
-			return;
-		}
+		if (healthyMixError) return setToggleHealthyMixPopup(() => true);
 
 		if (choicesSelected.includes(id)) {
 			setChoicesSelected(oldArray => {
@@ -42,10 +39,8 @@ function NewSet() {
 			return;
 		}
 
-		if (choicesSelected.length > 2) {
-			setToggleNumerousChoicesPopup(() => true);
-			return;
-		}
+		if (choicesSelected.length > 2)
+			return setToggleNumerousChoicesPopup(() => true);
 
 		setChoicesSelected(oldArray => {
 			const newArray = [...oldArray];
@@ -74,7 +69,6 @@ function NewSet() {
 			)}
 			<div className={STYLE.container}>
 				<h2 className={STYLE.title}>
-					{' '}
 					Select one or more category to create your set!
 				</h2>
 				<div className={STYLE.set_container}>
