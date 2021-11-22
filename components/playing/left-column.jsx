@@ -2,10 +2,10 @@
 import {BsFillVolumeUpFill, BsFillVolumeMuteFill} from 'react-icons/bs';
 import Image from 'next/image.js';
 import Tippy from '@tippyjs/react';
+import paint from '../../public/images/paint.svg';
 import STYLE from './left-column.module.scss';
 import rotate from '@/public/images/rotate.svg';
 import fastForward from '@/public/images/fast-forward.svg';
-import paint from '../../public/images/paint.svg';
 import 'tippy.js/dist/tippy.css';
 
 export default function LeftColumn({
