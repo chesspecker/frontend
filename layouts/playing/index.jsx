@@ -18,8 +18,6 @@ import SOUND_ERROR from '@/sounds/Error.mp3';
 import SOUND_GENERIC from '@/sounds/GenericNotify.mp3';
 import SOUND_VICTORY from '@/sounds/Victory.mp3';
 
-import {useUserContext} from '@/context/user-context.jsx';
-
 import http from '@/lib/http.js';
 import Chess from '@/lib/chess.js';
 
@@ -41,7 +39,7 @@ const BOARD_LIST = [
 	'wood3.jpg',
 ];
 
-function Index() {
+function Index({currentSetProps}) {
 	const api = process.env.API;
 	const [moveSound] = useSound(SOUND_MOVE);
 	const [captureSound] = useSound(SOUND_CAPTURE);
@@ -55,10 +53,6 @@ function Index() {
 	const [malus, setMalus] = useState(0);
 	const [chess, setChess] = useState(new Chess());
 	const [counter, setCounter] = useState(0);
-
-	const {currentUser} = useUserContext();
-	const [currentSet, setCurrentSet] = useState('');
-	const [currentSetId, setCurrentSetId] = useState('');
 
 	const [history, setHistory] = useState([]);
 	const [lastMove, setLastMove] = useState();
@@ -85,7 +79,6 @@ function Index() {
 	const [selectVisible, setSelectVisible] = useState(false);
 	const [solutionVisible, setSolutionVisible] = useState(false);
 	const [startPopupVisible, setStartPopupVisible] = useState(true);
-	const [hasPlayedMultipleTime, setHasPlayeMultipleTime] = useState(0);
 
 	const [wrongMoveVisible, setWrongMoveVisible] = useState(false);
 	const [rightMoveVisible, setRightMoveVisible] = useState(false);
@@ -104,32 +97,12 @@ function Index() {
 	 * Setup timer.
 	 */
 	useEffect(() => {
-		const timer = () => {
+		const timer = () =>
 			setTimeout(() => setCounter(lastCount => lastCount + 1), 1000);
-		};
 
 		if (timerRunning) timer();
 		if (!timerRunning) clearTimeout(timer);
 	}, [timerRunning, counter]);
-
-	/**
-	 * Get current set id
-	 */
-	useEffect(() => {
-		const newSetId =
-			currentUser.currentSet === ''
-				? localStorage.getItem('currentSet')
-				: currentUser.currentSet;
-
-		setCurrentSetId(newSetId);
-	}, [currentUser.currentSet]);
-
-	/**
-	 * Save current set to local storage
-	 */
-	useEffect(() => {
-		localStorage.setItem('currentSet', currentUser.currentSet);
-	}, [currentUser.currentSet]);
 
 	/**
 	 * Get last value setIsSoundDisabled
@@ -144,9 +117,10 @@ function Index() {
 	/**
 	 * Save setIsSoundDisabled to local storage
 	 */
-	useEffect(() => {
-		localStorage.setItem('isSoundDisabled', isSoundDisabled);
-	}, [isSoundDisabled]);
+	useEffect(
+		() => localStorage.setItem('isSoundDisabled', isSoundDisabled),
+		[isSoundDisabled],
+	);
 
 	/**
 	 * Get last value autoMove
@@ -161,34 +135,19 @@ function Index() {
 	/**
 	 * Save autoMove to local storage
 	 */
-	useEffect(() => {
-		localStorage.setItem('autoMove', autoMove);
-	}, [autoMove]);
+	useEffect(() => localStorage.setItem('autoMove', autoMove), [autoMove]);
 
 	/**
 	 * Retrieve the set.
 	 * Extract the list of puzzles.
 	 */
 	useEffect(() => {
-		if (!currentSetId) return;
-		const getSet = async () => {
-			try {
-				const response = await http.get(`${api}/set/id/${currentSetId}`, {
-					withCredentials: true,
-				});
-				setCurrentSet(() => response.data);
-				setCounter(() => response.data.currentTime);
-				setTimerBeforeCurrentPuzzle(() => response.data.currentTime);
-				let puzzleList = response.data.puzzles.filter(p => p.played === false);
-				puzzleList = sortBy(puzzleList, 'order');
-				setPuzzleList(() => puzzleList);
-			} catch (error) {
-				return console.log(error);
-			}
-		};
-
-		getSet();
-	}, [currentSetId, api, hasPlayedMultipleTime]);
+		setCounter(currentSetProps.currentTime);
+		setTimerBeforeCurrentPuzzle(currentSetProps.currentTime);
+		const puzzleList = currentSetProps.puzzles.filter(p => p.played === false);
+		const sortedPuzzleList = sortBy(puzzleList, 'order');
+		setPuzzleList(() => sortedPuzzleList);
+	}, [currentSetProps.currentTime, currentSetProps.puzzles]);
 
 	/**
 	 * Set the number of puzzles remaining.
@@ -211,10 +170,9 @@ function Index() {
 	 * RightBar title.
 	 */
 	useEffect(() => {
-		const text = {
-			title: 'Your turn',
-			subtitle: `Find the best move for ${orientation}.`,
-		};
+		const title = 'Your turn';
+		const subtitle = `Find the best move for ${orientation}.`;
+		const text = {title, subtitle};
 		setText(() => text);
 	}, [orientation, actualPuzzle]);
 
@@ -267,7 +225,7 @@ function Index() {
 		const mistakes = mistakesNumber;
 		try {
 			await http.put(
-				`${api}/puzzle/${localStorage.getItem('currentSet')}`,
+				`${api}/puzzle/${currentSetProps._id}`,
 				{puzzleId: actualPuzzleId._id, options: {mistakes, timeTaken}},
 				{withCredentials: true},
 			);
@@ -281,6 +239,7 @@ function Index() {
 		mistakesNumber,
 		puzzleList,
 		timerBeforeCurrentPuzzle,
+		currentSetProps._id,
 	]);
 
 	/**
@@ -301,14 +260,14 @@ function Index() {
 	const updateFinishedSet = useCallback(async () => {
 		try {
 			await http.put(
-				`${api}/set/complete/${currentSetId}`,
+				`${api}/set/complete/${currentSetProps._id}`,
 				{cycles: true, bestTime: counter + 1},
 				{withCredentials: true},
 			);
 		} catch (error) {
 			console.log(error);
 		}
-	}, [api, counter, currentSetId]);
+	}, [api, counter, currentSetProps]);
 
 	/**
 	 * Called after each correct move.
@@ -471,7 +430,7 @@ function Index() {
 
 		const isCorrectMove = validateMove(move);
 		if (isCorrectMove || chess.in_checkmate()) {
-			onRightMove(from, to);
+			await onRightMove(from, to);
 		} else {
 			onWrongMove();
 		}
@@ -528,7 +487,6 @@ function Index() {
 		setMalus(() => 0);
 		setTimerRunning(() => true);
 		setSucessVisible(() => false);
-		setHasPlayeMultipleTime(oldValue => oldValue + 1);
 	};
 
 	const handleStart = () => {
@@ -542,7 +500,8 @@ function Index() {
 	};
 
 	const getPercentage = () =>
-		(1 - (puzzleList.length - puzzleCompleteInSession) / currentSet.length) *
+		(1 -
+			(puzzleList.length - puzzleCompleteInSession) / currentSetProps.length) *
 		100;
 
 	return (
