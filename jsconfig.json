@@ -13,6 +13,7 @@
 			"@/models/*": ["models/*"],
 			"@/pages/*": ["pages/*"],
 			"@/public/*": ["public/*"],
+			"@/sounds/*": ["public/sounds/*"],
 			"@/styles/*": ["styles/*"]
 		}
 	}

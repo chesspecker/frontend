@@ -10,7 +10,6 @@ import plus from '@/public/images/plus.svg';
 import ConfirmRemovePopup from '@/components/popup/confirm-remove.jsx';
 import PuzzleSet from '@/components/puzzle-set/index.jsx';
 import useSetsDashboard from '@/hooks/use-sets-dashboard.jsx';
-import {useUserContext} from '@/context/user-context.jsx';
 
 export default function Dashboard() {
 	const api = process.env.API;
@@ -23,12 +22,7 @@ export default function Dashboard() {
 		setSets(() => setsDatabase);
 	}, [setsDatabase]);
 
-	const {updateCurrentSet} = useUserContext();
-
-	const handleCurrentSet = set => {
-		updateCurrentSet(set);
-		Router.push('/playing');
-	};
+	const handleCurrentSet = set => Router.push(`/playing/${set}`);
 
 	const handleConfirm = set => {
 		setSetToRemove(() => set);
