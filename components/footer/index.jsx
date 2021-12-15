@@ -7,7 +7,7 @@ function Footer() {
 	return (
 		<div className={STYLE.footer}>
 			<div className={STYLE.content}>
-				<Link href='https://github.com/sponsors/chesspecker'>
+				<Link href='https://www.buymeacoffee.com/chessPecker'>
 					<div className={STYLE.buyACoffee}>
 						<p className={STYLE.buyACoffee_desc}>Buy us coffee</p>
 					</div>
