@@ -187,7 +187,7 @@ function Index({currentSetProps}) {
 				const response = await http.get(`${api}/puzzle/${puzzleToGet._id}`, {
 					withCredentials: true,
 				});
-				setGameLink(() => response.data.GameUrl);
+				setGameLink(() => `https://lichess.org/training/${response.data.PuzzleId}`);
 				setCurrentPuzzle(() => response.data);
 			} catch (error) {
 				return console.log(error);
