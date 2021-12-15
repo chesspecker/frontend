@@ -8,9 +8,44 @@ const useClock = count => {
 		  Math.floor(count / 60) +
 		  ':' +
 		  (count % 60 < 10 ? '0' + (count % 60) : count % 60)
-		: Math.floor(count / 60) +
+		: count < 3600
+		? Math.floor(count / 60) +
 		  ':' +
-		  (count % 60 < 10 ? '0' + (count % 60) : count % 60);
+		  (count % 60 < 10 ? '0' + (count % 60) : count % 60)
+		: '0' +
+		  Math.floor(count / 3600) +
+		  ':'(
+				count % 3600 < 10
+					? '00:0' + (count % 3600)
+					: count % 3600 < 60
+					? '00:' + (count % 3600)
+					: count % 3600 < 600
+					? '0' +
+					  Math.floor((count % 3600) / 60) +
+					  ':' +
+					  ((count % 3600) % 60 < 10
+							? '0' + ((count % 3600) % 60)
+							: (count % 3600) % 60)
+					: Math.floor(count / 3600) +
+					  ':'(
+							count % 3600 < 10
+								? '00:0' + (count % 3600)
+								: count % 3600 < 60
+								? '00:' + (count % 3600)
+								: count % 3600 < 600
+								? '0' +
+								  Math.floor((count % 3600) / 60) +
+								  ':' +
+								  ((count % 3600) % 60 < 10
+										? '0' + ((count % 3600) % 60)
+										: (count % 3600) % 60)
+								: 'null',
+					  ),
+		  );
 };
 
 export default useClock;
+
+/* '0' + Math.floor(count/3600) + ':' (count % 3600 < 10 ? '00:0' + count%3600 : count%3600 < 60 ? '00:' + (count%3600) :(count%3600 < 600) ? '0' + Math.floor((count%3600)/60) +
+		  ':' +
+		  ((count%3600) % 60 < 10 ? '0' + ((count%3600) % 60) : (count%3600) % 60) ) */
