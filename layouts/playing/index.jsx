@@ -187,7 +187,9 @@ function Index({currentSetProps}) {
 				const response = await http.get(`${api}/puzzle/${puzzleToGet._id}`, {
 					withCredentials: true,
 				});
-				setGameLink(() => `https://lichess.org/training/${response.data.PuzzleId}`);
+				setGameLink(
+					() => `https://lichess.org/training/${response.data.PuzzleId}`,
+				);
 				setCurrentPuzzle(() => response.data);
 			} catch (error) {
 				return console.log(error);
@@ -479,6 +481,33 @@ function Index({currentSetProps}) {
 	const toggleSound = () => setIsSoundDisabled(previous => !previous);
 
 	const moveToNext = () => changePuzzle();
+
+	const handleKeyPress = useCallback(
+		event => {
+			switch (event.key) {
+				case 'Q':
+				case 'q':
+				case 'Escape':
+					Router.push('/dashboard');
+					break;
+				case 's':
+				case 'S':
+				case 'n':
+				case 'N':
+					if (!isComplete) break;
+					changePuzzle();
+					break;
+				default:
+					break;
+			}
+		},
+		[changePuzzle, isComplete],
+	);
+
+	useEffect(() => {
+		document.addEventListener('keydown', handleKeyPress);
+		return () => document.removeEventListener('keydown', handleKeyPress);
+	}, [handleKeyPress]);
 
 	const handleRestart = () => {
 		setPuzzleCompleteInSession(() => 0);
