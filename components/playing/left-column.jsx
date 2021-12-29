@@ -2,6 +2,7 @@
 import {BsFillVolumeUpFill, BsFillVolumeMuteFill} from 'react-icons/bs';
 import Image from 'next/image.js';
 import Tippy from '@tippyjs/react';
+import paint from '../../public/images/paint.svg';
 import STYLE from './left-column.module.scss';
 import rotate from '@/public/images/rotate.svg';
 import fastForward from '@/public/images/fast-forward.svg';
@@ -27,6 +28,13 @@ export default function LeftColumn({
 				<Tippy content='Flip board'>
 					<a className={STYLE.icon_rotate} onClick={switchOrientation}>
 						<Image src={rotate} width={50} height={50} />
+					</a>
+				</Tippy>
+			</div>
+			<div className={STYLE.content}>
+				<Tippy content='Change board theme'>
+					<a className={STYLE.icon_paint} onClick={() => console.log('ss')}>
+						<Image src={paint} width={50} height={50} />
 					</a>
 				</Tippy>
 			</div>
