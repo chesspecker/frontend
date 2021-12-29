@@ -12,7 +12,7 @@ const useClock = count => {
 		? Math.floor(count / 60) +
 		  ':' +
 		  (count % 60 < 10 ? '0' + (count % 60) : count % 60)
-		: count < 36000
+		: count < 36_000
 		? '0' +
 		  Math.floor(count / 3600) +
 		  ':' +
