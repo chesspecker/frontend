@@ -10,8 +10,6 @@
   <sup>
 </div>
 
-#### Beta
-
-The website is currently in beta.
-
-We are also working on implementing spaced-repetition. Feel free to reports bugs!
+**For the v2 we merged frontend and backend.**
+  
+**Head to [github.com/chesspecker/chesspecker](https://github.com/chesspecker/chesspecker)**
